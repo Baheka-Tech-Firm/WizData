@@ -1,0 +1,53 @@
+{
+  "status": "success",
+  "data_type": "price",
+  "timestamp": "2025-04-03T15:45:36.766506",
+  "record_count": 10,
+  "anomalies_detected": 3,
+  "anomaly_types": {
+    "negative_price": 0,
+    "price_jump": 2,
+    "zero_volume": 1,
+    "volume_spike": 0,
+    "price_staleness": 0
+  },
+  "completeness": {
+    "date": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "symbol": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "open": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "high": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "low": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "close": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "volume": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    }
+  },
+  "metrics": {
+    "volatility_by_symbol": {
+      "AAPL": 0.08314217579906666
+    },
+    "avg_volatility": 0.08314217579906666,
+    "avg_volume": 1580000.0,
+    "zero_volume_pct": 0.1,
+    "avg_daily_range_pct": 0.020003767849211596
+  }
+}

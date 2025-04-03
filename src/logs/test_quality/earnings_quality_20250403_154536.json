@@ -1,0 +1,59 @@
+{
+  "status": "success",
+  "data_type": "earnings",
+  "timestamp": "2025-04-03T15:45:36.807180",
+  "record_count": 7,
+  "anomalies_detected": 4,
+  "anomaly_types": {
+    "extreme_surprise": 1,
+    "unreasonable_eps": 0,
+    "negative_revenue": 1,
+    "revenue_jump": 1,
+    "invalid_dates": 1
+  },
+  "completeness": {
+    "symbol": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "report_date": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "quarter_end_date": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "eps": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "expected_eps": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "surprise_pct": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "revenue": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "currency": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "market": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    }
+  },
+  "metrics": {
+    "avg_eps": -1.1385714285714286,
+    "median_eps": 1.88,
+    "avg_surprise_pct": -194.6314285714286,
+    "avg_abs_surprise_pct": 199.09714285714287,
+    "avg_revenue": 66999857142.85714
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-04-03T15:30:00",
+  "report_type": "source_reliability",
+  "sources": {
+    "Alpha Vantage": {
+      "reliability_score": 0.98,
+      "total_records": 4500,
+      "anomaly_records": 90,
+      "data_types": ["price", "forex"],
+      "last_updated": "2025-04-03T14:00:00"
+    },
+    "CoinGecko": {
+      "reliability_score": 0.95,
+      "total_records": 2800,
+      "anomaly_records": 140,
+      "data_types": ["crypto"],
+      "last_updated": "2025-04-03T14:05:00"
+    },
+    "JSE Web Scraper": {
+      "reliability_score": 0.92,
+      "total_records": 1250,
+      "anomaly_records": 100,
+      "data_types": ["price"],
+      "last_updated": "2025-04-03T13:45:00"
+    },
+    "NSE Web Scraper": {
+      "reliability_score": 0.89,
+      "total_records": 975,
+      "anomaly_records": 107,
+      "data_types": ["price"],
+      "last_updated": "2025-04-03T13:50:00"
+    },
+    "Earnings API": {
+      "reliability_score": 0.94,
+      "total_records": 680,
+      "anomaly_records": 41,
+      "data_types": ["earnings"],
+      "last_updated": "2025-04-03T13:15:00"
+    },
+    "Dividend API": {
+      "reliability_score": 0.96,
+      "total_records": 1200,
+      "anomaly_records": 48,
+      "data_types": ["dividend"],
+      "last_updated": "2025-04-03T13:20:00"
+    }
+  }
+}

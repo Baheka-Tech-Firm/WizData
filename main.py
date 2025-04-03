@@ -40,7 +40,9 @@ import models  # noqa
 
 # Register API routes
 from src.api.routes.prices import prices_bp
+from src.api.routes.quality import quality_bp
 app.register_blueprint(prices_bp)
+app.register_blueprint(quality_bp)
 
 # Web UI Routes
 @app.route('/')
@@ -68,6 +70,11 @@ def products():
 def api_services():
     """Render the API services page"""
     return render_template('api_services.html', title="API Services")
+    
+@app.route('/quality')
+def quality_dashboard():
+    """Render the data quality dashboard page"""
+    return render_template('quality/dashboard.html', title="Data Quality Dashboard")
 
 @app.route('/api/health')
 def health():
