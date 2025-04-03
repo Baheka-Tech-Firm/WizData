@@ -46,6 +46,16 @@ def sources():
     # This would be implemented in a future version
     return render_template('dashboard.html')  # Placeholder
 
+@app.route('/products')
+def products():
+    """Render the data products page"""
+    return render_template('products.html')
+    
+@app.route('/api-services')
+def api_services():
+    """Render the API services page"""
+    return render_template('api_services.html')
+
 @app.route('/api/health')
 def health():
     """Health check endpoint"""

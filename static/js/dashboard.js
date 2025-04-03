@@ -185,7 +185,7 @@ function initDataSourceChart() {
 // Function to fetch API health status
 async function fetchApiHealth() {
     try {
-        const response = await fetch('http://localhost:8000/health');
+        const response = await fetch('/api/health');
         
         if (response.ok) {
             const data = await response.json();
