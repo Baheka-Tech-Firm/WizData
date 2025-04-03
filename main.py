@@ -85,8 +85,8 @@ def get_symbols():
     Get available symbols for different asset types
     
     Query parameters:
-    - asset_type: The asset type ("jse", "crypto", "forex")
-    - market: For African markets ("jse", "ngx", "egx", "nse", "cse")
+    - asset_type: The asset type ("jse", "crypto", "forex", "african", "global", "dividend", "earnings")
+    - market: For specific markets (e.g., "jse", "ngx", "egx", "nse", "cse", "asx", "lse", "nasdaq", "nyse", "tyo")
     
     Returns:
         JSON response with available symbols
@@ -96,6 +96,9 @@ def get_symbols():
         from src.ingestion.crypto_fetcher import CryptoFetcher
         from src.ingestion.jse_scraper import JSEScraper
         from src.ingestion.africa_markets_fetcher import AfricanMarketsFetcher
+        from src.ingestion.global_markets_fetcher import GlobalMarketsFetcher
+        from src.ingestion.dividend_fetcher import DividendFetcher
+        from src.ingestion.earnings_fetcher import EarningsFetcher
         
         asset_type = request.args.get('asset_type', 'jse').lower()
         market = request.args.get('market', 'jse').lower()
@@ -104,7 +107,7 @@ def get_symbols():
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
-        # Determine if we're using the African markets fetcher
+        # Get the appropriate fetcher based on asset type
         if asset_type == 'african':
             fetcher = AfricanMarketsFetcher()
             symbols = loop.run_until_complete(fetcher.get_symbols(market))
@@ -114,6 +117,42 @@ def get_symbols():
             return jsonify({
                 "market": market,
                 "asset_type": "stock",
+                "count": len(symbols),
+                "symbols": symbols
+            })
+        elif asset_type == 'global':
+            fetcher = GlobalMarketsFetcher()
+            symbols = loop.run_until_complete(fetcher.get_symbols(market))
+            
+            loop.close()
+            
+            return jsonify({
+                "market": market,
+                "asset_type": "stock",
+                "count": len(symbols),
+                "symbols": symbols
+            })
+        elif asset_type == 'dividend':
+            fetcher = DividendFetcher()
+            symbols = loop.run_until_complete(fetcher.get_symbols(market))
+            
+            loop.close()
+            
+            return jsonify({
+                "market": market,
+                "asset_type": "dividend",
+                "count": len(symbols),
+                "symbols": symbols
+            })
+        elif asset_type == 'earnings':
+            fetcher = EarningsFetcher()
+            symbols = loop.run_until_complete(fetcher.get_symbols(market))
+            
+            loop.close()
+            
+            return jsonify({
+                "market": market,
+                "asset_type": "earnings",
                 "count": len(symbols),
                 "symbols": symbols
             })
@@ -127,7 +166,7 @@ def get_symbols():
                 fetcher = JSEScraper()
             else:
                 return jsonify({
-                    "error": f"Invalid asset_type: {asset_type}. Supported types: jse, crypto, forex, african"
+                    "error": f"Invalid asset_type: {asset_type}. Supported types: jse, crypto, forex, african, global, dividend, earnings"
                 }), 400
             
             # Fetch symbols asynchronously
@@ -269,6 +308,311 @@ def get_african_market_data():
             
     except Exception as e:
         logger.error(f"Error fetching African market data: {str(e)}")
+        return jsonify({
+            "error": "Internal server error",
+            "message": str(e)
+        }), 500
+
+@app.route('/api/global/markets')
+def get_global_markets():
+    """
+    Get available global markets
+    
+    Returns:
+        JSON response with available global markets
+    """
+    try:
+        from src.ingestion.global_markets_fetcher import GlobalMarketsFetcher
+        
+        # Create event loop
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Get markets
+        fetcher = GlobalMarketsFetcher()
+        markets = loop.run_until_complete(fetcher.get_markets())
+        loop.close()
+        
+        return jsonify({
+            "count": len(markets),
+            "markets": markets
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching global markets: {str(e)}")
+        return jsonify({
+            "error": "Internal server error",
+            "message": str(e)
+        }), 500
+
+@app.route('/api/global/data')
+def get_global_market_data():
+    """
+    Get data for global markets
+    
+    Query parameters:
+    - market: The market code (asx, lse, nasdaq, nyse, tyo)
+    - symbol: Symbol to fetch (optional)
+    - start_date: Start date in YYYY-MM-DD format (optional)
+    - end_date: End date in YYYY-MM-DD format (optional)
+    - format: Export format (json, csv) - if provided, triggers a file download
+    
+    Returns:
+        JSON response with market data or a file download
+    """
+    try:
+        from src.ingestion.global_markets_fetcher import GlobalMarketsFetcher
+        
+        market = request.args.get('market', 'nasdaq').lower()
+        symbol = request.args.get('symbol')
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+        export_format = request.args.get('format')
+        
+        # Create event loop
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Get data
+        fetcher = GlobalMarketsFetcher()
+        
+        if export_format in ['json', 'csv']:
+            # Setup output path
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            symbol_part = f"_{symbol}" if symbol else "_all"
+            filename = f"{market.upper()}{symbol_part}_{timestamp}.{export_format}"
+            output_path = os.path.join(app.config["DATA_EXPORT_DIR"], filename)
+            
+            # Fetch and export data
+            result = loop.run_until_complete(fetcher.fetch_data(
+                market=market,
+                symbol=symbol,
+                start_date=start_date,
+                end_date=end_date,
+                save_format=export_format,
+                output_path=app.config["DATA_EXPORT_DIR"]
+            ))
+            loop.close()
+            
+            if result.empty:
+                return jsonify({
+                    "error": "No data found for the specified parameters"
+                }), 404
+                
+            # Return the file for download
+            return send_file(
+                os.path.join(app.config["DATA_EXPORT_DIR"], filename),
+                as_attachment=True,
+                download_name=filename,
+                mimetype='application/json' if export_format == 'json' else 'text/csv'
+            )
+        else:
+            # Return JSON response
+            df = loop.run_until_complete(fetcher.fetch_data(
+                market=market,
+                symbol=symbol,
+                start_date=start_date,
+                end_date=end_date
+            ))
+            loop.close()
+            
+            if df.empty:
+                return jsonify({
+                    "error": "No data found for the specified parameters"
+                }), 404
+                
+            # Convert DataFrame to list of dictionaries
+            data = df.to_dict(orient='records')
+            
+            return jsonify({
+                "market": market,
+                "symbol": symbol,
+                "start_date": start_date,
+                "end_date": end_date,
+                "count": len(data),
+                "data": data
+            })
+            
+    except Exception as e:
+        logger.error(f"Error fetching global market data: {str(e)}")
+        return jsonify({
+            "error": "Internal server error",
+            "message": str(e)
+        }), 500
+
+@app.route('/api/dividend/data')
+def get_dividend_data():
+    """
+    Get dividend data for a specific market and symbol
+    
+    Query parameters:
+    - market: The market code (asx, lse, nasdaq, nyse, jse, tyo)
+    - symbol: Symbol to fetch (optional)
+    - start_date: Start date in YYYY-MM-DD format (optional)
+    - end_date: End date in YYYY-MM-DD format (optional)
+    - format: Export format (json, csv) - if provided, triggers a file download
+    
+    Returns:
+        JSON response with dividend data or a file download
+    """
+    try:
+        from src.ingestion.dividend_fetcher import DividendFetcher
+        
+        market = request.args.get('market', 'nasdaq').lower()
+        symbol = request.args.get('symbol')
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+        export_format = request.args.get('format')
+        
+        # Create event loop
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Get data
+        fetcher = DividendFetcher()
+        
+        if export_format in ['json', 'csv']:
+            # Fetch and export data
+            result = loop.run_until_complete(fetcher.export_data(
+                market=market,
+                symbol=symbol,
+                start_date=start_date,
+                end_date=end_date,
+                format=export_format,
+                output_path=app.config["DATA_EXPORT_DIR"]
+            ))
+            loop.close()
+            
+            if not result:
+                return jsonify({
+                    "error": "No dividend data found for the specified parameters"
+                }), 404
+                
+            # Return the file for download
+            return send_file(
+                result,
+                as_attachment=True,
+                download_name=os.path.basename(result),
+                mimetype='application/json' if export_format == 'json' else 'text/csv'
+            )
+        else:
+            # Return JSON response
+            df = loop.run_until_complete(fetcher.fetch_data(
+                market=market,
+                symbol=symbol,
+                start_date=start_date,
+                end_date=end_date
+            ))
+            loop.close()
+            
+            if df.empty:
+                return jsonify({
+                    "error": "No dividend data found for the specified parameters"
+                }), 404
+                
+            # Convert DataFrame to list of dictionaries
+            data = df.to_dict(orient='records')
+            
+            return jsonify({
+                "market": market,
+                "symbol": symbol,
+                "start_date": start_date,
+                "end_date": end_date,
+                "count": len(data),
+                "data": data
+            })
+            
+    except Exception as e:
+        logger.error(f"Error fetching dividend data: {str(e)}")
+        return jsonify({
+            "error": "Internal server error",
+            "message": str(e)
+        }), 500
+
+@app.route('/api/earnings/data')
+def get_earnings_data():
+    """
+    Get earnings data for a specific market and symbol
+    
+    Query parameters:
+    - market: The market code (asx, lse, nasdaq, nyse, jse)
+    - symbol: Symbol to fetch (optional)
+    - start_date: Start date in YYYY-MM-DD format (optional)
+    - end_date: End date in YYYY-MM-DD format (optional)
+    - format: Export format (json, csv) - if provided, triggers a file download
+    
+    Returns:
+        JSON response with earnings data or a file download
+    """
+    try:
+        from src.ingestion.earnings_fetcher import EarningsFetcher
+        
+        market = request.args.get('market', 'nasdaq').lower()
+        symbol = request.args.get('symbol')
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+        export_format = request.args.get('format')
+        
+        # Create event loop
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Get data
+        fetcher = EarningsFetcher()
+        
+        if export_format in ['json', 'csv']:
+            # Fetch and export data
+            result = loop.run_until_complete(fetcher.export_data(
+                market=market,
+                symbol=symbol,
+                start_date=start_date,
+                end_date=end_date,
+                format=export_format,
+                output_path=app.config["DATA_EXPORT_DIR"]
+            ))
+            loop.close()
+            
+            if not result:
+                return jsonify({
+                    "error": "No earnings data found for the specified parameters"
+                }), 404
+                
+            # Return the file for download
+            return send_file(
+                result,
+                as_attachment=True,
+                download_name=os.path.basename(result),
+                mimetype='application/json' if export_format == 'json' else 'text/csv'
+            )
+        else:
+            # Return JSON response
+            df = loop.run_until_complete(fetcher.fetch_data(
+                market=market,
+                symbol=symbol,
+                start_date=start_date,
+                end_date=end_date
+            ))
+            loop.close()
+            
+            if df.empty:
+                return jsonify({
+                    "error": "No earnings data found for the specified parameters"
+                }), 404
+                
+            # Convert DataFrame to list of dictionaries
+            data = df.to_dict(orient='records')
+            
+            return jsonify({
+                "market": market,
+                "symbol": symbol,
+                "start_date": start_date,
+                "end_date": end_date,
+                "count": len(data),
+                "data": data
+            })
+            
+    except Exception as e:
+        logger.error(f"Error fetching earnings data: {str(e)}")
         return jsonify({
             "error": "Internal server error",
             "message": str(e)

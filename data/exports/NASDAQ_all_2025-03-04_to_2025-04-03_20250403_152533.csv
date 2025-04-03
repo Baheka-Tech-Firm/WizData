@@ -1,0 +1,231 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type,name,sector,country,currency
+2025-03-04,AAPL,106.76,124.14,104.62,121.71,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-05,AAPL,128.2,151.68,125.63,148.71,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-06,AAPL,157.63,189.73,154.48,186.01,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-07,AAPL,198.41,242.85,194.44,238.09,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-10,AAPL,225.39,229.9,185.54,189.33,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-11,AAPL,180.49,184.1,152.12,155.22,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-12,AAPL,149.01,151.99,128.51,131.13,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-13,AAPL,126.76,129.3,111.8,114.08,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-14,AAPL,111.04,113.26,100.12,102.16,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-17,AAPL,101.48,103.51,97.46,99.45,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-18,AAPL,99.45,101.44,97.46,99.45,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-19,AAPL,100.11,104.16,98.11,102.11,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-20,AAPL,103.48,109.77,101.41,107.61,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-21,AAPL,109.77,118.68,107.57,116.35,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-24,AAPL,121.01,138.24,118.59,135.53,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-25,AAPL,141.85,164.95,139.02,161.71,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-26,AAPL,170.34,201.54,166.93,197.59,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-27,AAPL,209.45,252.09,205.26,247.15,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-28,AAPL,263.62,322.67,258.35,316.35,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-31,AAPL,299.47,305.46,246.53,251.56,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-04-01,AAPL,258.27,284.51,253.1,278.93,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-04-02,AAPL,288.23,323.39,282.46,317.05,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-04-03,AAPL,329.73,376.68,323.14,369.3,4104000,NASDAQ,NASDAQ,stock,Apple Inc.,Technology,United States,USD
+2025-03-04,MSFT,491.36,501.19,462.27,471.71,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-05,MSFT,468.56,477.93,450.01,459.19,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-06,MSFT,459.19,468.37,450.01,459.19,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-07,MSFT,462.25,480.93,453.01,471.5,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-10,MSFT,484.07,533.25,474.39,522.79,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-11,MSFT,540.22,606.13,529.42,594.24,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-12,MSFT,618.01,706.02,605.65,692.17,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-13,MSFT,724.48,842.42,709.99,825.9,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-14,MSFT,869.95,1029.33,852.55,1009.14,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-17,MSFT,941.87,960.7,738.42,753.49,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-18,MSFT,708.28,722.45,569.18,580.79,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-19,MSFT,549.82,560.81,452.61,461.85,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-20,MSFT,440.29,449.1,371.08,378.65,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-21,MSFT,363.51,370.78,313.49,319.89,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-24,MSFT,313.49,319.76,288.79,294.68,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-25,MSFT,290.75,296.56,273.54,279.12,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-26,MSFT,277.26,282.8,266.28,271.71,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-27,MSFT,271.71,277.15,266.28,271.71,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-28,MSFT,273.53,284.58,268.05,279.0,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-31,MSFT,286.44,315.54,280.71,309.35,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-04-01,MSFT,299.04,305.02,263.75,269.13,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-04-02,MSFT,261.96,267.2,236.18,241.0,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-04-03,MSFT,236.18,240.9,217.57,222.01,1026000,NASDAQ,NASDAQ,stock,Microsoft Corporation,Technology,United States,USD
+2025-03-04,AMZN,355.2,362.3,306.32,312.58,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-05,AMZN,302.16,308.2,266.5,271.94,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-06,AMZN,264.69,269.98,238.64,243.51,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-07,AMZN,238.64,243.42,219.84,224.33,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-10,AMZN,224.33,228.81,219.84,224.33,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-11,AMZN,225.82,234.94,221.3,230.34,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-12,AMZN,233.41,247.6,228.74,242.74,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-13,AMZN,247.6,267.7,242.65,262.46,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-14,AMZN,269.45,296.83,264.07,291.01,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-17,AMZN,304.59,354.18,298.5,347.23,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-18,AMZN,365.75,432.76,358.44,424.27,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-19,AMZN,449.73,541.3,440.74,530.68,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-20,AMZN,566.06,692.86,554.74,679.27,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-21,AMZN,633.99,646.67,497.05,507.19,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-24,AMZN,483.52,493.19,407.51,415.83,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-25,AMZN,399.2,407.18,344.27,351.29,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-26,AMZN,339.58,346.37,299.51,305.62,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-27,AMZN,297.47,303.42,268.2,273.68,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-28,AMZN,268.2,273.57,247.07,252.11,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-31,AMZN,252.11,257.15,247.07,252.11,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-04-01,AMZN,236.98,241.72,190.44,194.33,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-04-02,AMZN,183.96,187.64,151.44,154.53,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-04-03,AMZN,147.32,150.26,124.16,126.69,855000,NASDAQ,NASDAQ,stock,Amazon.com Inc.,Consumer Discretionary,United States,USD
+2025-03-04,GOOGL,227.36,231.91,209.44,213.72,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-05,GOOGL,210.87,215.09,198.39,202.43,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-06,GOOGL,201.08,205.11,193.12,197.06,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-07,GOOGL,197.06,201.0,193.12,197.06,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-10,GOOGL,201.0,217.33,196.98,213.06,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-11,GOOGL,218.75,240.97,214.37,236.25,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-12,GOOGL,244.12,273.9,239.24,268.53,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-13,GOOGL,279.27,319.04,273.69,312.79,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-14,GOOGL,327.38,380.68,320.84,373.22,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-17,GOOGL,398.1,487.27,390.14,477.72,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-18,GOOGL,445.87,454.79,349.56,356.7,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-19,GOOGL,335.29,342.0,269.44,274.94,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-20,GOOGL,260.28,265.48,214.26,218.63,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-21,GOOGL,208.43,212.6,175.67,179.25,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-24,GOOGL,174.47,177.96,157.3,160.51,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-25,GOOGL,157.3,160.45,144.91,147.86,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-26,GOOGL,145.89,148.81,137.26,140.06,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-27,GOOGL,139.12,141.91,133.61,136.34,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-28,GOOGL,136.34,139.07,133.61,136.34,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-31,GOOGL,139.07,150.36,136.29,147.41,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-04-01,GOOGL,141.52,144.35,122.04,124.53,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-04-02,GOOGL,120.38,122.79,106.18,108.34,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-04-03,GOOGL,105.45,107.56,95.08,97.02,3676500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class A,Communication Services,United States,USD
+2025-03-04,GOOG,51.67,57.97,50.63,56.83,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-05,GOOG,59.11,67.52,57.92,66.2,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-06,GOOG,69.29,80.57,67.9,78.99,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-07,GOOG,83.2,98.44,81.54,96.51,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-10,GOOG,90.08,91.88,70.62,72.06,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-11,GOOG,67.74,69.09,54.44,55.55,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-12,GOOG,52.58,53.64,43.29,44.17,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-13,GOOG,42.11,42.95,35.49,36.21,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-14,GOOG,34.77,35.46,29.98,30.59,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-17,GOOG,29.98,30.58,27.62,28.18,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-18,GOOG,27.81,28.36,26.16,26.69,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-19,GOOG,26.52,27.05,25.47,25.99,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-20,GOOG,25.99,26.51,25.47,25.99,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-21,GOOG,26.16,27.22,25.64,26.68,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-24,GOOG,27.39,30.18,26.85,29.59,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-25,GOOG,30.57,34.3,29.96,33.63,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-26,GOOG,34.97,39.96,34.28,39.17,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-27,GOOG,41.0,47.67,40.18,46.74,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-28,GOOG,49.23,58.25,48.25,57.11,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-31,GOOG,53.3,54.37,41.79,42.64,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-04-01,GOOG,43.21,45.84,42.35,44.94,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-04-02,GOOG,45.84,49.56,44.92,48.59,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-04-03,GOOG,49.88,54.95,48.89,53.87,427500,NASDAQ,NASDAQ,stock,Alphabet Inc. Class C,Communication Services,United States,USD
+2025-03-04,META,377.0,384.54,332.51,339.3,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-05,META,330.25,336.86,297.76,303.83,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-06,META,297.76,303.71,274.29,279.89,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-07,META,276.16,281.68,259.81,265.11,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-10,META,266.88,277.66,261.54,272.22,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-11,META,275.85,292.62,270.33,286.88,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-12,META,292.62,316.38,286.77,310.17,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-13,META,318.45,350.8,312.08,343.92,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-14,META,355.39,398.74,348.28,390.92,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-17,META,411.77,487.21,403.54,477.66,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-18,META,506.32,609.4,496.19,597.45,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-19,META,637.28,780.04,624.54,764.74,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-20,META,713.76,728.03,559.59,571.01,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-21,META,536.75,547.48,431.33,440.13,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-24,META,422.53,430.98,364.39,371.82,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-25,META,359.43,366.62,317.02,323.49,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-26,META,314.86,321.16,283.88,289.67,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-27,META,283.88,289.56,261.51,266.85,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-28,META,263.29,268.55,247.7,252.76,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-31,META,254.44,264.72,249.35,259.53,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-04-01,META,245.69,250.6,202.25,206.38,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-04-02,META,196.75,200.68,165.82,169.2,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-04-03,META,162.43,165.68,140.08,142.94,4488750,NASDAQ,NASDAQ,stock,Meta Platforms Inc.,Communication Services,United States,USD
+2025-03-04,TSLA,289.68,295.47,238.46,243.33,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-05,TSLA,231.98,236.62,195.51,199.5,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-06,TSLA,191.52,195.35,165.17,168.54,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-07,TSLA,162.92,166.18,143.69,146.63,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-10,TSLA,144.67,147.57,136.11,138.89,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-11,TSLA,137.96,140.72,132.5,135.2,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-12,TSLA,135.2,137.9,132.5,135.2,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-13,TSLA,136.1,141.6,133.38,138.82,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-14,TSLA,140.67,149.23,137.86,146.3,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-17,TSLA,151.18,169.62,148.15,166.3,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-18,TSLA,172.95,197.58,169.49,193.7,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-19,TSLA,202.74,235.75,198.69,231.12,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-20,TSLA,243.45,288.05,238.58,282.4,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-21,TSLA,299.35,360.29,293.36,353.23,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-24,TSLA,332.04,338.68,266.82,272.27,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-25,TSLA,257.75,262.9,212.18,216.51,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-26,TSLA,206.41,210.53,173.96,177.51,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-27,TSLA,170.41,173.82,146.96,149.96,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-28,TSLA,144.96,147.86,127.86,130.46,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-31,TSLA,128.72,131.3,121.1,123.58,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-04-01,TSLA,131.81,161.34,129.18,158.18,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-04-02,TSLA,147.63,150.58,115.74,118.11,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-04-03,TSLA,111.02,113.24,89.22,91.04,769500,NASDAQ,NASDAQ,stock,Tesla Inc.,Consumer Discretionary,United States,USD
+2025-03-04,NVDA,444.92,453.82,409.86,418.22,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-05,NVDA,412.65,420.9,388.22,396.14,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-06,NVDA,393.5,401.37,377.92,385.63,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-07,NVDA,385.63,393.34,377.92,385.63,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-10,NVDA,393.34,425.28,385.48,416.94,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-11,NVDA,428.06,471.55,419.5,462.31,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-12,NVDA,477.72,536.0,468.16,525.49,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-13,NVDA,546.51,624.33,535.58,612.09,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-14,NVDA,640.66,744.95,627.84,730.35,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-17,NVDA,779.04,953.54,763.46,934.84,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-18,NVDA,872.52,889.97,684.06,698.02,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-19,NVDA,656.14,669.26,527.27,538.03,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-20,NVDA,509.34,519.52,419.29,427.84,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-21,NVDA,407.88,416.03,343.76,350.77,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-24,NVDA,341.42,348.25,307.82,314.11,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-25,NVDA,307.82,313.98,283.57,289.35,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-26,NVDA,285.5,291.21,268.6,274.08,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-27,NVDA,272.25,277.69,261.47,266.8,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-28,NVDA,266.8,272.14,261.47,266.8,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-31,NVDA,272.14,294.24,266.7,288.47,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-04-01,NVDA,276.93,282.47,238.82,243.7,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-04-02,NVDA,235.58,240.29,207.78,212.02,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-04-03,NVDA,206.36,210.49,186.06,189.86,4574250,NASDAQ,NASDAQ,stock,NVIDIA Corporation,Technology,United States,USD
+2025-03-04,PEP,73.84,75.32,60.79,62.03,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-05,PEP,59.13,60.31,49.84,50.85,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-06,PEP,48.82,49.79,42.1,42.96,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-07,PEP,41.53,42.36,36.63,37.38,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-10,PEP,36.88,37.61,34.69,35.4,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-11,PEP,35.17,35.87,33.77,34.46,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-12,PEP,34.46,35.15,33.77,34.46,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-13,PEP,34.69,36.09,34.0,35.39,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-14,PEP,35.86,38.04,35.14,37.29,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-17,PEP,38.54,43.24,37.76,42.39,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-18,PEP,44.08,50.36,43.2,49.37,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-19,PEP,51.68,60.09,50.65,58.91,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-20,PEP,62.06,73.42,60.82,71.99,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-21,PEP,76.3,91.84,74.78,90.04,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-24,PEP,84.64,86.33,68.01,69.4,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-25,PEP,65.7,67.01,54.08,55.19,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-26,PEP,52.61,53.67,44.34,45.25,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-27,PEP,43.44,44.31,37.46,38.22,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-28,PEP,36.95,37.69,32.59,33.26,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-31,PEP,32.81,33.47,30.87,31.5,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-04-01,PEP,33.6,41.13,32.93,40.32,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-04-02,PEP,37.63,38.38,29.5,30.11,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-04-03,PEP,28.3,28.87,22.74,23.21,1667250,NASDAQ,NASDAQ,stock,PepsiCo Inc.,Consumer Staples,United States,USD
+2025-03-04,COST,456.68,465.81,420.69,429.28,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-05,COST,423.56,432.03,398.48,406.61,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-06,COST,403.9,411.98,387.91,395.82,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-07,COST,395.82,403.74,387.91,395.82,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-10,COST,403.74,436.52,395.67,427.97,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-11,COST,439.38,484.02,430.59,474.53,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-12,COST,490.35,550.17,480.54,539.38,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-13,COST,560.96,640.84,549.74,628.27,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-14,COST,657.59,764.64,644.44,749.65,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-17,COST,799.63,978.75,783.64,959.55,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-18,COST,895.58,913.5,702.14,716.47,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-19,COST,673.48,686.95,541.21,552.25,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-20,COST,522.8,533.26,430.37,439.15,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-21,COST,418.66,427.03,352.84,360.05,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-24,COST,350.44,357.45,315.96,322.41,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-25,COST,315.96,322.28,291.06,297.0,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-26,COST,293.04,298.9,275.69,281.32,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-27,COST,279.45,285.03,268.38,273.86,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-28,COST,273.86,279.33,268.38,273.86,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-03-31,COST,279.33,302.02,273.75,296.09,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-04-01,COST,284.25,289.94,245.14,250.14,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-04-02,COST,241.8,246.64,213.27,217.62,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD
+2025-04-03,COST,211.82,216.06,190.98,194.87,983250,NASDAQ,NASDAQ,stock,Costco Wholesale Corporation,Consumer Staples,United States,USD

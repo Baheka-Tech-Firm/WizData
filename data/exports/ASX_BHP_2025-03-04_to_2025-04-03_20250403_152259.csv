@@ -1,0 +1,24 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type
+2025-03-04,BHP,46.37,48.43,45.44,47.48,359100,ASX,Australian Securities Exchange,stock
+2025-03-05,BHP,48.05,50.78,47.09,49.78,359100,ASX,Australian Securities Exchange,stock
+2025-03-06,BHP,50.58,54.06,49.57,53.0,359100,ASX,Australian Securities Exchange,stock
+2025-03-07,BHP,54.06,58.45,52.98,57.31,359100,ASX,Australian Securities Exchange,stock
+2025-03-10,BHP,59.14,66.12,57.96,64.82,359100,ASX,Australian Securities Exchange,stock
+2025-03-11,BHP,67.15,75.89,65.81,74.41,359100,ASX,Australian Securities Exchange,stock
+2025-03-12,BHP,77.38,88.4,75.83,86.67,359100,ASX,Australian Securities Exchange,stock
+2025-03-13,BHP,83.2,84.87,71.75,73.22,359100,ASX,Australian Securities Exchange,stock
+2025-03-14,BHP,70.58,71.99,61.7,62.96,359100,ASX,Australian Securities Exchange,stock
+2025-03-17,BHP,61.45,62.68,55.88,57.02,359100,ASX,Australian Securities Exchange,stock
+2025-03-18,BHP,55.88,57.0,51.48,52.53,359100,ASX,Australian Securities Exchange,stock
+2025-03-19,BHP,51.69,52.72,48.22,49.21,359100,ASX,Australian Securities Exchange,stock
+2025-03-20,BHP,48.62,49.59,45.93,46.87,359100,ASX,Australian Securities Exchange,stock
+2025-03-21,BHP,46.49,47.42,44.47,45.38,359100,ASX,Australian Securities Exchange,stock
+2025-03-24,BHP,45.56,47.03,44.65,46.11,359100,ASX,Australian Securities Exchange,stock
+2025-03-25,BHP,46.47,48.54,45.54,47.59,359100,ASX,Australian Securities Exchange,stock
+2025-03-26,BHP,48.16,50.89,47.2,49.89,359100,ASX,Australian Securities Exchange,stock
+2025-03-27,BHP,50.69,54.19,49.68,53.13,359100,ASX,Australian Securities Exchange,stock
+2025-03-28,BHP,54.19,58.59,53.1,57.44,359100,ASX,Australian Securities Exchange,stock
+2025-03-31,BHP,59.28,66.27,58.09,64.97,359100,ASX,Australian Securities Exchange,stock
+2025-04-01,BHP,64.71,66.0,62.65,63.93,359100,ASX,Australian Securities Exchange,stock
+2025-04-02,BHP,63.93,65.21,62.65,63.93,359100,ASX,Australian Securities Exchange,stock
+2025-04-03,BHP,64.19,66.26,62.9,64.96,359100,ASX,Australian Securities Exchange,stock

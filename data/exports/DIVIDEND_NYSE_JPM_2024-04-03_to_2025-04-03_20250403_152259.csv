@@ -1,0 +1,4 @@
+symbol,ex_date,payment_date,dividend_amount,currency,frequency,market
+JPM,2024-06-28,2024-07-12,0.51,USD,semi-annual,NYSE
+JPM,2024-07-28,2024-08-11,0.51,USD,semi-annual,NYSE
+JPM,2025-01-28,2025-02-11,0.52,USD,semi-annual,NYSE

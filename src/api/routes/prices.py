@@ -7,6 +7,10 @@ import asyncio
 from src.ingestion.jse_scraper import JSEScraper
 from src.ingestion.crypto_fetcher import CryptoFetcher
 from src.ingestion.forex_fetcher import ForexFetcher
+from src.ingestion.global_markets_fetcher import GlobalMarketsFetcher
+from src.ingestion.dividend_fetcher import DividendFetcher
+from src.ingestion.earnings_fetcher import EarningsFetcher
+from src.ingestion.africa_markets_fetcher import AfricanMarketsFetcher
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +21,10 @@ prices_bp = Blueprint('prices', __name__, url_prefix='/api')
 jse_scraper = JSEScraper()
 crypto_fetcher = CryptoFetcher()
 forex_fetcher = ForexFetcher()
+global_markets_fetcher = GlobalMarketsFetcher()
+dividend_fetcher = DividendFetcher()
+earnings_fetcher = EarningsFetcher()
+african_markets_fetcher = AfricanMarketsFetcher()
 
 @prices_bp.route('/symbols', methods=['GET'])
 def get_symbols():
@@ -24,12 +32,14 @@ def get_symbols():
     Get available symbols for different asset types
     
     Query parameters:
-    - asset_type: The asset type ("jse", "crypto", "forex")
+    - asset_type: The asset type ("jse", "crypto", "forex", "global", "african", "dividend", "earnings")
+    - market: For market-specific fetchers, the market code (e.g., "asx", "lse", "nasdaq", "jse", "ngx")
     
     Returns:
         JSON response with available symbols
     """
     asset_type = request.args.get('asset_type', 'jse').lower()
+    market = request.args.get('market', 'nasdaq').lower()
     
     try:
         # Create event loop for async operations
@@ -43,10 +53,18 @@ def get_symbols():
             symbols = loop.run_until_complete(crypto_fetcher.get_symbols())
         elif asset_type == 'forex':
             symbols = loop.run_until_complete(forex_fetcher.get_symbols())
+        elif asset_type == 'global':
+            symbols = loop.run_until_complete(global_markets_fetcher.get_symbols(market))
+        elif asset_type == 'african':
+            symbols = loop.run_until_complete(african_markets_fetcher.get_symbols(market))
+        elif asset_type == 'dividend':
+            symbols = loop.run_until_complete(dividend_fetcher.get_symbols(market))
+        elif asset_type == 'earnings':
+            symbols = loop.run_until_complete(earnings_fetcher.get_symbols(market))
         else:
             return jsonify({
                 'status': 'error',
-                'message': f"Invalid asset type: {asset_type}. Valid types are 'jse', 'crypto', 'forex'"
+                'message': f"Invalid asset type: {asset_type}. Valid types are 'jse', 'crypto', 'forex', 'global', 'african', 'dividend', 'earnings'"
             }), 400
         
         # Clean up event loop
@@ -55,6 +73,7 @@ def get_symbols():
         return jsonify({
             'status': 'success',
             'asset_type': asset_type,
+            'market': market if asset_type in ['global', 'african', 'dividend', 'earnings'] else None,
             'count': len(symbols),
             'symbols': symbols
         })
@@ -72,8 +91,9 @@ def get_prices():
     Get price data for a symbol
     
     Query parameters:
-    - asset_type: The asset type ("jse", "crypto", "forex")
-    - symbol: The ticker symbol (e.g., "SOL", "BTC", "EURUSD")
+    - asset_type: The asset type ("jse", "crypto", "forex", "global", "african", "dividend", "earnings")
+    - market: For market-specific fetchers, the market code (e.g., "asx", "lse", "nasdaq", "jse", "ngx")
+    - symbol: The ticker symbol (e.g., "AAPL", "BTC", "EURUSD")
     - interval: The time interval ("daily", "weekly", "monthly")
     - start_date: Start date in YYYY-MM-DD format
     - end_date: End date in YYYY-MM-DD format
@@ -83,6 +103,7 @@ def get_prices():
     """
     # Get query parameters
     asset_type = request.args.get('asset_type', 'jse').lower()
+    market = request.args.get('market', 'nasdaq').lower()
     symbol = request.args.get('symbol')
     interval = request.args.get('interval', 'daily').lower()
     start_date = request.args.get('start_date')
@@ -116,10 +137,18 @@ def get_prices():
             df = loop.run_until_complete(crypto_fetcher.fetch_data(symbol=symbol, interval=interval, start_date=start_date, end_date=end_date))
         elif asset_type == 'forex':
             df = loop.run_until_complete(forex_fetcher.fetch_data(symbol=symbol, interval=interval, start_date=start_date, end_date=end_date))
+        elif asset_type == 'global':
+            df = loop.run_until_complete(global_markets_fetcher.fetch_data(market=market, symbol=symbol, start_date=start_date, end_date=end_date))
+        elif asset_type == 'african':
+            df = loop.run_until_complete(african_markets_fetcher.fetch_data(market=market, symbol=symbol, start_date=start_date, end_date=end_date))
+        elif asset_type == 'dividend':
+            df = loop.run_until_complete(dividend_fetcher.fetch_data(market=market, symbol=symbol, start_date=start_date, end_date=end_date))
+        elif asset_type == 'earnings':
+            df = loop.run_until_complete(earnings_fetcher.fetch_data(market=market, symbol=symbol, start_date=start_date, end_date=end_date))
         else:
             return jsonify({
                 'status': 'error',
-                'message': f"Invalid asset type: {asset_type}. Valid types are 'jse', 'crypto', 'forex'"
+                'message': f"Invalid asset type: {asset_type}. Valid types are 'jse', 'crypto', 'forex', 'global', 'african', 'dividend', 'earnings'"
             }), 400
         
         # Clean up event loop
@@ -128,7 +157,7 @@ def get_prices():
         if df.empty:
             return jsonify({
                 'status': 'warning',
-                'message': f"No data found for {symbol if symbol else 'requested symbols'} in {asset_type}",
+                'message': f"No data found for {symbol if symbol else 'requested symbols'} in {asset_type} {market if asset_type in ['global', 'african', 'dividend', 'earnings'] else ''}",
                 'count': 0,
                 'data': []
             })
@@ -140,19 +169,25 @@ def get_prices():
         
         data_records = df.to_dict(orient='records')
         
-        return jsonify({
+        response_data = {
             'status': 'success',
             'asset_type': asset_type,
             'symbol': symbol if symbol else 'multiple',
-            'interval': interval,
+            'interval': interval if asset_type in ['crypto', 'forex'] else 'daily',
             'start_date': start_date,
             'end_date': end_date,
             'count': len(data_records),
             'data': data_records
-        })
+        }
+        
+        # Add market info for market-specific asset types
+        if asset_type in ['global', 'african', 'dividend', 'earnings']:
+            response_data['market'] = market
+            
+        return jsonify(response_data)
         
     except Exception as e:
-        logger.error(f"Error retrieving prices for {asset_type} {symbol}: {str(e)}")
+        logger.error(f"Error retrieving prices for {asset_type} {market if asset_type in ['global', 'african', 'dividend', 'earnings'] else ''} {symbol}: {str(e)}")
         return jsonify({
             'status': 'error',
             'message': f"Error retrieving prices: {str(e)}"
