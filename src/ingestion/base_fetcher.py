@@ -1,112 +1,121 @@
-from abc import ABC, abstractmethod
-import pandas as pd
-from typing import Dict, List, Any, Optional, Union, TypeVar, Sequence
+"""
+Base Fetcher Module
+
+This module provides the base class for all data fetchers in the system.
+It defines the common interface and functionality that all fetchers should implement.
+"""
+
 import logging
+import os
+import json
+from abc import ABC, abstractmethod
 from datetime import datetime
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Define TypeVar for flexible symbol return types
-T = TypeVar('T', str, Dict[str, str])
-SymbolListType = Sequence[T]
-
 class BaseFetcher(ABC):
-    """Base class for all data fetching operations"""
+    """Base class for all data fetchers"""
     
-    def __init__(self, source_name: str):
+    def __init__(self, name, data_type='general'):
         """
-        Initialize the fetcher
+        Initialize the base fetcher
         
         Args:
-            source_name (str): Name of the data source
+            name (str): Name of the fetcher
+            data_type (str): Type of data being fetched (e.g., 'market', 'company', 'esg')
         """
-        self.source_name = source_name
-        logger.info(f"Initialized {source_name} fetcher")
+        self.name = name
+        self.data_type = data_type
+        
+        # Create cache directory
+        self.cache_dir = os.path.join('data', 'cache', data_type)
+        os.makedirs(self.cache_dir, exist_ok=True)
+    
+    def get_cache_path(self, key, extension='json'):
+        """
+        Get path for caching data
+        
+        Args:
+            key (str): Cache key/identifier
+            extension (str): File extension for the cache
+            
+        Returns:
+            str: Path to the cache file
+        """
+        return os.path.join(self.cache_dir, f"{key}.{extension}")
+    
+    def save_to_cache(self, key, data, extension='json'):
+        """
+        Save data to cache
+        
+        Args:
+            key (str): Cache key/identifier
+            data: Data to cache
+            extension (str): File extension for the cache
+            
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        try:
+            cache_path = self.get_cache_path(key, extension)
+            
+            if extension.lower() == 'json':
+                with open(cache_path, 'w') as f:
+                    json.dump(data, f, indent=2)
+            else:
+                # For other types, just save as string
+                with open(cache_path, 'w') as f:
+                    f.write(str(data))
+                    
+            return True
+        except Exception as e:
+            logger.error(f"Error saving to cache: {str(e)}")
+            return False
+    
+    def load_from_cache(self, key, extension='json', max_age_hours=None):
+        """
+        Load data from cache
+        
+        Args:
+            key (str): Cache key/identifier
+            extension (str): File extension for the cache
+            max_age_hours (int, optional): Maximum age of cache in hours
+            
+        Returns:
+            Data from cache or None if not found or expired
+        """
+        cache_path = self.get_cache_path(key, extension)
+        
+        if not os.path.exists(cache_path):
+            return None
+        
+        # Check cache age if max_age_hours specified
+        if max_age_hours is not None:
+            file_modified_time = os.path.getmtime(cache_path)
+            file_modified_datetime = datetime.fromtimestamp(file_modified_time)
+            age_hours = (datetime.now() - file_modified_datetime).total_seconds() / 3600
+            
+            if age_hours > max_age_hours:
+                logger.info(f"Cache expired for {key} (age: {age_hours:.2f} hours)")
+                return None
+        
+        try:
+            if extension.lower() == 'json':
+                with open(cache_path, 'r') as f:
+                    return json.load(f)
+            else:
+                # For other types, just read as string
+                with open(cache_path, 'r') as f:
+                    return f.read()
+        except Exception as e:
+            logger.error(f"Error loading from cache: {str(e)}")
+            return None
     
     @abstractmethod
-    async def fetch_data(self, **kwargs) -> pd.DataFrame:
+    async def fetch_data(self, *args, **kwargs):
         """
-        Fetch data from the source and return a pandas DataFrame
+        Fetch data from the source
         
-        Args:
-            **kwargs: Additional parameters specific to the data source
-            
-        Returns:
-            pd.DataFrame: The fetched data in a standardized format
+        This method should be implemented by all fetcher subclasses.
         """
         pass
-    
-    @abstractmethod
-    async def get_symbols(self, *args, **kwargs) -> SymbolListType:
-        """
-        Get available symbols/tickers from the data source
-        
-        Returns:
-            SymbolListType: List of available symbols (either as strings or dictionaries)
-        """
-        pass
-    
-    def log_fetch_attempt(self, params: Dict[str, Any]) -> None:
-        """Log data fetch attempt"""
-        logger.info(f"Attempting to fetch data from {self.source_name} with params: {params}")
-    
-    def log_fetch_success(self, data_length: int) -> None:
-        """Log successful data fetch"""
-        logger.info(f"Successfully fetched {data_length} records from {self.source_name}")
-    
-    def log_fetch_error(self, error: Exception) -> None:
-        """Log error during data fetch"""
-        logger.error(f"Error fetching data from {self.source_name}: {str(error)}")
-    
-    @staticmethod
-    def standardize_dataframe(df: pd.DataFrame, mapping: Dict[str, str]) -> pd.DataFrame:
-        """
-        Standardize column names in DataFrame
-        
-        Args:
-            df (pd.DataFrame): Original DataFrame
-            mapping (Dict[str, str]): Mapping from source column names to standard names
-            
-        Returns:
-            pd.DataFrame: DataFrame with standardized column names
-        """
-        # Create a copy to avoid modifying the original
-        result_df = df.copy()
-        
-        # Rename columns according to mapping
-        renamed_columns = {src: dst for src, dst in mapping.items() if src in df.columns}
-        if renamed_columns:
-            result_df = result_df.rename(columns=renamed_columns)
-        
-        return result_df
-        
-    @staticmethod
-    def export_to_json(df: pd.DataFrame, filepath: str) -> str:
-        """
-        Export DataFrame to JSON file
-        
-        Args:
-            df (pd.DataFrame): DataFrame to export
-            filepath (str): Path to save the JSON file
-            
-        Returns:
-            str: Path to the saved file
-        """
-        df.to_json(filepath, orient='records', date_format='iso')
-        return filepath
-        
-    @staticmethod
-    def export_to_csv(df: pd.DataFrame, filepath: str) -> str:
-        """
-        Export DataFrame to CSV file
-        
-        Args:
-            df (pd.DataFrame): DataFrame to export
-            filepath (str): Path to save the CSV file
-            
-        Returns:
-            str: Path to the saved file
-        """
-        df.to_csv(filepath, index=False)
-        return filepath
