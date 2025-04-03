@@ -1,259 +1,159 @@
-from fastapi import APIRouter, Depends, Query, HTTPException, Path
-from typing import List, Optional, Dict, Any, Union
+from flask import Blueprint, jsonify, request
 from datetime import datetime, timedelta
-import asyncio
+import logging
 import pandas as pd
+import asyncio
 
-from src.storage.timescale_db import TimescaleDBClient
-from src.storage.redis_cache import RedisCacheClient
-from src.api.middleware.rate_limiter import rate_limit_dependency
-from src.api.middleware.auth import require_auth, get_current_user
-from src.utils.logger import get_api_logger
+from src.ingestion.jse_scraper import JSEScraper
+from src.ingestion.crypto_fetcher import CryptoFetcher
+from src.ingestion.forex_fetcher import ForexFetcher
 
-router = APIRouter(
-    prefix="/prices",
-    tags=["prices"],
-    responses={
-        404: {"description": "Not found"},
-        429: {"description": "Rate limit exceeded"},
-    },
-)
+logger = logging.getLogger(__name__)
 
-# Initialize clients
-db_client = TimescaleDBClient()
-cache_client = RedisCacheClient()
-logger = get_api_logger()
+# Create blueprint with URL prefix
+prices_bp = Blueprint('prices', __name__, url_prefix='/api')
 
-@router.get("/{symbol}")
-async def get_prices(
-    symbol: str = Path(..., description="Stock symbol"),
-    interval: str = Query("1d", description="Time interval (1d, 1h, etc.)"),
-    start_date: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
-    end_date: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
-    limit: int = Query(100, description="Number of results to return", ge=1, le=1000),
-    user_info: Optional[Dict[str, Any]] = Depends(get_current_user),
-    _: None = Depends(rate_limit_dependency)
-):
+# Initialize fetchers
+jse_scraper = JSEScraper()
+crypto_fetcher = CryptoFetcher()
+forex_fetcher = ForexFetcher()
+
+@prices_bp.route('/symbols', methods=['GET'])
+def get_symbols():
     """
-    Get historical price data for a symbol
+    Get available symbols for different asset types
+    
+    Query parameters:
+    - asset_type: The asset type ("jse", "crypto", "forex")
+    
+    Returns:
+        JSON response with available symbols
     """
+    asset_type = request.args.get('asset_type', 'jse').lower()
+    
     try:
-        # Validate symbol
-        symbol = symbol.upper()
+        # Create event loop for async operations
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
         
-        # Set default dates if not provided
-        if not end_date:
-            end_date = datetime.now().strftime("%Y-%m-%d")
-        if not start_date:
-            # Default to 30 days for free tier, 1 year for premium
-            days_back = 365 if (user_info and user_info.get("tier") == "premium") else 30
-            start_date = (datetime.now() - timedelta(days=days_back)).strftime("%Y-%m-%d")
+        # Fetch symbols based on asset type
+        if asset_type == 'jse':
+            symbols = loop.run_until_complete(jse_scraper.get_symbols())
+        elif asset_type == 'crypto':
+            symbols = loop.run_until_complete(crypto_fetcher.get_symbols())
+        elif asset_type == 'forex':
+            symbols = loop.run_until_complete(forex_fetcher.get_symbols())
+        else:
+            return jsonify({
+                'status': 'error',
+                'message': f"Invalid asset type: {asset_type}. Valid types are 'jse', 'crypto', 'forex'"
+            }), 400
         
-        # Generate cache key
-        cache_key = f"prices:{symbol}:{interval}:{start_date}:{end_date}:{limit}"
+        # Clean up event loop
+        loop.close()
         
-        # Try to get from cache first
-        cached_data = await cache_client.get_cache(cache_key)
-        if cached_data is not None:
-            logger.debug(f"Cache hit for {cache_key}")
-            return cached_data
+        return jsonify({
+            'status': 'success',
+            'asset_type': asset_type,
+            'count': len(symbols),
+            'symbols': symbols
+        })
         
-        # Not in cache, fetch from database
-        df = await db_client.get_ohlcv(symbol, start_date, end_date, limit)
+    except Exception as e:
+        logger.error(f"Error retrieving symbols for {asset_type}: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'message': f"Error retrieving symbols: {str(e)}"
+        }), 500
+
+@prices_bp.route('/prices', methods=['GET'])
+def get_prices():
+    """
+    Get price data for a symbol
+    
+    Query parameters:
+    - asset_type: The asset type ("jse", "crypto", "forex")
+    - symbol: The ticker symbol (e.g., "SOL", "BTC", "EURUSD")
+    - interval: The time interval ("daily", "weekly", "monthly")
+    - start_date: Start date in YYYY-MM-DD format
+    - end_date: End date in YYYY-MM-DD format
+    
+    Returns:
+        JSON response with price data
+    """
+    # Get query parameters
+    asset_type = request.args.get('asset_type', 'jse').lower()
+    symbol = request.args.get('symbol')
+    interval = request.args.get('interval', 'daily').lower()
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+    
+    # Validate required parameters
+    if not asset_type:
+        return jsonify({
+            'status': 'error',
+            'message': "Missing required parameter: asset_type"
+        }), 400
+    
+    # Set default dates if not provided
+    if not end_date:
+        end_date = datetime.now().strftime("%Y-%m-%d")
+    if not start_date:
+        # Default to 30 days before end date
+        end_dt = datetime.strptime(end_date, "%Y-%m-%d")
+        start_dt = end_dt - timedelta(days=30)
+        start_date = start_dt.strftime("%Y-%m-%d")
+    
+    try:
+        # Create event loop for async operations
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Fetch data based on asset type
+        if asset_type == 'jse':
+            df = loop.run_until_complete(jse_scraper.fetch_data(symbol=symbol, start_date=start_date, end_date=end_date))
+        elif asset_type == 'crypto':
+            df = loop.run_until_complete(crypto_fetcher.fetch_data(symbol=symbol, interval=interval, start_date=start_date, end_date=end_date))
+        elif asset_type == 'forex':
+            df = loop.run_until_complete(forex_fetcher.fetch_data(symbol=symbol, interval=interval, start_date=start_date, end_date=end_date))
+        else:
+            return jsonify({
+                'status': 'error',
+                'message': f"Invalid asset type: {asset_type}. Valid types are 'jse', 'crypto', 'forex'"
+            }), 400
+        
+        # Clean up event loop
+        loop.close()
         
         if df.empty:
-            raise HTTPException(status_code=404, detail=f"No data found for symbol {symbol}")
+            return jsonify({
+                'status': 'warning',
+                'message': f"No data found for {symbol if symbol else 'requested symbols'} in {asset_type}",
+                'count': 0,
+                'data': []
+            })
         
-        # Convert to list of dictionaries
-        result = df.to_dict(orient="records")
+        # Convert DataFrame to list of dictionaries for JSON response
+        # Ensure all date columns are converted to string format
+        if 'date' in df.columns:
+            df['date'] = df['date'].astype(str)
         
-        # Cache the result
-        cache_ttl = 60 * 5  # 5 minutes
-        await cache_client.set_cache(cache_key, result, cache_ttl)
+        data_records = df.to_dict(orient='records')
         
-        return result
-    
-    except HTTPException:
-        raise
+        return jsonify({
+            'status': 'success',
+            'asset_type': asset_type,
+            'symbol': symbol if symbol else 'multiple',
+            'interval': interval,
+            'start_date': start_date,
+            'end_date': end_date,
+            'count': len(data_records),
+            'data': data_records
+        })
+        
     except Exception as e:
-        logger.error(f"Error fetching prices for {symbol}: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
-
-@router.get("/latest/{symbol}")
-async def get_latest_price(
-    symbol: str = Path(..., description="Stock symbol"),
-    user_info: Optional[Dict[str, Any]] = Depends(get_current_user),
-    _: None = Depends(rate_limit_dependency)
-):
-    """
-    Get latest price for a symbol
-    """
-    try:
-        # Validate symbol
-        symbol = symbol.upper()
-        
-        # Generate cache key
-        cache_key = f"latest_price:{symbol}"
-        
-        # Try to get from cache first (short TTL for latest prices)
-        cached_data = await cache_client.get_cache(cache_key)
-        if cached_data is not None:
-            logger.debug(f"Cache hit for {cache_key}")
-            return cached_data
-        
-        # Not in cache, fetch from database
-        df = await db_client.get_ohlcv(symbol, limit=1)
-        
-        if df.empty:
-            raise HTTPException(status_code=404, detail=f"No data found for symbol {symbol}")
-        
-        # Get the latest record
-        latest = df.iloc[0].to_dict()
-        
-        # Cache the result
-        cache_ttl = 60  # 1 minute for latest prices
-        await cache_client.set_cache(cache_key, latest, cache_ttl)
-        
-        return latest
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error fetching latest price for {symbol}: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
-
-@router.get("/batch")
-async def get_batch_prices(
-    symbols: str = Query(..., description="Comma-separated list of symbols"),
-    start_date: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
-    end_date: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
-    user_info: Dict[str, Any] = Depends(require_auth("read:prices"))
-):
-    """
-    Get prices for multiple symbols (premium feature)
-    """
-    try:
-        # Only available for premium tier
-        if user_info.get("tier") != "premium":
-            raise HTTPException(status_code=403, detail="This endpoint requires a premium subscription")
-        
-        # Parse symbols
-        symbol_list = [s.strip().upper() for s in symbols.split(",")]
-        if not symbol_list:
-            raise HTTPException(status_code=400, detail="No symbols provided")
-        
-        # Set default dates if not provided
-        if not end_date:
-            end_date = datetime.now().strftime("%Y-%m-%d")
-        if not start_date:
-            start_date = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
-        
-        # Generate cache key
-        cache_key = f"batch_prices:{symbols}:{start_date}:{end_date}"
-        
-        # Try to get from cache first
-        cached_data = await cache_client.get_cache(cache_key)
-        if cached_data is not None:
-            logger.debug(f"Cache hit for {cache_key}")
-            return cached_data
-        
-        # Fetch data for each symbol in parallel
-        results = {}
-        tasks = []
-        
-        for symbol in symbol_list:
-            task = db_client.get_ohlcv(symbol, start_date, end_date)
-            tasks.append((symbol, task))
-        
-        for symbol, task in tasks:
-            df = await task
-            if not df.empty:
-                results[symbol] = df.to_dict(orient="records")
-        
-        # Cache the result
-        cache_ttl = 60 * 5  # 5 minutes
-        await cache_client.set_cache(cache_key, results, cache_ttl)
-        
-        return results
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error fetching batch prices: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
-
-@router.get("/compare")
-async def compare_symbols(
-    symbols: str = Query(..., description="Comma-separated list of symbols to compare"),
-    metric: str = Query("close", description="Metric to compare (close, volume, etc.)"),
-    start_date: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
-    end_date: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
-    normalize: bool = Query(False, description="Normalize values to percentage change"),
-    user_info: Dict[str, Any] = Depends(require_auth("read:prices"))
-):
-    """
-    Compare performance of multiple symbols
-    """
-    try:
-        # Parse symbols
-        symbol_list = [s.strip().upper() for s in symbols.split(",")]
-        if not symbol_list:
-            raise HTTPException(status_code=400, detail="No symbols provided")
-        
-        # Set default dates if not provided
-        if not end_date:
-            end_date = datetime.now().strftime("%Y-%m-%d")
-        if not start_date:
-            start_date = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
-        
-        # Generate cache key
-        cache_key = f"compare:{symbols}:{metric}:{start_date}:{end_date}:{normalize}"
-        
-        # Try to get from cache first
-        cached_data = await cache_client.get_cache(cache_key)
-        if cached_data is not None:
-            logger.debug(f"Cache hit for {cache_key}")
-            return cached_data
-        
-        # Fetch data for each symbol in parallel
-        results = {}
-        comparison = {"dates": [], "values": {}}
-        tasks = []
-        
-        for symbol in symbol_list:
-            task = db_client.get_ohlcv(symbol, start_date, end_date)
-            tasks.append((symbol, task))
-        
-        for symbol, task in tasks:
-            df = await task
-            if not df.empty:
-                # Ensure the requested metric exists
-                if metric not in df.columns:
-                    continue
-                
-                # Add to comparison data
-                if normalize:
-                    # Calculate percentage change from first value
-                    first_value = df[metric].iloc[-1]  # Oldest value (sorted by date DESC)
-                    series = ((df[metric] / first_value) - 1) * 100
-                    values = series.tolist()
-                else:
-                    values = df[metric].tolist()
-                
-                comparison["values"][symbol] = values
-                
-                # Add dates if not already added
-                if not comparison["dates"]:
-                    comparison["dates"] = df["date"].tolist()
-        
-        # Cache the result
-        cache_ttl = 60 * 15  # 15 minutes
-        await cache_client.set_cache(cache_key, comparison, cache_ttl)
-        
-        return comparison
-    
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error comparing symbols: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+        logger.error(f"Error retrieving prices for {asset_type} {symbol}: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'message': f"Error retrieving prices: {str(e)}"
+        }), 500

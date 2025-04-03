@@ -1,15 +1,25 @@
 from abc import ABC, abstractmethod
 import pandas as pd
-from typing import Dict, List, Any, Optional, Union
-from src.utils.logger import get_ingestion_logger
+from typing import Dict, List, Any, Optional
+import logging
+from datetime import datetime
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class BaseFetcher(ABC):
     """Base class for all data fetching operations"""
     
     def __init__(self, source_name: str):
-        self.source_name = source_name
-        self.logger = get_ingestion_logger(source_name)
+        """
+        Initialize the fetcher
         
+        Args:
+            source_name (str): Name of the data source
+        """
+        self.source_name = source_name
+        logger.info(f"Initialized {source_name} fetcher")
+    
     @abstractmethod
     async def fetch_data(self, **kwargs) -> pd.DataFrame:
         """
@@ -35,15 +45,15 @@ class BaseFetcher(ABC):
     
     def log_fetch_attempt(self, params: Dict[str, Any]) -> None:
         """Log data fetch attempt"""
-        self.logger.info(f"Attempting to fetch data from {self.source_name} with params: {params}")
+        logger.info(f"Attempting to fetch data from {self.source_name} with params: {params}")
     
     def log_fetch_success(self, data_length: int) -> None:
         """Log successful data fetch"""
-        self.logger.info(f"Successfully fetched {data_length} records from {self.source_name}")
+        logger.info(f"Successfully fetched {data_length} records from {self.source_name}")
     
     def log_fetch_error(self, error: Exception) -> None:
         """Log error during data fetch"""
-        self.logger.error(f"Error fetching data from {self.source_name}: {str(error)}")
+        logger.error(f"Error fetching data from {self.source_name}: {str(error)}")
     
     @staticmethod
     def standardize_dataframe(df: pd.DataFrame, mapping: Dict[str, str]) -> pd.DataFrame:
@@ -58,10 +68,11 @@ class BaseFetcher(ABC):
             pd.DataFrame: DataFrame with standardized column names
         """
         # Create a copy to avoid modifying the original
-        result = df.copy()
+        result_df = df.copy()
         
-        # Rename columns based on mapping
-        columns_to_rename = {k: v for k, v in mapping.items() if k in result.columns}
-        result = result.rename(columns=columns_to_rename)
+        # Rename columns according to mapping
+        renamed_columns = {src: dst for src, dst in mapping.items() if src in df.columns}
+        if renamed_columns:
+            result_df = result_df.rename(columns=renamed_columns)
         
-        return result
+        return result_df

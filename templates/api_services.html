@@ -1,313 +1,597 @@
-{% extends "layout.html" %}
-
-{% block content %}
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card bg-dark border-secondary">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0"><i class="fas fa-plug me-2"></i> WizData API Services</h5>
-                <div>
-                    <span class="badge bg-primary">Version 1.0.0</span>
-                </div>
-            </div>
-            <div class="card-body">
-                <p class="lead">
-                    WizData offers comprehensive financial data APIs for developers, traders, and financial service providers.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- API Endpoints Section -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card bg-dark border-secondary">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-network-wired me-2"></i> API Endpoints</h5>
-            </div>
-            <div class="card-body">
-                <p>Our RESTful API provides access to comprehensive financial data across multiple asset classes.</p>
-                
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover">
-                        <thead>
-                            <tr>
-                                <th>Endpoint</th>
-                                <th>Description</th>
-                                <th>Authentication</th>
-                                <th>Rate Limit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>/api/prices</code></td>
-                                <td>Historical and real-time price data (OHLCV) for various financial instruments</td>
-                                <td>API Key</td>
-                                <td>120/min (free), 1000/min (premium)</td>
-                            </tr>
-                            <tr>
-                                <td><code>/api/news</code></td>
-                                <td>Financial news articles with sentiment analysis</td>
-                                <td>API Key</td>
-                                <td>60/min (free), 500/min (premium)</td>
-                            </tr>
-                            <tr>
-                                <td><code>/api/fundamentals</code></td>
-                                <td>Company fundamentals and financial data</td>
-                                <td>API Key (Premium)</td>
-                                <td>30/min (premium)</td>
-                            </tr>
-                            <tr>
-                                <td><code>/api/dividends</code></td>
-                                <td>Dividend data, calendars, and forecasts</td>
-                                <td>API Key (Premium)</td>
-                                <td>30/min (premium)</td>
-                            </tr>
-                            <tr>
-                                <td><code>/api/indicators</code></td>
-                                <td>Technical indicators and signals</td>
-                                <td>API Key (Premium)</td>
-                                <td>50/min (premium)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Real-time Data Section -->
-<div class="row mb-4">
-    <div class="col-md-6">
-        <div class="card bg-dark border-secondary h-100">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-bolt me-2"></i> Real-time Data (WebSockets)</h5>
-            </div>
-            <div class="card-body">
-                <p>Get real-time updates through our WebSocket interface:</p>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>Price Streams</strong>
-                            <small class="d-block text-muted">Real-time price updates for stocks, crypto, and forex</small>
-                        </div>
-                        <span class="badge bg-success">Premium</span>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title | default('API Services - WizData') }}</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .api-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .api-card:hover {
+            transform: translateY(-5px);
+        }
+        .endpoint-card {
+            border-left: 4px solid var(--bs-primary);
+        }
+        pre {
+            background-color: rgba(var(--bs-dark-rgb), 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .api-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(var(--bs-primary-rgb), 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .code-block {
+            background-color: rgba(var(--bs-dark-rgb), 0.3);
+            border-radius: 5px;
+            padding: 0.2em 0.4em;
+            font-family: monospace;
+            word-break: break-word;
+        }
+        .pricing-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        .pricing-card.popular {
+            border: 1px solid var(--bs-primary);
+            position: relative;
+        }
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            transform: translateY(-50%);
+            padding: 5px 15px;
+            background-color: var(--bs-primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .feature-available {
+            color: var(--bs-success);
+        }
+        .feature-unavailable {
+            color: var(--bs-danger);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <span class="fs-4">WizData</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Dashboard</a>
                     </li>
-                    <li class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>Order Book Data</strong>
-                            <small class="d-block text-muted">Level 2 market depth for active traders</small>
-                        </div>
-                        <span class="badge bg-success">Premium</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sources">Data Sources</a>
                     </li>
-                    <li class="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>News Alerts</strong>
-                            <small class="d-block text-muted">Instant financial news and sentiment updates</small>
-                        </div>
-                        <span class="badge bg-primary">Standard</span>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/jobs">Collection Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Data Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/api-services">API Services</a>
                     </li>
                 </ul>
-                <div class="alert alert-secondary">
-                    <i class="fas fa-info-circle me-2"></i> WebSocket connections require authentication via API key.
+                <div class="d-flex">
+                    <a href="/api/docs" class="btn btn-outline-light me-2">API Docs</a>
+                    <a href="#" class="btn btn-primary">Sign In</a>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="col-md-6">
-        <div class="card bg-dark border-secondary h-100">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-code me-2"></i> Code Samples</h5>
-            </div>
-            <div class="card-body">
-                <nav>
-                    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-python-tab" data-bs-toggle="tab" data-bs-target="#nav-python" type="button" role="tab">Python</button>
-                        <button class="nav-link" id="nav-javascript-tab" data-bs-toggle="tab" data-bs-target="#nav-javascript" type="button" role="tab">JavaScript</button>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h2 class="card-title">API Services</h2>
+                                <p class="card-text text-muted">
+                                    Access financial market data through our powerful and scalable API endpoints
+                                </p>
+                            </div>
+                            <a href="#pricing" class="btn btn-primary">View Pricing</a>
+                        </div>
                     </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-python" role="tabpanel">
-                        <pre class="bg-secondary text-light p-3"><code>import requests
+                </div>
+            </div>
+        </div>
 
-# Set your API key
-api_key = "YOUR_API_KEY"
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h3 class="mb-4">Available API Endpoints</h3>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 api-card border-0 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="api-icon mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="card-title">Symbols</h4>
+                            <p class="card-text text-muted">Get available symbols for different asset types</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p><strong>Endpoint:</strong> <span class="code-block">/api/symbols</span></p>
+                            <p><strong>Method:</strong> GET</p>
+                            <p><strong>Parameters:</strong></p>
+                            <ul>
+                                <li><code>asset_type</code> - The asset type (jse, crypto, forex)</li>
+                            </ul>
+                            <p><strong>Example:</strong></p>
+                            <div class="code-block mt-2">
+                                /api/symbols?asset_type=crypto
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto pt-4">
+                            <button class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#symbolsModal">
+                                View Example Response
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 api-card border-0 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="api-icon mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="card-title">Prices</h4>
+                            <p class="card-text text-muted">Get price data for specific symbols</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p><strong>Endpoint:</strong> <span class="code-block">/api/prices</span></p>
+                            <p><strong>Method:</strong> GET</p>
+                            <p><strong>Parameters:</strong></p>
+                            <ul>
+                                <li><code>asset_type</code> - The asset type (jse, crypto, forex)</li>
+                                <li><code>symbol</code> - The ticker symbol (e.g., "SOL", "BTC")</li>
+                                <li><code>interval</code> - The time interval (daily, weekly, monthly)</li>
+                                <li><code>start_date</code> - Start date in YYYY-MM-DD format</li>
+                                <li><code>end_date</code> - End date in YYYY-MM-DD format</li>
+                            </ul>
+                            <p><strong>Example:</strong></p>
+                            <div class="code-block mt-2">
+                                /api/prices?asset_type=jse&symbol=SOL&interval=daily&start_date=2023-01-01&end_date=2023-01-31
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto pt-4">
+                            <button class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#pricesModal">
+                                View Example Response
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 api-card border-0 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <div class="api-icon mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="card-title">Historical Data</h4>
+                            <p class="card-text text-muted">Access historical financial data archives</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <div class="alert alert-secondary">
+                                <i class="bi bi-clock-history me-2"></i> Coming Soon
+                            </div>
+                            <p>Our historical data API will provide:</p>
+                            <ul>
+                                <li>Extended time series data (5+ years)</li>
+                                <li>Bulk data download capabilities</li>
+                                <li>CSV and JSON export formats</li>
+                                <li>Data aggregation options</li>
+                                <li>Technical indicators and analysis</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-auto pt-4">
+                            <button class="btn btn-sm btn-outline-secondary w-100" disabled>
+                                Coming Soon
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-# Get JSE stock data
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="card endpoint-card border-0 shadow-sm">
+                    <div class="card-header bg-transparent">
+                        <h4 class="mb-0">API Documentation</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Authentication</h5>
+                                <p>All API requests require an API key that should be included in the header of your request.</p>
+                                <pre><code>GET /api/symbols?asset_type=crypto HTTP/1.1
+Host: api.wizdata.com
+Authorization: Bearer YOUR_API_KEY
+Accept: application/json</code></pre>
+                                
+                                <h5 class="mt-4">Rate Limiting</h5>
+                                <p>Rate limits are applied based on your subscription plan:</p>
+                                <ul>
+                                    <li><strong>Basic:</strong> 100 requests per day</li>
+                                    <li><strong>Standard:</strong> 1,000 requests per day</li>
+                                    <li><strong>Premium:</strong> 10,000 requests per day</li>
+                                    <li><strong>Enterprise:</strong> Custom limits</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">Error Handling</h5>
+                                <p>The API uses standard HTTP status codes and returns detailed error messages in the following format:</p>
+                                <pre><code>{
+  "status": "error",
+  "message": "Invalid asset type: unknown",
+  "code": "INVALID_PARAMETER"
+}</code></pre>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Code Examples</h5>
+                                
+                                <div class="mb-3">
+                                    <h6>Python</h6>
+                                    <pre><code>import requests
+
 url = "https://api.wizdata.com/api/prices"
 params = {
-    "symbol": "SOL.JO",
+    "asset_type": "jse",
+    "symbol": "SOL",
     "interval": "daily",
-    "start_date": "2024-01-01",
-    "end_date": "2024-03-31"
+    "start_date": "2023-01-01",
+    "end_date": "2023-01-31"
 }
-headers = {"Authorization": f"Bearer {api_key}"}
+headers = {"Authorization": "Bearer YOUR_API_KEY"}
 
 response = requests.get(url, params=params, headers=headers)
 data = response.json()
 
-print(data)
-</code></pre>
+print(f"Retrieved {data['count']} price records")</code></pre>
+                                </div>
+                                
+                                <div>
+                                    <h6>JavaScript</h6>
+                                    <pre><code>const fetchPrices = async () => {
+  const url = new URL('https://api.wizdata.com/api/prices');
+  url.searchParams.append('asset_type', 'crypto');
+  url.searchParams.append('symbol', 'BTC');
+  url.searchParams.append('interval', 'daily');
+  
+  const response = await fetch(url, {
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY'
+    }
+  });
+  
+  const data = await response.json();
+  console.log(`Retrieved ${data.count} price records`);
+};</code></pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-javascript" role="tabpanel">
-                        <pre class="bg-secondary text-light p-3"><code>// Set your API key
-const apiKey = "YOUR_API_KEY";
-
-// Get cryptocurrency data
-fetch("https://api.wizdata.com/api/prices?symbol=BTC&interval=hourly&limit=24", {
-  headers: {
-    "Authorization": `Bearer ${apiKey}`
-  }
-})
-.then(response => response.json())
-.then(data => {
-  console.log(data);
-})
-.catch(error => console.error("Error:", error));
-</code></pre>
+                    <div class="card-footer bg-transparent">
+                        <a href="/api/docs" class="btn btn-primary">View Full API Documentation</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- Pricing Section -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card bg-dark border-secondary">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-tags me-2"></i> API Plans & Pricing</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card bg-secondary h-100">
-                            <div class="card-header text-center">
-                                <h5 class="mb-0">Free</h5>
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="card-title text-center mb-4">R0/month</h3>
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Basic price data (EOD only)</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Limited to 500 API calls/day</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Public data access only</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Basic support</li>
-                                    <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> No real-time data</li>
-                                    <li class="mb-2"><i class="fas fa-times text-danger me-2"></i> No premium endpoints</li>
-                                </ul>
-                                <button class="btn btn-outline-light mt-auto">Get Started</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="card bg-primary text-white h-100">
-                            <div class="card-header text-center">
-                                <h5 class="mb-0">Standard</h5>
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="card-title text-center mb-4">R2,500/month</h3>
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-2"><i class="fas fa-check me-2"></i> Full price history (intraday)</li>
-                                    <li class="mb-2"><i class="fas fa-check me-2"></i> Up to 10,000 API calls/day</li>
-                                    <li class="mb-2"><i class="fas fa-check me-2"></i> News and sentiment data</li>
-                                    <li class="mb-2"><i class="fas fa-check me-2"></i> Basic WebSocket access</li>
-                                    <li class="mb-2"><i class="fas fa-check me-2"></i> Priority support</li>
-                                    <li class="mb-2"><i class="fas fa-times me-2"></i> Limited premium features</li>
-                                </ul>
-                                <button class="btn btn-light mt-auto">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="card bg-secondary h-100">
-                            <div class="card-header text-center">
-                                <h5 class="mb-0">Enterprise</h5>
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h3 class="card-title text-center mb-4">R10,000+/month</h3>
-                                <ul class="list-unstyled mb-4">
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Full data access (all endpoints)</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Unlimited API calls</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Real-time data streams</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> All premium features</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> White-labeled solutions</li>
-                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Dedicated support</li>
-                                </ul>
-                                <button class="btn btn-outline-light mt-auto">Contact Sales</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Documentation Section -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card bg-dark border-secondary">
-            <div class="card-header">
-                <h5 class="mb-0"><i class="fas fa-book me-2"></i> API Documentation</h5>
-            </div>
-            <div class="card-body text-center">
-                <p>Find detailed documentation for all endpoints, parameters, and response formats.</p>
-                <a href="/api/health" class="btn btn-outline-info me-3">
-                    <i class="fas fa-file-alt me-2"></i> API Reference
-                </a>
-                <a href="#" class="btn btn-outline-info me-3">
-                    <i class="fas fa-graduation-cap me-2"></i> Tutorials
-                </a>
-                <a href="#" class="btn btn-outline-info">
-                    <i class="fas fa-code me-2"></i> Code Samples
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Get Started Section -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card bg-primary text-white">
-            <div class="card-body text-center">
-                <h4 class="card-title">Ready to start building with WizData APIs?</h4>
-                <p class="card-text">Sign up today to get your API key and start accessing financial data.</p>
-                <button class="btn btn-light">Get Your API Key</button>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Add navigation link for API Services
-        const navLinks = document.querySelector('#navbarNav .navbar-nav');
         
-        if (navLinks) {
-            const apiServicesLink = document.createElement('li');
-            apiServicesLink.className = 'nav-item';
-            apiServicesLink.innerHTML = '<a class="nav-link" href="/api-services"><i class="fas fa-plug me-1"></i> API Services</a>';
+        <div id="pricing" class="row mb-5">
+            <div class="col-md-12">
+                <h3 class="mb-4">Pricing Plans</h3>
+            </div>
             
-            // Insert after Products link
-            const productsLink = document.querySelector('a[href="/products"]').parentElement;
-            navLinks.insertBefore(apiServicesLink, productsLink.nextSibling);
+            <div class="col-md-3 mb-4">
+                <div class="card pricing-card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center">
+                            <h4 class="card-title">Basic</h4>
+                            <div class="my-4">
+                                <span class="display-4">$49</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                        </div>
+                        
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> 100 API requests/day</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> JSE, Crypto, Forex data</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Daily price updates</li>
+                            <li class="mb-2"><i class="bi bi-x-circle feature-unavailable me-2"></i> Historical data access</li>
+                            <li class="mb-2"><i class="bi bi-x-circle feature-unavailable me-2"></i> Technical indicators</li>
+                            <li class="mb-2"><i class="bi bi-x-circle feature-unavailable me-2"></i> Bulk downloads</li>
+                            <li class="mb-2"><i class="bi bi-x-circle feature-unavailable me-2"></i> Priority support</li>
+                        </ul>
+                        
+                        <div class="mt-auto text-center pt-4">
+                            <a href="#" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            // Highlight current page
-            const currentPath = window.location.pathname;
-            const navLink = document.querySelector(`a[href="${currentPath}"]`);
-            if (navLink) {
-                navLink.classList.add('active');
-            }
-        }
-    });
-</script>
-{% endblock %}
+            <div class="col-md-3 mb-4">
+                <div class="card pricing-card border-0 shadow-sm h-100 popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center">
+                            <h4 class="card-title">Standard</h4>
+                            <div class="my-4">
+                                <span class="display-4">$149</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                        </div>
+                        
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> 1,000 API requests/day</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> JSE, Crypto, Forex data</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Real-time price updates</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> 1-year historical data</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Basic technical indicators</li>
+                            <li class="mb-2"><i class="bi bi-x-circle feature-unavailable me-2"></i> Bulk downloads</li>
+                            <li class="mb-2"><i class="bi bi-x-circle feature-unavailable me-2"></i> Priority support</li>
+                        </ul>
+                        
+                        <div class="mt-auto text-center pt-4">
+                            <a href="#" class="btn btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-4">
+                <div class="card pricing-card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center">
+                            <h4 class="card-title">Premium</h4>
+                            <div class="my-4">
+                                <span class="display-4">$399</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                        </div>
+                        
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> 10,000 API requests/day</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> All available data sources</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Real-time price updates</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> 5-year historical data</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Advanced technical indicators</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Bulk downloads</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Priority support (24hr)</li>
+                        </ul>
+                        
+                        <div class="mt-auto text-center pt-4">
+                            <a href="#" class="btn btn-outline-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-4">
+                <div class="card pricing-card border-0 shadow-sm h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center">
+                            <h4 class="card-title">Enterprise</h4>
+                            <div class="my-4">
+                                <span class="text-muted">Custom Pricing</span>
+                            </div>
+                        </div>
+                        
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Unlimited API requests</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> All data sources + custom</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Real-time streaming data</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Complete historical archive</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Custom technical indicators</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Unlimited bulk downloads</li>
+                            <li class="mb-2"><i class="bi bi-check-circle feature-available me-2"></i> Dedicated support team</li>
+                        </ul>
+                        
+                        <div class="mt-auto text-center pt-4">
+                            <a href="#" class="btn btn-outline-primary">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h4>Ready to supercharge your financial applications?</h4>
+                                <p class="mb-0">Get instant access to reliable, high-quality financial data with WizData's API services.</p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <a href="#" class="btn btn-primary">Get Your API Key Today</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Symbols API Modal -->
+    <div class="modal fade" id="symbolsModal" tabindex="-1" aria-labelledby="symbolsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="symbolsModalLabel">Symbols API Response Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <pre><code>{
+  "status": "success",
+  "asset_type": "crypto",
+  "count": 20,
+  "symbols": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP",
+    "ADA",
+    "DOGE",
+    "DOT",
+    "AVAX",
+    "LINK",
+    "MATIC",
+    "UNI",
+    "ATOM",
+    "LTC",
+    "FTM",
+    "ALGO",
+    "XLM",
+    "NEAR",
+    "HBAR",
+    "MANA"
+  ]
+}</code></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Prices API Modal -->
+    <div class="modal fade" id="pricesModal" tabindex="-1" aria-labelledby="pricesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pricesModalLabel">Prices API Response Example</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <pre><code>{
+  "status": "success",
+  "asset_type": "jse",
+  "symbol": "SOL",
+  "interval": "daily",
+  "start_date": "2023-01-01",
+  "end_date": "2023-01-31",
+  "count": 3,
+  "data": [
+    {
+      "date": "2023-01-03",
+      "symbol": "SOL",
+      "open": 384.25,
+      "high": 392.50,
+      "low": 380.85,
+      "close": 387.35,
+      "volume": 1235000,
+      "exchange": "JSE",
+      "asset_type": "stock"
+    },
+    {
+      "date": "2023-01-02",
+      "symbol": "SOL",
+      "open": 380.75,
+      "high": 385.80,
+      "low": 377.25,
+      "close": 384.25,
+      "volume": 980500,
+      "exchange": "JSE",
+      "asset_type": "stock"
+    },
+    {
+      "date": "2023-01-01",
+      "symbol": "SOL",
+      "open": 375.50,
+      "high": 382.75,
+      "low": 374.25,
+      "close": 380.75,
+      "volume": 1050200,
+      "exchange": "JSE",
+      "asset_type": "stock"
+    }
+  ]
+}</code></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>WizData</h5>
+                    <p class="text-muted">Financial data acquisition and API service for TradingWealthWiz.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/api/docs" class="text-decoration-none text-muted">API Documentation</a></li>
+                        <li><a href="/products" class="text-decoration-none text-muted">Data Products</a></li>
+                        <li><a href="/api-services" class="text-decoration-none text-muted">API Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Getting Started</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">FAQ</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="text-muted">&copy; 2025 WizData. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

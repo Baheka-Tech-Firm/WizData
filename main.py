@@ -1,6 +1,7 @@
 import os
 import logging
-from flask import Flask, render_template, jsonify, request
+import asyncio
+from flask import Flask, render_template, jsonify, request, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 
@@ -28,33 +29,38 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 # Initialize database with app
 db.init_app(app)
 
-# Routes
+# Import models (must come after db init but before create_all)
+import models  # noqa
+
+# Register API routes
+from src.api.routes.prices import prices_bp
+app.register_blueprint(prices_bp)
+
+# Web UI Routes
 @app.route('/')
 def index():
     """Render the dashboard page"""
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', title="WizData Dashboard")
 
 @app.route('/jobs')
 def jobs():
     """Render the jobs page"""
-    # This would be implemented in a future version
-    return render_template('dashboard.html')  # Placeholder
+    return render_template('jobs.html', title="Data Collection Jobs")
 
 @app.route('/sources')
 def sources():
     """Render the data sources page"""
-    # This would be implemented in a future version
-    return render_template('dashboard.html')  # Placeholder
+    return render_template('sources.html', title="Data Sources")
 
 @app.route('/products')
 def products():
     """Render the data products page"""
-    return render_template('products.html')
+    return render_template('products.html', title="Data Products")
     
 @app.route('/api-services')
 def api_services():
     """Render the API services page"""
-    return render_template('api_services.html')
+    return render_template('api_services.html', title="API Services")
 
 @app.route('/api/health')
 def health():
@@ -64,6 +70,58 @@ def health():
         "version": "1.0.0",
         "service": "WizData Web Dashboard"
     })
+
+# API routes for direct usage
+@app.route('/api/symbols')
+def get_symbols():
+    """
+    Get available symbols for different asset types
+    
+    Query parameters:
+    - asset_type: The asset type ("jse", "crypto", "forex")
+    
+    Returns:
+        JSON response with available symbols
+    """
+    try:
+        from src.ingestion.forex_fetcher import ForexFetcher
+        from src.ingestion.crypto_fetcher import CryptoFetcher
+        from src.ingestion.jse_scraper import JSEScraper
+        
+        asset_type = request.args.get('asset_type', 'jse').lower()
+        
+        # Create event loop
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
+        # Get the appropriate fetcher
+        if asset_type == "forex":
+            fetcher = ForexFetcher()
+        elif asset_type == "crypto":
+            fetcher = CryptoFetcher()
+        elif asset_type == "jse":
+            fetcher = JSEScraper()
+        else:
+            return jsonify({
+                "error": f"Invalid asset_type: {asset_type}. Supported types: jse, crypto, forex"
+            }), 400
+        
+        # Fetch symbols asynchronously
+        symbols = loop.run_until_complete(fetcher.get_symbols())
+        loop.close()
+        
+        return jsonify({
+            "asset_type": asset_type,
+            "count": len(symbols),
+            "symbols": symbols
+        })
+        
+    except Exception as e:
+        logger.error(f"Error fetching symbols: {str(e)}")
+        return jsonify({
+            "error": "Internal server error",
+            "message": str(e)
+        }), 500
 
 # Create database tables
 with app.app_context():

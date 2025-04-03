@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Optional, Any, Union, Tuple
-from datetime import datetime, timezone
+from typing import List, Dict, Any, Tuple
+import logging
 
-from src.utils.logger import get_processing_logger
+logger = logging.getLogger(__name__)
 
 class DataCleaner:
     """
@@ -12,73 +12,89 @@ class DataCleaner:
     """
     
     def __init__(self):
-        self.logger = get_processing_logger()
+        """Initialize the data cleaner"""
+        logger.info("Initializing data cleaner")
     
     def clean_ohlcv(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         Clean OHLCV (Open, High, Low, Close, Volume) data
         
         Args:
-            df (pd.DataFrame): Input DataFrame
+            df (pd.DataFrame): Input DataFrame with OHLCV data
             
         Returns:
             pd.DataFrame: Cleaned DataFrame
         """
-        self.logger.info(f"Cleaning OHLCV data with {len(df)} rows")
+        if df.empty:
+            logger.warning("Empty DataFrame provided to clean_ohlcv")
+            return df
+        
+        # Make a copy to avoid modifying the original
+        df_clean = df.copy()
         
         try:
-            # Create a copy to avoid modifying the original
-            result = df.copy()
+            # Ensure date column is datetime
+            if 'date' in df_clean.columns:
+                df_clean['date'] = pd.to_datetime(df_clean['date'])
             
-            # Remove rows with NaN in essential columns
-            essential_cols = ['date', 'open', 'high', 'low', 'close']
-            essential_cols = [col for col in essential_cols if col in result.columns]
-            if essential_cols:
-                initial_len = len(result)
-                result = result.dropna(subset=essential_cols)
-                dropped_rows = initial_len - len(result)
-                if dropped_rows > 0:
-                    self.logger.info(f"Dropped {dropped_rows} rows with NaN values in essential columns")
-            
-            # Ensure OHLC values are valid
-            if all(col in result.columns for col in ['open', 'high', 'low', 'close']):
-                # High should be the highest value
-                result['high'] = result[['open', 'high', 'low', 'close']].max(axis=1)
+            # Check for and handle missing values
+            missing_counts = df_clean.isnull().sum()
+            if missing_counts.sum() > 0:
+                logger.info(f"Found {missing_counts.sum()} missing values")
                 
-                # Low should be the lowest value
-                result['low'] = result[['open', 'high', 'low', 'close']].min(axis=1)
+                # Handle missing values
+                numeric_cols = ['open', 'high', 'low', 'close', 'volume']
+                present_cols = [col for col in numeric_cols if col in df_clean.columns]
                 
-                # Ensure all prices are positive
-                for col in ['open', 'high', 'low', 'close']:
-                    invalid_count = sum(result[col] <= 0)
-                    if invalid_count > 0:
-                        self.logger.warning(f"Found {invalid_count} rows with non-positive {col} values")
-                        result = result[result[col] > 0]
+                if present_cols:
+                    df_clean = self.handle_missing_values(df_clean, method='ffill')
             
-            # Handle volume separately (can be zero but not negative)
-            if 'volume' in result.columns:
-                invalid_vol_count = sum(result['volume'] < 0)
-                if invalid_vol_count > 0:
-                    self.logger.warning(f"Found {invalid_vol_count} rows with negative volume")
-                    result['volume'] = result['volume'].clip(lower=0)
+            # Check for and handle outliers in price columns
+            price_cols = [col for col in ['open', 'high', 'low', 'close'] if col in df_clean.columns]
+            if price_cols:
+                # Group by symbol to handle outliers within each symbol separately
+                if 'symbol' in df_clean.columns:
+                    symbols = df_clean['symbol'].unique()
+                    
+                    cleaned_dfs = []
+                    for sym in symbols:
+                        sym_df = df_clean[df_clean['symbol'] == sym].copy()
+                        sym_df = self._remove_extreme_outliers(sym_df, price_cols)
+                        cleaned_dfs.append(sym_df)
+                    
+                    df_clean = pd.concat(cleaned_dfs, ignore_index=True)
+                else:
+                    df_clean = self._remove_extreme_outliers(df_clean, price_cols)
             
-            # Remove extreme outliers using z-score
-            numeric_cols = ['open', 'high', 'low', 'close', 'volume']
-            numeric_cols = [col for col in numeric_cols if col in result.columns]
-            if numeric_cols:
-                result = self._remove_extreme_outliers(result, numeric_cols)
+            # Ensure price relationships are valid (high ≥ open/close ≥ low)
+            if all(col in df_clean.columns for col in ['open', 'high', 'low', 'close']):
+                # Find rows with invalid price relationships
+                invalid_high = df_clean['high'] < df_clean[['open', 'close']].max(axis=1)
+                invalid_low = df_clean['low'] > df_clean[['open', 'close']].min(axis=1)
+                
+                invalid_rows = invalid_high | invalid_low
+                if invalid_rows.any():
+                    logger.warning(f"Found {invalid_rows.sum()} rows with invalid price relationships")
+                    
+                    # Fix invalid high values
+                    df_clean.loc[invalid_high, 'high'] = df_clean.loc[invalid_high, ['open', 'close', 'high']].max(axis=1)
+                    
+                    # Fix invalid low values
+                    df_clean.loc[invalid_low, 'low'] = df_clean.loc[invalid_low, ['open', 'close', 'low']].min(axis=1)
             
-            # Ensure data is sorted by date
-            if 'date' in result.columns:
-                result = result.sort_values('date')
+            # Ensure volume is non-negative
+            if 'volume' in df_clean.columns:
+                negative_volume = df_clean['volume'] < 0
+                if negative_volume.any():
+                    logger.warning(f"Found {negative_volume.sum()} rows with negative volume")
+                    df_clean.loc[negative_volume, 'volume'] = 0
             
-            self.logger.info(f"Successfully cleaned data, {len(result)} rows remain")
-            return result
+            logger.info(f"Successfully cleaned DataFrame with {len(df_clean)} rows")
+            return df_clean
             
         except Exception as e:
-            self.logger.error(f"Error cleaning OHLCV data: {str(e)}")
-            # Return original dataframe if cleaning fails
-            return df
+            logger.error(f"Error cleaning OHLCV data: {str(e)}")
+            return df  # Return original DataFrame on error
     
     def handle_missing_values(self, df: pd.DataFrame, method: str = 'ffill') -> pd.DataFrame:
         """
@@ -92,56 +108,54 @@ class DataCleaner:
         Returns:
             pd.DataFrame: DataFrame with missing values handled
         """
-        self.logger.info(f"Handling missing values using method: {method}")
+        if df.empty:
+            return df
+        
+        df_result = df.copy()
         
         try:
-            # Create a copy to avoid modifying the original
-            result = df.copy()
-            
-            if method == 'drop':
-                initial_len = len(result)
-                result = result.dropna()
-                dropped_rows = initial_len - len(result)
-                if dropped_rows > 0:
-                    self.logger.info(f"Dropped {dropped_rows} rows with NaN values")
-            
-            elif method == 'ffill':
+            if method == 'ffill':
                 # Forward fill (use previous value)
-                result = result.ffill()
-                # If there are still NaNs at the beginning, back fill
-                result = result.bfill()
-            
+                df_result = df_result.ffill()
+                
+                # If there are still missing values (e.g., at the beginning), use backward fill
+                if df_result.isnull().sum().sum() > 0:
+                    df_result = df_result.bfill()
+                    
             elif method == 'bfill':
                 # Backward fill (use next value)
-                result = result.bfill()
-                # If there are still NaNs at the end, forward fill
-                result = result.ffill()
-            
-            elif method == 'interpolate':
-                # Use linear interpolation for numeric columns
-                numeric_cols = result.select_dtypes(include=['number']).columns
-                for col in numeric_cols:
-                    result[col] = result[col].interpolate(method='linear')
+                df_result = df_result.bfill()
                 
-                # For non-numeric columns, use forward fill
-                non_numeric_cols = result.select_dtypes(exclude=['number']).columns
-                for col in non_numeric_cols:
-                    result[col] = result[col].ffill().bfill()
-            
+                # If there are still missing values (e.g., at the end), use forward fill
+                if df_result.isnull().sum().sum() > 0:
+                    df_result = df_result.ffill()
+                    
+            elif method == 'interpolate':
+                # Linear interpolation for continuous data
+                numeric_cols = df_result.select_dtypes(include=[np.number]).columns
+                for col in numeric_cols:
+                    df_result[col] = df_result[col].interpolate(method='linear')
+                
+                # Forward and backward fill for any remaining values
+                df_result = df_result.ffill().bfill()
+                
+            elif method == 'drop':
+                # Drop rows with any missing values
+                df_result = df_result.dropna()
+                
             else:
-                self.logger.warning(f"Unknown method: {method}, no action taken")
+                logger.warning(f"Unknown method '{method}' for handling missing values, using ffill")
+                df_result = df_result.ffill().bfill()
             
-            # Count remaining NaNs
-            remaining_nans = result.isna().sum().sum()
-            if remaining_nans > 0:
-                self.logger.warning(f"{remaining_nans} NaN values remain after {method}")
+            missing_after = df_result.isnull().sum().sum()
+            if missing_after > 0:
+                logger.warning(f"There are still {missing_after} missing values after {method}")
             
-            return result
+            return df_result
             
         except Exception as e:
-            self.logger.error(f"Error handling missing values: {str(e)}")
-            # Return original dataframe if handling fails
-            return df
+            logger.error(f"Error handling missing values: {str(e)}")
+            return df  # Return original DataFrame on error
     
     def _remove_extreme_outliers(self, df: pd.DataFrame, columns: List[str], 
                                 z_threshold: float = 3.0) -> pd.DataFrame:
@@ -156,46 +170,32 @@ class DataCleaner:
         Returns:
             pd.DataFrame: DataFrame with outliers removed or clipped
         """
-        result = df.copy()
+        df_result = df.copy()
         
-        # Process each column separately
         for col in columns:
-            if col not in result.columns:
-                continue
+            if col in df_result.columns:
+                # Calculate z-scores
+                mean = df_result[col].mean()
+                std = df_result[col].std()
                 
-            # Skip columns with all NaN values
-            if result[col].isna().all():
-                continue
-                
-            # Calculate z-scores
-            mean = result[col].mean()
-            std = result[col].std()
-            
-            # Avoid division by zero
-            if std == 0:
-                continue
-                
-            z_scores = np.abs((result[col] - mean) / std)
-            
-            # Identify outliers
-            outliers = z_scores > z_threshold
-            outlier_count = outliers.sum()
-            
-            if outlier_count > 0:
-                self.logger.info(f"Found {outlier_count} outliers in {col} using z-score > {z_threshold}")
-                
-                # If more than 1% of data are outliers, clip instead of removing
-                if outlier_count > len(result) * 0.01:
-                    self.logger.info(f"Clipping {col} outliers instead of removing rows")
-                    upper_bound = mean + z_threshold * std
-                    lower_bound = mean - z_threshold * std
-                    result[col] = result[col].clip(lower=lower_bound, upper=upper_bound)
-                else:
-                    # Otherwise remove the rows with extreme outliers
-                    result = result[~outliers]
-                    self.logger.info(f"Removed {outlier_count} rows with {col} outliers")
+                if std > 0:  # Avoid division by zero
+                    z_scores = (df_result[col] - mean) / std
+                    
+                    # Identify extreme outliers
+                    outliers = abs(z_scores) > z_threshold
+                    outlier_count = outliers.sum()
+                    
+                    if outlier_count > 0:
+                        logger.info(f"Found {outlier_count} outliers in column '{col}'")
+                        
+                        # Clip outliers to threshold values instead of removing them
+                        upper_bound = mean + (z_threshold * std)
+                        lower_bound = mean - (z_threshold * std)
+                        
+                        df_result.loc[df_result[col] > upper_bound, col] = upper_bound
+                        df_result.loc[df_result[col] < lower_bound, col] = lower_bound
         
-        return result
+        return df_result
     
     def validate_data(self, df: pd.DataFrame, rules: Dict[str, Any]) -> Tuple[pd.DataFrame, Dict[str, Any]]:
         """
@@ -210,67 +210,73 @@ class DataCleaner:
                 - DataFrame with validation flags
                 - Validation report
         """
-        self.logger.info(f"Validating data with {len(df)} rows")
+        if df.empty:
+            return df, {"valid": True, "message": "Empty DataFrame", "details": {}}
+        
+        df_result = df.copy()
+        validation_report = {
+            "valid": True,
+            "message": "Data validation passed",
+            "details": {}
+        }
         
         try:
-            # Create a copy to avoid modifying the original
-            result = df.copy()
+            # Add a validation column
+            df_result['is_valid'] = True
             
-            # Add a column to track validation issues
-            result['validation_issues'] = ""
-            
-            validation_report = {
-                "total_rows": len(result),
-                "rules_checked": [],
-                "issues_found": 0,
-                "issues_by_rule": {}
-            }
-            
-            for rule_name, rule_config in rules.items():
-                validation_report["rules_checked"].append(rule_name)
-                validation_report["issues_by_rule"][rule_name] = 0
+            # Apply validation rules
+            for rule_name, rule_params in rules.items():
+                if rule_name == "range_check":
+                    # Check if values are within specified range
+                    for col, (min_val, max_val) in rule_params.items():
+                        if col in df_result.columns:
+                            invalid = (df_result[col] < min_val) | (df_result[col] > max_val)
+                            if invalid.any():
+                                df_result.loc[invalid, 'is_valid'] = False
+                                validation_report["details"][f"{col}_range"] = {
+                                    "invalid_count": invalid.sum(),
+                                    "message": f"{invalid.sum()} values outside range [{min_val}, {max_val}]"
+                                }
+                                validation_report["valid"] = False
                 
-                column = rule_config.get("column")
-                condition = rule_config.get("condition")
+                elif rule_name == "completeness_check":
+                    # Check for missing values in specified columns
+                    required_cols = rule_params.get("required_columns", [])
+                    for col in required_cols:
+                        if col in df_result.columns:
+                            missing = df_result[col].isnull()
+                            if missing.any():
+                                df_result.loc[missing, 'is_valid'] = False
+                                validation_report["details"][f"{col}_missing"] = {
+                                    "invalid_count": missing.sum(),
+                                    "message": f"{missing.sum()} missing values in column '{col}'"
+                                }
+                                validation_report["valid"] = False
                 
-                if not column or not condition or column not in result.columns:
-                    continue
-                
-                # Apply validation condition
-                if condition == "not_null":
-                    invalid_mask = result[column].isna()
-                elif condition == "positive":
-                    invalid_mask = result[column] <= 0
-                elif condition == "in_range":
-                    min_val = rule_config.get("min")
-                    max_val = rule_config.get("max")
-                    invalid_mask = ~result[column].between(min_val, max_val)
-                elif condition == "unique":
-                    invalid_mask = result.duplicated(subset=[column])
-                else:
-                    self.logger.warning(f"Unknown condition: {condition} for rule {rule_name}")
-                    continue
-                
-                # Count issues
-                issues_count = invalid_mask.sum()
-                validation_report["issues_by_rule"][rule_name] = issues_count
-                validation_report["issues_found"] += issues_count
-                
-                # Add rule name to validation_issues column for rows that fail
-                if issues_count > 0:
-                    # Append rule name for rows with issues
-                    result.loc[invalid_mask, 'validation_issues'] += f"{rule_name};"
+                elif rule_name == "uniqueness_check":
+                    # Check if values in specified columns are unique
+                    unique_cols = rule_params.get("unique_columns", [])
+                    for col in unique_cols:
+                        if col in df_result.columns:
+                            duplicates = df_result.duplicated(subset=[col])
+                            if duplicates.any():
+                                df_result.loc[duplicates, 'is_valid'] = False
+                                validation_report["details"][f"{col}_duplicates"] = {
+                                    "invalid_count": duplicates.sum(),
+                                    "message": f"{duplicates.sum()} duplicate values in column '{col}'"
+                                }
+                                validation_report["valid"] = False
             
-            # Remove trailing semicolon
-            result['validation_issues'] = result['validation_issues'].str.rstrip(';')
+            # Update validation message if invalid
+            if not validation_report["valid"]:
+                validation_report["message"] = "Data validation failed"
             
-            # Add validation timestamp
-            validation_report["timestamp"] = datetime.now(timezone.utc).isoformat()
-            
-            self.logger.info(f"Validation complete. Found {validation_report['issues_found']} issues.")
-            return result, validation_report
+            return df_result, validation_report
             
         except Exception as e:
-            self.logger.error(f"Error during data validation: {str(e)}")
-            # Return original dataframe if validation fails
-            return df, {"error": str(e)}
+            logger.error(f"Error validating data: {str(e)}")
+            return df, {
+                "valid": False,
+                "message": f"Error during validation: {str(e)}",
+                "details": {}
+            }
