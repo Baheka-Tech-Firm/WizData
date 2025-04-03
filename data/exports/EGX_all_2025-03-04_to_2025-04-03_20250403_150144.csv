@@ -1,0 +1,231 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type,name,sector,country,currency
+2025-03-04,COMI,13.86,14.14,12.9,13.17,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-05,COMI,13.04,13.3,12.14,12.38,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-06,COMI,12.26,12.5,11.41,11.65,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-07,COMI,11.53,11.76,10.73,10.95,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-10,COMI,10.84,11.06,10.1,10.3,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-11,COMI,10.2,10.4,9.5,9.69,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-12,COMI,9.59,9.78,8.93,9.11,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-13,COMI,9.02,9.2,8.4,8.57,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-14,COMI,8.48,8.65,7.9,8.06,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-17,COMI,7.98,8.14,7.43,7.58,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-18,COMI,7.51,7.66,6.99,7.13,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-19,COMI,7.06,7.2,6.57,6.71,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-20,COMI,6.64,6.77,6.18,6.31,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-21,COMI,6.24,6.37,5.81,5.93,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-24,COMI,5.87,5.99,5.47,5.58,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-25,COMI,5.52,5.63,5.14,5.25,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-26,COMI,5.19,5.3,4.84,4.93,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-27,COMI,4.88,4.98,4.55,4.64,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-28,COMI,4.59,4.69,4.28,4.36,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-31,COMI,4.32,4.41,4.02,4.1,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-04-01,COMI,4.06,4.15,3.78,3.86,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-04-02,COMI,3.82,3.9,3.56,3.63,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-04-03,COMI,3.59,3.67,3.35,3.41,453150,EGX,Egyptian Exchange,stock,Commercial International Bank,Banking,Egypt,EGP
+2025-03-04,HRHO,35.63,39.61,34.92,38.84,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-05,HRHO,39.54,43.96,38.75,43.09,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-06,HRHO,43.87,48.77,42.99,47.82,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-07,HRHO,48.68,54.12,47.71,53.06,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-10,HRHO,54.01,60.05,52.93,58.88,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-11,HRHO,59.94,66.64,58.74,65.33,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-12,HRHO,66.51,73.94,65.18,72.49,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-13,HRHO,73.8,82.05,72.32,80.44,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-14,HRHO,81.89,91.04,80.25,89.26,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-17,HRHO,90.86,101.02,89.05,99.04,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-18,HRHO,100.82,112.09,98.81,109.9,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-19,HRHO,111.87,124.38,109.64,121.94,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-20,HRHO,124.14,138.02,121.66,135.31,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-21,HRHO,137.75,153.15,134.99,150.14,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-24,HRHO,152.85,169.93,149.79,166.6,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-25,HRHO,169.6,188.56,166.21,184.87,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-26,HRHO,188.19,209.23,184.43,205.13,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-27,HRHO,208.82,232.17,204.65,227.62,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-28,HRHO,231.71,257.62,227.08,252.57,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-31,HRHO,257.11,285.86,251.97,280.26,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-04-01,HRHO,285.3,317.2,279.59,310.98,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-04-02,HRHO,316.57,351.97,310.24,345.07,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-04-03,HRHO,351.28,390.55,344.25,382.89,64125,EGX,Egyptian Exchange,stock,EFG Hermes Holding,Financial Services,Egypt,EGP
+2025-03-04,TMGH,11.18,12.31,10.95,12.07,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-05,TMGH,12.26,13.51,12.02,13.24,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-06,TMGH,13.46,14.82,13.19,14.53,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-07,TMGH,14.77,16.27,14.47,15.95,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-10,TMGH,16.2,17.85,15.88,17.5,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-11,TMGH,17.78,19.58,17.42,19.2,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-12,TMGH,19.51,21.49,19.12,21.07,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-13,TMGH,21.4,23.58,20.98,23.12,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-14,TMGH,23.49,25.87,23.02,25.37,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-17,TMGH,25.77,28.39,25.26,27.83,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-18,TMGH,28.28,31.15,27.71,30.54,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-19,TMGH,31.03,34.18,30.41,33.51,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-20,TMGH,34.05,37.51,33.37,36.77,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-21,TMGH,37.36,41.16,36.61,40.35,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-24,TMGH,40.99,45.16,40.18,44.27,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-25,TMGH,44.98,49.55,44.08,48.58,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-26,TMGH,49.36,54.37,48.37,53.31,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-27,TMGH,54.16,59.66,53.08,58.49,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-28,TMGH,59.43,65.47,58.24,64.18,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-31,TMGH,65.21,71.84,63.91,70.43,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-04-01,TMGH,71.55,78.82,70.12,77.28,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-04-02,TMGH,78.52,86.49,76.94,84.8,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-04-03,TMGH,86.15,94.91,84.43,93.05,59850,EGX,Egyptian Exchange,stock,Talaat Moustafa Group,Real Estate,Egypt,EGP
+2025-03-04,EFIC,11.18,12.31,10.95,12.07,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-05,EFIC,12.26,13.51,12.02,13.24,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-06,EFIC,13.46,14.82,13.19,14.53,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-07,EFIC,14.77,16.27,14.47,15.95,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-10,EFIC,16.2,17.85,15.88,17.5,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-11,EFIC,17.78,19.58,17.42,19.2,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-12,EFIC,19.51,21.49,19.12,21.07,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-13,EFIC,21.4,23.58,20.98,23.12,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-14,EFIC,23.49,25.87,23.02,25.37,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-17,EFIC,25.77,28.39,25.26,27.83,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-18,EFIC,28.28,31.15,27.71,30.54,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-19,EFIC,31.03,34.18,30.41,33.51,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-20,EFIC,34.05,37.51,33.37,36.77,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-21,EFIC,37.36,41.16,36.61,40.35,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-24,EFIC,40.99,45.16,40.18,44.27,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-25,EFIC,44.98,49.55,44.08,48.58,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-26,EFIC,49.36,54.37,48.37,53.31,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-27,EFIC,54.16,59.66,53.08,58.49,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-28,EFIC,59.43,65.47,58.24,64.18,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-31,EFIC,65.21,71.84,63.91,70.43,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-04-01,EFIC,71.55,78.82,70.12,77.28,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-04-02,EFIC,78.52,86.49,76.94,84.8,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-04-03,EFIC,86.15,94.91,84.43,93.05,380475,EGX,Egyptian Exchange,stock,Edita Food Industries,Consumer Goods,Egypt,EGP
+2025-03-04,EAST,29.29,31.37,28.7,30.75,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-05,EAST,31.06,33.27,30.44,32.62,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-06,EAST,32.94,35.28,32.28,34.59,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-07,EAST,34.93,37.41,34.24,36.68,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-10,EAST,37.05,39.68,36.31,38.9,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-11,EAST,39.29,42.08,38.5,41.25,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-12,EAST,41.67,44.62,40.83,43.75,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-13,EAST,44.19,47.32,43.3,46.4,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-14,EAST,46.86,50.19,45.92,49.2,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-17,EAST,49.7,53.22,48.7,52.18,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-18,EAST,52.7,56.44,51.65,55.34,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-19,EAST,55.89,59.86,54.77,58.68,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-20,EAST,59.27,63.48,58.09,62.24,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-21,EAST,62.86,67.32,61.6,66.0,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-24,EAST,66.66,71.39,65.33,69.99,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-25,EAST,70.69,75.71,69.28,74.23,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-26,EAST,74.97,80.29,73.47,78.72,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-27,EAST,79.51,85.15,77.92,83.48,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-28,EAST,84.32,90.3,82.63,88.53,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-31,EAST,89.42,95.77,87.63,93.89,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-04-01,EAST,94.83,101.56,92.93,99.57,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-04-02,EAST,100.56,107.7,98.55,105.59,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-04-03,EAST,106.65,114.22,104.52,111.98,47025,EGX,Egyptian Exchange,stock,Eastern Company,Consumer Goods,Egypt,EGP
+2025-03-04,SWDY,23.05,23.74,22.59,23.28,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-05,SWDY,23.32,24.03,22.86,23.56,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-06,SWDY,23.6,24.32,23.13,23.84,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-07,SWDY,23.89,24.61,23.41,24.13,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-10,SWDY,24.17,24.9,23.69,24.42,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-11,SWDY,24.46,25.2,23.98,24.71,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-12,SWDY,24.76,25.51,24.26,25.01,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-13,SWDY,25.06,25.81,24.56,25.31,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-14,SWDY,25.36,26.12,24.85,25.61,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-17,SWDY,25.66,26.44,25.15,25.92,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-18,SWDY,25.97,26.76,25.45,26.23,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-19,SWDY,26.28,27.08,25.76,26.55,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-20,SWDY,26.6,27.4,26.07,26.86,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-21,SWDY,26.92,27.73,26.38,27.19,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-24,SWDY,27.24,28.06,26.7,27.51,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-25,SWDY,27.57,28.4,27.02,27.85,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-26,SWDY,27.9,28.74,27.34,28.18,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-27,SWDY,28.24,29.09,27.67,28.52,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-28,SWDY,28.58,29.44,28.0,28.86,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-31,SWDY,28.92,29.79,28.34,29.21,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-04-01,SWDY,29.27,30.15,28.68,29.56,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-04-02,SWDY,29.62,30.51,29.03,29.91,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-04-03,SWDY,29.97,30.88,29.38,30.27,158175,EGX,Egyptian Exchange,stock,Elsewedy Electric,Industrial,Egypt,EGP
+2025-03-04,ETEL,16.9,17.24,16.06,16.39,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-05,ETEL,16.29,16.62,15.49,15.8,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-06,ETEL,15.71,16.02,14.93,15.24,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-07,ETEL,15.15,15.45,14.4,14.69,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-10,ETEL,14.6,14.9,13.88,14.17,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-11,ETEL,14.08,14.36,13.39,13.66,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-12,ETEL,13.58,13.85,12.91,13.17,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-13,ETEL,13.09,13.35,12.44,12.7,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-14,ETEL,12.62,12.87,12.0,12.24,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-17,ETEL,12.17,12.41,11.57,11.8,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-18,ETEL,11.73,11.97,11.15,11.38,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-19,ETEL,11.31,11.54,10.75,10.97,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-20,ETEL,10.91,11.13,10.37,10.58,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-21,ETEL,10.52,10.73,10.0,10.2,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-24,ETEL,10.14,10.34,9.64,9.84,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-25,ETEL,9.78,9.97,9.29,9.48,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-26,ETEL,9.43,9.62,8.96,9.14,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-27,ETEL,9.09,9.27,8.64,8.82,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-28,ETEL,8.76,8.94,8.33,8.5,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-31,ETEL,8.45,8.62,8.03,8.2,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-04-01,ETEL,8.15,8.31,7.74,7.9,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-04-02,ETEL,7.86,8.01,7.47,7.62,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-04-03,ETEL,7.57,7.73,7.2,7.35,461700,EGX,Egyptian Exchange,stock,Telecom Egypt,Telecommunications,Egypt,EGP
+2025-03-04,EKHO,35.63,39.61,34.92,38.84,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-05,EKHO,39.54,43.96,38.75,43.09,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-06,EKHO,43.87,48.77,42.99,47.82,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-07,EKHO,48.68,54.12,47.71,53.06,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-10,EKHO,54.01,60.05,52.93,58.88,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-11,EKHO,59.94,66.64,58.74,65.33,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-12,EKHO,66.51,73.94,65.18,72.49,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-13,EKHO,73.8,82.05,72.32,80.44,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-14,EKHO,81.89,91.04,80.25,89.26,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-17,EKHO,90.86,101.02,89.05,99.04,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-18,EKHO,100.82,112.09,98.81,109.9,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-19,EKHO,111.87,124.38,109.64,121.94,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-20,EKHO,124.14,138.02,121.66,135.31,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-21,EKHO,137.75,153.15,134.99,150.14,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-24,EKHO,152.85,169.93,149.79,166.6,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-25,EKHO,169.6,188.56,166.21,184.87,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-26,EKHO,188.19,209.23,184.43,205.13,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-27,EKHO,208.82,232.17,204.65,227.62,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-28,EKHO,231.71,257.62,227.08,252.57,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-31,EKHO,257.11,285.86,251.97,280.26,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-04-01,EKHO,285.3,317.2,279.59,310.98,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-04-02,EKHO,316.57,351.97,310.24,345.07,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-04-03,EKHO,351.28,390.55,344.25,382.89,448875,EGX,Egyptian Exchange,stock,Egypt Kuwait Holding,Investments,Egypt,EGP
+2025-03-04,ORWE,8.1,8.75,7.93,8.58,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-05,ORWE,8.68,9.39,8.51,9.21,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-06,ORWE,9.32,10.07,9.13,9.88,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-07,ORWE,9.99,10.81,9.79,10.59,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-10,ORWE,10.72,11.59,10.51,11.36,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-11,ORWE,11.5,12.43,11.27,12.19,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-12,ORWE,12.34,13.34,12.09,13.08,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-13,ORWE,13.23,14.31,12.97,14.03,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-14,ORWE,14.2,15.35,13.91,15.05,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-17,ORWE,15.23,16.46,14.92,16.14,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-18,ORWE,16.34,17.66,16.01,17.32,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-19,ORWE,17.52,18.95,17.17,18.57,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-20,ORWE,18.8,20.32,18.42,19.93,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-21,ORWE,20.16,21.8,19.76,21.37,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-24,ORWE,21.63,23.39,21.2,22.93,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-25,ORWE,23.2,25.09,22.74,24.6,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-26,ORWE,24.89,26.91,24.39,26.39,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-27,ORWE,26.7,28.87,26.17,28.3,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-28,ORWE,28.64,30.97,28.07,30.36,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-31,ORWE,30.73,33.22,30.11,32.57,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-04-01,ORWE,32.96,35.64,32.3,34.94,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-04-02,ORWE,35.36,38.23,34.65,37.48,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-04-03,ORWE,37.93,41.01,37.17,40.2,115425,EGX,Egyptian Exchange,stock,Oriental Weavers,Consumer Goods,Egypt,EGP
+2025-03-04,ABUK,29.29,31.37,28.7,30.75,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-05,ABUK,31.06,33.27,30.44,32.62,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-06,ABUK,32.94,35.28,32.28,34.59,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-07,ABUK,34.93,37.41,34.24,36.68,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-10,ABUK,37.05,39.68,36.31,38.9,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-11,ABUK,39.29,42.08,38.5,41.25,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-12,ABUK,41.67,44.62,40.83,43.75,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-13,ABUK,44.19,47.32,43.3,46.4,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-14,ABUK,46.86,50.19,45.92,49.2,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-17,ABUK,49.7,53.22,48.7,52.18,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-18,ABUK,52.7,56.44,51.65,55.34,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-19,ABUK,55.89,59.86,54.77,58.68,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-20,ABUK,59.27,63.48,58.09,62.24,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-21,ABUK,62.86,67.32,61.6,66.0,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-24,ABUK,66.66,71.39,65.33,69.99,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-25,ABUK,70.69,75.71,69.28,74.23,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-26,ABUK,74.97,80.29,73.47,78.72,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-27,ABUK,79.51,85.15,77.92,83.48,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-28,ABUK,84.32,90.3,82.63,88.53,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-03-31,ABUK,89.42,95.77,87.63,93.89,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-04-01,ABUK,94.83,101.56,92.93,99.57,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-04-02,ABUK,100.56,107.7,98.55,105.59,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP
+2025-04-03,ABUK,106.65,114.22,104.52,111.98,431775,EGX,Egyptian Exchange,stock,Abou Kir Fertilizers,Materials,Egypt,EGP

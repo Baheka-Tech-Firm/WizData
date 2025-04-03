@@ -1,0 +1,231 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type,name,sector,country,currency
+2025-03-04,IAM,321.75,328.19,299.55,305.66,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-05,IAM,302.61,308.66,281.73,287.48,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-06,IAM,284.6,290.29,264.96,270.37,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-07,IAM,267.67,273.02,249.2,254.28,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-10,IAM,251.74,256.78,234.37,239.15,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-11,IAM,236.76,241.5,220.43,224.92,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-12,IAM,222.67,227.13,207.31,211.54,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-13,IAM,209.43,213.61,194.98,198.95,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-14,IAM,196.96,200.9,183.37,187.12,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-17,IAM,185.25,188.95,172.46,175.98,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-18,IAM,174.22,177.71,162.2,165.51,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-19,IAM,163.86,167.13,152.55,155.66,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-20,IAM,154.11,157.19,143.47,146.4,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-21,IAM,144.94,147.84,134.94,137.69,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-24,IAM,136.31,139.04,126.91,129.5,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-25,IAM,128.2,130.77,119.36,121.79,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-26,IAM,120.58,122.99,112.26,114.55,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-27,IAM,113.4,115.67,105.58,107.73,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-28,IAM,106.65,108.79,99.29,101.32,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-31,IAM,100.31,102.31,93.39,95.29,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-04-01,IAM,94.34,96.23,87.83,89.62,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-04-02,IAM,88.73,90.5,82.6,84.29,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-04-03,IAM,83.45,85.12,77.69,79.27,21375,CSE,Casablanca Stock Exchange,stock,Maroc Telecom,Telecommunications,Morocco,MAD
+2025-03-04,ATW,641.28,660.65,628.45,647.69,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-05,ATW,648.99,668.59,636.01,655.48,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-06,ATW,656.79,676.62,643.65,663.36,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-07,ATW,664.68,684.76,651.39,671.33,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-10,ATW,672.67,692.99,659.22,679.4,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-11,ATW,680.76,701.32,667.14,687.57,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-12,ATW,688.94,709.75,675.16,695.83,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-13,ATW,697.22,718.28,683.28,704.19,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-14,ATW,705.6,726.91,691.49,712.66,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-17,ATW,714.08,735.65,699.8,721.23,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-18,ATW,722.67,744.49,708.21,729.89,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-19,ATW,731.35,753.44,716.73,738.67,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-20,ATW,740.15,762.5,725.34,747.55,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-21,ATW,749.04,771.66,734.06,756.53,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-24,ATW,758.05,780.94,742.88,765.63,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-25,ATW,767.16,790.32,751.81,774.83,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-26,ATW,776.38,799.82,760.85,784.14,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-27,ATW,785.71,809.44,770.0,793.57,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-28,ATW,795.15,819.17,779.25,803.11,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-31,ATW,804.71,829.01,788.62,812.76,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-04-01,ATW,814.38,838.98,798.1,822.53,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-04-02,ATW,824.17,849.06,807.69,832.42,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-04-03,ATW,834.08,859.27,817.4,842.42,39330,CSE,Casablanca Stock Exchange,stock,Attijariwafa Bank,Banking,Morocco,MAD
+2025-03-04,BOA,252.5,270.43,247.45,265.12,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-05,BOA,267.78,286.79,262.42,281.17,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-06,BOA,283.98,304.14,278.3,298.18,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-07,BOA,301.16,322.54,295.13,316.22,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-10,BOA,319.38,342.05,312.99,335.35,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-11,BOA,338.7,362.75,331.93,355.63,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-12,BOA,359.19,384.69,352.01,377.15,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-13,BOA,380.92,407.97,373.3,399.97,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-14,BOA,403.97,432.65,395.89,424.17,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-17,BOA,428.41,458.82,419.84,449.83,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-18,BOA,454.33,486.58,445.24,477.04,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-19,BOA,481.81,516.02,472.18,505.9,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-20,BOA,510.96,547.24,500.74,536.51,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-21,BOA,541.88,580.35,531.04,568.97,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-24,BOA,574.66,615.46,563.17,603.39,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-25,BOA,609.43,652.7,597.24,639.9,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-26,BOA,646.3,692.18,633.37,678.61,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-27,BOA,685.4,734.06,671.69,719.67,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-28,BOA,726.86,778.47,712.33,763.21,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-31,BOA,770.84,825.57,755.42,809.38,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-04-01,BOA,817.48,875.52,801.13,858.35,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-04-02,BOA,866.93,928.49,849.59,910.28,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-04-03,BOA,919.38,984.66,900.99,965.35,17100,CSE,Casablanca Stock Exchange,stock,BMCE Bank of Africa,Banking,Morocco,MAD
+2025-03-04,BCP,299.72,330.17,293.73,323.7,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-05,BCP,328.88,362.29,322.3,355.19,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-06,BCP,360.87,397.53,353.65,389.74,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-07,BCP,395.98,436.21,388.06,427.65,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-10,BCP,434.5,478.64,425.81,469.26,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-11,BCP,476.76,525.2,467.23,514.9,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-12,BCP,523.14,576.29,512.68,564.99,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-13,BCP,574.03,632.36,562.55,619.96,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-14,BCP,629.88,693.87,617.28,680.27,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-17,BCP,691.15,761.37,677.33,746.44,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-18,BCP,758.39,835.44,743.22,819.06,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-19,BCP,832.16,916.71,815.52,898.73,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-20,BCP,913.11,1005.89,894.85,986.16,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-21,BCP,1001.94,1103.74,981.9,1082.1,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-24,BCP,1099.41,1211.11,1077.42,1187.36,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-25,BCP,1206.36,1328.93,1182.23,1302.87,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-26,BCP,1323.72,1458.21,1297.24,1429.61,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-27,BCP,1452.49,1600.06,1423.44,1568.69,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-28,BCP,1593.79,1755.71,1561.91,1721.29,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-31,BCP,1748.83,1926.51,1713.85,1888.74,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-04-01,BCP,1918.96,2113.92,1880.58,2072.47,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-04-02,BCP,2105.63,2319.56,2063.52,2274.08,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-04-03,BCP,2310.47,2545.21,2264.26,2495.31,19665,CSE,Casablanca Stock Exchange,stock,Banque Centrale Populaire,Banking,Morocco,MAD
+2025-03-04,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-05,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-06,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-07,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-10,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-11,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-12,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-13,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-14,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-17,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-18,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-19,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-20,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-21,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-24,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-25,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-26,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-27,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-28,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-31,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-04-01,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-04-02,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-04-03,ADH,175.0,178.5,171.5,175.0,12825,CSE,Casablanca Stock Exchange,stock,Douja Promotion Groupe Addoha,Real Estate,Morocco,MAD
+2025-03-04,CIH,283.92,309.87,278.24,303.79,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-05,CIH,308.05,336.2,301.89,329.61,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-06,CIH,334.23,364.77,327.54,357.62,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-07,CIH,362.63,395.77,355.38,388.01,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-10,CIH,393.44,429.4,385.58,420.99,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-11,CIH,426.88,465.9,418.34,456.76,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-12,CIH,463.16,505.49,453.89,495.58,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-13,CIH,502.51,548.44,492.46,537.69,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-14,CIH,545.22,595.05,534.31,583.38,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-17,CIH,591.55,645.62,579.72,632.96,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-18,CIH,641.82,700.48,628.98,686.75,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-19,CIH,696.36,760.01,682.43,745.11,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-20,CIH,755.54,824.6,740.43,808.43,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-21,CIH,819.74,894.67,803.35,877.13,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-24,CIH,889.41,970.7,871.62,951.66,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-25,CIH,964.99,1053.19,945.69,1032.54,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-26,CIH,1046.99,1142.69,1026.05,1120.28,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-27,CIH,1135.97,1239.79,1113.25,1215.48,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-28,CIH,1232.5,1345.15,1207.85,1318.78,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-31,CIH,1337.24,1459.46,1310.49,1430.85,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-04-01,CIH,1450.88,1583.49,1421.86,1552.44,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-04-02,CIH,1574.17,1718.05,1542.69,1684.36,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-04-03,CIH,1707.95,1864.05,1673.79,1827.5,18810,CSE,Casablanca Stock Exchange,stock,CIH Bank,Banking,Morocco,MAD
+2025-03-04,COL,431.72,449.16,423.09,440.35,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-05,COL,442.12,459.98,433.27,450.96,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-06,COL,452.76,471.05,443.71,461.82,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-07,COL,463.66,482.4,454.39,472.94,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-10,COL,474.83,494.01,465.33,484.33,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-11,COL,486.26,505.91,476.54,495.99,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-12,COL,497.97,518.09,488.01,507.93,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-13,COL,509.96,530.57,499.76,520.16,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-14,COL,522.24,543.34,511.8,532.69,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-17,COL,534.82,556.43,524.12,545.52,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-18,COL,547.7,569.82,536.74,558.65,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-19,COL,560.89,583.55,549.67,572.1,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-20,COL,574.39,597.6,562.9,585.88,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-21,COL,588.22,611.99,576.46,599.99,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-24,COL,602.39,626.72,590.34,614.44,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-25,COL,616.89,641.82,604.56,629.23,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-26,COL,631.75,657.27,619.11,644.38,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-27,COL,646.96,673.1,634.02,659.9,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-28,COL,662.54,689.31,649.29,675.79,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-31,COL,678.49,705.91,664.92,692.06,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-04-01,COL,694.83,722.9,680.94,708.73,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-04-02,COL,711.56,740.31,697.33,725.79,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-04-03,COL,728.7,758.14,714.12,743.27,27360,CSE,Casablanca Stock Exchange,stock,Colorado,Consumer Goods,Morocco,MAD
+2025-03-04,CMT,528.32,582.0,517.75,570.59,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-05,CMT,579.71,638.61,568.12,626.09,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-06,CMT,636.11,700.74,623.39,687.0,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-07,CMT,697.99,768.91,684.03,753.83,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-10,CMT,765.89,843.71,750.57,827.16,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-11,CMT,840.4,925.78,823.59,907.63,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-12,CMT,922.15,1015.84,903.71,995.92,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-13,CMT,1011.86,1114.66,991.62,1092.81,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-14,CMT,1110.29,1223.1,1088.09,1199.11,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-17,CMT,1218.3,1342.08,1193.93,1315.76,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-18,CMT,1336.82,1472.64,1310.08,1443.76,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-19,CMT,1466.86,1615.89,1437.52,1584.21,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-20,CMT,1609.56,1773.09,1577.37,1738.32,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-21,CMT,1766.14,1945.58,1730.81,1907.43,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-24,CMT,1937.95,2134.84,1899.19,2092.98,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-25,CMT,2126.47,2342.52,2083.94,2296.59,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-26,CMT,2333.33,2570.4,2286.66,2520.0,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-27,CMT,2560.32,2820.45,2509.11,2765.14,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-28,CMT,2809.39,3094.82,2753.2,3034.14,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-31,CMT,3082.68,3395.88,3021.03,3329.3,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-04-01,CMT,3382.57,3726.24,3314.91,3653.17,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-04-02,CMT,3711.62,4088.72,3637.39,4008.55,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-04-03,CMT,4072.69,4486.47,3991.24,4398.5,32490,CSE,Casablanca Stock Exchange,stock,Compagnie Minière de Touissit,Mining,Morocco,MAD
+2025-03-04,LBV,528.32,582.0,517.75,570.59,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-05,LBV,579.71,638.61,568.12,626.09,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-06,LBV,636.11,700.74,623.39,687.0,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-07,LBV,697.99,768.91,684.03,753.83,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-10,LBV,765.89,843.71,750.57,827.16,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-11,LBV,840.4,925.78,823.59,907.63,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-12,LBV,922.15,1015.84,903.71,995.92,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-13,LBV,1011.86,1114.66,991.62,1092.81,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-14,LBV,1110.29,1223.1,1088.09,1199.11,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-17,LBV,1218.3,1342.08,1193.93,1315.76,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-18,LBV,1336.82,1472.64,1310.08,1443.76,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-19,LBV,1466.86,1615.89,1437.52,1584.21,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-20,LBV,1609.56,1773.09,1577.37,1738.32,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-21,LBV,1766.14,1945.58,1730.81,1907.43,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-24,LBV,1937.95,2134.84,1899.19,2092.98,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-25,LBV,2126.47,2342.52,2083.94,2296.59,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-26,LBV,2333.33,2570.4,2286.66,2520.0,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-27,LBV,2560.32,2820.45,2509.11,2765.14,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-28,LBV,2809.39,3094.82,2753.2,3034.14,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-31,LBV,3082.68,3395.88,3021.03,3329.3,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-04-01,LBV,3382.57,3726.24,3314.91,3653.17,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-04-02,LBV,3711.62,4088.72,3637.39,4008.55,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-04-03,LBV,4072.69,4486.47,3991.24,4398.5,32490,CSE,Casablanca Stock Exchange,stock,Label Vie,Retail,Morocco,MAD
+2025-03-04,MNG,495.88,536.15,485.96,525.63,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-05,MNG,531.94,575.13,521.3,563.86,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-06,MNG,570.62,616.96,559.21,604.86,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-07,MNG,612.12,661.82,599.88,648.85,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-10,MNG,656.63,709.95,643.5,696.03,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-11,MNG,704.38,761.58,690.29,746.65,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-12,MNG,755.61,816.96,740.49,800.94,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-13,MNG,810.55,876.37,794.34,859.19,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-14,MNG,869.5,940.1,852.11,921.67,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-17,MNG,932.73,1008.46,914.07,988.69,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-18,MNG,1000.55,1081.8,980.54,1060.59,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-19,MNG,1073.31,1160.47,1051.85,1137.71,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-20,MNG,1151.37,1244.86,1128.34,1220.45,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-21,MNG,1235.09,1335.38,1210.39,1309.2,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-24,MNG,1324.91,1432.49,1298.41,1404.4,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-25,MNG,1421.26,1536.66,1392.83,1506.53,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-26,MNG,1524.61,1648.41,1494.12,1616.09,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-27,MNG,1635.48,1768.28,1602.77,1733.61,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-28,MNG,1754.41,1896.87,1719.32,1859.68,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-03-31,MNG,1881.99,2034.81,1844.35,1994.91,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-04-01,MNG,2018.85,2182.78,1978.47,2139.98,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-04-02,MNG,2165.66,2341.51,2122.35,2295.6,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD
+2025-04-03,MNG,2323.15,2511.79,2276.69,2462.54,30780,CSE,Casablanca Stock Exchange,stock,Managem,Mining,Morocco,MAD

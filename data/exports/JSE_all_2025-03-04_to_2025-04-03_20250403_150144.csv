@@ -1,0 +1,231 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type,name,sector,country,currency
+2025-03-04,SOL,877.14,894.68,816.62,833.28,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-05,SOL,824.95,841.45,768.03,783.7,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-06,SOL,775.87,791.38,722.33,737.07,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-07,SOL,729.7,744.3,679.35,693.22,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-10,SOL,686.28,700.01,638.93,651.97,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-11,SOL,645.45,658.36,600.91,613.18,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-12,SOL,607.05,619.19,565.16,576.69,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-13,SOL,570.93,582.35,531.53,542.38,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-14,SOL,536.96,547.7,499.91,510.11,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-17,SOL,505.01,515.11,470.16,479.76,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-18,SOL,474.96,484.46,442.19,451.21,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-19,SOL,446.7,455.63,415.88,424.36,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-20,SOL,420.12,428.52,391.13,399.12,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-21,SOL,395.12,403.03,367.86,375.37,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-24,SOL,371.61,379.05,345.97,353.03,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-25,SOL,349.5,356.49,325.39,332.03,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-26,SOL,328.71,335.28,306.03,312.27,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-27,SOL,309.15,315.33,287.82,293.69,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-28,SOL,290.76,296.57,270.69,276.22,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-31,SOL,273.46,278.92,254.59,259.78,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-04-01,SOL,257.18,262.33,239.44,244.33,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-04-02,SOL,241.88,246.72,225.19,229.79,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-04-03,SOL,227.49,232.04,211.79,216.12,205200,JSE,Johannesburg Stock Exchange,stock,Sasol Limited,Energy,South Africa,ZAR
+2025-03-04,NPN,855.47,942.39,838.36,923.91,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-05,NPN,938.69,1034.06,919.92,1013.79,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-06,NPN,1030.01,1134.66,1009.41,1112.41,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-07,NPN,1130.21,1245.04,1107.6,1220.62,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-10,NPN,1240.15,1366.15,1215.35,1339.37,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-11,NPN,1360.8,1499.05,1333.58,1469.66,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-12,NPN,1493.17,1644.88,1463.31,1612.63,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-13,NPN,1638.43,1804.9,1605.66,1769.51,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-14,NPN,1797.82,1980.48,1761.86,1941.64,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-17,NPN,1972.71,2173.14,1933.25,2130.53,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-18,NPN,2164.61,2384.54,2121.32,2337.78,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-19,NPN,2375.19,2616.51,2327.68,2565.2,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-20,NPN,2606.25,2871.04,2554.12,2814.75,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-21,NPN,2859.78,3150.34,2802.59,3088.56,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-24,NPN,3137.98,3456.8,3075.22,3389.02,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-25,NPN,3443.24,3793.08,3374.38,3718.7,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-26,NPN,3778.2,4162.07,3702.64,4080.46,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-27,NPN,4145.75,4566.95,4062.83,4477.41,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-28,NPN,4549.04,5011.23,4458.06,4912.97,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-31,NPN,4991.58,5498.72,4891.74,5390.9,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-04-01,NPN,5477.16,6033.63,5367.61,5915.33,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-04-02,NPN,6009.97,6620.59,5889.77,6490.77,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-04-03,NPN,6594.62,7264.64,6462.73,7122.19,196650,JSE,Johannesburg Stock Exchange,stock,Naspers Limited,Technology,South Africa,ZAR
+2025-03-04,SLM,855.47,942.39,838.36,923.91,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-05,SLM,938.69,1034.06,919.92,1013.79,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-06,SLM,1030.01,1134.66,1009.41,1112.41,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-07,SLM,1130.21,1245.04,1107.6,1220.62,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-10,SLM,1240.15,1366.15,1215.35,1339.37,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-11,SLM,1360.8,1499.05,1333.58,1469.66,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-12,SLM,1493.17,1644.88,1463.31,1612.63,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-13,SLM,1638.43,1804.9,1605.66,1769.51,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-14,SLM,1797.82,1980.48,1761.86,1941.64,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-17,SLM,1972.71,2173.14,1933.25,2130.53,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-18,SLM,2164.61,2384.54,2121.32,2337.78,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-19,SLM,2375.19,2616.51,2327.68,2565.2,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-20,SLM,2606.25,2871.04,2554.12,2814.75,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-21,SLM,2859.78,3150.34,2802.59,3088.56,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-24,SLM,3137.98,3456.8,3075.22,3389.02,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-25,SLM,3443.24,3793.08,3374.38,3718.7,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-26,SLM,3778.2,4162.07,3702.64,4080.46,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-27,SLM,4145.75,4566.95,4062.83,4477.41,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-28,SLM,4549.04,5011.23,4458.06,4912.97,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-31,SLM,4991.58,5498.72,4891.74,5390.9,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-04-01,SLM,5477.16,6033.63,5367.61,5915.33,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-04-02,SLM,6009.97,6620.59,5889.77,6490.77,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-04-03,SLM,6594.62,7264.64,6462.73,7122.19,196650,JSE,Johannesburg Stock Exchange,stock,Sanlam Limited,Financial Services,South Africa,ZAR
+2025-03-04,FSR,831.48,907.48,814.85,889.68,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-05,FSR,902.14,984.59,884.1,965.29,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-06,FSR,978.8,1068.27,959.23,1047.32,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-07,FSR,1061.98,1159.05,1040.74,1136.32,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-10,FSR,1152.23,1257.54,1129.18,1232.88,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-11,FSR,1250.15,1364.41,1225.14,1337.66,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-12,FSR,1356.38,1480.36,1329.25,1451.33,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-13,FSR,1471.65,1606.16,1442.22,1574.66,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-14,FSR,1596.71,1742.65,1564.77,1708.48,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-17,FSR,1732.4,1890.74,1697.75,1853.66,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-18,FSR,1879.62,2051.41,1842.02,2011.19,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-19,FSR,2039.35,2225.74,1998.56,2182.1,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-20,FSR,2212.65,2414.89,2168.4,2367.53,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-21,FSR,2400.68,2620.1,2352.67,2568.73,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-24,FSR,2604.69,2842.76,2552.6,2787.02,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-25,FSR,2826.04,3084.34,2769.52,3023.86,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-26,FSR,3066.19,3346.44,3004.87,3280.83,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-27,FSR,3326.76,3630.82,3260.22,3559.63,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-28,FSR,3609.47,3939.37,3537.28,3862.13,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-31,FSR,3916.2,4274.14,3837.87,4190.33,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-04-01,FSR,4249.0,4637.36,4164.02,4546.43,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-04-02,FSR,4610.08,5031.44,4517.88,4932.78,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-04-03,FSR,5001.84,5459.01,4901.8,5351.97,192375,JSE,Johannesburg Stock Exchange,stock,FirstRand Limited,Banking,South Africa,ZAR
+2025-03-04,SBK,573.38,584.84,539.43,550.44,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-05,SBK,546.04,556.96,513.71,524.2,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-06,SBK,520.0,530.4,489.22,499.2,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-07,SBK,495.21,505.11,465.89,475.4,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-10,SBK,471.6,481.03,443.68,452.73,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-11,SBK,449.11,458.09,422.52,431.15,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-12,SBK,427.7,436.25,402.38,410.59,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-13,SBK,407.31,415.45,383.19,391.01,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-14,SBK,387.88,395.64,364.92,372.37,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-17,SBK,369.39,376.78,347.52,354.61,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-18,SBK,351.78,358.81,330.95,337.71,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-19,SBK,335.01,341.71,315.17,321.6,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-20,SBK,319.03,325.41,300.15,306.27,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-21,SBK,303.82,309.9,285.83,291.67,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-24,SBK,289.33,295.12,272.21,277.76,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-25,SBK,275.54,281.05,259.23,264.52,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-26,SBK,262.4,267.65,246.87,251.91,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-27,SBK,249.89,254.89,235.1,239.89,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-28,SBK,237.98,242.73,223.89,228.46,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-31,SBK,226.63,231.16,213.21,217.56,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-04-01,SBK,215.82,220.14,203.05,207.19,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-04-02,SBK,205.53,209.64,193.36,197.31,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-04-03,SBK,195.73,199.65,184.15,187.9,145350,JSE,Johannesburg Stock Exchange,stock,Standard Bank Group,Banking,South Africa,ZAR
+2025-03-04,AGL,313.37,319.64,304.03,310.24,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-05,AGL,309.62,315.81,300.39,306.52,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-06,AGL,305.91,312.03,296.79,302.85,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-07,AGL,302.24,308.29,293.24,299.22,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-10,AGL,298.62,304.6,289.72,295.64,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-11,AGL,295.05,300.95,286.25,292.09,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-12,AGL,291.51,297.34,282.82,288.6,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-13,AGL,288.02,293.78,279.44,285.14,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-14,AGL,284.57,290.26,276.09,281.72,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-17,AGL,281.16,286.78,272.78,278.35,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-18,AGL,277.79,283.35,269.51,275.01,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-19,AGL,274.46,279.95,266.28,271.72,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-20,AGL,271.17,276.6,263.09,268.46,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-21,AGL,267.93,273.28,259.94,265.25,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-24,AGL,264.72,270.01,256.83,262.07,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-25,AGL,261.54,266.78,253.75,258.93,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-26,AGL,258.41,263.58,250.71,255.83,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-27,AGL,255.32,260.42,247.71,252.76,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-28,AGL,252.26,257.3,244.74,249.73,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-31,AGL,249.24,254.22,241.81,246.74,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-04-01,AGL,246.25,251.17,238.91,243.79,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-04-02,AGL,243.3,248.17,236.05,240.87,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-04-03,AGL,240.38,245.19,233.22,237.98,94050,JSE,Johannesburg Stock Exchange,stock,Anglo American PLC,Mining,South Africa,ZAR
+2025-03-04,BHG,246.02,250.94,231.45,236.18,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-05,BHG,234.29,238.97,220.42,224.91,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-06,BHG,223.12,227.58,209.91,214.19,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-07,BHG,212.48,216.73,199.9,203.98,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-10,BHG,202.35,206.39,190.37,194.25,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-11,BHG,192.7,196.55,181.29,184.99,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-12,BHG,183.51,187.18,172.65,176.17,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-13,BHG,174.76,178.26,164.41,167.77,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-14,BHG,166.43,169.76,156.58,159.77,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-17,BHG,158.49,161.66,149.11,152.15,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-18,BHG,150.94,153.95,142.0,144.9,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-19,BHG,143.74,146.61,135.23,137.99,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-20,BHG,136.89,139.62,128.78,131.41,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-21,BHG,130.36,132.97,122.64,125.14,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-24,BHG,124.14,126.63,116.79,119.18,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-25,BHG,118.22,120.59,111.23,113.5,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-26,BHG,112.59,114.84,105.92,108.08,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-27,BHG,107.22,109.36,100.87,102.93,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-28,BHG,102.11,104.15,96.06,98.02,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-31,BHG,97.24,99.18,91.48,93.35,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-04-01,BHG,92.6,94.45,87.12,88.9,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-04-02,BHG,88.19,89.95,82.97,84.66,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-04-03,BHG,83.98,85.66,79.01,80.62,81225,JSE,Johannesburg Stock Exchange,stock,BHP Group PLC,Mining,South Africa,ZAR
+2025-03-04,MTN,900.74,918.75,847.41,864.71,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-05,MTN,857.79,874.94,807.01,823.48,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-06,MTN,816.89,833.23,768.53,784.21,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-07,MTN,777.94,793.5,731.89,746.82,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-10,MTN,740.85,755.67,696.99,711.21,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-11,MTN,705.52,719.63,663.76,677.3,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-12,MTN,671.89,685.32,632.11,645.01,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-13,MTN,639.85,652.65,601.97,614.26,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-14,MTN,609.34,621.53,573.27,584.97,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-17,MTN,580.29,591.89,545.94,557.08,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-18,MTN,552.62,563.67,519.9,530.52,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-19,MTN,526.27,536.8,495.12,505.22,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-20,MTN,501.18,511.2,471.51,481.13,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-21,MTN,477.28,486.83,449.03,458.19,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-24,MTN,454.53,463.62,427.62,436.34,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-25,MTN,432.85,441.51,407.23,415.54,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-26,MTN,412.22,420.46,387.81,395.73,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-27,MTN,392.56,400.41,369.32,376.86,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-28,MTN,373.84,381.32,351.71,358.89,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-31,MTN,356.02,363.14,334.94,341.78,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-04-01,MTN,339.04,345.82,318.97,325.48,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-04-02,MTN,322.88,329.34,303.76,309.96,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-04-03,MTN,307.48,313.63,289.28,295.18,209475,JSE,Johannesburg Stock Exchange,stock,MTN Group Limited,Telecommunications,South Africa,ZAR
+2025-03-04,ABG,94.75,100.51,92.86,98.54,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-05,ABG,99.33,105.37,97.34,103.3,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-06,ABG,104.13,110.46,102.05,108.3,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-07,ABG,109.16,115.8,106.98,113.53,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-10,ABG,114.44,121.39,112.15,119.01,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-11,ABG,119.97,127.26,117.57,124.76,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-12,ABG,125.76,133.41,123.25,130.79,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-13,ABG,131.84,139.86,129.2,137.11,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-14,ABG,138.21,146.61,135.45,143.74,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-17,ABG,144.89,153.7,141.99,150.68,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-18,ABG,151.89,161.12,148.85,157.96,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-19,ABG,159.23,168.91,156.04,165.6,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-20,ABG,166.92,177.07,163.58,173.6,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-21,ABG,174.99,185.63,171.49,181.99,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-24,ABG,183.44,194.6,179.77,190.78,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-25,ABG,192.31,204.0,188.46,200.0,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-26,ABG,201.6,213.86,197.57,209.66,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-27,ABG,211.34,224.19,207.11,219.79,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-28,ABG,221.55,235.02,217.12,230.42,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-31,ABG,232.26,246.38,227.61,241.55,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-04-01,ABG,243.48,258.29,238.61,253.22,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-04-02,ABG,255.25,270.77,250.14,265.46,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-04-03,ABG,267.58,283.85,262.23,278.28,51300,JSE,Johannesburg Stock Exchange,stock,Absa Group Limited,Banking,South Africa,ZAR
+2025-03-04,SHP,831.48,907.48,814.85,889.68,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-05,SHP,902.14,984.59,884.1,965.29,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-06,SHP,978.8,1068.27,959.23,1047.32,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-07,SHP,1061.98,1159.05,1040.74,1136.32,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-10,SHP,1152.23,1257.54,1129.18,1232.88,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-11,SHP,1250.15,1364.41,1225.14,1337.66,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-12,SHP,1356.38,1480.36,1329.25,1451.33,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-13,SHP,1471.65,1606.16,1442.22,1574.66,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-14,SHP,1596.71,1742.65,1564.77,1708.48,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-17,SHP,1732.4,1890.74,1697.75,1853.66,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-18,SHP,1879.62,2051.41,1842.02,2011.19,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-19,SHP,2039.35,2225.74,1998.56,2182.1,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-20,SHP,2212.65,2414.89,2168.4,2367.53,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-21,SHP,2400.68,2620.1,2352.67,2568.73,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-24,SHP,2604.69,2842.76,2552.6,2787.02,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-25,SHP,2826.04,3084.34,2769.52,3023.86,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-26,SHP,3066.19,3346.44,3004.87,3280.83,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-27,SHP,3326.76,3630.82,3260.22,3559.63,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-28,SHP,3609.47,3939.37,3537.28,3862.13,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-03-31,SHP,3916.2,4274.14,3837.87,4190.33,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-04-01,SHP,4249.0,4637.36,4164.02,4546.43,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-04-02,SHP,4610.08,5031.44,4517.88,4932.78,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR
+2025-04-03,SHP,5001.84,5459.01,4901.8,5351.97,192375,JSE,Johannesburg Stock Exchange,stock,Shoprite Holdings,Retail,South Africa,ZAR

@@ -1,11 +1,15 @@
 from abc import ABC, abstractmethod
 import pandas as pd
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Union, TypeVar, Sequence
 import logging
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Define TypeVar for flexible symbol return types
+T = TypeVar('T', str, Dict[str, str])
+SymbolListType = Sequence[T]
 
 class BaseFetcher(ABC):
     """Base class for all data fetching operations"""
@@ -34,12 +38,12 @@ class BaseFetcher(ABC):
         pass
     
     @abstractmethod
-    async def get_symbols(self) -> List[str]:
+    async def get_symbols(self, *args, **kwargs) -> SymbolListType:
         """
         Get available symbols/tickers from the data source
         
         Returns:
-            List[str]: List of available symbols
+            SymbolListType: List of available symbols (either as strings or dictionaries)
         """
         pass
     
@@ -76,3 +80,33 @@ class BaseFetcher(ABC):
             result_df = result_df.rename(columns=renamed_columns)
         
         return result_df
+        
+    @staticmethod
+    def export_to_json(df: pd.DataFrame, filepath: str) -> str:
+        """
+        Export DataFrame to JSON file
+        
+        Args:
+            df (pd.DataFrame): DataFrame to export
+            filepath (str): Path to save the JSON file
+            
+        Returns:
+            str: Path to the saved file
+        """
+        df.to_json(filepath, orient='records', date_format='iso')
+        return filepath
+        
+    @staticmethod
+    def export_to_csv(df: pd.DataFrame, filepath: str) -> str:
+        """
+        Export DataFrame to CSV file
+        
+        Args:
+            df (pd.DataFrame): DataFrame to export
+            filepath (str): Path to save the CSV file
+            
+        Returns:
+            str: Path to the saved file
+        """
+        df.to_csv(filepath, index=False)
+        return filepath

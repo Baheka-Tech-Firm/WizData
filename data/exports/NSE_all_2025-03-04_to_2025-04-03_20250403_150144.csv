@@ -1,0 +1,231 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type,name,sector,country,currency
+2025-03-04,SCOM,165.0,168.3,156.85,160.05,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-05,SCOM,159.09,162.28,151.23,154.32,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-06,SCOM,153.39,156.46,145.82,148.79,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-07,SCOM,147.9,150.86,140.59,143.46,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-10,SCOM,142.6,145.45,135.56,138.32,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-11,SCOM,137.49,140.24,130.7,133.37,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-12,SCOM,132.57,135.22,126.02,128.59,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-13,SCOM,127.82,130.38,121.51,123.99,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-14,SCOM,123.24,125.71,117.15,119.54,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-17,SCOM,118.83,121.2,112.96,115.26,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-18,SCOM,114.57,116.86,108.91,111.13,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-19,SCOM,110.47,112.68,105.01,107.15,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-20,SCOM,106.51,108.64,101.25,103.32,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-21,SCOM,102.7,104.75,97.62,99.61,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-24,SCOM,99.02,101.0,94.13,96.05,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-25,SCOM,95.47,97.38,90.75,92.61,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-26,SCOM,92.05,93.89,87.5,89.29,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-27,SCOM,88.75,90.53,84.37,86.09,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-28,SCOM,85.57,87.29,81.35,83.01,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-31,SCOM,82.51,84.16,78.43,80.03,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-04-01,SCOM,79.55,81.14,75.62,77.17,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-04-02,SCOM,76.7,78.24,72.91,74.4,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-04-03,SCOM,73.96,75.44,70.3,71.74,13680,NSE,Nairobi Securities Exchange,stock,Safaricom PLC,Telecommunications,Kenya,KES
+2025-03-04,EQTY,37.92,38.68,36.79,37.54,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-05,EQTY,37.47,38.22,36.35,37.09,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-06,EQTY,37.02,37.76,35.92,36.65,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-07,EQTY,36.58,37.31,35.49,36.21,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-10,EQTY,36.14,36.86,35.06,35.78,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-11,EQTY,35.71,36.42,34.64,35.35,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-12,EQTY,35.28,35.98,34.23,34.93,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-13,EQTY,34.86,35.55,33.82,34.51,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-14,EQTY,34.44,35.13,33.41,34.09,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-17,EQTY,34.03,34.71,33.01,33.69,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-18,EQTY,33.62,34.29,32.62,33.28,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-19,EQTY,33.22,33.88,32.23,32.88,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-20,EQTY,32.82,33.47,31.84,32.49,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-21,EQTY,32.42,33.07,31.46,32.1,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-24,EQTY,32.04,32.68,31.08,31.72,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-25,EQTY,31.65,32.28,30.71,31.34,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-26,EQTY,31.27,31.9,30.34,30.96,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-27,EQTY,30.9,31.52,29.98,30.59,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-28,EQTY,30.53,31.14,29.62,30.22,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-31,EQTY,30.16,30.77,29.26,29.86,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-04-01,EQTY,29.8,30.4,28.91,29.5,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-04-02,EQTY,29.44,30.03,28.57,29.15,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-04-03,EQTY,29.09,29.67,28.22,28.8,28215,NSE,Nairobi Securities Exchange,stock,Equity Group Holdings,Banking,Kenya,KES
+2025-03-04,KCB,27.94,28.5,27.11,27.66,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-05,KCB,27.61,28.16,26.79,27.33,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-06,KCB,27.28,27.82,26.47,27.01,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-07,KCB,26.95,27.49,26.15,26.68,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-10,KCB,26.63,27.16,25.84,26.36,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-11,KCB,26.31,26.84,25.53,26.05,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-12,KCB,25.99,26.51,25.22,25.73,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-13,KCB,25.68,26.2,24.92,25.43,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-14,KCB,25.38,25.88,24.62,25.12,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-17,KCB,25.07,25.57,24.32,24.82,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-18,KCB,24.77,25.27,24.03,24.52,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-19,KCB,24.47,24.96,23.75,24.23,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-20,KCB,24.18,24.66,23.46,23.94,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-21,KCB,23.89,24.37,23.18,23.65,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-24,KCB,23.61,24.08,22.9,23.37,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-25,KCB,23.32,23.79,22.63,23.09,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-26,KCB,23.04,23.5,22.36,22.81,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-27,KCB,22.77,23.22,22.09,22.54,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-28,KCB,22.49,22.94,21.82,22.27,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-31,KCB,22.22,22.67,21.56,22.0,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-04-01,KCB,21.96,22.4,21.3,21.74,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-04-02,KCB,21.7,22.13,21.05,21.48,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-04-03,KCB,21.44,21.86,20.8,21.22,15390,NSE,Nairobi Securities Exchange,stock,KCB Group PLC,Banking,Kenya,KES
+2025-03-04,COOP,138.88,141.66,130.66,133.32,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-05,COOP,132.26,134.9,124.43,126.97,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-06,COOP,125.95,128.47,118.5,120.91,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-07,COOP,119.95,122.35,112.85,115.15,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-10,COOP,114.23,116.51,107.47,109.66,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-11,COOP,108.78,110.96,102.34,104.43,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-12,COOP,103.59,105.67,97.46,99.45,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-13,COOP,98.66,100.63,92.81,94.71,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-14,COOP,93.95,95.83,88.39,90.19,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-17,COOP,89.47,91.26,84.18,85.89,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-18,COOP,85.21,86.91,80.16,81.8,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-19,COOP,81.14,82.77,76.34,77.9,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-20,COOP,77.27,78.82,72.7,74.18,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-21,COOP,73.59,75.06,69.23,70.65,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-24,COOP,70.08,71.48,65.93,67.28,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-25,COOP,66.74,68.07,62.79,64.07,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-26,COOP,63.56,64.83,59.79,61.02,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-27,COOP,60.53,61.74,56.94,58.11,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-28,COOP,57.64,58.79,54.23,55.34,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-31,COOP,54.89,55.99,51.64,52.7,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-04-01,COOP,52.28,53.32,49.18,50.18,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-04-02,COOP,49.78,50.78,46.84,47.79,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-04-03,COOP,47.41,48.36,44.6,45.51,12825,NSE,Nairobi Securities Exchange,stock,Co-operative Bank,Banking,Kenya,KES
+2025-03-04,EABL,87.2,95.17,85.46,93.31,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-05,EABL,94.61,103.26,92.72,101.24,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-06,EABL,102.65,112.04,100.6,109.84,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-07,EABL,111.38,121.56,109.15,119.18,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-10,EABL,120.84,131.89,118.43,129.3,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-11,EABL,131.11,143.1,128.49,140.29,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-12,EABL,142.25,155.26,139.41,152.21,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-13,EABL,154.34,168.45,151.26,165.15,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-14,EABL,167.46,182.77,164.11,179.18,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-17,EABL,181.69,198.3,178.06,194.41,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-18,EABL,197.13,215.15,193.19,210.93,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-19,EABL,213.88,233.43,209.6,228.85,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-20,EABL,232.06,253.27,227.42,248.3,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-21,EABL,251.78,274.79,246.74,269.4,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-24,EABL,273.17,298.14,267.71,292.3,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-25,EABL,296.39,323.48,290.46,317.14,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-26,EABL,321.58,350.97,315.14,344.09,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-27,EABL,348.9,380.79,341.93,373.33,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-28,EABL,378.55,413.15,370.98,405.05,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-31,EABL,410.72,448.26,402.51,439.47,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-04-01,EABL,445.63,486.36,436.71,476.82,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-04-02,EABL,483.5,527.69,473.83,517.34,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-04-03,EABL,524.58,572.53,514.09,561.3,73530,NSE,Nairobi Securities Exchange,stock,East African Breweries,Consumer Goods,Kenya,KES
+2025-03-04,BAT,20.24,21.88,19.84,21.45,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-05,BAT,21.71,23.47,21.28,23.01,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-06,BAT,23.29,25.18,22.82,24.69,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-07,BAT,24.98,27.01,24.48,26.48,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-10,BAT,26.8,28.98,26.27,28.41,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-11,BAT,28.75,31.08,28.18,30.48,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-12,BAT,30.84,33.35,30.22,32.69,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-13,BAT,33.08,35.77,32.42,35.07,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-14,BAT,35.49,38.37,34.78,37.62,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-17,BAT,38.07,41.16,37.31,40.35,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-18,BAT,40.84,44.16,40.02,43.29,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-19,BAT,43.81,47.37,42.93,46.44,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-20,BAT,46.99,50.81,46.05,49.81,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-21,BAT,50.41,54.51,49.4,53.44,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-24,BAT,54.08,58.47,53.0,57.32,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-25,BAT,58.01,62.72,56.85,61.49,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-26,BAT,62.23,67.28,60.98,65.96,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-27,BAT,66.75,72.17,65.42,70.76,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-28,BAT,71.61,77.42,70.18,75.91,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-31,BAT,76.82,83.05,75.28,81.42,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-04-01,BAT,82.4,89.09,80.75,87.35,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-04-02,BAT,88.39,95.57,86.63,93.7,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-04-03,BAT,94.82,102.52,92.93,100.51,21375,NSE,Nairobi Securities Exchange,stock,British American Tobacco Kenya,Consumer Goods,Kenya,KES
+2025-03-04,ABSA,162.36,165.61,151.16,154.24,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-05,ABSA,152.7,155.75,142.16,145.06,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-06,ABSA,143.61,146.49,133.7,136.43,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-07,ABSA,135.07,137.77,125.75,128.32,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-10,ABSA,127.03,129.57,118.27,120.68,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-11,ABSA,119.47,121.86,111.23,113.5,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-12,ABSA,112.37,114.61,104.61,106.75,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-13,ABSA,105.68,107.79,98.39,100.4,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-14,ABSA,99.39,101.38,92.53,94.42,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-17,ABSA,93.48,95.35,87.03,88.8,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-18,ABSA,87.92,89.67,81.85,83.52,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-19,ABSA,82.68,84.34,76.98,78.55,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-20,ABSA,77.77,79.32,72.4,73.88,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-21,ABSA,73.14,74.6,68.09,69.48,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-24,ABSA,68.79,70.16,64.04,65.35,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-25,ABSA,64.69,65.99,60.23,61.46,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-26,ABSA,60.84,62.06,56.65,57.8,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-27,ABSA,57.22,58.37,53.28,54.36,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-28,ABSA,53.82,54.9,50.11,51.13,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-31,ABSA,50.62,51.63,47.12,48.09,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-04-01,ABSA,47.61,48.56,44.32,45.23,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-04-02,ABSA,44.77,45.67,41.68,42.53,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-04-03,ABSA,42.11,42.95,39.2,40.0,76095,NSE,Nairobi Securities Exchange,stock,Absa Bank Kenya,Banking,Kenya,KES
+2025-03-04,SBIC,44.44,47.6,43.55,46.66,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-05,SBIC,47.13,50.47,46.19,49.49,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-06,SBIC,49.98,53.53,48.98,52.48,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-07,SBIC,53.0,56.77,51.94,55.65,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-10,SBIC,56.21,60.2,55.09,59.02,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-11,SBIC,59.61,63.84,58.42,62.59,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-12,SBIC,63.22,67.71,61.95,66.38,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-13,SBIC,67.04,71.8,65.7,70.39,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-14,SBIC,71.1,76.15,69.68,74.65,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-17,SBIC,75.4,80.75,73.89,79.17,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-18,SBIC,79.96,85.64,78.36,83.96,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-19,SBIC,84.8,90.82,83.1,89.04,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-20,SBIC,89.93,96.31,88.13,94.43,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-21,SBIC,95.37,102.14,93.46,100.14,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-24,SBIC,101.14,108.32,99.12,106.2,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-25,SBIC,107.26,114.87,105.11,112.62,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-26,SBIC,113.75,121.82,111.47,119.44,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-27,SBIC,120.63,129.19,118.22,126.66,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-28,SBIC,127.93,137.01,125.37,134.32,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-31,SBIC,135.67,145.3,132.95,142.45,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-04-01,SBIC,143.88,154.09,141.0,151.07,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-04-02,SBIC,152.58,163.41,149.53,160.21,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-04-03,SBIC,161.81,173.3,158.58,169.9,84645,NSE,Nairobi Securities Exchange,stock,Stanbic Holdings,Banking,Kenya,KES
+2025-03-04,JUB,90.18,92.9,88.38,91.08,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-05,JUB,91.26,94.02,89.44,92.18,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-06,JUB,92.36,95.15,90.51,93.28,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-07,JUB,93.47,96.29,91.6,94.41,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-10,JUB,94.59,97.45,92.7,95.54,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-11,JUB,95.73,98.62,93.82,96.69,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-12,JUB,96.88,99.81,94.94,97.85,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-13,JUB,98.05,101.01,96.09,99.03,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-14,JUB,99.23,102.22,97.24,100.22,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-17,JUB,100.42,103.45,98.41,101.42,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-18,JUB,101.63,104.69,99.59,102.64,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-19,JUB,102.85,105.95,100.79,103.88,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-20,JUB,104.08,107.23,102.0,105.12,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-21,JUB,105.33,108.52,103.23,106.39,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-24,JUB,106.6,109.82,104.47,107.67,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-25,JUB,107.88,111.14,105.72,108.96,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-26,JUB,109.18,112.48,106.99,110.27,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-27,JUB,110.49,113.83,108.28,111.6,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-28,JUB,111.82,115.2,109.58,112.94,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-31,JUB,113.16,116.58,110.9,114.29,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-04-01,JUB,114.52,117.98,112.23,115.67,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-04-02,JUB,115.9,119.4,113.58,117.06,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-04-03,JUB,117.29,120.83,114.95,118.47,29925,NSE,Nairobi Securities Exchange,stock,Jubilee Holdings,Insurance,Kenya,KES
+2025-03-04,SCBK,97.34,106.24,95.4,104.16,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-05,SCBK,105.62,115.27,103.5,113.01,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-06,SCBK,114.59,125.07,112.3,122.61,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-07,SCBK,124.33,135.69,121.84,133.03,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-10,SCBK,134.9,147.22,132.2,144.34,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-11,SCBK,146.36,159.74,143.43,156.6,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-12,SCBK,158.8,173.31,155.62,169.91,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-13,SCBK,172.29,188.04,168.84,184.35,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-14,SCBK,186.93,204.02,183.19,200.02,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-17,SCBK,202.82,221.35,198.76,217.01,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-18,SCBK,220.05,240.17,215.65,235.46,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-19,SCBK,238.75,260.57,233.98,255.47,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-20,SCBK,259.04,282.72,253.86,277.17,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-21,SCBK,281.06,306.74,275.43,300.73,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-24,SCBK,304.94,332.81,298.84,326.29,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-25,SCBK,330.85,361.09,324.24,354.01,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-26,SCBK,358.97,391.78,351.79,384.1,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-27,SCBK,389.47,425.07,381.68,416.74,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-28,SCBK,422.57,461.19,414.12,452.15,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-03-31,SCBK,458.48,500.39,449.31,490.58,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-04-01,SCBK,497.44,542.91,487.49,532.26,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-04-02,SCBK,539.72,589.05,528.92,577.5,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
+2025-04-03,SCBK,585.58,639.1,573.87,626.57,86355,NSE,Nairobi Securities Exchange,stock,Standard Chartered Bank Kenya,Banking,Kenya,KES
