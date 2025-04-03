@@ -1,0 +1,162 @@
+/* Custom CSS for WizData Dashboard */
+
+/* Body and general styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make main content fill available space */
+main {
+    flex: 1;
+}
+
+/* Card styling */
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    font-weight: 500;
+    border-bottom: 1px solid #444;
+}
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+
+/* Status indicator circles */
+.status-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-online {
+    background-color: var(--bs-success);
+}
+
+.status-offline {
+    background-color: var(--bs-danger);
+}
+
+.status-warning {
+    background-color: var(--bs-warning);
+}
+
+/* Navbar customization */
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Table styling */
+.table-dark {
+    background-color: transparent;
+}
+
+.table-dark td, .table-dark th {
+    border-color: #444;
+}
+
+/* Progress bar customization */
+.progress {
+    background-color: #333;
+}
+
+/* List group customization */
+.list-group-item {
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    transform: translateX(3px);
+}
+
+/* Font sizing */
+.fs-7 {
+    font-size: 0.85rem;
+}
+
+.fs-8 {
+    font-size: 0.75rem;
+}
+
+/* Footer customization */
+.footer {
+    background-color: #1a1a1a !important;
+    border-top: 1px solid #333;
+}
+
+/* Dashboard stats cards */
+.card .card-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card .card-text {
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Hover effects for interactive elements */
+button:hover {
+    transform: translateY(-1px);
+}
+
+/* Responsive font sizes */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.75rem;
+    }
+    
+    h5 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Animation for refresh button */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.fa-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
