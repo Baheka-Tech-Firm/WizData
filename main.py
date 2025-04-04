@@ -24,8 +24,11 @@ app.secret_key = os.environ.get("SESSION_SECRET", "dev_secret_key")
 # Configure database
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_recycle": 300,
+    "pool_recycle": 60,
     "pool_pre_ping": True,
+    "connect_args": {
+        "connect_timeout": 10
+    }
 }
 
 # Configure data export directory
@@ -37,6 +40,16 @@ db.init_app(app)
 
 # Import models (must come after db init but before create_all)
 import models  # noqa
+
+# Set up database tables with the app context
+logger.info("Creating database tables if they don't exist")
+with app.app_context():
+    try:
+        db.create_all()
+        logger.info("Database setup complete")
+    except Exception as e:
+        logger.error(f"Error setting up database: {str(e)}")
+        # Continue without failing - the app can still function with reduced features
 
 # Register API routes
 from src.api.routes.prices import prices_bp
