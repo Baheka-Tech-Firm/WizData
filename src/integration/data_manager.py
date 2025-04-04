@@ -1,0 +1,522 @@
+"""
+WizData Integration Data Manager
+
+This module provides a unified interface for accessing financial and ESG data
+from various sources. It combines data from multiple providers and offers methods
+to retrieve, format, and cache data for consumption by the WizData platform.
+"""
+
+import os
+import time
+import logging
+import json
+import pandas as pd
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Union, Any
+from pathlib import Path
+
+from src.integration.finance.alpha_vantage_client import AlphaVantageClient
+from src.integration.esg.world_bank_client import WorldBankClient
+
+# Setup logging
+logger = logging.getLogger(__name__)
+
+class DataManager:
+    """
+    Unified data manager for financial and ESG data
+    
+    This class provides methods to access and combine data from various sources,
+    along with caching capabilities to avoid excessive API calls.
+    """
+    
+    # Cache directory relative to project root
+    CACHE_DIR = "data/cache"
+    
+    def __init__(self):
+        """Initialize the data manager with all required data sources"""
+        # Create data source clients
+        self.alpha_vantage = AlphaVantageClient()
+        self.world_bank = WorldBankClient()
+        
+        # Ensure cache directory exists
+        os.makedirs(self.CACHE_DIR, exist_ok=True)
+    
+    def _get_cache_path(self, data_type: str, key: str) -> str:
+        """
+        Get the file path for a cache item
+        
+        Args:
+            data_type: Type of data (e.g., 'finance', 'esg')
+            key: Cache key
+            
+        Returns:
+            Path to the cache file
+        """
+        return os.path.join(self.CACHE_DIR, f"{data_type}_{key}.json")
+    
+    def _cache_data(self, data_type: str, key: str, data: Any) -> None:
+        """
+        Cache data to disk
+        
+        Args:
+            data_type: Type of data (e.g., 'finance', 'esg')
+            key: Cache key
+            data: Data to cache
+        """
+        try:
+            cache_path = self._get_cache_path(data_type, key)
+            cache_data = {
+                "timestamp": datetime.now().isoformat(),
+                "data": data
+            }
+            with open(cache_path, "w") as f:
+                json.dump(cache_data, f)
+        except Exception as e:
+            logger.error(f"Failed to cache data: {str(e)}")
+    
+    def _get_cached_data(self, data_type: str, key: str, max_age_hours: int = 24) -> Optional[Any]:
+        """
+        Get data from cache if available and not expired
+        
+        Args:
+            data_type: Type of data (e.g., 'finance', 'esg')
+            key: Cache key
+            max_age_hours: Maximum age of cached data in hours
+            
+        Returns:
+            Cached data if available and fresh, None otherwise
+        """
+        cache_path = self._get_cache_path(data_type, key)
+        if not os.path.exists(cache_path):
+            return None
+        
+        try:
+            with open(cache_path, "r") as f:
+                cache_data = json.load(f)
+            
+            cache_time = datetime.fromisoformat(cache_data["timestamp"])
+            if datetime.now() - cache_time > timedelta(hours=max_age_hours):
+                return None
+            
+            return cache_data["data"]
+        except Exception as e:
+            logger.error(f"Failed to read cache: {str(e)}")
+            return None
+    
+    # Financial data methods
+    
+    def get_stock_data(self, symbol: str, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get stock data for a given symbol
+        
+        Args:
+            symbol: Stock symbol
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Stock data including time series and company info
+        """
+        cache_key = f"stock_{symbol}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key)
+            if cached_data:
+                logger.info(f"Using cached stock data for {symbol}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            # Get time series data
+            time_series = self.alpha_vantage.get_time_series_daily(symbol)
+            
+            # Get company overview
+            company_info = self.alpha_vantage.get_company_overview(symbol)
+            
+            # Format time series data
+            formatted_time_series = self.alpha_vantage.format_time_series_data(time_series)
+            
+            # Combine data
+            result = {
+                "symbol": symbol,
+                "company_info": company_info,
+                "time_series": formatted_time_series
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get stock data for {symbol}: {str(e)}")
+            raise
+    
+    def get_sector_performance(self, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get sector performance data
+        
+        Args:
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Sector performance data
+        """
+        cache_key = "sector_performance"
+        
+        # Try to get from cache - use a shorter cache period for sector data
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=4)
+            if cached_data:
+                logger.info("Using cached sector performance data")
+                return cached_data
+        
+        # Get data from source
+        try:
+            sector_data = self.alpha_vantage.get_sector_performance()
+            
+            # Format sector data
+            result = {
+                "timestamp": datetime.now().isoformat(),
+                "data": sector_data
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get sector performance data: {str(e)}")
+            raise
+    
+    def get_forex_data(self, from_currency: str, to_currency: str, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get forex exchange rate data
+        
+        Args:
+            from_currency: From currency code
+            to_currency: To currency code
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Forex exchange rate data
+        """
+        cache_key = f"forex_{from_currency}_{to_currency}"
+        
+        # Try to get from cache - use a shorter cache period for forex data
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=4)
+            if cached_data:
+                logger.info(f"Using cached forex data for {from_currency}/{to_currency}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            forex_data = self.alpha_vantage.get_forex_data(from_currency, to_currency)
+            
+            # Format forex data
+            result = {
+                "timestamp": datetime.now().isoformat(),
+                "from_currency": from_currency,
+                "to_currency": to_currency,
+                "data": forex_data
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get forex data for {from_currency}/{to_currency}: {str(e)}")
+            raise
+    
+    def get_crypto_data(self, symbol: str, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get cryptocurrency data
+        
+        Args:
+            symbol: Cryptocurrency symbol
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Cryptocurrency data
+        """
+        cache_key = f"crypto_{symbol}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=4)
+            if cached_data:
+                logger.info(f"Using cached crypto data for {symbol}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            crypto_data = self.alpha_vantage.get_crypto_data(symbol)
+            
+            # Format crypto data
+            result = {
+                "timestamp": datetime.now().isoformat(),
+                "symbol": symbol,
+                "data": crypto_data
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get crypto data for {symbol}: {str(e)}")
+            raise
+    
+    # ESG data methods
+    
+    def get_country_esg_data(self, country_code: str, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get ESG data for a country
+        
+        Args:
+            country_code: Country code (ISO 3166-1 alpha-2 or alpha-3)
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            ESG data for the country
+        """
+        cache_key = f"esg_{country_code}"
+        
+        # Try to get from cache - ESG data can be cached longer
+        if use_cache:
+            cached_data = self._get_cached_data("esg", cache_key, max_age_hours=168)  # 7 days
+            if cached_data:
+                logger.info(f"Using cached ESG data for {country_code}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            # Get country info
+            country_info = self.world_bank.get_country_data(country_code)
+            
+            # Get ESG data for the last 10 years
+            current_year = datetime.now().year
+            start_year = current_year - 10
+            esg_data = self.world_bank.get_all_esg_indicators(country_code, start_year, current_year)
+            
+            # Calculate ESG scores for the most recent year with data
+            # In reality, we'd want to find the most recent year with sufficient data
+            esg_scores = self.world_bank.calculate_esg_scores(country_code, current_year - 1)
+            
+            # Combine data
+            result = {
+                "country_code": country_code,
+                "country_info": country_info,
+                "esg_data": esg_data,
+                "esg_scores": esg_scores,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # Cache the result
+            self._cache_data("esg", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get ESG data for {country_code}: {str(e)}")
+            raise
+    
+    def get_countries_list(self, use_cache: bool = True) -> List[Dict[str, Any]]:
+        """
+        Get list of countries
+        
+        Args:
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            List of countries
+        """
+        cache_key = "countries_list"
+        
+        # Try to get from cache - country list rarely changes
+        if use_cache:
+            cached_data = self._get_cached_data("esg", cache_key, max_age_hours=720)  # 30 days
+            if cached_data:
+                logger.info("Using cached countries list")
+                return cached_data
+        
+        # Get data from source
+        try:
+            countries = self.world_bank.get_countries()
+            
+            # Cache the result
+            self._cache_data("esg", cache_key, countries)
+            
+            return countries
+        except Exception as e:
+            logger.error(f"Failed to get countries list: {str(e)}")
+            raise
+    
+    def get_esg_scores_for_region(self, region_code: str, year: Optional[int] = None, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get ESG scores for a region (country or sub-region)
+        
+        Args:
+            region_code: Region code (could be country or custom region)
+            year: Year for the data (default to most recent)
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            ESG scores for the region
+        """
+        if year is None:
+            year = datetime.now().year - 1  # Default to previous year
+            
+        cache_key = f"esg_scores_{region_code}_{year}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("esg", cache_key, max_age_hours=168)  # 7 days
+            if cached_data:
+                logger.info(f"Using cached ESG scores for {region_code} ({year})")
+                return cached_data
+        
+        # For country-level data
+        if len(region_code) == 2 or len(region_code) == 3:
+            try:
+                # Calculate ESG scores
+                esg_scores = self.world_bank.calculate_esg_scores(region_code, year)
+                
+                # Get country info
+                country_info = self.world_bank.get_country_data(region_code)
+                
+                # Format result
+                result = {
+                    "region_code": region_code,
+                    "region_name": country_info.get("name", region_code),
+                    "year": year,
+                    "scores": esg_scores,
+                    "timestamp": datetime.now().isoformat()
+                }
+                
+                # Cache the result
+                self._cache_data("esg", cache_key, result)
+                
+                return result
+            except Exception as e:
+                logger.error(f"Failed to get ESG scores for region {region_code} ({year}): {str(e)}")
+                raise
+        
+        # For custom regions, would need custom logic here
+        # This would be where we'd apply our special algorithms for African regions
+        
+        raise ValueError(f"Unsupported region code: {region_code}")
+    
+    def compare_esg_scores(self, region_codes: List[str], year: Optional[int] = None, 
+                         dimension: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Compare ESG scores for multiple regions
+        
+        Args:
+            region_codes: List of region codes
+            year: Year for the data (default to most recent)
+            dimension: ESG dimension to compare (default to all)
+            
+        Returns:
+            Comparative ESG scores
+        """
+        results = {}
+        
+        for region_code in region_codes:
+            try:
+                region_data = self.get_esg_scores_for_region(region_code, year)
+                if dimension:
+                    if dimension in region_data["scores"]:
+                        results[region_code] = {
+                            "region_name": region_data["region_name"],
+                            "score": region_data["scores"][dimension]
+                        }
+                else:
+                    results[region_code] = {
+                        "region_name": region_data["region_name"],
+                        "scores": region_data["scores"]
+                    }
+            except Exception as e:
+                logger.warning(f"Failed to get ESG scores for comparison: {region_code} - {str(e)}")
+                continue
+        
+        return {
+            "year": year or datetime.now().year - 1,
+            "dimension": dimension or "all",
+            "regions": results,
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    # Combined data methods
+    
+    def get_market_esg_impact(self, symbol: str, country_code: str) -> Dict[str, Any]:
+        """
+        Get combined market and ESG data to evaluate ESG impact
+        
+        Args:
+            symbol: Stock symbol
+            country_code: Country code for ESG data
+            
+        Returns:
+            Combined market and ESG data with impact analysis
+        """
+        # Get stock data
+        stock_data = self.get_stock_data(symbol)
+        
+        # Get ESG data
+        esg_data = self.get_country_esg_data(country_code)
+        
+        # Here we would implement some analysis to correlate ESG factors with stock performance
+        # This is a simplified placeholder implementation
+        
+        result = {
+            "symbol": symbol,
+            "company_name": stock_data["company_info"].get("Name", symbol),
+            "country_code": country_code,
+            "country_name": esg_data["country_info"].get("name", country_code),
+            "timestamp": datetime.now().isoformat(),
+            "stock_data": {
+                "latest_price": stock_data["time_series"][0]["close"] if stock_data["time_series"] else None,
+                "change_30d": self._calculate_price_change(stock_data["time_series"], 30) if stock_data["time_series"] else None,
+                "change_90d": self._calculate_price_change(stock_data["time_series"], 90) if stock_data["time_series"] else None,
+                "change_1y": self._calculate_price_change(stock_data["time_series"], 365) if stock_data["time_series"] else None
+            },
+            "esg_scores": esg_data["esg_scores"],
+            # This would be where we'd put our proprietary correlation analysis
+            "impact_analysis": {
+                "correlation": 0.0,  # Placeholder
+                "esg_impact_estimate": "Neutral",  # Placeholder
+                "key_factors": []  # Placeholder
+            }
+        }
+        
+        return result
+    
+    def _calculate_price_change(self, time_series: List[Dict[str, Any]], days: int) -> float:
+        """
+        Calculate price change over a period
+        
+        Args:
+            time_series: Time series data
+            days: Number of days for the change
+            
+        Returns:
+            Percentage change
+        """
+        if not time_series or len(time_series) < 2:
+            return 0.0
+        
+        latest_price = time_series[0]["close"]
+        
+        # Find the price 'days' days ago
+        older_price = latest_price
+        for entry in time_series:
+            entry_date = datetime.fromisoformat(entry["date"])
+            if (datetime.now() - entry_date).days >= days:
+                older_price = entry["close"]
+                break
+        
+        if older_price == 0:
+            return 0.0
+            
+        return ((latest_price - older_price) / older_price) * 100.0

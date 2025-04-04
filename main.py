@@ -63,12 +63,14 @@ from src.api.routes.quality import quality_bp
 from src.api.routes.esg import esg_bp, africa_esg_bp
 from src.api.routes.insights import insights_bp
 from src.api.routes.realtime import realtime_bp
+from src.api.routes.integrated_data_routes import integrated_data_bp
 app.register_blueprint(prices_bp)
 app.register_blueprint(quality_bp)
 app.register_blueprint(esg_bp)
 app.register_blueprint(africa_esg_bp)
 app.register_blueprint(insights_bp)
 app.register_blueprint(realtime_bp)
+app.register_blueprint(integrated_data_bp)
 
 # Initialize Socket.IO handlers
 from src.api.routes.realtime.socket_routes import init_socket_handlers
@@ -125,6 +127,11 @@ def esg_dashboard():
 def africa_esg_dashboard():
     """Render the Africa ESG data dashboard page"""
     return render_template('esg/africa_dashboard.html', title="African ESG Data Dashboard")
+
+@app.route('/integrated-data')
+def integrated_data_dashboard():
+    """Render the integrated data dashboard page"""
+    return render_template('integrated/dashboard.html', title="Integrated Financial & ESG Data")
 
 @app.route('/api/health')
 def health():
