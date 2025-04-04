@@ -16,6 +16,9 @@ from typing import Dict, List, Optional, Union, Any
 from pathlib import Path
 
 from src.integration.finance.alpha_vantage_client import AlphaVantageClient
+from src.integration.finance.sp_global_client import SPGlobalClient
+from src.integration.finance.bloomberg_client import BloombergClient
+from src.integration.finance.refinitiv_client import RefinitivClient
 from src.integration.esg.world_bank_client import WorldBankClient
 
 # Setup logging
@@ -36,6 +39,9 @@ class DataManager:
         """Initialize the data manager with all required data sources"""
         # Create data source clients
         self.alpha_vantage = AlphaVantageClient()
+        self.sp_global = SPGlobalClient()
+        self.bloomberg = BloombergClient()
+        self.refinitiv = RefinitivClient()
         self.world_bank = WorldBankClient()
         
         # Ensure cache directory exists
@@ -446,6 +452,264 @@ class DataManager:
             "regions": results,
             "timestamp": datetime.now().isoformat()
         }
+    
+    # S&P Global data methods
+    
+    def get_sp500_constituents(self, use_cache: bool = True) -> List[Dict[str, Any]]:
+        """
+        Get the current constituents of the S&P 500 index
+        
+        Args:
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            List of S&P 500 constituent companies
+        """
+        cache_key = "sp500_constituents"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=24)
+            if cached_data:
+                logger.info("Using cached S&P 500 constituents data")
+                return cached_data
+        
+        # Get data from source
+        try:
+            constituents = self.sp_global.get_sp500_constituents()
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, constituents)
+            
+            return constituents
+        except Exception as e:
+            logger.error(f"Failed to get S&P 500 constituents: {str(e)}")
+            raise
+    
+    def get_index_performance(self, index_id: str = "SP500", period: str = "1y", use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get performance data for a specific index
+        
+        Args:
+            index_id: Index identifier (e.g., SP500, DJIA)
+            period: Time period (1d, 5d, 1m, 3m, 6m, 1y, 5y)
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Index performance data
+        """
+        cache_key = f"index_performance_{index_id}_{period}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=4)
+            if cached_data:
+                logger.info(f"Using cached index performance data for {index_id}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            performance = self.sp_global.get_index_performance(index_id, period)
+            
+            # Format data
+            result = {
+                "index_id": index_id,
+                "period": period,
+                "timestamp": datetime.now().isoformat(),
+                "data": performance
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get index performance for {index_id}: {str(e)}")
+            raise
+    
+    # Bloomberg data methods
+    
+    def get_market_indices(self, region: str = None, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get market indices data
+        
+        Args:
+            region: Region filter (e.g., US, EU, ASIA)
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Market indices data
+        """
+        cache_key = f"market_indices_{region or 'global'}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=4)
+            if cached_data:
+                logger.info(f"Using cached market indices data for {region or 'global'}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            if region:
+                indices = self.refinitiv.get_market_indices(region)
+            else:
+                indices = self.bloomberg.get_global_market_indices()
+            
+            # Format data
+            result = {
+                "region": region or "global",
+                "timestamp": datetime.now().isoformat(),
+                "data": indices
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get market indices for {region or 'global'}: {str(e)}")
+            raise
+    
+    def get_fixed_income_data(self, issuer_type: str = "sovereign", currency: str = "USD", use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get fixed income market data
+        
+        Args:
+            issuer_type: Type of issuer (sovereign, corporate)
+            currency: Currency code
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Fixed income market data
+        """
+        cache_key = f"fixed_income_{issuer_type}_{currency}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=4)
+            if cached_data:
+                logger.info(f"Using cached fixed income data for {issuer_type}/{currency}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            fixed_income_data = self.bloomberg.get_fixed_income_data(issuer_type, currency)
+            
+            # Format data
+            result = {
+                "issuer_type": issuer_type,
+                "currency": currency,
+                "timestamp": datetime.now().isoformat(),
+                "data": fixed_income_data
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get fixed income data for {issuer_type}/{currency}: {str(e)}")
+            raise
+    
+    # Refinitiv data methods
+    
+    def get_time_series(self, ric: str, interval: str = "P1D", start: str = None, end: str = None, use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get time series data for a RIC (Reuters Instrument Code)
+        
+        Args:
+            ric: Reuters Instrument Code
+            interval: Time interval (P1D for daily, PT1M for minute, etc.)
+            start: Start date in ISO format
+            end: End date in ISO format
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Time series data
+        """
+        cache_key = f"time_series_{ric}_{interval}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=4)
+            if cached_data:
+                logger.info(f"Using cached time series data for {ric}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            time_series = self.refinitiv.get_time_series(ric, None, interval, start, end)
+            
+            # Format data
+            formatted_time_series = self.refinitiv.format_time_series_data(time_series)
+            
+            result = {
+                "ric": ric,
+                "interval": interval,
+                "start": start,
+                "end": end,
+                "timestamp": datetime.now().isoformat(),
+                "data": formatted_time_series
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get time series data for {ric}: {str(e)}")
+            raise
+    
+    def get_company_fundamentals(self, identifier: str, source: str = "refinitiv", use_cache: bool = True) -> Dict[str, Any]:
+        """
+        Get company fundamental data from the specified source
+        
+        Args:
+            identifier: Company identifier (ticker or RIC)
+            source: Data source provider (refinitiv, bloomberg, sp_global, alpha_vantage)
+            use_cache: Whether to use cached data if available
+            
+        Returns:
+            Company fundamental data
+        """
+        cache_key = f"fundamentals_{source}_{identifier}"
+        
+        # Try to get from cache
+        if use_cache:
+            cached_data = self._get_cached_data("finance", cache_key, max_age_hours=24)
+            if cached_data:
+                logger.info(f"Using cached fundamentals data for {identifier} from {source}")
+                return cached_data
+        
+        # Get data from source
+        try:
+            if source == "refinitiv":
+                fundamentals = self.refinitiv.get_fundamentals(identifier)
+            elif source == "bloomberg":
+                fundamentals = self.bloomberg.get_company_fundamentals(identifier)
+            elif source == "sp_global":
+                fundamentals = self.sp_global.get_company_financials(identifier)
+            elif source == "alpha_vantage":
+                fundamentals = self.alpha_vantage.get_company_overview(identifier)
+            else:
+                raise ValueError(f"Unsupported data source: {source}")
+            
+            # Format data
+            result = {
+                "identifier": identifier,
+                "source": source,
+                "timestamp": datetime.now().isoformat(),
+                "data": fundamentals
+            }
+            
+            # Cache the result
+            self._cache_data("finance", cache_key, result)
+            
+            return result
+        except Exception as e:
+            logger.error(f"Failed to get fundamentals for {identifier} from {source}: {str(e)}")
+            raise
     
     # Combined data methods
     
