@@ -1,0 +1,647 @@
+{% extends 'layout.html' %}
+
+{% block title %}African ESG Data Dashboard{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+<style>
+  .card {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    font-weight: bold;
+    border-bottom: none;
+  }
+  
+  .metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .metric-change {
+    font-size: 0.9rem;
+  }
+  
+  .positive-change {
+    color: var(--bs-success);
+  }
+  
+  .negative-change {
+    color: var(--bs-danger);
+  }
+  
+  .region-select {
+    max-width: 300px;
+  }
+  
+  .chart-container {
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .map-container {
+    height: 500px;
+    margin-bottom: 20px;
+  }
+  
+  .score-dial {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .score-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .region-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .region-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .metric-table {
+    font-size: 0.9rem;
+  }
+  
+  .legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+  }
+  
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin-right: 5px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>African ESG Data Dashboard</h1>
+    <div class="d-flex">
+      <select id="region-select" class="form-select region-select me-2">
+        <option value="ZA">South Africa</option>
+        <option value="KE">Kenya</option>
+        <option value="NG">Nigeria</option>
+        <option value="EG">Egypt</option>
+        <option value="GH">Ghana</option>
+      </select>
+      <select id="date-range" class="form-select me-2">
+        <option value="1m">Last Month</option>
+        <option value="3m">Last 3 Months</option>
+        <option value="6m">Last 6 Months</option>
+        <option value="1y" selected>Last Year</option>
+        <option value="all">All Time</option>
+      </select>
+      <button id="export-btn" class="btn btn-outline-primary">
+        <i class="bi bi-download me-1"></i> Export
+      </button>
+    </div>
+  </div>
+  
+  <!-- Map & Overview -->
+  <div class="row mb-4">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>ESG Score Map</span>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="show-infrastructure" checked>
+            <label class="form-check-label" for="show-infrastructure">Show Infrastructure</label>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--bs-success);"></div>
+              <span>High Score (80-100)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--bs-warning);"></div>
+              <span>Medium Score (50-79)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--bs-danger);"></div>
+              <span>Low Score (0-49)</span>
+            </div>
+          </div>
+          <div id="africa-map" class="map-container"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card h-100">
+        <div class="card-header">
+          Region Overview
+        </div>
+        <div class="card-body">
+          <h3 id="selected-region-name">South Africa - Gauteng</h3>
+          <div class="row mt-4">
+            <div class="col-6 text-center mb-3">
+              <div class="score-dial" id="environmental-score">
+                <div class="score-value">76</div>
+              </div>
+              <p>Environmental</p>
+            </div>
+            <div class="col-6 text-center mb-3">
+              <div class="score-dial" id="social-score">
+                <div class="score-value">68</div>
+              </div>
+              <p>Social</p>
+            </div>
+            <div class="col-6 text-center">
+              <div class="score-dial" id="governance-score">
+                <div class="score-value">82</div>
+              </div>
+              <p>Governance</p>
+            </div>
+            <div class="col-6 text-center">
+              <div class="score-dial" id="infrastructure-score">
+                <div class="score-value">71</div>
+              </div>
+              <p>Infrastructure</p>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <h5>Overall ESG Score</h5>
+            <div class="progress">
+              <div id="overall-score-bar" class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Key Metrics -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Electricity Access</span>
+          <span class="badge bg-info">Environmental</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">83%</div>
+          <div class="metric-change positive-change">
+            <i class="bi bi-arrow-up-right"></i> +2.4% vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Literacy Rate</span>
+          <span class="badge bg-info">Social</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">91%</div>
+          <div class="metric-change positive-change">
+            <i class="bi bi-arrow-up-right"></i> +1.5% vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Corruption Index</span>
+          <span class="badge bg-info">Governance</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">42</div>
+          <div class="metric-change negative-change">
+            <i class="bi bi-arrow-down-right"></i> -3.1 vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Road Infrastructure</span>
+          <span class="badge bg-info">Infrastructure</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">68%</div>
+          <div class="metric-change positive-change">
+            <i class="bi bi-arrow-up-right"></i> +4.2% vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Charts -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Historical ESG Scores
+        </div>
+        <div class="card-body">
+          <div id="historical-chart" class="chart-container"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Comparative Analysis
+        </div>
+        <div class="card-body">
+          <div id="comparative-chart" class="chart-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Detailed Metrics -->
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>Detailed Metrics</span>
+      <div>
+        <select id="metric-dimension" class="form-select form-select-sm d-inline-block" style="width: 150px;">
+          <option value="all">All Dimensions</option>
+          <option value="environmental">Environmental</option>
+          <option value="social">Social</option>
+          <option value="governance">Governance</option>
+          <option value="infrastructure">Infrastructure</option>
+        </select>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover metric-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Dimension</th>
+              <th>Value</th>
+              <th>Unit</th>
+              <th>Date</th>
+              <th>YoY Change</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Electricity Access</td>
+              <td><span class="badge bg-success">Environmental</span></td>
+              <td>83.2</td>
+              <td>%</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+2.4%</td>
+              <td>0.95</td>
+            </tr>
+            <tr>
+              <td>Water Access</td>
+              <td><span class="badge bg-success">Environmental</span></td>
+              <td>78.5</td>
+              <td>%</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+1.8%</td>
+              <td>0.92</td>
+            </tr>
+            <tr>
+              <td>Load Shedding Index</td>
+              <td><span class="badge bg-success">Environmental</span></td>
+              <td>3.2</td>
+              <td>index</td>
+              <td>2025-03-15</td>
+              <td class="negative-change">+0.5</td>
+              <td>0.98</td>
+            </tr>
+            <tr>
+              <td>Literacy Rate</td>
+              <td><span class="badge bg-primary">Social</span></td>
+              <td>91.3</td>
+              <td>%</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+1.5%</td>
+              <td>0.97</td>
+            </tr>
+            <tr>
+              <td>School Coverage</td>
+              <td><span class="badge bg-primary">Social</span></td>
+              <td>86.7</td>
+              <td>%</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+2.1%</td>
+              <td>0.94</td>
+            </tr>
+            <tr>
+              <td>Healthcare Access</td>
+              <td><span class="badge bg-primary">Social</span></td>
+              <td>72.4</td>
+              <td>%</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+3.2%</td>
+              <td>0.91</td>
+            </tr>
+            <tr>
+              <td>Corruption Index</td>
+              <td><span class="badge bg-warning">Governance</span></td>
+              <td>42.3</td>
+              <td>index</td>
+              <td>2025-03-15</td>
+              <td class="negative-change">-3.1</td>
+              <td>0.88</td>
+            </tr>
+            <tr>
+              <td>Audit Outcome</td>
+              <td><span class="badge bg-warning">Governance</span></td>
+              <td>Qualified</td>
+              <td>-</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">Improved</td>
+              <td>0.96</td>
+            </tr>
+            <tr>
+              <td>Protests (Monthly)</td>
+              <td><span class="badge bg-warning">Governance</span></td>
+              <td>14</td>
+              <td>count</td>
+              <td>2025-03-15</td>
+              <td class="negative-change">+3</td>
+              <td>0.93</td>
+            </tr>
+            <tr>
+              <td>Road Infrastructure</td>
+              <td><span class="badge bg-info">Infrastructure</span></td>
+              <td>68.5</td>
+              <td>%</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+4.2%</td>
+              <td>0.95</td>
+            </tr>
+            <tr>
+              <td>School Buildings</td>
+              <td><span class="badge bg-info">Infrastructure</span></td>
+              <td>1532</td>
+              <td>count</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+23</td>
+              <td>0.99</td>
+            </tr>
+            <tr>
+              <td>Clinics & Hospitals</td>
+              <td><span class="badge bg-info">Infrastructure</span></td>
+              <td>287</td>
+              <td>count</td>
+              <td>2025-03-15</td>
+              <td class="positive-change">+8</td>
+              <td>0.99</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson@3"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize historical chart
+    const historicalCtx = document.getElementById('historical-chart').getContext('2d');
+    const historicalChart = new Chart(historicalCtx, {
+      type: 'line',
+      data: {
+        labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+        datasets: [
+          {
+            label: 'Environmental',
+            data: [72, 73, 74, 75, 74, 75, 76, 75, 76, 77, 76, 76],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.3
+          },
+          {
+            label: 'Social',
+            data: [65, 66, 66, 67, 67, 68, 67, 67, 68, 67, 68, 68],
+            borderColor: '#007bff',
+            backgroundColor: 'rgba(0, 123, 255, 0.1)',
+            tension: 0.3
+          },
+          {
+            label: 'Governance',
+            data: [78, 79, 80, 81, 82, 81, 82, 83, 82, 83, 82, 82],
+            borderColor: '#ffc107',
+            backgroundColor: 'rgba(255, 193, 7, 0.1)',
+            tension: 0.3
+          },
+          {
+            label: 'Infrastructure',
+            data: [64, 65, 66, 67, 68, 68, 69, 69, 70, 71, 71, 71],
+            borderColor: '#17a2b8',
+            backgroundColor: 'rgba(23, 162, 184, 0.1)',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+          }
+        },
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            ticks: {
+              callback: function(value) {
+                return value;
+              }
+            }
+          }
+        }
+      }
+    });
+    
+    // Initialize comparative chart
+    const comparativeCtx = document.getElementById('comparative-chart').getContext('2d');
+    const comparativeChart = new Chart(comparativeCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Environmental', 'Social', 'Governance', 'Infrastructure', 'Overall'],
+        datasets: [
+          {
+            label: 'Gauteng',
+            data: [76, 68, 82, 71, 75],
+            backgroundColor: 'rgba(40, 167, 69, 0.2)',
+            borderColor: 'rgba(40, 167, 69, 1)',
+            pointBackgroundColor: 'rgba(40, 167, 69, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(40, 167, 69, 1)'
+          },
+          {
+            label: 'Western Cape',
+            data: [81, 73, 85, 78, 79],
+            backgroundColor: 'rgba(0, 123, 255, 0.2)',
+            borderColor: 'rgba(0, 123, 255, 1)',
+            pointBackgroundColor: 'rgba(0, 123, 255, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(0, 123, 255, 1)'
+          },
+          {
+            label: 'KwaZulu-Natal',
+            data: [68, 65, 71, 64, 67],
+            backgroundColor: 'rgba(255, 193, 7, 0.2)',
+            borderColor: 'rgba(255, 193, 7, 1)',
+            pointBackgroundColor: 'rgba(255, 193, 7, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(255, 193, 7, 1)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        elements: {
+          line: {
+            borderWidth: 3
+          }
+        },
+        scales: {
+          r: {
+            angleLines: {
+              display: true
+            },
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        }
+      }
+    });
+    
+    // Initialize score dials
+    function initializeScoreDials() {
+      const dialColors = {
+        environmental: '#28a745',
+        social: '#007bff',
+        governance: '#ffc107',
+        infrastructure: '#17a2b8'
+      };
+      
+      Object.keys(dialColors).forEach(dimension => {
+        const scoreElement = document.getElementById(`${dimension}-score`);
+        const scoreValue = parseInt(scoreElement.querySelector('.score-value').textContent);
+        
+        // Create SVG for score dial
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "150");
+        svg.setAttribute("height", "150");
+        svg.setAttribute("viewBox", "0 0 100 100");
+        
+        // Background circle
+        const bgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        bgCircle.setAttribute("cx", "50");
+        bgCircle.setAttribute("cy", "50");
+        bgCircle.setAttribute("r", "45");
+        bgCircle.setAttribute("fill", "none");
+        bgCircle.setAttribute("stroke", "rgba(255, 255, 255, 0.1)");
+        bgCircle.setAttribute("stroke-width", "10");
+        svg.appendChild(bgCircle);
+        
+        // Score circle
+        const scoreCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        scoreCircle.setAttribute("cx", "50");
+        scoreCircle.setAttribute("cy", "50");
+        scoreCircle.setAttribute("r", "45");
+        scoreCircle.setAttribute("fill", "none");
+        scoreCircle.setAttribute("stroke", dialColors[dimension]);
+        scoreCircle.setAttribute("stroke-width", "10");
+        scoreCircle.setAttribute("stroke-dasharray", `${scoreValue * 2.83} 283`);
+        scoreCircle.setAttribute("transform", "rotate(-90 50 50)");
+        svg.appendChild(scoreCircle);
+        
+        // Insert SVG before the score value
+        scoreElement.insertBefore(svg, scoreElement.firstChild);
+      });
+      
+      // Update overall score bar
+      const overallScoreBar = document.getElementById('overall-score-bar');
+      const overallScore = 75;
+      overallScoreBar.style.width = `${overallScore}%`;
+      overallScoreBar.textContent = overallScore;
+      
+      if (overallScore >= 80) {
+        overallScoreBar.classList.add('bg-success');
+      } else if (overallScore >= 60) {
+        overallScoreBar.classList.add('bg-info');
+      } else if (overallScore >= 40) {
+        overallScoreBar.classList.add('bg-warning');
+      } else {
+        overallScoreBar.classList.add('bg-danger');
+      }
+    }
+    
+    // Call function to initialize score dials
+    initializeScoreDials();
+    
+    // Set up filtering for the detailed metrics table
+    document.getElementById('metric-dimension').addEventListener('change', function() {
+      const dimension = this.value;
+      const rows = document.querySelectorAll('.metric-table tbody tr');
+      
+      rows.forEach(row => {
+        const rowDimension = row.querySelector('td:nth-child(2) .badge').textContent.toLowerCase();
+        
+        if (dimension === 'all' || dimension === rowDimension) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+    
+    // This would be the placeholder for a real Africa map visualization
+    // using D3.js and TopoJSON data
+    document.getElementById('africa-map').innerHTML = 
+      '<div class="d-flex justify-content-center align-items-center h-100">' +
+      '<p class="text-muted">Interactive map would be rendered here with real data</p>' +
+      '</div>';
+  });
+</script>
+{% endblock %}

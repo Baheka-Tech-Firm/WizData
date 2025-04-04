@@ -60,12 +60,13 @@ with app.app_context():
 # Register API routes
 from src.api.routes.prices import prices_bp
 from src.api.routes.quality import quality_bp
-from src.api.routes.esg import esg_bp
+from src.api.routes.esg import esg_bp, africa_esg_bp
 from src.api.routes.insights import insights_bp
 from src.api.routes.realtime import realtime_bp
 app.register_blueprint(prices_bp)
 app.register_blueprint(quality_bp)
 app.register_blueprint(esg_bp)
+app.register_blueprint(africa_esg_bp)
 app.register_blueprint(insights_bp)
 app.register_blueprint(realtime_bp)
 
@@ -114,6 +115,16 @@ def insights_wizard():
 def websocket_demo():
     """Render the WebSocket demo page"""
     return render_template('websocket_demo.html', title="Real-time Data Demo")
+
+@app.route('/esg')
+def esg_dashboard():
+    """Render the ESG data dashboard page"""
+    return render_template('esg/dashboard.html', title="ESG Data Dashboard")
+
+@app.route('/esg/africa')
+def africa_esg_dashboard():
+    """Render the Africa ESG data dashboard page"""
+    return render_template('esg/africa_dashboard.html', title="African ESG Data Dashboard")
 
 @app.route('/api/health')
 def health():
