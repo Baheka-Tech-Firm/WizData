@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WizData - WebSocket Demo</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <style>
+        .stream-card {
+            transition: all 0.3s ease;
+        }
+        
+        .price-up {
+            background-color: rgba(40, 167, 69, 0.2);
+            transition: background-color 0.5s ease;
+        }
+        
+        .price-down {
+            background-color: rgba(220, 53, 69, 0.2);
+            transition: background-color 0.5s ease;
+        }
+        
+        .data-point {
+            font-family: monospace;
+        }
+        
+        #notification-area {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 350px;
+        }
+        
+        .notification {
+            margin-bottom: 10px;
+            animation: fadeInUp 0.3s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chart-container {
+            height: 250px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <i class="bi bi-bar-chart-line-fill text-primary me-2" style="font-size: 1.5rem;"></i>
+                <span>WizData</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/jobs">Data Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sources">Data Sources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Data Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api-services">API Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-primary text-white rounded px-3" href="/insights">
+                            <i class="bi bi-robot"></i> AI Insights
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="/api/docs" class="btn btn-outline-light me-2">API Docs</a>
+                    <a href="#" class="btn btn-primary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title">WebSocket Demo</h2>
+                        <p class="card-text text-muted">
+                            Real-time financial data streams using WebSockets
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Control Panel -->
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Connection Control</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="connection-status" class="alert alert-secondary mb-4">
+                            <i class="bi bi-plug"></i> Not connected
+                        </div>
+
+                        <div class="mb-4">
+                            <button id="connect-btn" class="btn btn-primary me-2">
+                                <i class="bi bi-plug-fill"></i> Connect
+                            </button>
+                            <button id="disconnect-btn" class="btn btn-outline-danger" disabled>
+                                <i class="bi bi-plug"></i> Disconnect
+                            </button>
+                        </div>
+
+                        <h6 class="border-bottom pb-2 mb-3">Market Data Streams</h6>
+
+                        <form id="subscribe-form" class="mb-4">
+                            <div class="mb-3">
+                                <label for="market-select" class="form-label">Market</label>
+                                <select id="market-select" class="form-select">
+                                    <option value="jse">JSE</option>
+                                    <option value="crypto">Crypto</option>
+                                    <option value="forex">Forex</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="symbol-input" class="form-label">Symbol</label>
+                                <input type="text" id="symbol-input" class="form-control" value="SOL">
+                            </div>
+                            <div class="mb-3">
+                                <label for="interval-input" class="form-label">Update Interval (seconds)</label>
+                                <input type="number" id="interval-input" class="form-control" value="1" min="0.5" max="30" step="0.5">
+                            </div>
+                            <button type="submit" id="subscribe-btn" class="btn btn-success w-100" disabled>
+                                <i class="bi bi-play-fill"></i> Subscribe to Stream
+                            </button>
+                        </form>
+
+                        <h6 class="border-bottom pb-2 mb-3">Price Alerts</h6>
+
+                        <form id="alert-form" class="mb-4">
+                            <div class="mb-3">
+                                <label for="alert-symbol-input" class="form-label">Symbol</label>
+                                <input type="text" id="alert-symbol-input" class="form-control" value="SOL">
+                            </div>
+                            <div class="mb-3">
+                                <label for="price-input" class="form-label">Target Price</label>
+                                <input type="number" id="price-input" class="form-control" value="100" step="0.01">
+                            </div>
+                            <div class="mb-3">
+                                <label for="direction-select" class="form-label">Direction</label>
+                                <select id="direction-select" class="form-select">
+                                    <option value="above">Price Goes Above</option>
+                                    <option value="below">Price Goes Below</option>
+                                </select>
+                            </div>
+                            <button type="submit" id="alert-btn" class="btn btn-warning w-100" disabled>
+                                <i class="bi bi-bell-fill"></i> Set Price Alert
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Streams Display -->
+            <div class="col-md-8 mb-4">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Active Streams</h5>
+                                <div>
+                                    <button id="clear-streams-btn" class="btn btn-sm btn-outline-danger" disabled>
+                                        <i class="bi bi-x-circle"></i> Clear All Streams
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body" id="streams-container">
+                                <div class="alert alert-secondary text-center">
+                                    <i class="bi bi-info-circle me-2"></i> No active streams. Subscribe to see real-time data.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-transparent">
+                                <h5 class="mb-0">Price Chart</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="price-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Data Log</h5>
+                                <div>
+                                    <button id="clear-log-btn" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-trash"></i> Clear Log
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="log-container bg-dark p-3 rounded" style="height: 250px; overflow-y: auto;">
+                                    <div id="log-content" class="log-content font-monospace small text-light"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Area -->
+    <div id="notification-area"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const connectBtn = document.getElementById('connect-btn');
+            const disconnectBtn = document.getElementById('disconnect-btn');
+            const subscribeBtn = document.getElementById('subscribe-btn');
+            const alertBtn = document.getElementById('alert-btn');
+            const clearStreamsBtn = document.getElementById('clear-streams-btn');
+            const clearLogBtn = document.getElementById('clear-log-btn');
+            const connectionStatus = document.getElementById('connection-status');
+            const streamsContainer = document.getElementById('streams-container');
+            const logContent = document.getElementById('log-content');
+            const notificationArea = document.getElementById('notification-area');
+
+            // Forms
+            const subscribeForm = document.getElementById('subscribe-form');
+            const alertForm = document.getElementById('alert-form');
+
+            // Chart setup
+            const ctx = document.getElementById('price-chart').getContext('2d');
+            const priceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 0
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxTicksLimit: 10
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // Socket.io client
+            let socket = null;
+            const activeStreams = {};
+            const chartData = {};
+
+            // Connect to WebSocket server
+            connectBtn.addEventListener('click', function() {
+                // Create socket connection
+                socket = io();
+
+                // Connection events
+                socket.on('connect', function() {
+                    connectionStatus.className = 'alert alert-success';
+                    connectionStatus.innerHTML = '<i class="bi bi-plug-fill"></i> Connected';
+                    
+                    // Enable/disable buttons
+                    connectBtn.disabled = true;
+                    disconnectBtn.disabled = false;
+                    subscribeBtn.disabled = false;
+                    alertBtn.disabled = false;
+                    
+                    // Log connection
+                    appendToLog('Connected to server');
+                });
+
+                socket.on('disconnect', function() {
+                    connectionStatus.className = 'alert alert-danger';
+                    connectionStatus.innerHTML = '<i class="bi bi-plug"></i> Disconnected';
+                    
+                    // Enable/disable buttons
+                    connectBtn.disabled = false;
+                    disconnectBtn.disabled = true;
+                    subscribeBtn.disabled = true;
+                    alertBtn.disabled = true;
+                    clearStreamsBtn.disabled = true;
+                    
+                    // Clear active streams
+                    clearStreams();
+                    
+                    // Log disconnection
+                    appendToLog('Disconnected from server');
+                });
+
+                socket.on('connection_response', function(data) {
+                    appendToLog('Server acknowledged connection: ' + JSON.stringify(data));
+                });
+
+                // Stream events
+                socket.on('subscription_response', function(data) {
+                    appendToLog('Subscribed to stream: ' + JSON.stringify(data));
+                    
+                    // Add to active streams
+                    activeStreams[data.stream_id] = data;
+                    
+                    // Initialize chart data
+                    chartData[data.stream_id] = {
+                        times: [],
+                        prices: []
+                    };
+                    
+                    // Add dataset to chart
+                    const colorIndex = Object.keys(activeStreams).length % 5;
+                    const colors = ['#0d6efd', '#198754', '#dc3545', '#ffc107', '#6f42c1'];
+                    
+                    priceChart.data.datasets.push({
+                        label: `${data.market.toUpperCase()}:${data.symbol}`,
+                        data: [],
+                        borderColor: colors[colorIndex],
+                        backgroundColor: colors[colorIndex] + '33',
+                        tension: 0.1,
+                        streamId: data.stream_id
+                    });
+                    
+                    priceChart.update();
+                    
+                    // Create stream card
+                    createStreamCard(data);
+                    
+                    // Update UI
+                    updateStreamsContainer();
+                    clearStreamsBtn.disabled = false;
+                });
+
+                socket.on('unsubscription_response', function(data) {
+                    appendToLog('Unsubscribed from stream: ' + JSON.stringify(data));
+                    
+                    // Remove from active streams
+                    if (activeStreams[data.stream_id]) {
+                        delete activeStreams[data.stream_id];
+                        delete chartData[data.stream_id];
+                        
+                        // Remove dataset from chart
+                        const datasetIndex = priceChart.data.datasets.findIndex(ds => ds.streamId === data.stream_id);
+                        if (datasetIndex !== -1) {
+                            priceChart.data.datasets.splice(datasetIndex, 1);
+                            priceChart.update();
+                        }
+                        
+                        // Remove stream card
+                        const streamCard = document.getElementById(`card-${data.stream_id}`);
+                        if (streamCard) {
+                            streamCard.remove();
+                        }
+                        
+                        // Update UI
+                        updateStreamsContainer();
+                        clearStreamsBtn.disabled = Object.keys(activeStreams).length === 0;
+                    }
+                });
+
+                socket.on('price_update', function(data) {
+                    const streamId = data.stream_id;
+                    const priceData = data.data;
+                    
+                    // Log update
+                    appendToLog(`Price update for ${priceData.market}:${priceData.symbol}: ${priceData.price}`);
+                    
+                    // Update stream card
+                    updateStreamCard(streamId, priceData);
+                    
+                    // Update chart
+                    if (chartData[streamId]) {
+                        const time = new Date(priceData.timestamp).toLocaleTimeString();
+                        chartData[streamId].times.push(time);
+                        chartData[streamId].prices.push(priceData.price);
+                        
+                        // Keep only the last 30 data points
+                        if (chartData[streamId].times.length > 30) {
+                            chartData[streamId].times.shift();
+                            chartData[streamId].prices.shift();
+                        }
+                        
+                        // Update chart labels
+                        const allTimes = Object.values(chartData)
+                            .flatMap(cd => cd.times)
+                            .filter((value, index, self) => self.indexOf(value) === index)
+                            .sort();
+                        
+                        priceChart.data.labels = allTimes;
+                        
+                        // Update dataset
+                        const datasetIndex = priceChart.data.datasets.findIndex(ds => ds.streamId === streamId);
+                        if (datasetIndex !== -1) {
+                            const dataset = priceChart.data.datasets[datasetIndex];
+                            dataset.data = [];
+                            
+                            // Fill in missing data points
+                            allTimes.forEach(t => {
+                                const idx = chartData[streamId].times.indexOf(t);
+                                if (idx !== -1) {
+                                    dataset.data.push(chartData[streamId].prices[idx]);
+                                } else {
+                                    dataset.data.push(null);
+                                }
+                            });
+                            
+                            priceChart.update();
+                        }
+                    }
+                    
+                    // Check for alerts
+                    if (socket) {
+                        socket.emit('check_alerts', { price_data: priceData });
+                    }
+                });
+
+                socket.on('alert_response', function(data) {
+                    appendToLog('Alert response: ' + JSON.stringify(data));
+                    
+                    if (data.status === 'added') {
+                        showNotification('Price Alert Added', `Alert set for ${data.market}:${data.symbol} ${data.direction} ${data.target_price}`, 'info');
+                    } else if (data.status === 'removed') {
+                        showNotification('Price Alert Removed', `Alert has been removed`, 'secondary');
+                    }
+                });
+
+                socket.on('alert_triggered', function(data) {
+                    appendToLog('Alert triggered: ' + JSON.stringify(data));
+                    
+                    const direction = data.direction === 'above' ? 'rose above' : 'fell below';
+                    showNotification(
+                        'Price Alert Triggered!', 
+                        `${data.market}:${data.symbol} ${direction} ${data.target_price} (Current: ${data.current_price})`, 
+                        'warning'
+                    );
+                });
+
+                socket.on('error', function(data) {
+                    appendToLog('Error: ' + JSON.stringify(data));
+                    showNotification('Error', data.message, 'danger');
+                });
+            });
+
+            // Disconnect from WebSocket server
+            disconnectBtn.addEventListener('click', function() {
+                if (socket) {
+                    socket.disconnect();
+                    socket = null;
+                }
+            });
+
+            // Subscribe to data stream
+            subscribeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!socket) return;
+                
+                const market = document.getElementById('market-select').value;
+                const symbol = document.getElementById('symbol-input').value;
+                const interval = parseFloat(document.getElementById('interval-input').value);
+                
+                if (!symbol) {
+                    showNotification('Error', 'Symbol is required', 'danger');
+                    return;
+                }
+                
+                socket.emit('subscribe', {
+                    market: market,
+                    symbol: symbol,
+                    interval: interval
+                });
+            });
+
+            // Set price alert
+            alertForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!socket) return;
+                
+                const symbol = document.getElementById('alert-symbol-input').value;
+                const targetPrice = parseFloat(document.getElementById('price-input').value);
+                const direction = document.getElementById('direction-select').value;
+                
+                if (!symbol) {
+                    showNotification('Error', 'Symbol is required', 'danger');
+                    return;
+                }
+                
+                if (isNaN(targetPrice)) {
+                    showNotification('Error', 'Invalid target price', 'danger');
+                    return;
+                }
+                
+                socket.emit('add_alert', {
+                    market: 'jse', // Default to JSE for simplicity
+                    symbol: symbol,
+                    target_price: targetPrice,
+                    direction: direction
+                });
+            });
+
+            // Clear all streams
+            clearStreamsBtn.addEventListener('click', function() {
+                clearStreams();
+                clearStreamsBtn.disabled = true;
+            });
+
+            // Clear log
+            clearLogBtn.addEventListener('click', function() {
+                logContent.innerHTML = '';
+            });
+
+            // Helper functions
+            function clearStreams() {
+                if (!socket) return;
+                
+                // Unsubscribe from all streams
+                Object.keys(activeStreams).forEach(streamId => {
+                    socket.emit('unsubscribe', { stream_id: streamId });
+                });
+                
+                // Clear active streams
+                Object.keys(activeStreams).forEach(streamId => {
+                    delete activeStreams[streamId];
+                    delete chartData[streamId];
+                    
+                    const streamCard = document.getElementById(`card-${streamId}`);
+                    if (streamCard) {
+                        streamCard.remove();
+                    }
+                });
+                
+                // Clear chart
+                priceChart.data.datasets = [];
+                priceChart.update();
+                
+                // Update UI
+                updateStreamsContainer();
+            }
+
+            function appendToLog(message) {
+                const now = new Date().toLocaleTimeString();
+                const logEntry = document.createElement('div');
+                logEntry.innerHTML = `<span class="text-secondary">[${now}]</span> ${message}`;
+                logContent.appendChild(logEntry);
+                logContent.scrollTop = logContent.scrollHeight;
+            }
+
+            function showNotification(title, message, type = 'primary') {
+                const notification = document.createElement('div');
+                notification.className = `notification alert alert-${type} alert-dismissible fade show`;
+                notification.innerHTML = `
+                    <strong>${title}</strong><br>
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                
+                notificationArea.appendChild(notification);
+                
+                // Auto-remove after 5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 5000);
+            }
+
+            function createStreamCard(data) {
+                const streamCard = document.createElement('div');
+                streamCard.id = `card-${data.stream_id}`;
+                streamCard.className = 'card stream-card mb-3';
+                streamCard.innerHTML = `
+                    <div class="card-body p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="card-title mb-0">${data.market.toUpperCase()}:${data.symbol}</h6>
+                            <button class="btn btn-sm btn-outline-danger py-0 px-2 unsubscribe-btn" data-stream-id="${data.stream_id}">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="text-muted small">Price</div>
+                                <div class="data-point price">--</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="text-muted small">Change</div>
+                                <div class="data-point change">--</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="text-muted small">Volume</div>
+                                <div class="data-point volume">--</div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="text-muted small">Last Update</div>
+                            <div class="data-point timestamp small">--</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listener for unsubscribe button
+                streamCard.querySelector('.unsubscribe-btn').addEventListener('click', function() {
+                    const streamId = this.dataset.streamId;
+                    
+                    if (socket) {
+                        socket.emit('unsubscribe', { stream_id: streamId });
+                    }
+                });
+                
+                streamsContainer.appendChild(streamCard);
+            }
+
+            function updateStreamCard(streamId, data) {
+                const streamCard = document.getElementById(`card-${streamId}`);
+                if (!streamCard) return;
+                
+                // Remove previous highlighting
+                streamCard.classList.remove('price-up', 'price-down');
+                
+                // Add new highlighting based on price change
+                if (data.change > 0) {
+                    streamCard.classList.add('price-up');
+                } else if (data.change < 0) {
+                    streamCard.classList.add('price-down');
+                }
+                
+                // Update price with direction indicator
+                const priceEl = streamCard.querySelector('.price');
+                priceEl.textContent = data.price.toFixed(2);
+                
+                // Update change with color
+                const changeEl = streamCard.querySelector('.change');
+                const changeText = data.change.toFixed(2);
+                const changePercent = data.change_percent.toFixed(2);
+                
+                if (data.change > 0) {
+                    changeEl.innerHTML = `<span class="text-success">+${changeText} (${changePercent}%)</span>`;
+                } else if (data.change < 0) {
+                    changeEl.innerHTML = `<span class="text-danger">${changeText} (${changePercent}%)</span>`;
+                } else {
+                    changeEl.innerHTML = `<span>${changeText} (${changePercent}%)</span>`;
+                }
+                
+                // Update volume
+                const volumeEl = streamCard.querySelector('.volume');
+                volumeEl.textContent = data.volume.toLocaleString();
+                
+                // Update timestamp
+                const timestampEl = streamCard.querySelector('.timestamp');
+                const time = new Date(data.timestamp).toLocaleTimeString();
+                timestampEl.textContent = time;
+                
+                // Clear highlighting after a delay
+                setTimeout(() => {
+                    streamCard.classList.remove('price-up', 'price-down');
+                }, 1000);
+            }
+
+            function updateStreamsContainer() {
+                if (Object.keys(activeStreams).length === 0) {
+                    streamsContainer.innerHTML = `
+                        <div class="alert alert-secondary text-center">
+                            <i class="bi bi-info-circle me-2"></i> No active streams. Subscribe to see real-time data.
+                        </div>
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

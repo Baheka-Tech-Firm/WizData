@@ -2,10 +2,13 @@ import os
 import logging
 import asyncio
 import json
+import threading
+import time
 from datetime import datetime, timedelta
 from flask import Flask, render_template, jsonify, request, Blueprint, send_file, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
+from flask_socketio import SocketIO, emit
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -38,6 +41,9 @@ os.makedirs(app.config["DATA_EXPORT_DIR"], exist_ok=True)
 # Initialize database with app
 db.init_app(app)
 
+# Initialize Socket.IO
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='gevent')
+
 # Import models (must come after db init but before create_all)
 import models  # noqa
 
@@ -56,10 +62,16 @@ from src.api.routes.prices import prices_bp
 from src.api.routes.quality import quality_bp
 from src.api.routes.esg import esg_bp
 from src.api.routes.insights import insights_bp
+from src.api.routes.realtime import realtime_bp
 app.register_blueprint(prices_bp)
 app.register_blueprint(quality_bp)
 app.register_blueprint(esg_bp)
 app.register_blueprint(insights_bp)
+app.register_blueprint(realtime_bp)
+
+# Initialize Socket.IO handlers
+from src.api.routes.realtime.socket_routes import init_socket_handlers
+init_socket_handlers(socketio, db_url=app.config["SQLALCHEMY_DATABASE_URI"])
 
 # Web UI Routes
 @app.route('/')
@@ -97,6 +109,11 @@ def quality_dashboard():
 def insights_wizard():
     """Render the AI insights wizard page"""
     return render_template('insights/wizard.html', title="AI Insights Wizard")
+    
+@app.route('/websocket')
+def websocket_demo():
+    """Render the WebSocket demo page"""
+    return render_template('websocket_demo.html', title="Real-time Data Demo")
 
 @app.route('/api/health')
 def health():
@@ -654,4 +671,4 @@ with app.app_context():
     logger.info("Database setup complete")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True, allow_unsafe_werkzeug=True)
