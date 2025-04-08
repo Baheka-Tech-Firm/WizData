@@ -1,0 +1,1166 @@
+{% extends 'layout.html' %}
+
+{% block title %}African ESG Data Dashboard{% endblock %}
+
+{% block styles %}
+<style>
+  /* Modern dashboard styling */
+  .hero-section {
+    background: linear-gradient(135deg, rgba(18, 35, 46, 0.8) 0%, rgba(30, 65, 80, 0.8) 100%);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  }
+  
+  .card-header {
+    font-weight: 600;
+    border-bottom: none;
+    padding: 1.25rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .metric-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--bs-info) 0%, var(--bs-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .metric-change {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  
+  .positive-change {
+    color: var(--bs-success);
+    background-color: rgba(40, 167, 69, 0.1);
+  }
+  
+  .negative-change {
+    color: var(--bs-danger);
+    background-color: rgba(220, 53, 69, 0.1);
+  }
+  
+  .region-select {
+    max-width: 300px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .chart-container {
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .map-container {
+    height: 500px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .score-dial {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .score-dial:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  }
+  
+  .score-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+  
+  .region-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .region-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .metric-table {
+    font-size: 0.9rem;
+  }
+  
+  .metric-table thead th {
+    background-color: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+    border-top: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .metric-table tbody tr {
+    transition: all 0.2s ease;
+  }
+  
+  .metric-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    transition: all 0.2s ease;
+  }
+  
+  .legend-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Animated pulse for realtime indicators */
+  .pulse-border {
+    position: relative;
+  }
+  
+  .pulse-border::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    animation: pulse-border 2s infinite;
+    z-index: -1;
+  }
+  
+  @keyframes pulse-border {
+    0% {
+      box-shadow: 0 0 0 0 rgba(23, 162, 184, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(23, 162, 184, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(23, 162, 184, 0);
+    }
+  }
+  
+  /* Shimmer effect for loading states */
+  .shimmer {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.05) 0%, 
+      rgba(255, 255, 255, 0.15) 50%, 
+      rgba(255, 255, 255, 0.05) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
+  
+  /* Badge styling */
+  .badge {
+    padding: 0.5em 0.75em;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+  
+  /* Button styling */
+  .btn {
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Progress bar styling */
+  .progress {
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .progress-bar {
+    background-image: linear-gradient(90deg, var(--bs-primary) 0%, var(--bs-info) 100%);
+    transition: width 1.5s ease;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <!-- Hero Section -->
+  <div class="hero-section mb-4 animate__animated animate__fadeIn">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h1 class="display-5 fw-bold mb-3">Africa ESG Data Dashboard</h1>
+        <p class="lead text-light-emphasis mb-0">
+          Comprehensive environmental, social, governance, and infrastructure metrics for African regions with real-time data integration.
+        </p>
+      </div>
+      <div class="col-lg-4 d-flex justify-content-end">
+        <div class="d-flex flex-column flex-md-row mt-3 mt-lg-0">
+          <select id="region-select" class="form-select region-select me-2 mb-2 mb-md-0" data-aos="fade-left" data-aos-delay="100">
+            <option value="ZA">South Africa</option>
+            <option value="KE">Kenya</option>
+            <option value="NG">Nigeria</option>
+            <option value="EG">Egypt</option>
+            <option value="GH">Ghana</option>
+          </select>
+          <select id="date-range" class="form-select me-2 mb-2 mb-md-0" data-aos="fade-left" data-aos-delay="200">
+            <option value="1m">Last Month</option>
+            <option value="3m">Last 3 Months</option>
+            <option value="6m">Last 6 Months</option>
+            <option value="1y" selected>Last Year</option>
+            <option value="all">All Time</option>
+          </select>
+          <button id="export-btn" class="btn btn-outline-primary pulse-border" data-aos="fade-left" data-aos-delay="300">
+            <i class="fas fa-download me-1"></i> Export
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Status Cards -->
+  <div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+      <div class="card bg-success-subtle">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <i class="fas fa-database fa-2x text-success"></i>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h6 class="fw-bold mb-1">Data Freshness</h6>
+              <div class="d-flex align-items-center">
+                <div class="pulse me-2 bg-success rounded-circle" style="width: 8px; height: 8px;"></div>
+                <span>Updated Today</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+      <div class="card bg-primary-subtle">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <i class="fas fa-globe-africa fa-2x text-primary"></i>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h6 class="fw-bold mb-1">Countries</h6>
+              <div>
+                <span class="fw-bold">5</span> active regions
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+      <div class="card bg-info-subtle">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <i class="fas fa-chart-line fa-2x text-info"></i>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h6 class="fw-bold mb-1">Metrics</h6>
+              <div>
+                <span class="fw-bold">120+</span> data points
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" data-aos="fade-up" data-aos-delay="400">
+      <div class="card bg-warning-subtle">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <i class="fas fa-clock fa-2x text-warning"></i>
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <h6 class="fw-bold mb-1">Refresh Interval</h6>
+              <div>
+                <span class="fw-bold">Daily</span> updates
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Map & Overview -->
+  <div class="row mb-4">
+    <div class="col-lg-8" data-aos="fade-right" data-aos-delay="100">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-map-marked-alt me-2 text-info"></i>
+            <span class="fw-bold">ESG Score Map</span>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="show-infrastructure" checked>
+            <label class="form-check-label" for="show-infrastructure">Show Infrastructure</label>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--bs-success);"></div>
+              <span>High Score (80-100)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--bs-warning);"></div>
+              <span>Medium Score (50-79)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: var(--bs-danger);"></div>
+              <span>Low Score (0-49)</span>
+            </div>
+          </div>
+          <div id="africa-map" class="map-container pulse-border"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+      <div class="card h-100">
+        <div class="card-header d-flex align-items-center">
+          <i class="fas fa-info-circle me-2 text-info"></i>
+          <span class="fw-bold">Region Overview</span>
+        </div>
+        <div class="card-body">
+          <h3 id="selected-region-name" class="mb-3 text-center fw-bold bg-gradient-dark p-2 rounded animate__animated animate__fadeIn">
+            <i class="fas fa-map-marker-alt me-2 text-danger"></i>South Africa - Gauteng
+          </h3>
+          <div class="row mt-4">
+            <div class="col-6 text-center mb-3" data-aos="zoom-in" data-aos-delay="100">
+              <div class="score-dial bg-success-subtle" id="environmental-score">
+                <div class="score-value">76</div>
+              </div>
+              <p class="mt-2"><i class="fas fa-leaf me-1 text-success"></i> Environmental</p>
+            </div>
+            <div class="col-6 text-center mb-3" data-aos="zoom-in" data-aos-delay="200">
+              <div class="score-dial bg-primary-subtle" id="social-score">
+                <div class="score-value">68</div>
+              </div>
+              <p class="mt-2"><i class="fas fa-users me-1 text-primary"></i> Social</p>
+            </div>
+            <div class="col-6 text-center" data-aos="zoom-in" data-aos-delay="300">
+              <div class="score-dial bg-warning-subtle" id="governance-score">
+                <div class="score-value">82</div>
+              </div>
+              <p class="mt-2"><i class="fas fa-balance-scale me-1 text-warning"></i> Governance</p>
+            </div>
+            <div class="col-6 text-center" data-aos="zoom-in" data-aos-delay="400">
+              <div class="score-dial bg-info-subtle" id="infrastructure-score">
+                <div class="score-value">71</div>
+              </div>
+              <p class="mt-2"><i class="fas fa-road me-1 text-info"></i> Infrastructure</p>
+            </div>
+          </div>
+          <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0 fw-bold">Overall ESG Score</h5>
+              <span class="badge bg-info px-3 py-2">75/100</span>
+            </div>
+            <div class="progress">
+              <div id="overall-score-bar" class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2 small text-muted">
+              <span>0</span>
+              <span>25</span>
+              <span>50</span>
+              <span>75</span>
+              <span>100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Key Metrics -->
+  <div class="row mb-4">
+    <div class="col-12 mb-4">
+      <h3 class="fw-bold d-flex align-items-center" data-aos="fade-right">
+        <i class="fas fa-chart-bar text-info me-2"></i>
+        Key Performance Indicators
+        <span class="ms-2 badge bg-info">Real-time Data</span>
+      </h3>
+    </div>
+    <div class="col-md-3 mb-4" data-aos="flip-left" data-aos-delay="100">
+      <div class="card bg-success-subtle">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-plug me-2 text-success"></i>
+            <span>Electricity Access</span>
+          </div>
+          <span class="badge bg-success">Environmental</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">83%</div>
+          <div class="progress my-2">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 83%" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="metric-change positive-change mt-2">
+            <i class="fas fa-arrow-up me-1"></i> +2.4% vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4" data-aos="flip-left" data-aos-delay="200">
+      <div class="card bg-primary-subtle">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-book me-2 text-primary"></i>
+            <span>Literacy Rate</span>
+          </div>
+          <span class="badge bg-primary">Social</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">91%</div>
+          <div class="progress my-2">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="metric-change positive-change mt-2">
+            <i class="fas fa-arrow-up me-1"></i> +1.5% vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4" data-aos="flip-left" data-aos-delay="300">
+      <div class="card bg-warning-subtle">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-balance-scale me-2 text-warning"></i>
+            <span>Corruption Index</span>
+          </div>
+          <span class="badge bg-warning">Governance</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">42</div>
+          <div class="progress my-2">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 42%" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="metric-change negative-change mt-2">
+            <i class="fas fa-arrow-down me-1"></i> -3.1 vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mb-4" data-aos="flip-left" data-aos-delay="400">
+      <div class="card bg-info-subtle">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-road me-2 text-info"></i>
+            <span>Road Infrastructure</span>
+          </div>
+          <span class="badge bg-info">Infrastructure</span>
+        </div>
+        <div class="card-body text-center">
+          <div class="metric-value">68%</div>
+          <div class="progress my-2">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 68%" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="metric-change positive-change mt-2">
+            <i class="fas fa-arrow-up me-1"></i> +4.2% vs. last year
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Charts -->
+  <div class="row mb-4">
+    <div class="col-12 mb-4">
+      <h3 class="fw-bold d-flex align-items-center" data-aos="fade-right">
+        <i class="fas fa-chart-line text-primary me-2"></i>
+        Data Analysis
+        <span class="ms-2 badge bg-primary">Interactive</span>
+      </h3>
+    </div>
+    <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-history me-2 text-primary"></i>
+            <span class="fw-bold">Historical ESG Scores</span>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle rounded-pill" type="button" id="timeframeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Last 12 Months
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="timeframeDropdown">
+              <li><a class="dropdown-item" href="#">Last 6 Months</a></li>
+              <li><a class="dropdown-item" href="#">Last 12 Months</a></li>
+              <li><a class="dropdown-item" href="#">Last 2 Years</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="historical-chart" class="chart-container" data-aos="zoom-in" data-aos-delay="200"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-balance-scale me-2 text-info"></i>
+            <span class="fw-bold">Comparative Analysis</span>
+          </div>
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle rounded-pill" type="button" id="regionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              All Regions
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="regionDropdown">
+              <li><a class="dropdown-item" href="#">Top 3 Regions</a></li>
+              <li><a class="dropdown-item" href="#">Bottom 3 Regions</a></li>
+              <li><a class="dropdown-item" href="#">All Regions</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="comparative-chart" class="chart-container" data-aos="zoom-in" data-aos-delay="300"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Detailed Metrics -->
+  <div class="row mb-4">
+    <div class="col-12 mb-4">
+      <h3 class="fw-bold d-flex align-items-center" data-aos="fade-right">
+        <i class="fas fa-table text-info me-2"></i>
+        Detailed Metrics
+        <span class="ms-2 badge bg-info">Interactive</span>
+      </h3>
+    </div>
+    <div class="col-12" data-aos="fade-up">
+      <div class="card shadow-lg">
+        <div class="card-header d-flex justify-content-between align-items-center bg-dark-subtle">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-filter me-2 text-info"></i>
+            <span class="fw-bold">Data Explorer</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="input-group input-group-sm me-2" style="width: 200px;">
+              <span class="input-group-text bg-transparent border-end-0">
+                <i class="fas fa-search text-muted"></i>
+              </span>
+              <input type="text" id="metric-search" class="form-control border-start-0" placeholder="Search metrics...">
+            </div>
+            <select id="metric-dimension" class="form-select form-select-sm" style="width: 170px;">
+              <option value="all">All Dimensions</option>
+              <option value="environmental">Environmental</option>
+              <option value="social">Social</option>
+              <option value="governance">Governance</option>
+              <option value="infrastructure">Infrastructure</option>
+            </select>
+            <button class="btn btn-sm btn-outline-primary ms-2 rounded-pill">
+              <i class="fas fa-download me-1"></i> Export CSV
+            </button>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover metric-table" id="metrics-table">
+              <thead class="thead-dark">
+                <tr>
+                  <th class="sortable" data-sort="metric">
+                    <div class="d-flex align-items-center">
+                      <span>Metric</span>
+                      <i class="fas fa-sort ms-1 text-muted small"></i>
+                    </div>
+                  </th>
+                  <th class="sortable" data-sort="dimension">
+                    <div class="d-flex align-items-center">
+                      <span>Dimension</span>
+                      <i class="fas fa-sort ms-1 text-muted small"></i>
+                    </div>
+                  </th>
+                  <th class="sortable text-end" data-sort="value">
+                    <div class="d-flex align-items-center justify-content-end">
+                      <span>Value</span>
+                      <i class="fas fa-sort ms-1 text-muted small"></i>
+                    </div>
+                  </th>
+                  <th>Unit</th>
+                  <th class="sortable" data-sort="date">
+                    <div class="d-flex align-items-center">
+                      <span>Date</span>
+                      <i class="fas fa-sort ms-1 text-muted small"></i>
+                    </div>
+                  </th>
+                  <th class="sortable text-end" data-sort="change">
+                    <div class="d-flex align-items-center justify-content-end">
+                      <span>YoY Change</span>
+                      <i class="fas fa-sort ms-1 text-muted small"></i>
+                    </div>
+                  </th>
+                  <th class="sortable text-end" data-sort="confidence">
+                    <div class="d-flex align-items-center justify-content-end">
+                      <span>Confidence</span>
+                      <i class="fas fa-sort ms-1 text-muted small"></i>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-aos="fade-up" data-aos-delay="100">
+                  <td><strong>Electricity Access</strong></td>
+                  <td><span class="badge bg-success">Environmental</span></td>
+                  <td class="text-end">83.2</td>
+                  <td>%</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+2.4%
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.95</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="150">
+                  <td><strong>Water Access</strong></td>
+                  <td><span class="badge bg-success">Environmental</span></td>
+                  <td class="text-end">78.5</td>
+                  <td>%</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+1.8%
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 92%" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.92</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="200">
+                  <td><strong>Load Shedding Index</strong></td>
+                  <td><span class="badge bg-success">Environmental</span></td>
+                  <td class="text-end">3.2</td>
+                  <td>index</td>
+                  <td>2025-03-15</td>
+                  <td class="negative-change text-end">
+                    <i class="fas fa-arrow-down me-1"></i>+0.5
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 98%" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.98</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="250">
+                  <td><strong>Literacy Rate</strong></td>
+                  <td><span class="badge bg-primary">Social</span></td>
+                  <td class="text-end">91.3</td>
+                  <td>%</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+1.5%
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 97%" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.97</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="300">
+                  <td><strong>School Coverage</strong></td>
+                  <td><span class="badge bg-primary">Social</span></td>
+                  <td class="text-end">86.7</td>
+                  <td>%</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+2.1%
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.94</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="350">
+                  <td><strong>Healthcare Access</strong></td>
+                  <td><span class="badge bg-primary">Social</span></td>
+                  <td class="text-end">72.4</td>
+                  <td>%</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+3.2%
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.91</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="400">
+                  <td><strong>Corruption Index</strong></td>
+                  <td><span class="badge bg-warning">Governance</span></td>
+                  <td class="text-end">42.3</td>
+                  <td>index</td>
+                  <td>2025-03-15</td>
+                  <td class="negative-change text-end">
+                    <i class="fas fa-arrow-down me-1"></i>-3.1
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 88%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.88</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="450">
+                  <td><strong>Audit Outcome</strong></td>
+                  <td><span class="badge bg-warning">Governance</span></td>
+                  <td class="text-end">Qualified</td>
+                  <td>-</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>Improved
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 96%" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.96</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="500">
+                  <td><strong>Protests (Monthly)</strong></td>
+                  <td><span class="badge bg-warning">Governance</span></td>
+                  <td class="text-end">14</td>
+                  <td>count</td>
+                  <td>2025-03-15</td>
+                  <td class="negative-change text-end">
+                    <i class="fas fa-arrow-down me-1"></i>+3
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 93%" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.93</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="550">
+                  <td><strong>Road Infrastructure</strong></td>
+                  <td><span class="badge bg-info">Infrastructure</span></td>
+                  <td class="text-end">68.5</td>
+                  <td>%</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+4.2%
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.95</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="600">
+                  <td><strong>School Buildings</strong></td>
+                  <td><span class="badge bg-info">Infrastructure</span></td>
+                  <td class="text-end">1532</td>
+                  <td>count</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+23
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 99%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.99</span>
+                  </td>
+                </tr>
+                <tr data-aos="fade-up" data-aos-delay="650">
+                  <td><strong>Clinics & Hospitals</strong></td>
+                  <td><span class="badge bg-info">Infrastructure</span></td>
+                  <td class="text-end">287</td>
+                  <td>count</td>
+                  <td>2025-03-15</td>
+                  <td class="positive-change text-end">
+                    <i class="fas fa-arrow-up me-1"></i>+8
+                  </td>
+                  <td class="text-end">
+                    <div class="progress" style="width: 80px; height: 8px; display: inline-block; vertical-align: middle;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 99%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="ms-1">0.99</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between bg-dark-subtle">
+          <div>
+            <small class="text-muted">Showing 12 of 120+ metrics</small>
+          </div>
+          <div>
+            <nav aria-label="Table pagination">
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card bg-primary-subtle animate__animated animate__fadeIn animate__delay-2s">
+        <div class="card-body p-4">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <h4 class="mb-2 fw-bold text-primary">Need more granular ESG data for African markets?</h4>
+              <p class="mb-lg-0">
+                Access our premium API services for deeper insights, custom reports, and real-time data streaming.
+              </p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+              <a href="/api-services" class="btn btn-primary rounded-pill px-4 me-2 shadow">
+                <i class="fas fa-plug me-1"></i> API Docs
+              </a>
+              <a href="/products" class="btn btn-outline-primary rounded-pill px-4 shadow">
+                <i class="fas fa-tags me-1"></i> Data Products
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson@3"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize historical chart
+    const historicalCtx = document.getElementById('historical-chart').getContext('2d');
+    const historicalChart = new Chart(historicalCtx, {
+      type: 'line',
+      data: {
+        labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+        datasets: [
+          {
+            label: 'Environmental',
+            data: [72, 73, 74, 75, 74, 75, 76, 75, 76, 77, 76, 76],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.3
+          },
+          {
+            label: 'Social',
+            data: [65, 66, 66, 67, 67, 68, 67, 67, 68, 67, 68, 68],
+            borderColor: '#007bff',
+            backgroundColor: 'rgba(0, 123, 255, 0.1)',
+            tension: 0.3
+          },
+          {
+            label: 'Governance',
+            data: [78, 79, 80, 81, 82, 81, 82, 83, 82, 83, 82, 82],
+            borderColor: '#ffc107',
+            backgroundColor: 'rgba(255, 193, 7, 0.1)',
+            tension: 0.3
+          },
+          {
+            label: 'Infrastructure',
+            data: [64, 65, 66, 67, 68, 68, 69, 69, 70, 71, 71, 71],
+            borderColor: '#17a2b8',
+            backgroundColor: 'rgba(23, 162, 184, 0.1)',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+          }
+        },
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            ticks: {
+              callback: function(value) {
+                return value;
+              }
+            }
+          }
+        }
+      }
+    });
+    
+    // Initialize comparative chart
+    const comparativeCtx = document.getElementById('comparative-chart').getContext('2d');
+    const comparativeChart = new Chart(comparativeCtx, {
+      type: 'radar',
+      data: {
+        labels: ['Environmental', 'Social', 'Governance', 'Infrastructure', 'Overall'],
+        datasets: [
+          {
+            label: 'Gauteng',
+            data: [76, 68, 82, 71, 75],
+            backgroundColor: 'rgba(40, 167, 69, 0.2)',
+            borderColor: 'rgba(40, 167, 69, 1)',
+            pointBackgroundColor: 'rgba(40, 167, 69, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(40, 167, 69, 1)'
+          },
+          {
+            label: 'Western Cape',
+            data: [81, 73, 85, 78, 79],
+            backgroundColor: 'rgba(0, 123, 255, 0.2)',
+            borderColor: 'rgba(0, 123, 255, 1)',
+            pointBackgroundColor: 'rgba(0, 123, 255, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(0, 123, 255, 1)'
+          },
+          {
+            label: 'KwaZulu-Natal',
+            data: [68, 65, 71, 64, 67],
+            backgroundColor: 'rgba(255, 193, 7, 0.2)',
+            borderColor: 'rgba(255, 193, 7, 1)',
+            pointBackgroundColor: 'rgba(255, 193, 7, 1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(255, 193, 7, 1)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        elements: {
+          line: {
+            borderWidth: 3
+          }
+        },
+        scales: {
+          r: {
+            angleLines: {
+              display: true
+            },
+            suggestedMin: 0,
+            suggestedMax: 100
+          }
+        }
+      }
+    });
+    
+    // Initialize score dials
+    function initializeScoreDials() {
+      const dialColors = {
+        environmental: '#28a745',
+        social: '#007bff',
+        governance: '#ffc107',
+        infrastructure: '#17a2b8'
+      };
+      
+      Object.keys(dialColors).forEach(dimension => {
+        const scoreElement = document.getElementById(`${dimension}-score`);
+        const scoreValue = parseInt(scoreElement.querySelector('.score-value').textContent);
+        
+        // Create SVG for score dial
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "150");
+        svg.setAttribute("height", "150");
+        svg.setAttribute("viewBox", "0 0 100 100");
+        
+        // Background circle
+        const bgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        bgCircle.setAttribute("cx", "50");
+        bgCircle.setAttribute("cy", "50");
+        bgCircle.setAttribute("r", "45");
+        bgCircle.setAttribute("fill", "none");
+        bgCircle.setAttribute("stroke", "rgba(255, 255, 255, 0.1)");
+        bgCircle.setAttribute("stroke-width", "10");
+        svg.appendChild(bgCircle);
+        
+        // Score circle
+        const scoreCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        scoreCircle.setAttribute("cx", "50");
+        scoreCircle.setAttribute("cy", "50");
+        scoreCircle.setAttribute("r", "45");
+        scoreCircle.setAttribute("fill", "none");
+        scoreCircle.setAttribute("stroke", dialColors[dimension]);
+        scoreCircle.setAttribute("stroke-width", "10");
+        scoreCircle.setAttribute("stroke-dasharray", `${scoreValue * 2.83} 283`);
+        scoreCircle.setAttribute("transform", "rotate(-90 50 50)");
+        svg.appendChild(scoreCircle);
+        
+        // Insert SVG before the score value
+        scoreElement.insertBefore(svg, scoreElement.firstChild);
+      });
+      
+      // Update overall score bar
+      const overallScoreBar = document.getElementById('overall-score-bar');
+      const overallScore = 75;
+      overallScoreBar.style.width = `${overallScore}%`;
+      overallScoreBar.textContent = overallScore;
+      
+      if (overallScore >= 80) {
+        overallScoreBar.classList.add('bg-success');
+      } else if (overallScore >= 60) {
+        overallScoreBar.classList.add('bg-info');
+      } else if (overallScore >= 40) {
+        overallScoreBar.classList.add('bg-warning');
+      } else {
+        overallScoreBar.classList.add('bg-danger');
+      }
+    }
+    
+    // Call function to initialize score dials
+    initializeScoreDials();
+    
+    // Set up filtering for the detailed metrics table
+    document.getElementById('metric-dimension').addEventListener('change', function() {
+      const dimension = this.value;
+      const rows = document.querySelectorAll('.metric-table tbody tr');
+      
+      rows.forEach(row => {
+        const rowDimension = row.querySelector('td:nth-child(2) .badge').textContent.toLowerCase();
+        
+        if (dimension === 'all' || dimension === rowDimension) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+    
+    // This would be the placeholder for a real Africa map visualization
+    // using D3.js and TopoJSON data
+    document.getElementById('africa-map').innerHTML = 
+      '<div class="d-flex justify-content-center align-items-center h-100">' +
+      '<p class="text-muted">Interactive map would be rendered here with real data</p>' +
+      '</div>';
+  });
+</script>
+{% endblock %}

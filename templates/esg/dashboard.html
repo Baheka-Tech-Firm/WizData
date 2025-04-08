@@ -1,0 +1,875 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="card-title">
+                            <i class="fas fa-leaf text-success me-2"></i>ESG Data Dashboard
+                        </h1>
+                        <a href="/esg/africa" class="btn btn-primary">
+                            <i class="fas fa-map-marker-alt me-2"></i>Go to Africa ESG Dashboard
+                        </a>
+                    </div>
+                    <p class="card-text">
+                        Explore comprehensive Environmental, Social, Governance, and Infrastructure data for African regions.
+                        This dashboard provides access to the latest ESG metrics, allowing you to analyze sustainability 
+                        performance and track progress across multiple dimensions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Region Selection -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-map-marker-alt me-2"></i>Region Selection</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="regionType">Region Type</label>
+                                <select class="form-select" id="regionType">
+                                    <option value="all">All</option>
+                                    <option value="country">Country</option>
+                                    <option value="province">Province/State</option>
+                                    <option value="municipality">Municipality</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="country">Country</label>
+                                <select class="form-select" id="country">
+                                    <option value="all">All</option>
+                                    <option value="ZA">South Africa</option>
+                                    <option value="KE">Kenya</option>
+                                    <option value="NG">Nigeria</option>
+                                    <option value="EG">Egypt</option>
+                                    <option value="GH">Ghana</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="region">Specific Region</label>
+                                <select class="form-select" id="region">
+                                    <option value="all">All</option>
+                                    <!-- Will be populated based on country selection -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" id="startDate">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-3">
+                                <label for="endDate">End Date</label>
+                                <input type="date" class="form-control" id="endDate">
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button id="fetchDataBtn" class="btn btn-primary w-100 mb-3">
+                                <i class="fas fa-search me-2"></i>Fetch ESG Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ESG Score Overview -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-line me-2"></i>ESG Score Overview</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card bg-success-subtle text-dark mb-3">
+                                <div class="card-body text-center">
+                                    <h6 class="card-subtitle mb-2 text-muted">Environmental</h6>
+                                    <h2 class="display-4 fw-bold environmental-score">--</h2>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-primary-subtle text-dark mb-3">
+                                <div class="card-body text-center">
+                                    <h6 class="card-subtitle mb-2 text-muted">Social</h6>
+                                    <h2 class="display-4 fw-bold social-score">--</h2>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-warning-subtle text-dark mb-3">
+                                <div class="card-body text-center">
+                                    <h6 class="card-subtitle mb-2 text-muted">Governance</h6>
+                                    <h2 class="display-4 fw-bold governance-score">--</h2>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-info-subtle text-dark mb-3">
+                                <div class="card-body text-center">
+                                    <h6 class="card-subtitle mb-2 text-muted">Infrastructure</h6>
+                                    <h2 class="display-4 fw-bold infrastructure-score">--</h2>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed ESG Metrics -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-leaf me-2"></i>Environmental Metrics</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="environmentalChart" height="300"></canvas>
+                    <div class="mt-3 environmental-metrics-data">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Value</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="environmentalTableBody">
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-users me-2"></i>Social Metrics</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="socialChart" height="300"></canvas>
+                    <div class="mt-3 social-metrics-data">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Value</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="socialTableBody">
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-balance-scale me-2"></i>Governance Metrics</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="governanceChart" height="300"></canvas>
+                    <div class="mt-3 governance-metrics-data">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Value</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="governanceTableBody">
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-building me-2"></i>Infrastructure Metrics</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="infrastructureChart" height="300"></canvas>
+                    <div class="mt-3 infrastructure-metrics-data">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Value</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="infrastructureTableBody">
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Export Options -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5><i class="fas fa-download me-2"></i>Data Export Options</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button id="exportJsonBtn" class="btn btn-outline-primary w-100 mb-2">
+                                <i class="fas fa-file-code me-2"></i>Export as JSON
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="exportCsvBtn" class="btn btn-outline-success w-100 mb-2">
+                                <i class="fas fa-file-excel me-2"></i>Export as CSV
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="exportReportBtn" class="btn btn-outline-info w-100 mb-2">
+                                <i class="fas fa-file-pdf me-2"></i>Generate Report
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="exportComparisonBtn" class="btn btn-outline-warning w-100 mb-2">
+                                <i class="fas fa-chart-bar me-2"></i>Comparative Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Regions data structure
+    const regions = {
+        'ZA': [
+            {id: 'ZA-GT', name: 'Gauteng'},
+            {id: 'ZA-WC', name: 'Western Cape'},
+            {id: 'ZA-EC', name: 'Eastern Cape'},
+            {id: 'ZA-NC', name: 'Northern Cape'},
+            {id: 'ZA-KZN', name: 'KwaZulu-Natal'}
+        ],
+        'KE': [
+            {id: 'KE-NB', name: 'Nairobi'},
+            {id: 'KE-MO', name: 'Mombasa'},
+            {id: 'KE-KI', name: 'Kisumu'}
+        ],
+        'NG': [
+            {id: 'NG-LG', name: 'Lagos'},
+            {id: 'NG-AB', name: 'Abuja'},
+            {id: 'NG-KN', name: 'Kano'}
+        ],
+        'EG': [
+            {id: 'EG-CA', name: 'Cairo'},
+            {id: 'EG-AL', name: 'Alexandria'},
+            {id: 'EG-GZ', name: 'Giza'}
+        ],
+        'GH': [
+            {id: 'GH-AC', name: 'Accra'},
+            {id: 'GH-KU', name: 'Kumasi'},
+            {id: 'GH-TM', name: 'Tamale'}
+        ]
+    };
+
+    // Chart instances
+    let environmentalChart, socialChart, governanceChart, infrastructureChart;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize date pickers with default values
+        const today = new Date();
+        const lastYear = new Date();
+        lastYear.setFullYear(lastYear.getFullYear() - 1);
+        
+        document.getElementById('startDate').valueAsDate = lastYear;
+        document.getElementById('endDate').valueAsDate = today;
+        
+        // Set up country change listener
+        document.getElementById('country').addEventListener('change', function() {
+            updateRegionDropdown();
+        });
+        
+        // Initialize region dropdown
+        updateRegionDropdown();
+        
+        // Set up data fetch button
+        document.getElementById('fetchDataBtn').addEventListener('click', fetchESGData);
+        
+        // Set up export buttons
+        document.getElementById('exportJsonBtn').addEventListener('click', () => exportData('json'));
+        document.getElementById('exportCsvBtn').addEventListener('click', () => exportData('csv'));
+        document.getElementById('exportReportBtn').addEventListener('click', generateReport);
+        document.getElementById('exportComparisonBtn').addEventListener('click', showComparisonModal);
+        
+        // Initialize charts
+        initializeCharts();
+    });
+
+    function updateRegionDropdown() {
+        const country = document.getElementById('country').value;
+        const regionSelect = document.getElementById('region');
+        
+        // Clear existing options
+        regionSelect.innerHTML = '<option value="all">All</option>';
+        
+        // Add regions for selected country
+        if (country !== 'all' && regions[country]) {
+            regions[country].forEach(region => {
+                const option = document.createElement('option');
+                option.value = region.id;
+                option.textContent = region.name;
+                regionSelect.appendChild(option);
+            });
+        }
+    }
+
+    function initializeCharts() {
+        // Environmental chart
+        environmentalChart = new Chart(
+            document.getElementById('environmentalChart'),
+            {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Environmental Metrics Trend'
+                        }
+                    }
+                }
+            }
+        );
+        
+        // Social chart
+        socialChart = new Chart(
+            document.getElementById('socialChart'),
+            {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Social Metrics Trend'
+                        }
+                    }
+                }
+            }
+        );
+        
+        // Governance chart
+        governanceChart = new Chart(
+            document.getElementById('governanceChart'),
+            {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Governance Metrics Trend'
+                        }
+                    }
+                }
+            }
+        );
+        
+        // Infrastructure chart
+        infrastructureChart = new Chart(
+            document.getElementById('infrastructureChart'),
+            {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Infrastructure Metrics Trend'
+                        }
+                    }
+                }
+            }
+        );
+    }
+
+    function fetchESGData() {
+        const region = document.getElementById('region').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        
+        // Show loading state
+        document.querySelectorAll('.card-body').forEach(element => {
+            element.classList.add('loading');
+        });
+        
+        // Clear existing data
+        clearData();
+        
+        // Fetch ESG scores
+        fetchESGScores(region);
+        
+        // Fetch detailed metrics for each dimension
+        fetchEnvironmentalMetrics(region, startDate, endDate);
+        fetchSocialMetrics(region, startDate, endDate);
+        fetchGovernanceMetrics(region, startDate, endDate);
+        fetchInfrastructureMetrics(region, startDate, endDate);
+    }
+
+    function clearData() {
+        // Clear score displays
+        document.querySelector('.environmental-score').textContent = '--';
+        document.querySelector('.social-score').textContent = '--';
+        document.querySelector('.governance-score').textContent = '--';
+        document.querySelector('.infrastructure-score').textContent = '--';
+        
+        // Reset progress bars
+        document.querySelectorAll('.progress-bar').forEach(bar => {
+            bar.style.width = '0%';
+        });
+        
+        // Clear table bodies
+        document.getElementById('environmentalTableBody').innerHTML = '';
+        document.getElementById('socialTableBody').innerHTML = '';
+        document.getElementById('governanceTableBody').innerHTML = '';
+        document.getElementById('infrastructureTableBody').innerHTML = '';
+        
+        // Reset charts
+        resetChart(environmentalChart);
+        resetChart(socialChart);
+        resetChart(governanceChart);
+        resetChart(infrastructureChart);
+    }
+
+    function resetChart(chart) {
+        chart.data.labels = [];
+        chart.data.datasets = [];
+        chart.update();
+    }
+
+    function fetchESGScores(region) {
+        // For demonstration purposes, we'll use sample data
+        // In a real application, you would make an API call to fetch the actual data
+        
+        // Simulate API call delay
+        setTimeout(() => {
+            const scores = {
+                environmental: 72.5,
+                social: 68.9,
+                governance: 64.2,
+                infrastructure: 70.1
+            };
+            
+            // Update score displays
+            document.querySelector('.environmental-score').textContent = scores.environmental.toFixed(1);
+            document.querySelector('.social-score').textContent = scores.social.toFixed(1);
+            document.querySelector('.governance-score').textContent = scores.governance.toFixed(1);
+            document.querySelector('.infrastructure-score').textContent = scores.infrastructure.toFixed(1);
+            
+            // Update progress bars
+            document.querySelectorAll('.progress-bar')[0].style.width = `${scores.environmental}%`;
+            document.querySelectorAll('.progress-bar')[1].style.width = `${scores.social}%`;
+            document.querySelectorAll('.progress-bar')[2].style.width = `${scores.governance}%`;
+            document.querySelectorAll('.progress-bar')[3].style.width = `${scores.infrastructure}%`;
+        }, 1000);
+    }
+
+    function fetchEnvironmentalMetrics(region, startDate, endDate) {
+        // In a real application, you would make an API call to fetch the data
+        // For demonstration, we'll use sample data
+        
+        // Simulate API call delay
+        setTimeout(() => {
+            const metrics = [
+                {
+                    metric_type: 'electricity_access',
+                    value: 87.5,
+                    unit: '%',
+                    date: '2023-01-15'
+                },
+                {
+                    metric_type: 'water_access',
+                    value: 92.1,
+                    unit: '%',
+                    date: '2023-02-10'
+                },
+                {
+                    metric_type: 'air_quality_index',
+                    value: 65.4,
+                    unit: 'AQI',
+                    date: '2023-03-05'
+                }
+            ];
+            
+            // Update table
+            const tableBody = document.getElementById('environmentalTableBody');
+            metrics.forEach(metric => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatMetricName(metric.metric_type)}</td>
+                    <td>${metric.value} ${metric.unit}</td>
+                    <td>${formatDate(metric.date)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update chart
+            updateEnvironmentalChart(metrics);
+            
+            // Remove loading state
+            document.querySelectorAll('.card-body').forEach(element => {
+                element.classList.remove('loading');
+            });
+        }, 1200);
+    }
+
+    function fetchSocialMetrics(region, startDate, endDate) {
+        // Simulate API call delay
+        setTimeout(() => {
+            const metrics = [
+                {
+                    metric_type: 'literacy_rate',
+                    value: 91.2,
+                    unit: '%',
+                    date: '2023-01-20'
+                },
+                {
+                    metric_type: 'healthcare_access',
+                    value: 78.5,
+                    unit: '%',
+                    date: '2023-02-15'
+                },
+                {
+                    metric_type: 'employment_rate',
+                    value: 65.8,
+                    unit: '%',
+                    date: '2023-03-10'
+                }
+            ];
+            
+            // Update table
+            const tableBody = document.getElementById('socialTableBody');
+            metrics.forEach(metric => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatMetricName(metric.metric_type)}</td>
+                    <td>${metric.value} ${metric.unit}</td>
+                    <td>${formatDate(metric.date)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update chart
+            updateSocialChart(metrics);
+        }, 1300);
+    }
+
+    function fetchGovernanceMetrics(region, startDate, endDate) {
+        // Simulate API call delay
+        setTimeout(() => {
+            const metrics = [
+                {
+                    metric_type: 'audit_outcome',
+                    value: 82.0,
+                    status: 'Unqualified',
+                    unit: 'score',
+                    date: '2023-01-25'
+                },
+                {
+                    metric_type: 'corruption_index',
+                    value: 58.3,
+                    unit: 'index',
+                    date: '2023-02-20'
+                },
+                {
+                    metric_type: 'public_participation',
+                    value: 71.5,
+                    unit: 'index',
+                    date: '2023-03-15'
+                }
+            ];
+            
+            // Update table
+            const tableBody = document.getElementById('governanceTableBody');
+            metrics.forEach(metric => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatMetricName(metric.metric_type)}</td>
+                    <td>${metric.value} ${metric.unit} ${metric.status ? `(${metric.status})` : ''}</td>
+                    <td>${formatDate(metric.date)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update chart
+            updateGovernanceChart(metrics);
+        }, 1400);
+    }
+
+    function fetchInfrastructureMetrics(region, startDate, endDate) {
+        // Simulate API call delay
+        setTimeout(() => {
+            const metrics = [
+                {
+                    metric_type: 'roads_paved',
+                    value: 72.4,
+                    unit: '%',
+                    date: '2023-01-30'
+                },
+                {
+                    metric_type: 'internet_connectivity',
+                    value: 81.2,
+                    unit: '%',
+                    date: '2023-02-25'
+                },
+                {
+                    metric_type: 'public_transport_access',
+                    value: 67.8,
+                    unit: '%',
+                    date: '2023-03-20'
+                }
+            ];
+            
+            // Update table
+            const tableBody = document.getElementById('infrastructureTableBody');
+            metrics.forEach(metric => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${formatMetricName(metric.metric_type)}</td>
+                    <td>${metric.value} ${metric.unit}</td>
+                    <td>${formatDate(metric.date)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            
+            // Update chart
+            updateInfrastructureChart(metrics);
+        }, 1500);
+    }
+
+    function updateEnvironmentalChart(metrics) {
+        // Group metrics by type
+        const metricTypes = [...new Set(metrics.map(m => m.metric_type))];
+        
+        // Create datasets
+        const datasets = metricTypes.map(type => {
+            const metricData = metrics.filter(m => m.metric_type === type);
+            const color = getRandomColor();
+            
+            return {
+                label: formatMetricName(type),
+                data: metricData.map(m => m.value),
+                borderColor: color,
+                backgroundColor: color + '33',  // Add transparency
+                tension: 0.3
+            };
+        });
+        
+        // Update chart
+        environmentalChart.data.labels = metrics.map(m => formatDate(m.date));
+        environmentalChart.data.datasets = datasets;
+        environmentalChart.update();
+    }
+
+    function updateSocialChart(metrics) {
+        // Group metrics by type
+        const metricTypes = [...new Set(metrics.map(m => m.metric_type))];
+        
+        // Create datasets
+        const datasets = metricTypes.map(type => {
+            const metricData = metrics.filter(m => m.metric_type === type);
+            const color = getRandomColor();
+            
+            return {
+                label: formatMetricName(type),
+                data: metricData.map(m => m.value),
+                borderColor: color,
+                backgroundColor: color + '33',  // Add transparency
+                tension: 0.3
+            };
+        });
+        
+        // Update chart
+        socialChart.data.labels = metrics.map(m => formatDate(m.date));
+        socialChart.data.datasets = datasets;
+        socialChart.update();
+    }
+
+    function updateGovernanceChart(metrics) {
+        // Group metrics by type
+        const metricTypes = [...new Set(metrics.map(m => m.metric_type))];
+        
+        // Create datasets
+        const datasets = metricTypes.map(type => {
+            const metricData = metrics.filter(m => m.metric_type === type);
+            const color = getRandomColor();
+            
+            return {
+                label: formatMetricName(type),
+                data: metricData.map(m => m.value),
+                borderColor: color,
+                backgroundColor: color + '33',  // Add transparency
+                tension: 0.3
+            };
+        });
+        
+        // Update chart
+        governanceChart.data.labels = metrics.map(m => formatDate(m.date));
+        governanceChart.data.datasets = datasets;
+        governanceChart.update();
+    }
+
+    function updateInfrastructureChart(metrics) {
+        // Group metrics by type
+        const metricTypes = [...new Set(metrics.map(m => m.metric_type))];
+        
+        // Create datasets
+        const datasets = metricTypes.map(type => {
+            const metricData = metrics.filter(m => m.metric_type === type);
+            const color = getRandomColor();
+            
+            return {
+                label: formatMetricName(type),
+                data: metricData.map(m => m.value),
+                borderColor: color,
+                backgroundColor: color + '33',  // Add transparency
+                tension: 0.3
+            };
+        });
+        
+        // Update chart
+        infrastructureChart.data.labels = metrics.map(m => formatDate(m.date));
+        infrastructureChart.data.datasets = datasets;
+        infrastructureChart.update();
+    }
+
+    function exportData(format) {
+        const region = document.getElementById('region').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        
+        alert(`Exporting data in ${format.toUpperCase()} format for region ${region} from ${startDate} to ${endDate}`);
+        
+        // In a real application, you would make an API call to export the data
+        // For demonstration, we'll just show an alert
+        
+        // Example URL for JSON export:
+        // window.location.href = `/api/esg/export?region=${region}&format=${format}&start_date=${startDate}&end_date=${endDate}`;
+    }
+
+    function generateReport() {
+        const region = document.getElementById('region').value;
+        alert(`Generating comprehensive ESG report for region ${region}`);
+        
+        // In a real application, you would make an API call to generate the report
+        // For demonstration, we'll just show an alert
+    }
+
+    function showComparisonModal() {
+        alert('Showing comparison modal to select multiple regions for comparison');
+        
+        // In a real application, you would show a modal to select regions to compare
+        // For demonstration, we'll just show an alert
+    }
+
+    function formatMetricName(name) {
+        return name
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString();
+    }
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+{% endblock %}

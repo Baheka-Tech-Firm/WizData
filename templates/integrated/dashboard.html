@@ -1,0 +1,210 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="mb-4">Integrated Financial & ESG Data Dashboard</h1>
+    
+    <div class="alert alert-info">
+        <strong>New!</strong> WizData now integrates data from multiple premium sources including Alpha Vantage, S&P Global, Bloomberg, and Refinitiv.
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="mb-0 h5">Data Sources</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="card h-100 border-info">
+                                <div class="card-body text-center">
+                                    <h5>Alpha Vantage</h5>
+                                    <p class="small">Real-time and historical data for stocks, forex, and cryptocurrencies</p>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5>S&P Global</h5>
+                                    <p class="small">Premium financial data, indices, and company fundamentals</p>
+                                    <span class="badge bg-secondary">API Key Required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5>Bloomberg</h5>
+                                    <p class="small">Market data, news, analytics, and fixed income data</p>
+                                    <span class="badge bg-secondary">API Key Required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5>Refinitiv</h5>
+                                    <p class="small">Time series data, fundamentals, and market indices</p>
+                                    <span class="badge bg-secondary">API Key Required</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="mb-0 h5">Financial Data</h3>
+                </div>
+                <div class="card-body">
+                    <h5 class="mb-3">Available Endpoints</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/stock/{symbol}</strong>
+                                <p class="small text-muted mb-0">Stock data with optional ESG metrics</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/sector</strong>
+                                <p class="small text-muted mb-0">Sector performance data</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/forex</strong>
+                                <p class="small text-muted mb-0">Forex exchange rate data</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/crypto/{symbol}</strong>
+                                <p class="small text-muted mb-0">Cryptocurrency data</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/sp500/constituents</strong>
+                                <p class="small text-muted mb-0">S&P 500 constituent companies</p>
+                            </div>
+                            <span class="badge bg-secondary rounded-pill">API Key Required</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/index/{index_id}/performance</strong>
+                                <p class="small text-muted mb-0">Index performance data</p>
+                            </div>
+                            <span class="badge bg-secondary rounded-pill">API Key Required</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/indices</strong>
+                                <p class="small text-muted mb-0">Market indices data</p>
+                            </div>
+                            <span class="badge bg-secondary rounded-pill">API Key Required</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/fixed-income</strong>
+                                <p class="small text-muted mb-0">Fixed income market data</p>
+                            </div>
+                            <span class="badge bg-secondary rounded-pill">API Key Required</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/fundamentals/{identifier}</strong>
+                                <p class="small text-muted mb-0">Company fundamental data</p>
+                            </div>
+                            <span class="badge bg-secondary rounded-pill">API Key Required</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="mb-0 h5">ESG Data</h3>
+                </div>
+                <div class="card-body">
+                    <h5 class="mb-3">Available Endpoints</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/countries</strong>
+                                <p class="small text-muted mb-0">List of countries with ESG data available</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/esg/country/{country_code}</strong>
+                                <p class="small text-muted mb-0">ESG data for a specific country</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/esg/region/{region_code}/scores</strong>
+                                <p class="small text-muted mb-0">ESG scores for a region</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>/api/integrated/esg/compare</strong>
+                                <p class="small text-muted mb-0">Compare ESG scores across multiple regions</p>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Active</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <h5 class="mb-3">Data Sources Special Focus</h5>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">African ESG & Infrastructure Data</h5>
+                                <p class="card-text">Our specialized vertical focuses on African ESG and Infrastructure data, addressing the data scarcity in this critical market segment.</p>
+                                <a href="/esg/africa" class="btn btn-outline-primary">Explore African ESG Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-dark text-white">
+                    <h3 class="mb-0 h5">API Key Management</h3>
+                </div>
+                <div class="card-body">
+                    <p>To access premium data sources, you'll need to set up API keys for the respective providers.</p>
+                    <p>Run the following utility to check your API key status and get instructions for obtaining missing keys:</p>
+                    <pre class="bg-dark text-light p-3 rounded"><code>python request_api_keys.py</code></pre>
+                    <p>For instructions on obtaining a specific API key:</p>
+                    <pre class="bg-dark text-light p-3 rounded"><code>python request_api_keys.py ALPHA_VANTAGE_API_KEY</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

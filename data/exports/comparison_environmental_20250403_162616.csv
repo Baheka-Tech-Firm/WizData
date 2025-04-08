@@ -1,0 +1,7 @@
+region_code,dimension,metric,value,date
+ZA-GT,environmental,electricity_access,71,2025-04-03
+ZA-GT,environmental,water_access,73,2025-04-03
+ZA-GT,environmental,air_quality_index,64,2025-04-03
+KE-NB,environmental,electricity_access,89,2025-04-03
+KE-NB,environmental,water_access,51,2025-04-03
+KE-NB,environmental,air_quality_index,82,2025-04-03

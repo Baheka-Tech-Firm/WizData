@@ -1,0 +1,67 @@
+ Now that WizData will be a data vendor, you’ve unlocked a whole new business vertical: selling raw and structured data to traders, fintechs, wealth managers, educators, and devs — just like Bloomberg, Refinitiv, or Morningstar do.
+
+Here's a breakdown of data types WizData can sell, grouped by category, use-case, and value-add:
+
+🔢 1. Market Data (Core Trading Data)
+Type	What You Sell	Buyer Use Case
+OHLCV (open, high, low, close, volume)	Per instrument, per timeframe (1m, 5m, 1d)	Charting, technical analysis
+Real-time prices	WebSocket streams for top tickers	Live dashboards, algos
+Order Book / Level 2 (if licensed)	Bid/Ask depth, volume by price	Scalping bots, liquidity monitoring
+Aggregated Trades	Time & sales logs	Execution metrics, HFT sims
+Tick-level Data	Raw tick snapshots	Algo testing, backtesting
+✅ Sell as: JSON API, CSV, WebSocket, S3 batch dumps
+
+📊 2. Derived & Technical Data
+Type	What You Sell	Buyer Use Case
+Technical Indicators	RSI, MACD, moving averages, Bollinger Bands	Backtests, screeners
+Custom Signals	Buy/sell flags, support/resistance levels	Strategy dev, alerts
+Volatility Metrics	ATR, Std Dev, beta	Risk models
+Liquidity Scores	Volume-weighted measures	Trade execution analysis
+✅ Sell as: API endpoints (e.g. /api/signals), CSV exports, or charts-as-a-service
+
+💼 3. Fundamentals & Company Data
+Type	What You Sell	Buyer Use Case
+Financials	Income statement, balance sheet, ratios	Equity research
+Earnings	Earnings calendar + results	Event trading
+Dividends	Calendar, yields, pay dates	Passive investing, PnL tracking
+Valuations	PE, PB, EV/EBITDA, DCF models	Advisor reports, fintech dashboards
+✅ Sell as: APIs or embed in client dashboards
+
+🌍 4. Macroeconomic & Market-Wide Data
+Type	What You Sell	Buyer Use Case
+Interest Rates	Repo, prime, bond yields	Macro analysis
+CPI, Inflation, Unemployment	South Africa + other countries	Portfolio rotation models
+Currency & FX Rates	Daily/hourly USDZAR, EURUSD, etc.	Forex platforms, retail traders
+Commodities	Gold, platinum, oil, agri	Portfolio risk hedging
+✅ Sell as: Market dashboards, CSV drops, embeddable modules
+
+🧠 5. Alternative Data (Alpha-generating)
+Type	What You Sell	Buyer Use Case
+Sentiment Analysis	NLP on Twitter/Reddit/news headlines	Predictive signals
+Insider Trading Data	Director buys/sells	Retail + hedge fund strategy
+ESG Scores	Environmental, social, governance ratings	Impact investing, advisors
+Event Detection	Load shedding alerts, stock-specific keywords	News trading bots
+✅ Sell as: Premium signals or push notifications via WebSocket/API
+
+👤 6. User & Client-Centric Data
+Type	What You Sell	Buyer Use Case
+User Portfolio Snapshots (white-label)	Live performance, asset allocation	For wealth managers & fintechs
+Custom Reporting Templates	Branded PDF exports with embedded charts	RIAs, brokers, consultants
+Client APIs	Plug-and-play endpoints for fintech startups	Internal tooling, dashboards
+✅ Sell as: White-labeled B2B APIs or dashboard access
+
+💡 Bonus Ideas (Niche Data Products)
+Product	Description
+“Top Movers Feed”	Daily JSON file of JSE/crypto/forex gainers/losers
+“Africa Indexes Pack”	Build & sell custom indexes (e.g., SA Tech 25)
+“Retail Flow Heatmaps”	Combine social + trading patterns into visual data
+“Chart Embed Widgets”	Sell charts-as-a-service to financial media or bloggers
+“Education Packs”	Static + dynamic data for finance educators, students
+🧱 Data Monetization Models
+Model	Description
+Subscription	Monthly access to APIs (e.g. R250 – R10,000/month)
+Pay-per-call	Bill per 1,000 API hits
+Bulk Export	Sell raw datasets (CSV, JSON, XLSX)
+White-label Access	Custom dashboards for advisors/firms
+Embedded Widgets	Sell usage rights for chart/news widgets
+Freemium	Free EOD + basic data → premium real-time/indicators

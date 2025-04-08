@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-04-03T14:05:12",
+  "data_type": "dividend",
+  "market": "nasdaq",
+  "total_records": 87,
+  "anomaly_count": 1,
+  "anomaly_rate": 0.0115,
+  "quality_report": {
+    "anomalies_detected": 1,
+    "anomaly_types": {
+      "negative_dividend": 1
+    },
+    "metrics": {
+      "dividend_yield_volatility": 0.0128,
+      "dividend_continuity": 0.9885,
+      "statistical_measures": {
+        "mean_dividend": 0.47,
+        "median_dividend": 0.42,
+        "std_dividend": 0.18,
+        "mean_yield": 0.0285,
+        "median_yield": 0.0245,
+        "std_yield": 0.0098
+      }
+    },
+    "completeness": {
+      "date": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "ex_date": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "payment_date": {
+        "missing_count": 3,
+        "missing_percentage": 0.0345
+      },
+      "amount": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "yield": {
+        "missing_count": 2,
+        "missing_percentage": 0.023
+      }
+    }
+  }
+}

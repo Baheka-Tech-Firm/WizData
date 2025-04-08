@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title | default('Dashboard - WizData') }}</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .stat-card {
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .data-source-card {
+            border-left: 4px solid var(--bs-primary);
+        }
+        .chart-container {
+            height: 300px;
+            width: 100%;
+        }
+        .status-badge {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-active {
+            background-color: var(--bs-success);
+            box-shadow: 0 0 5px var(--bs-success);
+        }
+        .status-warning {
+            background-color: var(--bs-warning);
+            box-shadow: 0 0 5px var(--bs-warning);
+        }
+        .status-inactive {
+            background-color: var(--bs-danger);
+            box-shadow: 0 0 5px var(--bs-danger);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <span class="fs-4">WizData</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sources">Data Sources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/jobs">Collection Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Data Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api-services">API Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-primary text-white rounded px-3" href="/insights"><i class="bi bi-robot"></i> AI Insights</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="/api/docs" class="btn btn-outline-light me-2">API Docs</a>
+                    <a href="#" class="btn btn-primary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h2 class="card-title">WizData Dashboard</h2>
+                                <p class="card-text text-muted">
+                                    Monitor and manage your financial data platform
+                                </p>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-light me-2">Export Report</button>
+                                <button class="btn btn-primary">Refresh Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-3 mb-4">
+                <div class="card stat-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-2">Total Data Sources</h6>
+                                <h3 class="mb-0">3</h3>
+                            </div>
+                            <div class="bg-primary bg-opacity-10 p-3 rounded">
+                                <i class="bi bi-database fs-4 text-primary"></i>
+                            </div>
+                        </div>
+                        <p class="small text-muted mt-3 mb-0">
+                            <i class="bi bi-arrow-up-short text-success"></i>
+                            <span class="text-success fw-bold">5%</span> increase
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card stat-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-2">Tracked Symbols</h6>
+                                <h3 class="mb-0">45</h3>
+                            </div>
+                            <div class="bg-success bg-opacity-10 p-3 rounded">
+                                <i class="bi bi-tag fs-4 text-success"></i>
+                            </div>
+                        </div>
+                        <p class="small text-muted mt-3 mb-0">
+                            <i class="bi bi-arrow-up-short text-success"></i>
+                            <span class="text-success fw-bold">12%</span> increase
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card stat-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-2">Data Points</h6>
+                                <h3 class="mb-0">125K</h3>
+                            </div>
+                            <div class="bg-info bg-opacity-10 p-3 rounded">
+                                <i class="bi bi-bar-chart fs-4 text-info"></i>
+                            </div>
+                        </div>
+                        <p class="small text-muted mt-3 mb-0">
+                            <i class="bi bi-arrow-up-short text-success"></i>
+                            <span class="text-success fw-bold">8%</span> weekly growth
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card stat-card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-2">API Requests</h6>
+                                <h3 class="mb-0">1.2M</h3>
+                            </div>
+                            <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                <i class="bi bi-arrow-repeat fs-4 text-warning"></i>
+                            </div>
+                        </div>
+                        <p class="small text-muted mt-3 mb-0">
+                            <i class="bi bi-arrow-up-short text-success"></i>
+                            <span class="text-success fw-bold">15%</span> monthly increase
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-8 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-transparent">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Market Overview</h5>
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-light active">Day</button>
+                                <button type="button" class="btn btn-outline-light">Week</button>
+                                <button type="button" class="btn btn-outline-light">Month</button>
+                                <button type="button" class="btn btn-outline-light">Year</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="marketChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Top Performing Symbols</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Price</th>
+                                        <th>Change</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>BTC</td>
+                                        <td>$28,542.68</td>
+                                        <td class="text-success">+4.21%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ETH</td>
+                                        <td>$1,865.32</td>
+                                        <td class="text-success">+3.15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SOL</td>
+                                        <td>$405.35</td>
+                                        <td class="text-success">+2.87%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EURUSD</td>
+                                        <td>1.0842</td>
+                                        <td class="text-success">+0.45%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SLM</td>
+                                        <td>$152.75</td>
+                                        <td class="text-success">+1.25%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>GBPUSD</td>
+                                        <td>1.2534</td>
+                                        <td class="text-danger">-0.15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ADA</td>
+                                        <td>$0.478</td>
+                                        <td class="text-danger">-1.21%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Data Source Status</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="status-badge status-active"></span>
+                                    JSE Web Scraper
+                                </div>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="status-badge status-active"></span>
+                                    CoinGecko API
+                                </div>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="status-badge status-active"></span>
+                                    Alpha Vantage API
+                                </div>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="status-badge status-warning"></span>
+                                    Financial News API
+                                </div>
+                                <span class="badge bg-secondary">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/sources" class="btn btn-sm btn-outline-primary">View All Sources</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Recent Collection Jobs</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <strong>Cryptocurrency Data Collection</strong>
+                                    <span class="text-success">Completed</span>
+                                </div>
+                                <div class="small text-muted mt-1">April 03, 2025 - 10:30 AM</div>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <strong>JSE Market Data Update</strong>
+                                    <span class="text-success">Completed</span>
+                                </div>
+                                <div class="small text-muted mt-1">April 03, 2025 - 09:15 AM</div>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <strong>Forex Rates Update</strong>
+                                    <span class="text-success">Completed</span>
+                                </div>
+                                <div class="small text-muted mt-1">April 02, 2025 - 06:45 PM</div>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <strong>Historical Data Archiving</strong>
+                                    <span class="text-primary">Scheduled</span>
+                                </div>
+                                <div class="small text-muted mt-1">April 04, 2025 - 12:00 AM</div>
+                                <div class="progress mt-2" style="height: 5px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/jobs" class="btn btn-sm btn-outline-primary">View All Jobs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card data-source-card border-0 shadow-sm h-100">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">API Usage Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="apiUsageChart" height="230"></canvas>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <h5 class="mb-0">5.4k</h5>
+                                <div class="small text-muted">Today</div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="mb-0">32.1k</h5>
+                                <div class="small text-muted">This Week</div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="mb-0">1.2M</h5>
+                                <div class="small text-muted">This Month</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-transparent">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Market Insights</h5>
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-light">All</button>
+                                <button type="button" class="btn btn-outline-light active">JSE</button>
+                                <button type="button" class="btn btn-outline-light">Crypto</button>
+                                <button type="button" class="btn btn-outline-light">Forex</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Name</th>
+                                        <th>Sector</th>
+                                        <th>Open</th>
+                                        <th>Close</th>
+                                        <th>Change</th>
+                                        <th>Volume</th>
+                                        <th>Last Updated</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>SOL</td>
+                                        <td>Sasol Limited</td>
+                                        <td>Energy</td>
+                                        <td>403.25</td>
+                                        <td>405.35</td>
+                                        <td class="text-success">+0.52%</td>
+                                        <td>1,235,789</td>
+                                        <td>Today, 11:45 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NPN</td>
+                                        <td>Naspers Limited</td>
+                                        <td>Technology</td>
+                                        <td>3,452.80</td>
+                                        <td>3,501.25</td>
+                                        <td class="text-success">+1.40%</td>
+                                        <td>985,432</td>
+                                        <td>Today, 11:45 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FSR</td>
+                                        <td>FirstRand Limited</td>
+                                        <td>Financial</td>
+                                        <td>68.45</td>
+                                        <td>67.85</td>
+                                        <td class="text-danger">-0.88%</td>
+                                        <td>2,453,678</td>
+                                        <td>Today, 11:45 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SBK</td>
+                                        <td>Standard Bank Group</td>
+                                        <td>Financial</td>
+                                        <td>185.75</td>
+                                        <td>186.20</td>
+                                        <td class="text-success">+0.24%</td>
+                                        <td>1,543,210</td>
+                                        <td>Today, 11:45 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AGL</td>
+                                        <td>Anglo American PLC</td>
+                                        <td>Mining</td>
+                                        <td>345.65</td>
+                                        <td>339.80</td>
+                                        <td class="text-danger">-1.69%</td>
+                                        <td>3,245,678</td>
+                                        <td>Today, 11:45 AM</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>WizData</h5>
+                    <p class="text-muted">Financial data acquisition and API service for TradingWealthWiz.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/api/docs" class="text-decoration-none text-muted">API Documentation</a></li>
+                        <li><a href="/products" class="text-decoration-none text-muted">Data Products</a></li>
+                        <li><a href="/api-services" class="text-decoration-none text-muted">API Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Getting Started</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">FAQ</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="text-muted">&copy; 2025 WizData. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Market Overview Chart
+        const marketCtx = document.getElementById('marketChart').getContext('2d');
+        const marketChart = new Chart(marketCtx, {
+            type: 'line',
+            data: {
+                labels: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
+                datasets: [
+                    {
+                        label: 'JSE Top 40',
+                        data: [74250, 74320, 74410, 74380, 74450, 74520, 74580, 74650],
+                        borderColor: '#0d6efd',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'BTC/USD',
+                        data: [28100, 28250, 28420, 28380, 28510, 28450, 28530, 28650],
+                        borderColor: '#ffc107',
+                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'EUR/USD',
+                        data: [1.0815, 1.0825, 1.0832, 1.0829, 1.0845, 1.0840, 1.0852, 1.0860],
+                        borderColor: '#20c997',
+                        backgroundColor: 'rgba(32, 201, 151, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // API Usage Chart
+        const apiUsageCtx = document.getElementById('apiUsageChart').getContext('2d');
+        const apiUsageChart = new Chart(apiUsageCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Symbols', 'Prices', 'OHLCV', 'Other'],
+                datasets: [
+                    {
+                        data: [35, 45, 15, 5],
+                        backgroundColor: [
+                            '#0d6efd',
+                            '#20c997',
+                            '#ffc107',
+                            '#6c757d'
+                        ],
+                        borderWidth: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+    </script>
+</body>
+</html>

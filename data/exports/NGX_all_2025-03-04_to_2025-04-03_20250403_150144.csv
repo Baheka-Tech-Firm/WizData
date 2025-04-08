@@ -1,0 +1,231 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type,name,sector,country,currency
+2025-03-04,DANGCEM,5.03,5.28,4.93,5.18,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-05,DANGCEM,5.21,5.48,5.11,5.37,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-06,DANGCEM,5.4,5.67,5.29,5.56,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-07,DANGCEM,5.6,5.88,5.48,5.76,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-10,DANGCEM,5.8,6.09,5.68,5.97,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-11,DANGCEM,6.01,6.31,5.89,6.19,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-12,DANGCEM,6.23,6.54,6.1,6.41,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-13,DANGCEM,6.45,6.78,6.32,6.64,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-14,DANGCEM,6.68,7.02,6.55,6.88,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-17,DANGCEM,6.93,7.28,6.79,7.13,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-18,DANGCEM,7.18,7.54,7.03,7.39,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-19,DANGCEM,7.44,7.81,7.29,7.66,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-20,DANGCEM,7.71,8.1,7.55,7.94,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-21,DANGCEM,7.98,8.39,7.82,8.22,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-24,DANGCEM,8.27,8.69,8.11,8.52,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-25,DANGCEM,8.57,9.01,8.4,8.83,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-26,DANGCEM,8.88,9.33,8.7,9.15,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-27,DANGCEM,9.2,9.67,9.02,9.48,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-28,DANGCEM,9.54,10.02,9.35,9.82,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-31,DANGCEM,9.88,10.38,9.68,10.18,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-04-01,DANGCEM,10.24,10.76,10.03,10.55,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-04-02,DANGCEM,10.61,11.15,10.4,10.93,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-04-03,DANGCEM,10.99,11.55,10.77,11.32,89775,NGX,Nigerian Stock Exchange,stock,Dangote Cement PLC,Industrial,Nigeria,NGN
+2025-03-04,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-05,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-06,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-07,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-10,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-11,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-12,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-13,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-14,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-17,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-18,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-19,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-20,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-21,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-24,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-25,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-26,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-27,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-28,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-31,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-04-01,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-04-02,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-04-03,MTNN,91.0,92.82,89.18,91.0,23085,NGX,Nigerian Stock Exchange,stock,MTN Nigeria,Telecommunications,Nigeria,NGN
+2025-03-04,ZENITHBANK,40.24,42.28,39.44,41.45,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-05,ZENITHBANK,41.7,43.81,40.86,42.95,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-06,ZENITHBANK,43.2,45.39,42.34,44.5,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-07,ZENITHBANK,44.77,47.03,43.87,46.11,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-10,ZENITHBANK,46.39,48.73,45.46,47.78,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-11,ZENITHBANK,48.07,50.5,47.1,49.51,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-12,ZENITHBANK,49.8,52.32,48.81,51.3,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-13,ZENITHBANK,51.61,54.22,50.57,53.15,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-14,ZENITHBANK,53.47,56.18,52.4,55.08,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-17,ZENITHBANK,55.41,58.21,54.3,57.07,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-18,ZENITHBANK,57.41,60.32,56.26,59.14,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-19,ZENITHBANK,59.49,62.5,58.3,61.27,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-20,ZENITHBANK,61.64,64.76,60.41,63.49,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-21,ZENITHBANK,63.87,67.1,62.6,65.79,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-24,ZENITHBANK,66.18,69.53,64.86,68.17,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-25,ZENITHBANK,68.58,72.05,67.21,70.64,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-26,ZENITHBANK,71.06,74.65,69.64,73.19,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-27,ZENITHBANK,73.63,77.36,72.16,75.84,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-28,ZENITHBANK,76.29,80.15,74.77,78.58,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-31,ZENITHBANK,79.05,83.05,77.47,81.43,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-04-01,ZENITHBANK,81.91,86.06,80.28,84.37,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-04-02,ZENITHBANK,84.88,89.17,83.18,87.42,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-04-03,ZENITHBANK,87.95,92.4,86.19,90.59,51300,NGX,Nigerian Stock Exchange,stock,Zenith Bank PLC,Banking,Nigeria,NGN
+2025-03-04,GUARANTY,62.25,64.76,61.0,63.49,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-05,GUARANTY,63.75,66.32,62.47,65.02,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-06,GUARANTY,65.28,67.92,63.98,66.59,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-07,GUARANTY,66.85,69.55,65.52,68.19,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-10,GUARANTY,68.46,71.23,67.09,69.83,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-11,GUARANTY,70.11,72.94,68.71,71.51,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-12,GUARANTY,71.8,74.7,70.36,73.24,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-13,GUARANTY,73.53,76.5,72.06,75.0,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-14,GUARANTY,75.3,78.34,73.79,76.81,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-17,GUARANTY,77.11,80.23,75.57,78.66,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-18,GUARANTY,78.97,82.16,77.39,80.55,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-19,GUARANTY,80.87,84.14,79.25,82.49,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-20,GUARANTY,82.82,86.17,81.16,84.48,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-21,GUARANTY,84.81,88.24,83.12,86.51,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-24,GUARANTY,86.86,90.36,85.12,88.59,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-25,GUARANTY,88.95,92.54,87.17,90.73,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-26,GUARANTY,91.09,94.77,89.27,92.91,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-27,GUARANTY,93.28,97.05,91.42,95.15,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-28,GUARANTY,95.53,99.39,93.62,97.44,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-31,GUARANTY,97.83,101.78,95.87,99.79,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-04-01,GUARANTY,100.19,104.23,98.18,102.19,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-04-02,GUARANTY,102.6,106.74,100.55,104.65,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-04-03,GUARANTY,105.07,109.31,102.97,107.17,24795,NGX,Nigerian Stock Exchange,stock,Guaranty Trust Bank,Banking,Nigeria,NGN
+2025-03-04,NESTLE,51.69,52.72,49.13,50.14,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-05,NESTLE,49.84,50.83,47.37,48.34,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-06,NESTLE,48.05,49.01,45.68,46.61,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-07,NESTLE,46.33,47.26,44.04,44.94,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-10,NESTLE,44.67,45.56,42.46,43.33,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-11,NESTLE,43.07,43.93,40.94,41.78,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-12,NESTLE,41.53,42.36,39.48,40.28,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-13,NESTLE,40.04,40.84,38.06,38.84,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-14,NESTLE,38.61,39.38,36.7,37.45,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-17,NESTLE,37.22,37.97,35.38,36.11,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-18,NESTLE,35.89,36.61,34.12,34.81,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-19,NESTLE,34.6,35.3,32.89,33.57,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-20,NESTLE,33.36,34.03,31.72,32.36,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-21,NESTLE,32.17,32.81,30.58,31.2,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-24,NESTLE,31.02,31.64,29.49,30.09,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-25,NESTLE,29.91,30.5,28.43,29.01,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-26,NESTLE,28.83,29.41,27.41,27.97,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-27,NESTLE,27.8,28.36,26.43,26.97,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-28,NESTLE,26.81,27.34,25.48,26.0,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-31,NESTLE,25.85,26.36,24.57,25.07,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-04-01,NESTLE,24.92,25.42,23.69,24.17,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-04-02,NESTLE,24.03,24.51,22.84,23.31,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-04-03,NESTLE,23.17,23.63,22.02,22.47,58995,NGX,Nigerian Stock Exchange,stock,Nestle Nigeria PLC,Consumer Goods,Nigeria,NGN
+2025-03-04,NB,31.81,32.44,30.24,30.85,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-05,NB,30.67,31.28,29.15,29.75,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-06,NB,29.57,30.16,28.11,28.68,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-07,NB,28.51,29.08,27.1,27.66,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-10,NB,27.49,28.04,26.13,26.66,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-11,NB,26.5,27.04,25.2,25.71,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-12,NB,25.56,26.07,24.29,24.79,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-13,NB,24.64,25.13,23.42,23.9,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-14,NB,23.76,24.23,22.58,23.04,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-17,NB,22.91,23.36,21.77,22.22,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-18,NB,22.09,22.53,20.99,21.42,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-19,NB,21.29,21.72,20.24,20.66,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-20,NB,20.53,20.94,19.52,19.92,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-21,NB,19.8,20.19,18.82,19.2,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-24,NB,19.09,19.47,18.14,18.51,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-25,NB,18.4,18.77,17.49,17.85,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-26,NB,17.74,18.1,16.87,17.21,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-27,NB,17.11,17.45,16.26,16.6,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-28,NB,16.5,16.83,15.68,16.0,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-31,NB,15.91,16.22,15.12,15.43,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-04-01,NB,15.34,15.64,14.58,14.88,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-04-02,NB,14.79,15.08,14.06,14.34,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-04-03,NB,14.26,14.54,13.55,13.83,46170,NGX,Nigerian Stock Exchange,stock,Nigerian Breweries,Consumer Goods,Nigeria,NGN
+2025-03-04,FBNH,89.58,99.6,87.79,97.65,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-05,FBNH,99.4,110.52,97.42,108.35,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-06,FBNH,110.3,122.63,108.09,120.23,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-07,FBNH,122.39,136.08,119.94,133.41,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-10,FBNH,135.81,150.99,133.09,148.03,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-11,FBNH,150.7,167.54,147.68,164.26,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-12,FBNH,167.22,185.91,163.87,182.26,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-13,FBNH,185.55,206.29,181.83,202.24,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-14,FBNH,205.88,228.9,201.77,224.41,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-17,FBNH,228.45,254.0,223.89,249.01,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-18,FBNH,253.5,281.84,248.43,276.31,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-19,FBNH,281.29,312.73,275.66,306.6,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-20,FBNH,312.12,347.02,305.88,340.21,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-21,FBNH,346.33,385.05,339.41,377.5,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-24,FBNH,384.3,427.26,376.61,418.89,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-25,FBNH,426.43,474.1,417.9,464.81,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-26,FBNH,473.17,526.07,463.71,515.76,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-27,FBNH,525.04,583.74,514.54,572.29,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-28,FBNH,582.6,647.73,570.94,635.03,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-31,FBNH,646.46,718.73,633.53,704.64,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-04-01,FBNH,717.33,797.52,702.98,781.88,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-04-02,FBNH,795.96,884.95,780.04,867.59,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-04-03,FBNH,883.21,981.95,865.55,962.7,82080,NGX,Nigerian Stock Exchange,stock,FBN Holdings PLC,Banking,Nigeria,NGN
+2025-03-04,UBA,57.88,59.04,56.16,57.31,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-05,UBA,57.19,58.33,55.49,56.62,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-06,UBA,56.51,57.64,54.82,55.94,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-07,UBA,55.83,56.95,54.16,55.27,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-10,UBA,55.16,56.26,53.52,54.61,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-11,UBA,54.5,55.59,52.87,53.95,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-12,UBA,53.85,54.92,52.24,53.31,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-13,UBA,53.2,54.26,51.62,52.67,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-14,UBA,52.56,53.61,51.0,52.04,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-17,UBA,51.93,52.97,50.39,51.41,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-18,UBA,51.31,52.34,49.78,50.8,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-19,UBA,50.7,51.71,49.19,50.19,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-20,UBA,50.09,51.09,48.6,49.59,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-21,UBA,49.49,50.48,48.01,48.99,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-24,UBA,48.9,49.87,47.44,48.41,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-25,UBA,48.31,49.28,46.87,47.83,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-26,UBA,47.73,48.69,46.31,47.25,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-27,UBA,47.16,48.1,45.75,46.69,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-28,UBA,46.6,47.53,45.21,46.13,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-31,UBA,46.04,46.96,44.67,45.58,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-04-01,UBA,45.49,46.4,44.13,45.03,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-04-02,UBA,44.94,45.84,43.6,44.49,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-04-03,UBA,44.4,45.29,43.08,43.96,22230,NGX,Nigerian Stock Exchange,stock,United Bank for Africa,Banking,Nigeria,NGN
+2025-03-04,ACCESSCORP,60.39,61.6,56.22,57.37,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-05,ACCESSCORP,56.8,57.93,52.88,53.96,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-06,ACCESSCORP,53.42,54.49,49.73,50.75,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-07,ACCESSCORP,50.24,51.24,46.77,47.73,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-10,ACCESSCORP,47.25,48.19,43.99,44.89,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-11,ACCESSCORP,44.44,45.33,41.37,42.22,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-12,ACCESSCORP,41.79,42.63,38.91,39.7,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-13,ACCESSCORP,39.31,40.09,36.6,37.34,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-14,ACCESSCORP,36.97,37.71,34.42,35.12,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-17,ACCESSCORP,34.77,35.46,32.37,33.03,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-18,ACCESSCORP,32.7,33.35,30.44,31.07,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-19,ACCESSCORP,30.75,31.37,28.63,29.22,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-20,ACCESSCORP,28.92,29.5,26.93,27.48,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-21,ACCESSCORP,27.2,27.75,25.33,25.84,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-24,ACCESSCORP,25.59,26.1,23.82,24.31,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-25,ACCESSCORP,24.06,24.54,22.4,22.86,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-26,ACCESSCORP,22.63,23.08,21.07,21.5,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-27,ACCESSCORP,21.28,21.71,19.82,20.22,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-28,ACCESSCORP,20.02,20.42,18.64,19.02,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-31,ACCESSCORP,18.83,19.2,17.53,17.89,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-04-01,ACCESSCORP,17.71,18.06,16.49,16.82,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-04-02,ACCESSCORP,16.65,16.99,15.5,15.82,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-04-03,ACCESSCORP,15.66,15.98,14.58,14.88,44460,NGX,Nigerian Stock Exchange,stock,Access Holdings PLC,Banking,Nigeria,NGN
+2025-03-04,SEPLAT,80.19,81.79,74.66,76.18,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-05,SEPLAT,75.42,76.93,70.21,71.65,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-06,SEPLAT,70.93,72.35,66.04,67.38,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-07,SEPLAT,66.71,68.05,62.11,63.38,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-10,SEPLAT,62.74,64.0,58.41,59.6,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-11,SEPLAT,59.01,60.19,54.94,56.06,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-12,SEPLAT,55.5,56.61,51.67,52.72,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-13,SEPLAT,52.2,53.24,48.59,49.59,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-14,SEPLAT,49.09,50.07,45.7,46.64,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-17,SEPLAT,46.17,47.09,42.98,43.86,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-18,SEPLAT,43.42,44.29,40.43,41.25,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-19,SEPLAT,40.84,41.66,38.02,38.8,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-20,SEPLAT,38.41,39.18,35.76,36.49,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-21,SEPLAT,36.12,36.85,33.63,34.32,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-24,SEPLAT,33.97,34.65,31.63,32.28,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-25,SEPLAT,31.95,32.59,29.75,30.35,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-26,SEPLAT,30.05,30.65,27.98,28.55,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-27,SEPLAT,28.26,28.83,26.31,26.85,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-28,SEPLAT,26.58,27.11,24.75,25.25,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-03-31,SEPLAT,25.0,25.5,23.27,23.75,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-04-01,SEPLAT,23.51,23.98,21.89,22.34,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-04-02,SEPLAT,22.11,22.56,20.59,21.01,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN
+2025-04-03,SEPLAT,20.8,21.21,19.36,19.76,57285,NGX,Nigerian Stock Exchange,stock,Seplat Energy PLC,Energy,Nigeria,NGN

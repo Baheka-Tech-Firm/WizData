@@ -1,0 +1,47 @@
+{
+  "status": "success",
+  "data_type": "dividend",
+  "timestamp": "2025-04-03T15:45:36.792496",
+  "record_count": 7,
+  "anomalies_detected": 2,
+  "anomaly_types": {
+    "negative_dividend": 1,
+    "unusual_dividend": 0,
+    "invalid_dates": 1
+  },
+  "completeness": {
+    "symbol": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "ex_date": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "payment_date": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "dividend_amount": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "currency": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "frequency": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "exchange": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    }
+  },
+  "metrics": {
+    "avg_dividend": 0.3828571428571429,
+    "median_dividend": 0.35,
+    "avg_days_between_payments": 106.5
+  }
+}

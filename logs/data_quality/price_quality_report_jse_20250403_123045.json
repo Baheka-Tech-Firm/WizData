@@ -1,0 +1,58 @@
+{
+  "timestamp": "2025-04-03T12:30:45",
+  "data_type": "price",
+  "market": "jse",
+  "total_records": 125,
+  "anomaly_count": 3,
+  "anomaly_rate": 0.024,
+  "quality_report": {
+    "anomalies_detected": 3,
+    "anomaly_types": {
+      "price_jump": 2,
+      "volume_zero": 1
+    },
+    "metrics": {
+      "price_volatility": 0.0245,
+      "volume_volatility": 0.1845,
+      "price_continuity": 0.9975,
+      "statistical_measures": {
+        "mean_price": 1205.47,
+        "median_price": 1198.92,
+        "std_price": 37.82,
+        "mean_volume": 452089,
+        "median_volume": 387250,
+        "std_volume": 298401
+      }
+    },
+    "completeness": {
+      "date": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "open": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "high": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "low": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "close": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "volume": {
+        "missing_count": 0,
+        "missing_percentage": 0.0
+      },
+      "adjusted_close": {
+        "missing_count": 1,
+        "missing_percentage": 0.008
+      }
+    }
+  }
+}

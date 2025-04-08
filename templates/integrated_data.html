@@ -1,0 +1,412 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card shadow-lg border-0" data-aos="fade-up">
+        <div class="card-body p-5">
+          <div class="row">
+            <div class="col-md-8">
+              <h1 class="display-4 fw-bold mb-4">Integrated Financial & ESG Data</h1>
+              <p class="lead">Access high-quality, authentic financial and ESG data from industry-leading sources through our unified API.</p>
+              <p class="mb-4">WizData's integrated data services combine multiple premium data sources to provide you with comprehensive insights that connect financial performance with environmental, social, and governance metrics.</p>
+              <div class="mt-4">
+                <a href="#data-sources" class="btn btn-primary rounded-pill px-4 me-2">
+                  <i class="fas fa-database me-2"></i> Data Sources
+                </a>
+                <a href="#api-examples" class="btn btn-outline-primary rounded-pill px-4">
+                  <i class="fas fa-code me-2"></i> API Examples
+                </a>
+              </div>
+            </div>
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
+              <div class="text-center">
+                <div class="display-1 text-primary mb-3">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="badge bg-primary p-2 rounded-pill">Real-time data</div>
+                <div class="badge bg-success p-2 rounded-pill ms-2">Licensed for resale</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-5" id="data-sources">
+    <div class="col-12 mb-4">
+      <h2 class="fw-bold" data-aos="fade-right">
+        <i class="fas fa-database text-primary me-2"></i> Premium Data Sources
+      </h2>
+      <p class="text-muted">Our data is sourced from industry-leading providers and can be legally resold to your clients.</p>
+    </div>
+
+    <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-chart-bar fs-4 me-2"></i>
+            <h3 class="mb-0 fs-5">Financial Data</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <h4 class="mb-3">Alpha Vantage</h4>
+          <p>Our primary source for real-time and historical financial market data. Alpha Vantage provides enterprise-grade data feed with transparent, low-latency delivery.</p>
+          <h5 class="mt-4 mb-3">Available Data:</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Stock Time Series Data
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Sector Performance
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Forex Exchange Rates
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Cryptocurrency Data
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Company Fundamentals
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Data frequency: Real-time to end-of-day updates</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header bg-success text-white">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-leaf fs-4 me-2"></i>
+            <h3 class="mb-0 fs-5">ESG Data</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <h4 class="mb-3">World Bank Data</h4>
+          <p>Comprehensive ESG metrics at country and regional levels from the World Bank's extensive datasets, providing reliable indicators across environmental, social, governance, and infrastructure dimensions.</p>
+          <h5 class="mt-4 mb-3">Available Data:</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Environmental Indicators
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Social Metrics
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Governance Indicators
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Infrastructure Data
+            </li>
+            <li class="list-group-item d-flex align-items-center">
+              <i class="fas fa-check-circle text-success me-2"></i> Composite ESG Scores
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Data frequency: Annual to quarterly updates</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-5" id="data-features">
+    <div class="col-12 mb-4">
+      <h2 class="fw-bold" data-aos="fade-right">
+        <i class="fas fa-tools text-primary me-2"></i> Features & Capabilities
+      </h2>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <div class="feature-icon bg-primary-subtle p-3 rounded-circle me-3">
+              <i class="fas fa-sync text-primary"></i>
+            </div>
+            <h3 class="fs-5 mb-0">Real-time Integration</h3>
+          </div>
+          <p>Integrate financial and ESG data in real-time with intelligent caching to optimize performance and reduce API calls.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <div class="feature-icon bg-primary-subtle p-3 rounded-circle me-3">
+              <i class="fas fa-file-export text-primary"></i>
+            </div>
+            <h3 class="fs-5 mb-0">Multiple Export Formats</h3>
+          </div>
+          <p>Export data in JSON or CSV formats to easily integrate with your existing systems, dashboards, or analytics tools.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <div class="feature-icon bg-primary-subtle p-3 rounded-circle me-3">
+              <i class="fas fa-globe-africa text-primary"></i>
+            </div>
+            <h3 class="fs-5 mb-0">African Market Focus</h3>
+          </div>
+          <p>Specialized data coverage for African markets with unique regional ESG metrics not available from other providers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <div class="feature-icon bg-primary-subtle p-3 rounded-circle me-3">
+              <i class="fas fa-chart-pie text-primary"></i>
+            </div>
+            <h3 class="fs-5 mb-0">Comparative Analysis</h3>
+          </div>
+          <p>Compare ESG scores across multiple regions or correlate financial performance with ESG metrics with our advanced analytics.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <div class="feature-icon bg-primary-subtle p-3 rounded-circle me-3">
+              <i class="fas fa-history text-primary"></i>
+            </div>
+            <h3 class="fs-5 mb-0">Historical Data</h3>
+          </div>
+          <p>Access historical data to identify trends, perform backtesting, or analyze performance over time with complete data lineage.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+            <div class="feature-icon bg-primary-subtle p-3 rounded-circle me-3">
+              <i class="fas fa-cogs text-primary"></i>
+            </div>
+            <h3 class="fs-5 mb-0">Custom Integration</h3>
+          </div>
+          <p>Tailor data delivery to your specific needs with custom API endpoints, webhooks, or scheduled data exports.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-5" id="api-examples">
+    <div class="col-12 mb-4">
+      <h2 class="fw-bold" data-aos="fade-right">
+        <i class="fas fa-code text-primary me-2"></i> API Examples
+      </h2>
+      <p class="text-muted">Explore our powerful API endpoints that provide access to integrated financial and ESG data.</p>
+    </div>
+
+    <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark">
+          <h3 class="mb-0 fs-5 text-white">Financial Data API</h3>
+        </div>
+        <div class="card-body">
+          <div class="nav nav-tabs mb-4" id="financial-tab" role="tablist">
+            <button class="nav-link active" id="stocks-tab" data-bs-toggle="tab" data-bs-target="#stocks" type="button" role="tab">Stocks</button>
+            <button class="nav-link" id="forex-tab" data-bs-toggle="tab" data-bs-target="#forex" type="button" role="tab">Forex</button>
+            <button class="nav-link" id="crypto-tab" data-bs-toggle="tab" data-bs-target="#crypto" type="button" role="tab">Crypto</button>
+          </div>
+          <div class="tab-content" id="financial-tab-content">
+            <div class="tab-pane fade show active" id="stocks" role="tabpanel">
+              <h4 class="fs-6 fw-bold">Get Stock Data</h4>
+              <pre class="bg-dark text-light p-3 rounded"><code>GET /api/integrated/stock/AAPL
+
+# Response
+{
+  "symbol": "AAPL",
+  "company_name": "Apple Inc.",
+  "stock_data": {
+    "latest_price": 178.72,
+    "change_30d": 5.2,
+    "change_90d": -2.1,
+    "change_1y": 15.3
+  },
+  "time_series": [...]
+}</code></pre>
+              <p class="mt-3"><a href="/api-services#stock-api" class="link-primary">See full documentation <i class="fas fa-arrow-right"></i></a></p>
+            </div>
+            <div class="tab-pane fade" id="forex" role="tabpanel">
+              <h4 class="fs-6 fw-bold">Get Forex Data</h4>
+              <pre class="bg-dark text-light p-3 rounded"><code>GET /api/integrated/forex?from_currency=USD&to_currency=EUR
+
+# Response
+{
+  "from_currency": "USD",
+  "to_currency": "EUR",
+  "data": {
+    "exchange_rate": 0.9234,
+    "last_refreshed": "2025-04-04 08:15:00"
+  }
+}</code></pre>
+              <p class="mt-3"><a href="/api-services#forex-api" class="link-primary">See full documentation <i class="fas fa-arrow-right"></i></a></p>
+            </div>
+            <div class="tab-pane fade" id="crypto" role="tabpanel">
+              <h4 class="fs-6 fw-bold">Get Cryptocurrency Data</h4>
+              <pre class="bg-dark text-light p-3 rounded"><code>GET /api/integrated/crypto/BTC
+
+# Response
+{
+  "symbol": "BTC",
+  "data": {
+    "price_usd": 72431.25,
+    "market_cap": 1421893428102,
+    "volume_24h": 32457821935,
+    "change_24h": 1.24
+  }
+}</code></pre>
+              <p class="mt-3"><a href="/api-services#crypto-api" class="link-primary">See full documentation <i class="fas fa-arrow-right"></i></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark">
+          <h3 class="mb-0 fs-5 text-white">ESG Data API</h3>
+        </div>
+        <div class="card-body">
+          <div class="nav nav-tabs mb-4" id="esg-tab" role="tablist">
+            <button class="nav-link active" id="country-tab" data-bs-toggle="tab" data-bs-target="#country" type="button" role="tab">Country ESG</button>
+            <button class="nav-link" id="region-tab" data-bs-toggle="tab" data-bs-target="#region" type="button" role="tab">Regional</button>
+            <button class="nav-link" id="compare-tab" data-bs-toggle="tab" data-bs-target="#compare" type="button" role="tab">Compare</button>
+          </div>
+          <div class="tab-content" id="esg-tab-content">
+            <div class="tab-pane fade show active" id="country" role="tabpanel">
+              <h4 class="fs-6 fw-bold">Get Country ESG Data</h4>
+              <pre class="bg-dark text-light p-3 rounded"><code>GET /api/integrated/esg/country/ZA
+
+# Response
+{
+  "country_code": "ZA",
+  "country_name": "South Africa",
+  "esg_scores": {
+    "environmental": 68.3,
+    "social": 62.8,
+    "governance": 71.5,
+    "infrastructure": 65.7,
+    "overall": 67.1
+  }
+}</code></pre>
+              <p class="mt-3"><a href="/api-services#esg-api" class="link-primary">See full documentation <i class="fas fa-arrow-right"></i></a></p>
+            </div>
+            <div class="tab-pane fade" id="region" role="tabpanel">
+              <h4 class="fs-6 fw-bold">Get Regional ESG Scores</h4>
+              <pre class="bg-dark text-light p-3 rounded"><code>GET /api/integrated/esg/region/ZA-GT/scores
+
+# Response
+{
+  "region_code": "ZA-GT",
+  "region_name": "Gauteng",
+  "year": 2024,
+  "scores": {
+    "environmental": 76.2,
+    "social": 67.9,
+    "governance": 82.1,
+    "infrastructure": 71.5,
+    "overall": 74.4
+  }
+}</code></pre>
+              <p class="mt-3"><a href="/api-services#regional-esg-api" class="link-primary">See full documentation <i class="fas fa-arrow-right"></i></a></p>
+            </div>
+            <div class="tab-pane fade" id="compare" role="tabpanel">
+              <h4 class="fs-6 fw-bold">Compare ESG Scores</h4>
+              <pre class="bg-dark text-light p-3 rounded"><code>GET /api/integrated/esg/compare?regions=ZA-GT,ZA-WC,ZA-KZN
+
+# Response
+{
+  "year": 2024,
+  "dimension": "all",
+  "regions": {
+    "ZA-GT": {
+      "region_name": "Gauteng",
+      "scores": {...}
+    },
+    "ZA-WC": {
+      "region_name": "Western Cape",
+      "scores": {...}
+    },
+    "ZA-KZN": {
+      "region_name": "KwaZulu-Natal",
+      "scores": {...}
+    }
+  }
+}</code></pre>
+              <p class="mt-3"><a href="/api-services#compare-esg-api" class="link-primary">See full documentation <i class="fas fa-arrow-right"></i></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card bg-primary text-white p-4 shadow" data-aos="fade-up">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-lg-8">
+              <h2 class="mb-3">Ready to integrate authentic financial and ESG data?</h2>
+              <p class="lead mb-0">Contact our sales team to discuss custom data integration for your business needs.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+              <a href="/contact" class="btn btn-light btn-lg rounded-pill">
+                <i class="fas fa-envelope me-2"></i> Contact Sales
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  pre {
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  
+  .card {
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+</style>
+{% endblock %}

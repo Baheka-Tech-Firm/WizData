@@ -1,0 +1,701 @@
+{% extends "layout.html" %}
+
+{% block title %}AI Insights Wizard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">
+                        <i class="fas fa-magic me-2"></i> AI-Powered Insights Wizard
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">
+                        Welcome to the WizData AI Insights Wizard. This tool helps you explore and analyze financial and ESG data
+                        with step-by-step guidance powered by advanced AI.
+                    </p>
+                    <hr>
+                    <div id="wizard-welcome" class="mb-4">
+                        <div class="mb-3">
+                            <label for="user-name" class="form-label">Your Name (optional)</label>
+                            <input type="text" class="form-control" id="user-name" placeholder="Enter your name for personalized experience">
+                        </div>
+                        <div class="mb-3">
+                            <label for="focus-area" class="form-label">What would you like to focus on?</label>
+                            <select class="form-select" id="focus-area">
+                                <option value="">Choose an area of focus...</option>
+                                <option value="ESG">ESG Data Analysis</option>
+                                <option value="Market Analysis">Market Data Analysis</option>
+                                <option value="Comparative">Comparative Analysis</option>
+                                <option value="General">General Exploration</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="start-wizard">
+                            <i class="fas fa-play-circle me-2"></i> Start Wizard
+                        </button>
+                    </div>
+
+                    <div id="wizard-interface" class="d-none">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card mb-4 border-0 shadow-sm">
+                                    <div class="card-header bg-light">
+                                        <h4 class="mb-0" id="wizard-title">Insights Wizard</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="wizard-response" class="mb-4">
+                                            <!-- Wizard responses will be shown here -->
+                                        </div>
+                                        <div id="wizard-input">
+                                            <div class="mb-3">
+                                                <label for="user-question" class="form-label">What would you like to know?</label>
+                                                <textarea class="form-control" id="user-question" rows="3" placeholder="Ask a question or request guidance..."></textarea>
+                                            </div>
+                                            <div class="d-flex">
+                                                <button class="btn btn-primary me-2" id="ask-question">
+                                                    <i class="fas fa-paper-plane me-2"></i> Ask
+                                                </button>
+                                                <button class="btn btn-outline-secondary me-2" id="get-guide">
+                                                    <i class="fas fa-book me-2"></i> Get Step-by-Step Guide
+                                                </button>
+                                                <button class="btn btn-outline-secondary" id="suggest-analysis">
+                                                    <i class="fas fa-chart-line me-2"></i> Suggest Analysis
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mb-4 border-0 shadow-sm">
+                                    <div class="card-header bg-light">
+                                        <h4 class="mb-0">Quick Actions</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="list-group" id="suggested-next-steps">
+                                            <!-- Suggested next steps will be populated here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-header bg-light">
+                                        <h4 class="mb-0">Data Sources</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label for="data-source" class="form-label">Select Data Source</label>
+                                            <select class="form-select" id="data-source">
+                                                <option value="esg-environmental">ESG - Environmental</option>
+                                                <option value="esg-social">ESG - Social</option>
+                                                <option value="esg-governance">ESG - Governance</option>
+                                                <option value="esg-infrastructure">ESG - Infrastructure</option>
+                                                <option value="market-african">African Markets</option>
+                                                <option value="market-global">Global Markets</option>
+                                                <option value="market-dividend">Dividend Data</option>
+                                                <option value="market-earnings">Earnings Data</option>
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-outline-primary btn-sm w-100" id="load-data">
+                                            <i class="fas fa-database me-2"></i> Load Sample Data
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Session data
+        let session = {
+            id: null,
+            history: []
+        };
+        
+        // DOM elements
+        const welcomeSection = document.getElementById('wizard-welcome');
+        const wizardInterface = document.getElementById('wizard-interface');
+        const userNameInput = document.getElementById('user-name');
+        const focusAreaSelect = document.getElementById('focus-area');
+        const startWizardBtn = document.getElementById('start-wizard');
+        
+        const wizardTitle = document.getElementById('wizard-title');
+        const wizardResponse = document.getElementById('wizard-response');
+        const userQuestionInput = document.getElementById('user-question');
+        const askQuestionBtn = document.getElementById('ask-question');
+        const getGuideBtn = document.getElementById('get-guide');
+        const suggestAnalysisBtn = document.getElementById('suggest-analysis');
+        const suggestedNextSteps = document.getElementById('suggested-next-steps');
+        const dataSourceSelect = document.getElementById('data-source');
+        const loadDataBtn = document.getElementById('load-data');
+        
+        // Start wizard session
+        startWizardBtn.addEventListener('click', function() {
+            const userName = userNameInput.value.trim();
+            const focusArea = focusAreaSelect.value;
+            
+            fetch('/api/insights/session/start', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_name: userName || null,
+                    focus_area: focusArea || null
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                session.id = data.session_id;
+                
+                // Update UI with welcome message
+                welcomeSection.classList.add('d-none');
+                wizardInterface.classList.remove('d-none');
+                
+                const welcomeContent = `
+                    <div class="alert alert-primary">
+                        <h4>${data.welcome}</h4>
+                        <p>${data.guidance}</p>
+                    </div>
+                `;
+                wizardResponse.innerHTML = welcomeContent;
+                
+                // Update suggested next steps
+                updateSuggestedSteps(data.suggested_next_steps);
+            })
+            .catch(error => {
+                console.error('Error starting wizard session:', error);
+                alert('Failed to start the wizard session. Please try again.');
+            });
+        });
+        
+        // Ask a question
+        askQuestionBtn.addEventListener('click', function() {
+            const question = userQuestionInput.value.trim();
+            if (!question) return;
+            
+            // Show thinking state
+            addUserMessage(question);
+            showThinking();
+            
+            fetch('/api/insights/question/answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    question: question
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                removeThinking();
+                
+                if (data.error) {
+                    addErrorMessage(data.error, data.message);
+                    return;
+                }
+                
+                // Add answer to the UI
+                const answerContent = `
+                    <div class="card mb-3 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Answer</h5>
+                            <p>${data.answer}</p>
+                            
+                            ${data.related_concepts && data.related_concepts.length > 0 ? `
+                                <h6>Related Concepts</h6>
+                                <ul>
+                                    ${data.related_concepts.map(concept => `<li>${concept}</li>`).join('')}
+                                </ul>
+                            ` : ''}
+                            
+                            ${data.relevant_data_sources && data.relevant_data_sources.length > 0 ? `
+                                <h6>Relevant Data Sources</h6>
+                                <ul>
+                                    ${data.relevant_data_sources.map(source => `<li>${source}</li>`).join('')}
+                                </ul>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                wizardResponse.insertAdjacentHTML('beforeend', answerContent);
+                
+                // Update suggested next questions
+                if (data.suggested_next_questions && data.suggested_next_questions.length > 0) {
+                    updateSuggestedSteps(data.suggested_next_questions);
+                }
+                
+                // Clear input
+                userQuestionInput.value = '';
+            })
+            .catch(error => {
+                removeThinking();
+                console.error('Error getting answer:', error);
+                addErrorMessage('Failed to get answer', 'An unexpected error occurred.');
+            });
+        });
+        
+        // Get a step-by-step guide
+        getGuideBtn.addEventListener('click', function() {
+            const question = userQuestionInput.value.trim();
+            if (!question) {
+                alert('Please specify what type of analysis you need guidance with.');
+                return;
+            }
+            
+            // Show thinking state
+            addUserMessage(`I need a step-by-step guide for ${question}`);
+            showThinking();
+            
+            fetch(`/api/insights/guide?analysis_type=${encodeURIComponent(question)}&complexity=intermediate`)
+                .then(response => response.json())
+                .then(data => {
+                    removeThinking();
+                    
+                    if (data.error) {
+                        addErrorMessage(data.error, data.message);
+                        return;
+                    }
+                    
+                    // Add guide to the UI
+                    const guideContent = `
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">${data.analysis_title}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-1"><strong>Complexity:</strong> ${data.complexity}</p>
+                                <p>${data.overview}</p>
+                                
+                                <h6>Prerequisites</h6>
+                                <ul>
+                                    ${data.prerequisites.map(prereq => `<li>${prereq}</li>`).join('')}
+                                </ul>
+                                
+                                <h6>Steps</h6>
+                                <div class="accordion" id="guideStepsAccordion">
+                                    ${data.steps.map((step, index) => `
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading${index}">
+                                                <button class="accordion-button ${index > 0 ? 'collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}" aria-expanded="${index === 0}" aria-controls="collapse${index}">
+                                                    Step ${step.step_number}: ${step.title}
+                                                </button>
+                                            </h2>
+                                            <div id="collapse${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading${index}" data-bs-parent="#guideStepsAccordion">
+                                                <div class="accordion-body">
+                                                    <p>${step.description}</p>
+                                                    ${step.code_example ? `
+                                                        <div class="bg-light p-3 rounded mb-3">
+                                                            <pre class="mb-0"><code>${step.code_example}</code></pre>
+                                                        </div>
+                                                    ` : ''}
+                                                    ${step.tip ? `
+                                                        <div class="alert alert-info">
+                                                            <i class="fas fa-lightbulb me-2"></i> ${step.tip}
+                                                        </div>
+                                                    ` : ''}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <p><strong>Expected Outcome:</strong> ${data.expected_outcome}</p>
+                                    <p><strong>Next Level:</strong> ${data.next_level_analysis}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    wizardResponse.insertAdjacentHTML('beforeend', guideContent);
+                    
+                    // Clear input
+                    userQuestionInput.value = '';
+                })
+                .catch(error => {
+                    removeThinking();
+                    console.error('Error getting guide:', error);
+                    addErrorMessage('Failed to get guide', 'An unexpected error occurred.');
+                });
+        });
+        
+        // Suggest comparative analysis
+        suggestAnalysisBtn.addEventListener('click', function() {
+            const dataType = dataSourceSelect.value.split('-')[0] || 'esg';
+            
+            // Show thinking state
+            addUserMessage(`I need suggestions for ${dataType} data analysis`);
+            showThinking();
+            
+            fetch(`/api/insights/comparison/suggest?data_type=${encodeURIComponent(dataType)}`)
+                .then(response => response.json())
+                .then(data => {
+                    removeThinking();
+                    
+                    if (data.error) {
+                        addErrorMessage(data.error, data.message);
+                        return;
+                    }
+                    
+                    // Add analysis suggestions to the UI
+                    const analysisContent = `
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">${data.analysis_title}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Objective:</strong> ${data.objective}</p>
+                                <p><strong>Methodology:</strong> ${data.methodology}</p>
+                                
+                                <h6>Data Requirements</h6>
+                                <ul>
+                                    ${data.data_requirements.map(req => `<li>${req}</li>`).join('')}
+                                </ul>
+                                
+                                <h6>Suggested Comparisons</h6>
+                                <div class="list-group mb-3">
+                                    ${data.suggested_comparisons.map(comp => `
+                                        <div class="list-group-item">
+                                            <h6 class="mb-1">${comp.comparison_name}</h6>
+                                            <p class="mb-1"><strong>Elements to compare:</strong> ${comp.elements_to_compare.join(', ')}</p>
+                                            <p class="mb-1"><strong>Metrics:</strong> ${comp.metrics.join(', ')}</p>
+                                            <p class="mb-1"><strong>Visualization:</strong> ${comp.visualization}</p>
+                                            <p class="mb-0"><strong>Expected insights:</strong> ${comp.expected_insights}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <p><strong>Interpretation Guidance:</strong> ${data.interpretation_guidance}</p>
+                                
+                                ${data.potential_api_endpoints && data.potential_api_endpoints.length > 0 ? `
+                                    <h6>Potential API Endpoints</h6>
+                                    <ul>
+                                        ${data.potential_api_endpoints.map(endpoint => `<li>${endpoint}</li>`).join('')}
+                                    </ul>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                    
+                    wizardResponse.insertAdjacentHTML('beforeend', analysisContent);
+                })
+                .catch(error => {
+                    removeThinking();
+                    console.error('Error getting analysis suggestions:', error);
+                    addErrorMessage('Failed to get analysis suggestions', 'An unexpected error occurred.');
+                });
+        });
+        
+        // Load sample data
+        loadDataBtn.addEventListener('click', function() {
+            const dataSourceType = dataSourceSelect.value;
+            const [category, subcategory] = dataSourceType.split('-');
+            
+            let endpoint = '';
+            let params = {};
+            
+            if (category === 'esg') {
+                endpoint = `/api/esg/${subcategory}`;
+                params = {
+                    region_code: 'ZA-GT',  // Default to Gauteng
+                    limit: 5
+                };
+            } else if (category === 'market') {
+                if (subcategory === 'african') {
+                    endpoint = '/api/african/data';
+                    params = {
+                        market: 'jse',
+                        limit: 5
+                    };
+                } else if (subcategory === 'global') {
+                    endpoint = '/api/global/data';
+                    params = {
+                        market: 'nasdaq',
+                        limit: 5
+                    };
+                } else if (subcategory === 'dividend') {
+                    endpoint = '/api/dividend/data';
+                    params = {
+                        market: 'nasdaq',
+                        limit: 5
+                    };
+                } else if (subcategory === 'earnings') {
+                    endpoint = '/api/earnings/data';
+                    params = {
+                        market: 'nasdaq',
+                        limit: 5
+                    };
+                }
+            }
+            
+            // Build query string
+            const queryString = Object.keys(params)
+                .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+                .join('&');
+            
+            const url = `${endpoint}?${queryString}`;
+            
+            // Show loading state
+            addUserMessage(`Load sample data from ${dataSourceSelect.options[dataSourceSelect.selectedIndex].text}`);
+            showThinking();
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    removeThinking();
+                    
+                    if (data.error) {
+                        addErrorMessage(data.error, data.message);
+                        return;
+                    }
+                    
+                    // Add data to the UI
+                    const dataContent = `
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Sample Data: ${dataSourceSelect.options[dataSourceSelect.selectedIndex].text}</h5>
+                            </div>
+                            <div class="card-body">
+                                <pre class="bg-light p-3 rounded" style="max-height: 300px; overflow-y: auto;"><code>${JSON.stringify(data, null, 2)}</code></pre>
+                                
+                                <div class="mt-3">
+                                    <p>You can analyze this data by asking questions or requesting insights:</p>
+                                    <div class="d-flex">
+                                        <button class="btn btn-sm btn-outline-primary me-2 analyze-data-btn" data-action="analyze">
+                                            <i class="fas fa-search me-1"></i> Analyze This Data
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary me-2 analyze-data-btn" data-action="trends">
+                                            <i class="fas fa-chart-line me-1"></i> Identify Trends
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary analyze-data-btn" data-action="narrative">
+                                            <i class="fas fa-file-alt me-1"></i> Generate Narrative
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    wizardResponse.insertAdjacentHTML('beforeend', dataContent);
+                    
+                    // Set up analyze data buttons
+                    document.querySelectorAll('.analyze-data-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const action = this.getAttribute('data-action');
+                            analyzeLoadedData(data, action);
+                        });
+                    });
+                })
+                .catch(error => {
+                    removeThinking();
+                    console.error('Error loading sample data:', error);
+                    addErrorMessage('Failed to load sample data', 'An unexpected error occurred.');
+                });
+        });
+        
+        // Function to analyze loaded data
+        function analyzeLoadedData(data, action) {
+            let endpoint = '';
+            let requestData = {};
+            
+            if (action === 'analyze') {
+                endpoint = '/api/insights/data/analyze';
+                requestData = {
+                    data: data,
+                    question: 'What are the key insights from this data?'
+                };
+            } else if (action === 'trends') {
+                endpoint = '/api/insights/data/analyze';
+                requestData = {
+                    data: data,
+                    question: 'What trends can be identified in this data?'
+                };
+            } else if (action === 'narrative') {
+                endpoint = '/api/insights/narrative';
+                requestData = {
+                    data: data,
+                    narrative_type: 'trends_summary'
+                };
+            }
+            
+            // Show thinking state
+            showThinking();
+            
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                removeThinking();
+                
+                if (result.error) {
+                    addErrorMessage(result.error, result.message);
+                    return;
+                }
+                
+                // Display results based on action
+                if (action === 'analyze' || action === 'trends') {
+                    const insightsContent = `
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Data Insights</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6>Key Insights</h6>
+                                <ul>
+                                    ${result.key_insights.map(insight => `<li>${insight}</li>`).join('')}
+                                </ul>
+                                
+                                <h6>Explanation</h6>
+                                <p>${result.explanation}</p>
+                                
+                                <h6>Suggested Visualizations</h6>
+                                <ul>
+                                    ${result.suggested_visualizations.map(viz => `<li>${viz}</li>`).join('')}
+                                </ul>
+                                
+                                <h6>Next Analysis Steps</h6>
+                                <ul>
+                                    ${result.next_analysis_steps.map(step => `<li>${step}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    
+                    wizardResponse.insertAdjacentHTML('beforeend', insightsContent);
+                } else if (action === 'narrative') {
+                    const narrativeContent = `
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">${result.title}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="lead">${result.summary}</p>
+                                
+                                <h6>Detailed Narrative</h6>
+                                <p>${result.detailed_narrative}</p>
+                                
+                                <h6>Key Data Points</h6>
+                                <ul>
+                                    ${result.key_data_points.map(point => `<li>${point}</li>`).join('')}
+                                </ul>
+                                
+                                <p><strong>Limitations:</strong> ${result.limitations}</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    wizardResponse.insertAdjacentHTML('beforeend', narrativeContent);
+                }
+            })
+            .catch(error => {
+                removeThinking();
+                console.error('Error analyzing data:', error);
+                addErrorMessage('Failed to analyze data', 'An unexpected error occurred.');
+            });
+        }
+        
+        // Helper functions
+        function updateSuggestedSteps(steps) {
+            suggestedNextSteps.innerHTML = '';
+            
+            steps.forEach(step => {
+                const item = document.createElement('button');
+                item.className = 'list-group-item list-group-item-action';
+                item.textContent = step;
+                item.addEventListener('click', function() {
+                    userQuestionInput.value = step;
+                    askQuestionBtn.click();
+                });
+                
+                suggestedNextSteps.appendChild(item);
+            });
+        }
+        
+        function addUserMessage(message) {
+            const userMessageElement = `
+                <div class="chat-message user-message mb-3">
+                    <div class="d-flex align-items-start">
+                        <div class="user-avatar me-3">
+                            <div class="bg-light rounded-circle p-2">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="message-content p-3 bg-light rounded">
+                            <p class="mb-0">${message}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            wizardResponse.insertAdjacentHTML('beforeend', userMessageElement);
+            
+            // Scroll to bottom
+            wizardResponse.scrollTop = wizardResponse.scrollHeight;
+        }
+        
+        function showThinking() {
+            const thinkingElement = `
+                <div class="chat-message assistant-message mb-3" id="thinking-indicator">
+                    <div class="d-flex align-items-start">
+                        <div class="assistant-avatar me-3">
+                            <div class="bg-primary text-white rounded-circle p-2">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                        </div>
+                        <div class="message-content p-3 bg-light rounded">
+                            <p class="mb-0">
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                Thinking...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            wizardResponse.insertAdjacentHTML('beforeend', thinkingElement);
+            
+            // Scroll to bottom
+            wizardResponse.scrollTop = wizardResponse.scrollHeight;
+        }
+        
+        function removeThinking() {
+            const thinkingIndicator = document.getElementById('thinking-indicator');
+            if (thinkingIndicator) {
+                thinkingIndicator.remove();
+            }
+        }
+        
+        function addErrorMessage(title, message) {
+            const errorElement = `
+                <div class="alert alert-danger mb-3">
+                    <h5 class="alert-heading">${title}</h5>
+                    <p class="mb-0">${message}</p>
+                </div>
+            `;
+            
+            wizardResponse.insertAdjacentHTML('beforeend', errorElement);
+            
+            // Scroll to bottom
+            wizardResponse.scrollTop = wizardResponse.scrollHeight;
+        }
+    });
+</script>
+{% endblock %}

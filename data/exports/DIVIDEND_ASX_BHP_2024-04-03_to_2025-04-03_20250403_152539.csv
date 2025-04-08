@@ -1,0 +1,5 @@
+symbol,ex_date,payment_date,dividend_amount,currency,frequency,market
+BHP,2024-04-28,2024-05-12,0.2,AUD,quarterly,ASX
+BHP,2024-07-28,2024-08-11,0.2,AUD,quarterly,ASX
+BHP,2024-10-28,2024-11-11,0.2,AUD,quarterly,ASX
+BHP,2025-01-28,2025-02-11,0.2,AUD,quarterly,ASX

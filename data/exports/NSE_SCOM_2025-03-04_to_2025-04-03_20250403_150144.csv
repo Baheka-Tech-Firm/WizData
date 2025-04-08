@@ -1,0 +1,24 @@
+date,symbol,open,high,low,close,volume,market,exchange,asset_type
+2025-03-04,SCOM,165.0,168.3,156.85,160.05,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-05,SCOM,159.09,162.28,151.23,154.32,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-06,SCOM,153.39,156.46,145.82,148.79,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-07,SCOM,147.9,150.86,140.59,143.46,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-10,SCOM,142.6,145.45,135.56,138.32,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-11,SCOM,137.49,140.24,130.7,133.37,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-12,SCOM,132.57,135.22,126.02,128.59,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-13,SCOM,127.82,130.38,121.51,123.99,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-14,SCOM,123.24,125.71,117.15,119.54,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-17,SCOM,118.83,121.2,112.96,115.26,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-18,SCOM,114.57,116.86,108.91,111.13,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-19,SCOM,110.47,112.68,105.01,107.15,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-20,SCOM,106.51,108.64,101.25,103.32,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-21,SCOM,102.7,104.75,97.62,99.61,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-24,SCOM,99.02,101.0,94.13,96.05,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-25,SCOM,95.47,97.38,90.75,92.61,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-26,SCOM,92.05,93.89,87.5,89.29,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-27,SCOM,88.75,90.53,84.37,86.09,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-28,SCOM,85.57,87.29,81.35,83.01,13680,NSE,Nairobi Securities Exchange,stock
+2025-03-31,SCOM,82.51,84.16,78.43,80.03,13680,NSE,Nairobi Securities Exchange,stock
+2025-04-01,SCOM,79.55,81.14,75.62,77.17,13680,NSE,Nairobi Securities Exchange,stock
+2025-04-02,SCOM,76.7,78.24,72.91,74.4,13680,NSE,Nairobi Securities Exchange,stock
+2025-04-03,SCOM,73.96,75.44,70.3,71.74,13680,NSE,Nairobi Securities Exchange,stock
