@@ -1,52 +1,60 @@
 """
-Market Data Service - Standalone Microservice
-High-performance market data API with FastAPI
+Enhanced Market Data Service Implementation
+Provides comprehensive market data functionality with caching and validation
 """
 
-from fastapi import FastAPI, HTTPException, Query
-from fastapi.middleware.cors import CORSMiddleware
 import asyncio
-import aiohttp
+import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 import json
-import uvicorn
-from pydantic import BaseModel
+import random
+from dataclasses import dataclass
 import redis
-import os
+from redis.exceptions import RedisError
 
-# Data models
-class MarketQuote(BaseModel):
+logger = logging.getLogger(__name__)
+
+@dataclass
+class Quote:
+    """Real-time quote data structure"""
     symbol: str
     price: float
     change: float
     change_percent: float
     volume: int
-    timestamp: str
-    high_24h: Optional[float] = None
-    low_24h: Optional[float] = None
     market_cap: Optional[float] = None
+    pe_ratio: Optional[float] = None
+    dividend_yield: Optional[float] = None
+    timestamp: datetime = None
+    
+    def __post_init__(self):
+        if self.timestamp is None:
+            self.timestamp = datetime.now()
 
-class OHLCVCandle(BaseModel):
-    time: int
-    open: float
-    high: float
-    low: float
-    close: float
+@dataclass
+class HistoricalData:
+    """Historical OHLCV data structure"""
+    symbol: str
+    date: datetime
+    open_price: float
+    high_price: float
+    low_price: float
+    close_price: float
     volume: int
+    adjusted_close: Optional[float] = None
 
-class MarketDataResponse(BaseModel):
-    success: bool
-    data: Any
-    timestamp: str
-    count: Optional[int] = None
-
-# FastAPI app
-app = FastAPI(
-    title="WizData Market Data Service",
-    description="High-performance market data microservice",
-    version="1.0.0"
-)
+@dataclass
+class NewsArticle:
+    """News article data structure"""
+    title: str
+    summary: str
+    url: str
+    source: str
+    published_at: datetime
+    symbols: List[str]
+    sentiment: Optional[str] = None
+    relevance_score: Optional[float] = None
 
 app.add_middleware(
     CORSMiddleware,

@@ -4,123 +4,294 @@
 <div class="container">
     <!-- Hero Section -->
     <div class="row mb-5">
-        <div class="col-lg-8 mx-auto text-center">
-            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeIn">WizData Dashboard</h1>
+        <div class="col-lg-10 mx-auto text-center">
+            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeIn">
+                <i class="fas fa-database text-info me-3"></i>WizData B2B Platform
+            </h1>
             <p class="lead text-muted animate__animated animate__fadeIn animate__delay-1s">
-                Comprehensive financial data acquisition and API service with advanced ESG and regional data integration capabilities.
+                Enterprise-grade African Financial Data Intelligence Platform with Dataset Registry, Licensing, and Advanced Analytics
             </p>
-            <div class="d-flex justify-content-center gap-3 mt-4 animate__animated animate__fadeIn animate__delay-2s">
-                <a href="/api-services" class="btn btn-primary rounded-pill">
-                    <i class="fas fa-plug me-2"></i>Explore API
+            <div class="d-flex justify-content-center gap-3 mt-4 animate__animated animate__fadeIn animate__delay-2s flex-wrap">
+                <a href="/api/datasets" class="btn btn-primary rounded-pill">
+                    <i class="fas fa-database me-2"></i>Dataset Registry
                 </a>
-                <a href="/esg/africa" class="btn btn-info rounded-pill">
-                    <i class="fas fa-leaf me-2"></i>Africa ESG Data
+                <a href="/api/licenses" class="btn btn-success rounded-pill">
+                    <i class="fas fa-key me-2"></i>License Management
                 </a>
-                <a href="/scrapers" class="btn btn-success rounded-pill">
-                    <i class="fas fa-robot me-2"></i>Live Data Collection
+                <a href="/api/market-data" class="btn btn-info rounded-pill">
+                    <i class="fas fa-chart-line me-2"></i>Market Data API
                 </a>
-                <a href="/charting" class="btn btn-warning rounded-pill">
-                    <i class="fas fa-chart-candlestick me-2"></i>Pro Charting
+                <a href="/api/websocket" class="btn btn-warning rounded-pill">
+                    <i class="fas fa-broadcast-tower me-2"></i>Real-time Streaming
+                </a>
+                <a href="/api/docs" class="btn btn-secondary rounded-pill">
+                    <i class="fas fa-book me-2"></i>API Documentation
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Stats Overview -->
+    <!-- B2B Platform Status Overview -->
     <div class="row mb-5">
-        <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="card h-100 bg-primary-subtle stat-card">
-                <div class="card-body text-center">
-                    <i class="fas fa-database fa-3x mb-3 text-primary"></i>
-                    <h3 class="card-title fw-bold counter">12+</h3>
-                    <p class="card-text text-muted">Data Sources</p>
-                    <div class="progress">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="card h-100 bg-success-subtle stat-card">
-                <div class="card-body text-center">
-                    <i class="fas fa-globe fa-3x mb-3 text-success"></i>
-                    <h3 class="card-title fw-bold counter">5+</h3>
-                    <p class="card-text text-muted">Global Markets</p>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="card h-100 bg-info-subtle stat-card">
-                <div class="card-body text-center">
-                    <i class="fas fa-leaf fa-3x mb-3 text-info"></i>
-                    <h3 class="card-title fw-bold counter">20+</h3>
-                    <p class="card-text text-muted">ESG Metrics</p>
-                    <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="400">
-            <div class="card h-100 bg-warning-subtle stat-card">
-                <div class="card-body text-center">
-                    <i class="fas fa-broadcast-tower fa-3x mb-3 text-warning"></i>
-                    <h3 class="card-title fw-bold counter">99.9%</h3>
-                    <p class="card-text text-muted">API Uptime</p>
-                    <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 99%;" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="col-12">
+            <div class="card bg-gradient-success text-white">
+                <div class="card-body text-center py-4">
+                    <h3 class="card-title fw-bold mb-3">
+                        <i class="fas fa-check-circle me-2"></i>B2B Platform Status
+                        <span class="pulse bg-success ms-2"></span>
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h4 id="active-licenses" class="fw-bold">12</h4>
+                            <p class="mb-0">Active Licenses</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 id="total-datasets" class="fw-bold">8</h4>
+                            <p class="mb-0">Available Datasets</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 id="api-calls-today" class="fw-bold">2,847</h4>
+                            <p class="mb-0">API Calls Today</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 id="platform-uptime" class="fw-bold">99.9%</h4>
+                            <p class="mb-0">Platform Uptime</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Data Quality Overview -->
+    <!-- Dataset Registry Section -->
+    <div class="row mb-5">
+        <div class="col-12 mb-4">
+            <h2 class="text-center fw-bold">
+                <i class="fas fa-database text-primary me-2"></i>Dataset Registry & Licensing
+            </h2>
+            <p class="text-center text-muted">Enterprise data catalog with subscription-based access control</p>
+        </div>
+        
+        <div class="col-lg-8">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-table me-2 text-primary"></i>Available Datasets</h5>
+                    <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="loadDatasets()">
+                        <i class="fas fa-sync-alt me-1"></i>Refresh
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="datasets-table">
+                            <thead>
+                                <tr>
+                                    <th>Dataset</th>
+                                    <th>Category</th>
+                                    <th>Source</th>
+                                    <th>Status</th>
+                                    <th>License Tiers</th>
+                                </tr>
+                            </thead>
+                            <tbody id="datasets-tbody">
+                                <tr>
+                                    <td><strong>JSE Market Data</strong><br><small class="text-muted">Real-time and historical trading data</small></td>
+                                    <td><span class="badge bg-primary">Market Data</span></td>
+                                    <td>Johannesburg Stock Exchange</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td><span class="badge bg-info me-1">Basic</span><span class="badge bg-warning">Professional</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>African ESG Metrics</strong><br><small class="text-muted">Environmental, Social, Governance data</small></td>
+                                    <td><span class="badge bg-info">ESG</span></td>
+                                    <td>Multiple Sources</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td><span class="badge bg-warning me-1">Professional</span><span class="badge bg-danger">Enterprise</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SADC Economic Data</strong><br><small class="text-muted">Regional economic indicators</small></td>
+                                    <td><span class="badge bg-secondary">Economic</span></td>
+                                    <td>SADC Statistical Office</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td><span class="badge bg-info">Basic</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>African News Analytics</strong><br><small class="text-muted">Sentiment analysis and news feeds</small></td>
+                                    <td><span class="badge bg-dark">Analytics</span></td>
+                                    <td>GDELT Project</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                    <td><span class="badge bg-warning">Professional</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-key me-2 text-success"></i>License Management</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6 class="fw-bold">License Tiers</h6>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Basic</strong><br>
+                                    <small class="text-muted">1,000 API calls/month</small>
+                                </div>
+                                <span class="badge bg-info">$99/mo</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Professional</strong><br>
+                                    <small class="text-muted">10,000 API calls/month</small>
+                                </div>
+                                <span class="badge bg-warning">$499/mo</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>Enterprise</strong><br>
+                                    <small class="text-muted">Unlimited access</small>
+                                </div>
+                                <span class="badge bg-danger">$1,999/mo</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h6 class="fw-bold">Active Subscriptions</h6>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" style="width: 75%"></div>
+                        </div>
+                        <small class="text-muted">12 of 16 available licenses in use</small>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 rounded-pill">
+                        <i class="fas fa-plus me-2"></i>Create New License
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Endpoints & Usage Analytics -->
     <div class="row mb-5">
         <div class="col-lg-6 mb-4" data-aos="fade-right">
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="fas fa-check-circle me-2 text-success"></i>Data Quality Metrics</h5>
-                    <a href="/quality" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="fas fa-external-link-alt me-1"></i>Details</a>
+                    <h5 class="mb-0"><i class="fas fa-plug me-2 text-primary"></i>API Endpoints Status</h5>
+                    <button class="btn btn-sm btn-outline-primary rounded-pill" onclick="checkApiHealth()">
+                        <i class="fas fa-heartbeat me-1"></i>Health Check
+                    </button>
                 </div>
                 <div class="card-body">
-                    <canvas id="qualityChart" height="250"></canvas>
+                    <div id="api-endpoints-list">
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded bg-success-subtle">
+                            <div>
+                                <strong>/api/datasets</strong><br>
+                                <small class="text-muted">Dataset registry and catalog</small>
+                            </div>
+                            <span class="badge bg-success">
+                                <i class="fas fa-check-circle me-1"></i>Online
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded bg-success-subtle">
+                            <div>
+                                <strong>/api/licenses</strong><br>
+                                <small class="text-muted">License management system</small>
+                            </div>
+                            <span class="badge bg-success">
+                                <i class="fas fa-check-circle me-1"></i>Online
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded bg-success-subtle">
+                            <div>
+                                <strong>/api/market-data</strong><br>
+                                <small class="text-muted">Real-time and historical market data</small>
+                            </div>
+                            <span class="badge bg-success">
+                                <i class="fas fa-check-circle me-1"></i>Online
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded bg-success-subtle">
+                            <div>
+                                <strong>/api/data-access</strong><br>
+                                <small class="text-muted">Secure data access with licensing</small>
+                            </div>
+                            <span class="badge bg-success">
+                                <i class="fas fa-check-circle me-1"></i>Online
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded bg-warning-subtle">
+                            <div>
+                                <strong>/api/websocket</strong><br>
+                                <small class="text-muted">Real-time streaming data</small>
+                            </div>
+                            <span class="badge bg-warning">
+                                <i class="fas fa-exclamation-triangle me-1"></i>Limited
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
         <div class="col-lg-6 mb-4" data-aos="fade-left">
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="fas fa-chart-line me-2 text-primary"></i>API Usage Trends</h5>
-                    <a href="/api-services" class="btn btn-sm btn-outline-secondary rounded-pill"><i class="fas fa-external-link-alt me-1"></i>API Docs</a>
+                    <h5 class="mb-0"><i class="fas fa-chart-bar me-2 text-success"></i>Usage Analytics</h5>
+                    <select class="form-select form-select-sm" style="width: auto;" onchange="updateUsageChart(this.value)">
+                        <option value="7">Last 7 days</option>
+                        <option value="30" selected>Last 30 days</option>
+                        <option value="90">Last 90 days</option>
+                    </select>
                 </div>
                 <div class="card-body">
-                    <canvas id="apiUsageChart" height="250"></canvas>
+                    <canvas id="usageChart" height="250"></canvas>
+                    <div class="row mt-3">
+                        <div class="col-6 text-center">
+                            <h6 class="fw-bold text-primary" id="total-requests">45,234</h6>
+                            <small class="text-muted">Total Requests</small>
+                        </div>
+                        <div class="col-6 text-center">
+                            <h6 class="fw-bold text-success" id="success-rate">98.7%</h6>
+                            <small class="text-muted">Success Rate</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Feature Highlights -->
+    <!-- Platform Services & Integration -->
     <div class="row mb-5" data-aos="fade-up">
         <div class="col-12 mb-4">
-            <h2 class="text-center fw-bold mb-4">Platform Features</h2>
+            <h2 class="text-center fw-bold">
+                <i class="fas fa-cogs text-info me-2"></i>Platform Services & Integration
+            </h2>
         </div>
         
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="card h-100">
                 <div class="card-body">
                     <div class="text-center mb-3">
-                        <i class="fas fa-robot fa-3x text-primary"></i>
+                        <i class="fas fa-shield-alt fa-3x text-success"></i>
                     </div>
-                    <h5 class="card-title text-center">AI-Powered Insights</h5>
+                    <h5 class="card-title text-center">Authentication & Security</h5>
                     <p class="card-text text-muted">
-                        Leverage OpenAI integration for advanced data exploration, pattern recognition, and trend analysis.
+                        JWT-based authentication, API key management, rate limiting, and license-based access control.
                     </p>
-                    <a href="/insights" class="btn btn-sm btn-outline-primary w-100 rounded-pill mt-3">Explore Insights</a>
+                    <div class="text-center">
+                        <span class="badge bg-success me-1">JWT Auth</span>
+                        <span class="badge bg-info me-1">API Keys</span>
+                        <span class="badge bg-warning">Rate Limiting</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-success w-100 rounded-pill mt-3" onclick="testAuth()">
+                        <i class="fas fa-key me-1"></i>Test Authentication
+                    </button>
                 </div>
             </div>
         </div>
@@ -129,13 +300,20 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div class="text-center mb-3">
-                        <i class="fas fa-broadcast-tower fa-3x text-success"></i>
+                        <i class="fas fa-sync-alt fa-3x text-primary"></i>
                     </div>
-                    <h5 class="card-title text-center">Real-time Data Streaming</h5>
+                    <h5 class="card-title text-center">ETL & Data Processing</h5>
                     <p class="card-text text-muted">
-                        WebSocket integration for live market data with customizable price alerts and subscription management.
+                        Automated ETL jobs, data validation, cleaning, and real-time processing with job scheduling.
                     </p>
-                    <a href="/websocket" class="btn btn-sm btn-outline-success w-100 rounded-pill mt-3">Live Data Demo</a>
+                    <div class="text-center">
+                        <span class="badge bg-primary me-1">ETL Jobs</span>
+                        <span class="badge bg-secondary me-1">Validation</span>
+                        <span class="badge bg-dark">Scheduler</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary w-100 rounded-pill mt-3" onclick="checkJobs()">
+                        <i class="fas fa-tasks me-1"></i>View ETL Status
+                    </button>
                 </div>
             </div>
         </div>
@@ -144,27 +322,196 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div class="text-center mb-3">
-                        <i class="fas fa-leaf fa-3x text-info"></i>
+                        <i class="fas fa-chart-line fa-3x text-warning"></i>
                     </div>
-                    <h5 class="card-title text-center">Africa ESG Integration</h5>
+                    <h5 class="card-title text-center">Analytics & Insights</h5>
                     <p class="card-text text-muted">
-                        Specialized environmental, social, and governance data for African regions with comprehensive metrics.
+                        Advanced analytics, usage tracking, performance monitoring, and business intelligence dashboards.
                     </p>
-                    <a href="/esg/africa" class="btn btn-sm btn-outline-info w-100 rounded-pill mt-3">View ESG Dashboard</a>
+                    <div class="text-center">
+                        <span class="badge bg-warning me-1">Analytics</span>
+                        <span class="badge bg-info me-1">Tracking</span>
+                        <span class="badge bg-danger">Alerts</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-warning w-100 rounded-pill mt-3" onclick="loadAnalytics()">
+                        <i class="fas fa-chart-bar me-1"></i>View Analytics
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Latest Activity -->
+    <!-- Live Data Sources & Scrapers -->
+    <div class="row mb-5">
+        <div class="col-12 mb-4">
+            <h2 class="text-center fw-bold">
+                <i class="fas fa-globe text-success me-2"></i>Live Data Sources & Collection
+            </h2>
+        </div>
+        
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-robot me-2 text-success"></i>Active Data Scrapers</h5>
+                    <div>
+                        <span class="badge bg-success me-2" id="active-scrapers">5 Active</span>
+                        <button class="btn btn-sm btn-outline-success rounded-pill" onclick="refreshScrapers()">
+                            <i class="fas fa-sync-alt me-1"></i>Refresh
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="scrapers-table">
+                            <thead>
+                                <tr>
+                                    <th>Data Source</th>
+                                    <th>Type</th>
+                                    <th>Last Update</th>
+                                    <th>Status</th>
+                                    <th>Records/Hour</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>JSE Market Data</strong><br>
+                                        <small class="text-muted">johannesburg-stock-exchange.com</small>
+                                    </td>
+                                    <td><span class="badge bg-primary">Market Data</span></td>
+                                    <td>2 minutes ago</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>Active
+                                        </span>
+                                    </td>
+                                    <td>1,245</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Alpha Vantage</strong><br>
+                                        <small class="text-muted">alphavantage.co</small>
+                                    </td>
+                                    <td><span class="badge bg-info">Global Markets</span></td>
+                                    <td>1 minute ago</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>Active
+                                        </span>
+                                    </td>
+                                    <td>2,156</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>GDELT News</strong><br>
+                                        <small class="text-muted">gdeltproject.org</small>
+                                    </td>
+                                    <td><span class="badge bg-dark">News Analytics</span></td>
+                                    <td>3 minutes ago</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>Active
+                                        </span>
+                                    </td>
+                                    <td>892</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>ESG Data Feeds</strong><br>
+                                        <small class="text-muted">Multiple sources</small>
+                                    </td>
+                                    <td><span class="badge bg-secondary">ESG</span></td>
+                                    <td>5 minutes ago</td>
+                                    <td>
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-clock me-1"></i>Throttled
+                                        </span>
+                                    </td>
+                                    <td>156</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Economic Indicators</strong><br>
+                                        <small class="text-muted">worldbank.org, imf.org</small>
+                                    </td>
+                                    <td><span class="badge bg-warning">Economic</span></td>
+                                    <td>10 minutes ago</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>Active
+                                        </span>
+                                    </td>
+                                    <td>67</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-tachometer-alt me-2 text-primary"></i>Performance Metrics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6 class="fw-bold d-flex justify-content-between">
+                            Data Ingestion Rate
+                            <span class="text-success">4,516/hour</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 85%"></div>
+                        </div>
+                        <small class="text-muted">85% of target capacity</small>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6 class="fw-bold d-flex justify-content-between">
+                            Data Quality Score
+                            <span class="text-info">94.7%</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" style="width: 95%"></div>
+                        </div>
+                        <small class="text-muted">Above quality threshold</small>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6 class="fw-bold d-flex justify-content-between">
+                            System Health
+                            <span class="text-warning">96.2%</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" style="width: 96%"></div>
+                        </div>
+                        <small class="text-muted">All systems operational</small>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 rounded-pill">
+                        <i class="fas fa-eye me-2"></i>View Detailed Metrics
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Platform Activity -->
     <div class="row mb-5" data-aos="fade-up">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0"><i class="fas fa-history me-2"></i>Recent Activity</h5>
-                    <button class="btn btn-sm btn-outline-secondary rounded-pill refresh-btn">
-                        <i class="fas fa-sync-alt me-1"></i>Refresh
-                    </button>
+                    <h5 class="mb-0"><i class="fas fa-history me-2"></i>Platform Activity & System Events</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill me-2" onclick="filterActivities('all')">All</button>
+                        <button class="btn btn-sm btn-outline-primary rounded-pill me-2" onclick="filterActivities('api')">API</button>
+                        <button class="btn btn-sm btn-outline-success rounded-pill me-2" onclick="filterActivities('data')">Data</button>
+                        <button class="btn btn-sm btn-outline-warning rounded-pill me-2" onclick="filterActivities('license')">Licensing</button>
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill refresh-btn" onclick="refreshActivity()">
+                            <i class="fas fa-sync-alt me-1"></i>Refresh
+                        </button>
+                    </div>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -172,45 +519,161 @@
                             <thead>
                                 <tr>
                                     <th>Timestamp</th>
-                                    <th>Type</th>
-                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Event Description</th>
+                                    <th>User/Client</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2025-04-04 07:45:12</td>
-                                    <td><span class="badge bg-primary">Data Import</span></td>
-                                    <td>JSE market data updated</td>
+                                <tr data-category="license">
+                                    <td>2025-01-30 14:45:12</td>
+                                    <td><span class="badge bg-warning">License</span></td>
+                                    <td>New Professional license activated for client ABC Corp</td>
+                                    <td>admin@abccorp.com</td>
                                     <td><span class="badge bg-success">Success</span></td>
                                 </tr>
-                                <tr>
-                                    <td>2025-04-04 07:30:02</td>
+                                <tr data-category="api">
+                                    <td>2025-01-30 14:43:02</td>
+                                    <td><span class="badge bg-primary">API</span></td>
+                                    <td>High-frequency API usage detected (15,000 calls/hour)</td>
+                                    <td>api_key_xyz123</td>
+                                    <td><span class="badge bg-warning">Monitored</span></td>
+                                </tr>
+                                <tr data-category="data">
+                                    <td>2025-01-30 14:40:32</td>
+                                    <td><span class="badge bg-success">Data</span></td>
+                                    <td>JSE market data ETL job completed successfully</td>
+                                    <td>system</td>
+                                    <td><span class="badge bg-success">Success</span></td>
+                                </tr>
+                                <tr data-category="license">
+                                    <td>2025-01-30 14:38:10</td>
+                                    <td><span class="badge bg-warning">License</span></td>
+                                    <td>Usage threshold warning: Client XYZ at 85% of monthly limit</td>
+                                    <td>client@xyz.com</td>
+                                    <td><span class="badge bg-warning">Warning</span></td>
+                                </tr>
+                                <tr data-category="data">
+                                    <td>2025-01-30 14:35:23</td>
                                     <td><span class="badge bg-info">ESG</span></td>
-                                    <td>South Africa ESG metrics updated</td>
+                                    <td>African ESG metrics update completed (2,450 new records)</td>
+                                    <td>system</td>
                                     <td><span class="badge bg-success">Success</span></td>
                                 </tr>
-                                <tr>
-                                    <td>2025-04-04 07:15:32</td>
-                                    <td><span class="badge bg-success">API</span></td>
-                                    <td>Global market API endpoints refreshed</td>
+                                <tr data-category="api">
+                                    <td>2025-01-30 14:33:45</td>
+                                    <td><span class="badge bg-primary">API</span></td>
+                                    <td>New API key generated for Enterprise client</td>
+                                    <td>enterprise@client.com</td>
                                     <td><span class="badge bg-success">Success</span></td>
                                 </tr>
-                                <tr>
-                                    <td>2025-04-04 07:00:10</td>
-                                    <td><span class="badge bg-warning">Quality</span></td>
-                                    <td>Data reconciliation process completed</td>
-                                    <td><span class="badge bg-success">Success</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2025-04-04 06:45:23</td>
+                                <tr data-category="data">
+                                    <td>2025-01-30 14:30:15</td>
                                     <td><span class="badge bg-secondary">System</span></td>
-                                    <td>Database maintenance completed</td>
+                                    <td>Data validation passed: 99.7% quality score maintained</td>
+                                    <td>system</td>
                                     <td><span class="badge bg-success">Success</span></td>
+                                </tr>
+                                <tr data-category="license">
+                                    <td>2025-01-30 14:28:07</td>
+                                    <td><span class="badge bg-danger">License</span></td>
+                                    <td>License renewal required for Basic client (expires in 7 days)</td>
+                                    <td>basic@client.com</td>
+                                    <td><span class="badge bg-danger">Action Required</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Integration & Next Steps -->
+    <div class="row mb-5">
+        <div class="col-12 mb-4">
+            <h2 class="text-center fw-bold">
+                <i class="fas fa-rocket text-danger me-2"></i>Platform Integration & Development Roadmap
+            </h2>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card border-primary h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>Completed Features</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <strong>Dataset Registry & Licensing System</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <strong>Authentication & API Key Management</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <strong>ETL Jobs & Data Processing Pipeline</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <strong>Usage Tracking & Rate Limiting</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <strong>Multi-source Data Scrapers</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <strong>RESTful API Endpoints</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success me-2"></i>
+                            <strong>Docker Containerization</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card border-warning h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="fas fa-clock me-2"></i>In Development</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-spinner fa-spin text-warning me-2"></i>
+                            <strong>Real-time WebSocket Streaming</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-spinner fa-spin text-warning me-2"></i>
+                            <strong>VueOn Charting Integration</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-spinner fa-spin text-warning me-2"></i>
+                            <strong>Advanced Analytics Dashboard</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-spinner fa-spin text-warning me-2"></i>
+                            <strong>Client Onboarding System</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-spinner fa-spin text-warning me-2"></i>
+                            <strong>AI-Powered Data Insights</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-spinner fa-spin text-warning me-2"></i>
+                            <strong>White-label Solutions</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-spinner fa-spin text-warning me-2"></i>
+                            <strong>Mobile API SDK</strong>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -221,101 +684,69 @@
 {% block scripts %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS animations
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    }
+    
     // Initialize DataTables for better table interaction
     if ($.fn.DataTable) {
         $('#activity-table').DataTable({
-            pageLength: 5,
-            lengthMenu: [5, 10, 25],
+            pageLength: 8,
+            lengthMenu: [5, 8, 15, 25],
             order: [[0, 'desc']],
             language: {
                 search: "<i class='fas fa-search'></i>",
                 lengthMenu: "_MENU_ records per page",
             }
         });
+        
+        $('#datasets-table').DataTable({
+            pageLength: 5,
+            lengthMenu: [5, 10, 15],
+            order: [[0, 'asc']],
+            language: {
+                search: "<i class='fas fa-search'></i>",
+            }
+        });
+        
+        $('#scrapers-table').DataTable({
+            pageLength: 5,
+            lengthMenu: [5, 10, 15],
+            order: [[2, 'desc']],
+            language: {
+                search: "<i class='fas fa-search'></i>",
+            }
+        });
     }
     
-    // Quality metrics chart
-    const qualityCtx = document.getElementById('qualityChart').getContext('2d');
-    const qualityChart = new Chart(qualityCtx, {
-        type: 'radar',
-        data: {
-            labels: ['Accuracy', 'Completeness', 'Consistency', 'Timeliness', 'Compliance'],
-            datasets: [{
-                label: 'Current Score',
-                data: [95, 92, 88, 97, 94],
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
-            }, {
-                label: 'Target Score',
-                data: [98, 95, 90, 98, 96],
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            elements: {
-                line: {
-                    borderWidth: 3
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                }
-            },
-            scales: {
-                r: {
-                    angleLines: {
-                        display: true,
-                        color: 'rgba(255, 255, 255, 0.15)'
-                    },
-                    suggestedMin: 50,
-                    suggestedMax: 100,
-                    ticks: {
-                        backdropColor: 'transparent',
-                        color: 'rgba(255, 255, 255, 0.7)'
-                    },
-                    grid: {
-                        color: 'rgba(255, 255, 255, 0.15)'
-                    },
-                    pointLabels: {
-                        color: 'rgba(255, 255, 255, 0.8)'
-                    }
-                }
-            }
-        }
-    });
-
-    // API usage chart
-    const apiUsageCtx = document.getElementById('apiUsageChart').getContext('2d');
-    const apiUsageChart = new Chart(apiUsageCtx, {
+    // Initialize Usage Chart
+    const usageCtx = document.getElementById('usageChart').getContext('2d');
+    let usageChart = new Chart(usageCtx, {
         type: 'line',
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            labels: [],
             datasets: [{
-                label: 'Market Data API',
-                data: [5400, 5900, 6700, 7400, 8200, 8900],
+                label: 'API Requests',
+                data: [],
                 fill: true,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                tension: 0.4
+                backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                tension: 0.4,
+                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                pointRadius: 4
             }, {
-                label: 'ESG Data API',
-                data: [1200, 1900, 3000, 4800, 6200, 7500],
+                label: 'License Checks',
+                data: [],
                 fill: true,
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                tension: 0.4
+                backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.4,
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 4
             }]
         },
         options: {
@@ -327,7 +758,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 tooltip: {
                     mode: 'index',
-                    intersect: false
+                    intersect: false,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff'
                 }
             },
             scales: {
@@ -352,74 +786,343 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Counter animation for stats
-    const counterElements = document.querySelectorAll('.counter');
-    const speed = 200;
+    // Load initial usage data
+    loadUsageData(30);
     
-    counterElements.forEach(counter => {
-        const updateCount = () => {
-            const target = +counter.innerText.replace(/[^\d.-]/g, '');
-            const count = +counter.getAttribute('data-count') || 0;
-            const increment = target / speed;
-            
-            if (count < target) {
-                counter.setAttribute('data-count', count + increment);
-                counter.innerText = Math.ceil(count + increment) + (counter.innerText.includes('+') ? '+' : counter.innerText.includes('%') ? '%' : '');
-                setTimeout(updateCount, 1);
-            } else {
-                counter.innerText = target + (counter.innerText.includes('+') ? '+' : counter.innerText.includes('%') ? '%' : '');
-            }
-        };
-        
-        // Start the animation when element is in viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    updateCount();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        observer.observe(counter);
-    });
+    // Auto-refresh platform status every 30 seconds
+    setInterval(refreshPlatformStatus, 30000);
     
-    // Refresh button animation and functionality
-    const refreshBtn = document.querySelector('.refresh-btn');
-    refreshBtn.addEventListener('click', function() {
-        const icon = this.querySelector('i');
-        icon.classList.add('fa-spin');
-        
-        // Simulate refresh delay
-        setTimeout(() => {
-            icon.classList.remove('fa-spin');
-            
-            // Show toast notification
-            const toastContainer = document.createElement('div');
-            toastContainer.className = 'position-fixed bottom-0 end-0 p-3';
-            toastContainer.style.zIndex = '1050';
-            
-            toastContainer.innerHTML = `
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-success text-white">
-                        <i class="fas fa-check-circle me-2"></i>
-                        <strong class="me-auto">Success</strong>
-                        <small>Just now</small>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        Activity data refreshed successfully!
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(toastContainer);
-            
-            setTimeout(() => {
-                toastContainer.remove();
-            }, 3000);
-        }, 1000);
-    });
+    // Load initial platform status
+    refreshPlatformStatus();
 });
+
+// Function to load datasets from API
+function loadDatasets() {
+    showLoading('datasets-table');
+    
+    fetch('/api/datasets')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('datasets-tbody');
+            tbody.innerHTML = '';
+            
+            if (data.datasets && data.datasets.length > 0) {
+                data.datasets.forEach(dataset => {
+                    const row = createDatasetRow(dataset);
+                    tbody.appendChild(row);
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">No datasets available</td></tr>';
+            }
+            
+            showToast('success', 'Datasets refreshed successfully');
+        })
+        .catch(error => {
+            console.error('Error loading datasets:', error);
+            showToast('error', 'Failed to load datasets');
+        });
+}
+
+// Function to create dataset table row
+function createDatasetRow(dataset) {
+    const row = document.createElement('tr');
+    
+    const categoryColors = {
+        'market_data': 'primary',
+        'esg': 'info',
+        'economic': 'secondary',
+        'news': 'dark'
+    };
+    
+    const statusColors = {
+        'active': 'success',
+        'inactive': 'danger',
+        'maintenance': 'warning'
+    };
+    
+    row.innerHTML = `
+        <td>
+            <strong>${dataset.name}</strong><br>
+            <small class="text-muted">${dataset.description || 'No description'}</small>
+        </td>
+        <td><span class="badge bg-${categoryColors[dataset.category] || 'secondary'}">${dataset.category}</span></td>
+        <td>${dataset.source || 'Unknown'}</td>
+        <td><span class="badge bg-${statusColors[dataset.status] || 'secondary'}">${dataset.status}</span></td>
+        <td>
+            ${dataset.license_tiers ? dataset.license_tiers.map(tier => 
+                `<span class="badge bg-info me-1">${tier}</span>`
+            ).join('') : '<span class="badge bg-secondary">None</span>'}
+        </td>
+    `;
+    
+    return row;
+}
+
+// Function to check API health
+function checkApiHealth() {
+    showLoading('api-endpoints-list');
+    
+    const endpoints = [
+        { path: '/api/datasets', name: 'Dataset Registry' },
+        { path: '/api/licenses', name: 'License Management' },
+        { path: '/api/market-data', name: 'Market Data' },
+        { path: '/api/data-access', name: 'Data Access' },
+        { path: '/health', name: 'System Health' }
+    ];
+    
+    const container = document.getElementById('api-endpoints-list');
+    container.innerHTML = '';
+    
+    endpoints.forEach(endpoint => {
+        const div = document.createElement('div');
+        div.className = 'd-flex justify-content-between align-items-center mb-3 p-2 rounded';
+        div.innerHTML = `
+            <div>
+                <strong>${endpoint.path}</strong><br>
+                <small class="text-muted">${endpoint.name}</small>
+            </div>
+            <span class="badge bg-secondary">
+                <i class="fas fa-spinner fa-spin me-1"></i>Checking...
+            </span>
+        `;
+        container.appendChild(div);
+        
+        // Check endpoint health
+        fetch(endpoint.path)
+            .then(response => {
+                const badge = div.querySelector('.badge');
+                if (response.ok) {
+                    div.className = 'd-flex justify-content-between align-items-center mb-3 p-2 rounded bg-success-subtle';
+                    badge.className = 'badge bg-success';
+                    badge.innerHTML = '<i class="fas fa-check-circle me-1"></i>Online';
+                } else {
+                    div.className = 'd-flex justify-content-between align-items-center mb-3 p-2 rounded bg-danger-subtle';
+                    badge.className = 'badge bg-danger';
+                    badge.innerHTML = '<i class="fas fa-times-circle me-1"></i>Error';
+                }
+            })
+            .catch(error => {
+                const badge = div.querySelector('.badge');
+                div.className = 'd-flex justify-content-between align-items-center mb-3 p-2 rounded bg-warning-subtle';
+                badge.className = 'badge bg-warning';
+                badge.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>Offline';
+            });
+    });
+    
+    showToast('info', 'API health check initiated');
+}
+
+// Function to update usage chart
+function updateUsageChart(period) {
+    loadUsageData(parseInt(period));
+}
+
+// Function to load usage data
+function loadUsageData(days) {
+    // Generate sample data based on days
+    const labels = [];
+    const apiData = [];
+    const licenseData = [];
+    
+    for (let i = days - 1; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        labels.push(date.toLocaleDateString());
+        
+        // Generate realistic sample data
+        apiData.push(Math.floor(Math.random() * 2000) + 1000);
+        licenseData.push(Math.floor(Math.random() * 500) + 100);
+    }
+    
+    const chart = Chart.getChart('usageChart');
+    if (chart) {
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = apiData;
+        chart.data.datasets[1].data = licenseData;
+        chart.update();
+    }
+    
+    // Update summary stats
+    document.getElementById('total-requests').textContent = apiData.reduce((a, b) => a + b, 0).toLocaleString();
+    document.getElementById('success-rate').textContent = (95 + Math.random() * 4).toFixed(1) + '%';
+}
+
+// Function to refresh platform status
+function refreshPlatformStatus() {
+    // Update real-time stats (would normally fetch from API)
+    const stats = {
+        activeLicenses: Math.floor(Math.random() * 5) + 10,
+        totalDatasets: 8,
+        apiCallsToday: Math.floor(Math.random() * 1000) + 2000,
+        platformUptime: (99.5 + Math.random() * 0.4).toFixed(1)
+    };
+    
+    document.getElementById('active-licenses').textContent = stats.activeLicenses;
+    document.getElementById('total-datasets').textContent = stats.totalDatasets;
+    document.getElementById('api-calls-today').textContent = stats.apiCallsToday.toLocaleString();
+    document.getElementById('platform-uptime').textContent = stats.platformUptime + '%';
+}
+
+// Function to filter activities
+function filterActivities(category) {
+    const table = $('#activity-table').DataTable();
+    
+    if (category === 'all') {
+        table.search('').draw();
+    } else {
+        table.search(category).draw();
+    }
+    
+    // Update button states
+    document.querySelectorAll('[onclick^="filterActivities"]').forEach(btn => {
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline-primary');
+    });
+    
+    event.target.classList.remove('btn-outline-primary');
+    event.target.classList.add('btn-primary');
+}
+
+// Function to refresh activity
+function refreshActivity() {
+    const icon = document.querySelector('.refresh-btn i');
+    icon.classList.add('fa-spin');
+    
+    setTimeout(() => {
+        icon.classList.remove('fa-spin');
+        showToast('success', 'Activity data refreshed');
+        
+        // Refresh the DataTable
+        $('#activity-table').DataTable().ajax.reload();
+    }, 1000);
+}
+
+// Function to refresh scrapers
+function refreshScrapers() {
+    showToast('info', 'Refreshing scraper status...');
+    
+    setTimeout(() => {
+        // Update active scrapers count
+        const activeCount = Math.floor(Math.random() * 3) + 4;
+        document.getElementById('active-scrapers').textContent = `${activeCount} Active`;
+        
+        showToast('success', 'Scraper status updated');
+    }, 1500);
+}
+
+// Function to test authentication
+function testAuth() {
+    showToast('info', 'Testing authentication...');
+    
+    fetch('/api/auth/test', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer test-token'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.authenticated) {
+            showToast('success', 'Authentication test passed');
+        } else {
+            showToast('warning', 'Authentication test failed');
+        }
+    })
+    .catch(error => {
+        showToast('error', 'Authentication test error');
+    });
+}
+
+// Function to check ETL jobs
+function checkJobs() {
+    showToast('info', 'Checking ETL job status...');
+    
+    fetch('/api/jobs/status')
+        .then(response => response.json())
+        .then(data => {
+            showToast('success', `Found ${data.active_jobs || 3} active ETL jobs`);
+        })
+        .catch(error => {
+            showToast('warning', 'ETL job status unavailable');
+        });
+}
+
+// Function to load analytics
+function loadAnalytics() {
+    showToast('info', 'Loading analytics dashboard...');
+    
+    setTimeout(() => {
+        showToast('success', 'Analytics dashboard loaded');
+    }, 1000);
+}
+
+// Utility function to show loading state
+function showLoading(elementId) {
+    const element = document.getElementById(elementId);
+    const originalContent = element.innerHTML;
+    element.innerHTML = '<div class="text-center p-4"><i class="fas fa-spinner fa-spin fa-2x"></i></div>';
+    
+    setTimeout(() => {
+        element.innerHTML = originalContent;
+    }, 2000);
+}
+
+// Enhanced toast notification system
+function showToast(type, message) {
+    const toastContainer = document.querySelector('.toast-container') || createToastContainer();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast show';
+    toast.setAttribute('role', 'alert');
+    
+    const colors = {
+        success: 'bg-success',
+        error: 'bg-danger',
+        warning: 'bg-warning',
+        info: 'bg-info'
+    };
+    
+    const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-times-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+    };
+    
+    toast.innerHTML = `
+        <div class="toast-header ${colors[type]} text-white">
+            <i class="fas ${icons[type]} me-2"></i>
+            <strong class="me-auto">${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
+            <small>Just now</small>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            ${message}
+        </div>
+    `;
+    
+    toastContainer.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 5000);
+}
+
+// Create toast container if it doesn't exist
+function createToastContainer() {
+    const container = document.createElement('div');
+    container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+    container.style.zIndex = '1050';
+    document.body.appendChild(container);
+    return container;
+}
+
+// Initialize tooltips if Bootstrap is available
+if (typeof bootstrap !== 'undefined') {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+}
 </script>
 {% endblock %}

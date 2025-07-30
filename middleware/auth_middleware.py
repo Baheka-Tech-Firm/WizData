@@ -1,21 +1,29 @@
 """
-Authentication Middleware for API Key Validation
-Handles API key authentication and authorization for all requests
+Enhanced Authentication Middleware for WizData API
+Provides JWT-based authentication, API key management, and role-based access control
 """
 
-from flask import request, jsonify, g
+import jwt
+import hashlib
+import secrets
+from datetime import datetime, timedelta
 from functools import wraps
-import time
-from datetime import datetime
-from typing import Optional, Dict, Any
-import redis
+from typing import Dict, List, Any, Optional, Tuple
+from flask import request, jsonify, g, current_app
+import logging
+from redis import Redis
+from redis.exceptions import RedisError
 import os
 import json
 
-# Import API key manager
-import sys
-sys.path.append('/home/runner/workspace')
-from auth.api_key_manager import api_key_manager
+logger = logging.getLogger(__name__)
+
+class AuthenticationError(Exception):
+    """Custom exception for authentication errors"""
+    def __init__(self, message: str, status_code: int = 401):
+        self.message = message
+        self.status_code = status_code
+        super().__init__(self.message)
 
 class AuthenticationMiddleware:
     """Middleware for API key authentication and rate limiting"""
