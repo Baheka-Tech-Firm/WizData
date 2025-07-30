@@ -1,600 +1,698 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title | default('Dashboard - WizData') }}</title>
-    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <title>WizData Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .stat-card {
-            height: 100%;
-            transition: transform 0.2s;
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-        .stat-card:hover {
-            transform: translateY(-5px);
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
         }
-        .data-source-card {
-            border-left: 4px solid var(--bs-primary);
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 3px;
         }
-        .chart-container {
-            height: 300px;
-            width: 100%;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
         }
-        .status-badge {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
         }
-        .status-active {
-            background-color: var(--bs-success);
-            box-shadow: 0 0 5px var(--bs-success);
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .status-warning {
-            background-color: var(--bs-warning);
-            box-shadow: 0 0 5px var(--bs-warning);
+        
+        .pulse-dot {
+            animation: pulse 2s infinite;
         }
-        .status-inactive {
-            background-color: var(--bs-danger);
-            box-shadow: 0 0 5px var(--bs-danger);
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
     </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'sidebar-bg': '#111827',
+                        'topbar-bg': '#1E293B',
+                        'hover-gray': '#1F2937'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <span class="fs-4">WizData</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/sources">Data Sources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/jobs">Collection Jobs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/products">Data Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/api-services">API Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link bg-primary text-white rounded px-3" href="/insights"><i class="bi bi-robot"></i> AI Insights</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a href="/api/docs" class="btn btn-outline-light me-2">API Docs</a>
-                    <a href="#" class="btn btn-primary">Sign In</a>
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Top Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 h-16 bg-topbar-bg border-b border-gray-700 flex items-center px-8">
+        <div class="flex items-center space-x-6 flex-1">
+            <!-- App Name -->
+            <div class="font-bold text-xl text-white">WizData</div>
+            
+            <!-- App Switcher -->
+            <div class="relative">
+                <button id="appSwitcher" class="flex items-center space-x-2 px-3 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
+                    <i data-lucide="grid-3x3" class="w-4 h-4"></i>
+                    <span class="text-sm">Dashboard</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </button>
+                
+                <!-- Dropdown Menu -->
+                <div id="appDropdown" class="hidden absolute top-full mt-2 left-0 bg-gray-800 rounded-lg shadow-xl border border-gray-700 min-w-[200px] z-50">
+                    <div class="p-2">
+                        <div class="text-xs text-gray-400 px-3 py-2 uppercase tracking-wider">Products</div>
+                        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded hover:bg-gray-700 transition-colors">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4 text-blue-400"></i>
+                            <span>VueOn Charts</span>
+                        </a>
+                        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded hover:bg-gray-700 transition-colors">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-green-400"></i>
+                            <span>Trader (Strada)</span>
+                        </a>
+                        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded hover:bg-gray-700 transition-colors">
+                            <i data-lucide="pulse" class="w-4 h-4 text-purple-400"></i>
+                            <span>Pulse</span>
+                        </a>
+                        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded hover:bg-gray-700 transition-colors">
+                            <i data-lucide="shield" class="w-4 h-4 text-yellow-400"></i>
+                            <span>Wealth (Novia)</span>
+                        </a>
+                        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded hover:bg-gray-700 transition-colors">
+                            <i data-lucide="users" class="w-4 h-4 text-indigo-400"></i>
+                            <span>Connect</span>
+                        </a>
+                    </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Center Search -->
+        <div class="flex-1 max-w-md mx-8">
+            <div class="relative">
+                <input type="text" placeholder="Search..." class="w-full bg-gray-700 text-white px-4 py-2 pl-10 pr-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400 bg-gray-600 px-2 py-1 rounded">⌘K</div>
+            </div>
+        </div>
+        
+        <!-- Right Side -->
+        <div class="flex items-center space-x-4">
+            <!-- System Status -->
+            <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full pulse-dot"></div>
+                <span class="text-sm text-gray-300">System OK</span>
+            </div>
+            
+            <!-- AI Insights Button -->
+            <button id="aiInsightsBtn" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-sm font-medium transition-colors">
+                <i data-lucide="brain" class="w-4 h-4 inline mr-2"></i>
+                AI Insights
+            </button>
+            
+            <!-- User Menu -->
+            <div class="relative">
+                <button id="userMenu" class="flex items-center space-x-2 hover:bg-gray-700 rounded-lg p-2 transition-colors">
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center font-medium text-sm">
+                        A
+                    </div>
+                    <span class="text-sm">Admin</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <nav class="fixed left-0 top-16 bottom-0 w-56 bg-sidebar-bg border-r border-gray-700 z-30 overflow-y-auto">
+        <div class="p-4">
+            <!-- Navigation Items -->
+            <div class="space-y-2">
+                <a href="#" class="nav-item active flex items-center space-x-3 px-3 py-2 rounded-lg bg-blue-600 text-white">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="/scrapers" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="database" class="w-5 h-5"></i>
+                    <span>Sources</span>
+                </a>
+                <a href="/jobs" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="clock" class="w-5 h-5"></i>
+                    <span>Jobs</span>
+                </a>
+                <a href="/charting" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                    <span>Screener</span>
+                </a>
+                <a href="/charting" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+                    <span>Charts</span>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                    <span>Events</span>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span>Alerts</span>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                    <span>Logs</span>
+                </a>
+            </div>
+            
+            <!-- API Keys Section -->
+            <div class="mt-8 pt-4 border-t border-gray-700">
+                <div class="text-xs text-gray-400 px-3 py-2 uppercase tracking-wider">Administration</div>
+                <a href="/admin/api-keys" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="key" class="w-5 h-5"></i>
+                    <span>API Keys</span>
+                </a>
+                <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-hover-gray transition-colors text-gray-300 hover:text-white">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    <span>Settings</span>
+                </a>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid py-4">
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h2 class="card-title">WizData Dashboard</h2>
-                                <p class="card-text text-muted">
-                                    Monitor and manage your financial data platform
-                                </p>
-                            </div>
-                            <div>
-                                <button class="btn btn-outline-light me-2">Export Report</button>
-                                <button class="btn btn-primary">Refresh Data</button>
-                            </div>
+    <!-- Main Content -->
+    <main class="ml-56 mt-16 p-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Page Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Dashboard</h1>
+                <p class="text-gray-400">Monitor your financial data platform performance and insights</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total Sources -->
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors fade-in">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium">Total Sources</p>
+                            <p class="text-2xl font-bold text-white mt-1" id="totalSources">-</p>
+                        </div>
+                        <div class="p-3 bg-blue-600 rounded-lg">
+                            <i data-lucide="database" class="w-6 h-6 text-white"></i>
                         </div>
                     </div>
+                    <div class="mt-4">
+                        <span class="text-green-500 text-sm font-medium" id="sourcesChange">+0%</span>
+                        <span class="text-gray-400 text-sm ml-1">vs last month</span>
+                    </div>
+                </div>
+
+                <!-- Tracked Symbols -->
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors fade-in">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium">Tracked Symbols</p>
+                            <p class="text-2xl font-bold text-white mt-1" id="trackedSymbols">-</p>
+                        </div>
+                        <div class="p-3 bg-green-600 rounded-lg">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-green-500 text-sm font-medium" id="symbolsChange">+0%</span>
+                        <span class="text-gray-400 text-sm ml-1">vs last month</span>
+                    </div>
+                </div>
+
+                <!-- Data Points -->
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors fade-in">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium">Data Points</p>
+                            <p class="text-2xl font-bold text-white mt-1" id="dataPoints">-</p>
+                        </div>
+                        <div class="p-3 bg-purple-600 rounded-lg">
+                            <i data-lucide="activity" class="w-6 h-6 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-green-500 text-sm font-medium" id="dataPointsChange">+0%</span>
+                        <span class="text-gray-400 text-sm ml-1">vs last month</span>
+                    </div>
+                </div>
+
+                <!-- API Requests -->
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-600 transition-colors fade-in">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm font-medium">API Requests</p>
+                            <p class="text-2xl font-bold text-white mt-1" id="apiRequests">-</p>
+                        </div>
+                        <div class="p-3 bg-yellow-600 rounded-lg">
+                            <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-green-500 text-sm font-medium" id="requestsChange">+0%</span>
+                        <span class="text-gray-400 text-sm ml-1">vs last hour</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart and Top Performers Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Market Overview Chart -->
+                <div class="lg:col-span-2 bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-white">Market Overview</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="time-range-btn px-3 py-1 text-sm rounded bg-blue-600 text-white" data-range="1D">1D</button>
+                            <button class="time-range-btn px-3 py-1 text-sm rounded text-gray-400 hover:text-white hover:bg-gray-700" data-range="1W">1W</button>
+                            <button class="time-range-btn px-3 py-1 text-sm rounded text-gray-400 hover:text-white hover:bg-gray-700" data-range="1M">1M</button>
+                            <button class="time-range-btn px-3 py-1 text-sm rounded text-gray-400 hover:text-white hover:bg-gray-700" data-range="1Y">1Y</button>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Performing Symbols -->
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <h3 class="text-lg font-semibold text-white mb-6">Top Performers</h3>
+                    <div class="space-y-4" id="topPerformers">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Insights Table -->
+            <div class="bg-gray-800 rounded-lg border border-gray-700">
+                <div class="p-6 border-b border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-white">Market Insights</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="filter-btn px-3 py-1 text-sm rounded bg-blue-600 text-white" data-filter="all">All</button>
+                            <button class="filter-btn px-3 py-1 text-sm rounded text-gray-400 hover:text-white hover:bg-gray-700" data-filter="jse">JSE</button>
+                            <button class="filter-btn px-3 py-1 text-sm rounded text-gray-400 hover:text-white hover:bg-gray-700" data-filter="crypto">Crypto</button>
+                            <button class="filter-btn px-3 py-1 text-sm rounded text-gray-400 hover:text-white hover:bg-gray-700" data-filter="forex">Forex</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left p-4 text-gray-400 font-medium">Symbol</th>
+                                <th class="text-left p-4 text-gray-400 font-medium">Name</th>
+                                <th class="text-left p-4 text-gray-400 font-medium">Sector</th>
+                                <th class="text-right p-4 text-gray-400 font-medium">Price</th>
+                                <th class="text-right p-4 text-gray-400 font-medium">Change</th>
+                                <th class="text-right p-4 text-gray-400 font-medium">Volume</th>
+                                <th class="text-right p-4 text-gray-400 font-medium">Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="marketInsightsTable">
+                            <!-- Dynamic content will be loaded here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="row mb-4">
-            <div class="col-md-3 mb-4">
-                <div class="card stat-card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">Total Data Sources</h6>
-                                <h3 class="mb-0">3</h3>
-                            </div>
-                            <div class="bg-primary bg-opacity-10 p-3 rounded">
-                                <i class="bi bi-database fs-4 text-primary"></i>
-                            </div>
-                        </div>
-                        <p class="small text-muted mt-3 mb-0">
-                            <i class="bi bi-arrow-up-short text-success"></i>
-                            <span class="text-success fw-bold">5%</span> increase
-                        </p>
-                    </div>
-                </div>
+    <!-- AI Insights Panel -->
+    <div id="aiInsightsPanel" class="fixed right-0 top-16 bottom-0 w-80 bg-gray-800 border-l border-gray-700 transform translate-x-full transition-transform duration-300 z-40 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-white">AI Insights</h3>
+                <button id="closeAiPanel" class="text-gray-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
             </div>
-            <div class="col-md-3 mb-4">
-                <div class="card stat-card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">Tracked Symbols</h6>
-                                <h3 class="mb-0">45</h3>
-                            </div>
-                            <div class="bg-success bg-opacity-10 p-3 rounded">
-                                <i class="bi bi-tag fs-4 text-success"></i>
-                            </div>
-                        </div>
-                        <p class="small text-muted mt-3 mb-0">
-                            <i class="bi bi-arrow-up-short text-success"></i>
-                            <span class="text-success fw-bold">12%</span> increase
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card stat-card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">Data Points</h6>
-                                <h3 class="mb-0">125K</h3>
-                            </div>
-                            <div class="bg-info bg-opacity-10 p-3 rounded">
-                                <i class="bi bi-bar-chart fs-4 text-info"></i>
-                            </div>
-                        </div>
-                        <p class="small text-muted mt-3 mb-0">
-                            <i class="bi bi-arrow-up-short text-success"></i>
-                            <span class="text-success fw-bold">8%</span> weekly growth
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-4">
-                <div class="card stat-card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="text-muted mb-2">API Requests</h6>
-                                <h3 class="mb-0">1.2M</h3>
-                            </div>
-                            <div class="bg-warning bg-opacity-10 p-3 rounded">
-                                <i class="bi bi-arrow-repeat fs-4 text-warning"></i>
-                            </div>
-                        </div>
-                        <p class="small text-muted mt-3 mb-0">
-                            <i class="bi bi-arrow-up-short text-success"></i>
-                            <span class="text-success fw-bold">15%</span> monthly increase
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col-md-8 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-transparent">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Market Overview</h5>
-                            <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-outline-light active">Day</button>
-                                <button type="button" class="btn btn-outline-light">Week</button>
-                                <button type="button" class="btn btn-outline-light">Month</button>
-                                <button type="button" class="btn btn-outline-light">Year</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="marketChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-transparent">
-                        <h5 class="mb-0">Top Performing Symbols</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Symbol</th>
-                                        <th>Price</th>
-                                        <th>Change</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>BTC</td>
-                                        <td>$28,542.68</td>
-                                        <td class="text-success">+4.21%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ETH</td>
-                                        <td>$1,865.32</td>
-                                        <td class="text-success">+3.15%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SOL</td>
-                                        <td>$405.35</td>
-                                        <td class="text-success">+2.87%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>EURUSD</td>
-                                        <td>1.0842</td>
-                                        <td class="text-success">+0.45%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SLM</td>
-                                        <td>$152.75</td>
-                                        <td class="text-success">+1.25%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>GBPUSD</td>
-                                        <td>1.2534</td>
-                                        <td class="text-danger">-0.15%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ADA</td>
-                                        <td>$0.478</td>
-                                        <td class="text-danger">-1.21%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-transparent">
-                        <h5 class="mb-0">Data Source Status</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="status-badge status-active"></span>
-                                    JSE Web Scraper
-                                </div>
-                                <span class="badge bg-success">Active</span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="status-badge status-active"></span>
-                                    CoinGecko API
-                                </div>
-                                <span class="badge bg-success">Active</span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="status-badge status-active"></span>
-                                    Alpha Vantage API
-                                </div>
-                                <span class="badge bg-success">Active</span>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <span class="status-badge status-warning"></span>
-                                    Financial News API
-                                </div>
-                                <span class="badge bg-secondary">Coming Soon</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <a href="/sources" class="btn btn-sm btn-outline-primary">View All Sources</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-transparent">
-                        <h5 class="mb-0">Recent Collection Jobs</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            <div class="list-group-item">
-                                <div class="d-flex justify-content-between">
-                                    <strong>Cryptocurrency Data Collection</strong>
-                                    <span class="text-success">Completed</span>
-                                </div>
-                                <div class="small text-muted mt-1">April 03, 2025 - 10:30 AM</div>
-                                <div class="progress mt-2" style="height: 5px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="d-flex justify-content-between">
-                                    <strong>JSE Market Data Update</strong>
-                                    <span class="text-success">Completed</span>
-                                </div>
-                                <div class="small text-muted mt-1">April 03, 2025 - 09:15 AM</div>
-                                <div class="progress mt-2" style="height: 5px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="d-flex justify-content-between">
-                                    <strong>Forex Rates Update</strong>
-                                    <span class="text-success">Completed</span>
-                                </div>
-                                <div class="small text-muted mt-1">April 02, 2025 - 06:45 PM</div>
-                                <div class="progress mt-2" style="height: 5px;">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div class="list-group-item">
-                                <div class="d-flex justify-content-between">
-                                    <strong>Historical Data Archiving</strong>
-                                    <span class="text-primary">Scheduled</span>
-                                </div>
-                                <div class="small text-muted mt-1">April 04, 2025 - 12:00 AM</div>
-                                <div class="progress mt-2" style="height: 5px;">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <a href="/jobs" class="btn btn-sm btn-outline-primary">View All Jobs</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card data-source-card border-0 shadow-sm h-100">
-                    <div class="card-header bg-transparent">
-                        <h5 class="mb-0">API Usage Statistics</h5>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="apiUsageChart" height="230"></canvas>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <div class="row text-center">
-                            <div class="col-4">
-                                <h5 class="mb-0">5.4k</h5>
-                                <div class="small text-muted">Today</div>
-                            </div>
-                            <div class="col-4">
-                                <h5 class="mb-0">32.1k</h5>
-                                <div class="small text-muted">This Week</div>
-                            </div>
-                            <div class="col-4">
-                                <h5 class="mb-0">1.2M</h5>
-                                <div class="small text-muted">This Month</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-transparent">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Market Insights</h5>
-                            <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-outline-light">All</button>
-                                <button type="button" class="btn btn-outline-light active">JSE</button>
-                                <button type="button" class="btn btn-outline-light">Crypto</button>
-                                <button type="button" class="btn btn-outline-light">Forex</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Symbol</th>
-                                        <th>Name</th>
-                                        <th>Sector</th>
-                                        <th>Open</th>
-                                        <th>Close</th>
-                                        <th>Change</th>
-                                        <th>Volume</th>
-                                        <th>Last Updated</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>SOL</td>
-                                        <td>Sasol Limited</td>
-                                        <td>Energy</td>
-                                        <td>403.25</td>
-                                        <td>405.35</td>
-                                        <td class="text-success">+0.52%</td>
-                                        <td>1,235,789</td>
-                                        <td>Today, 11:45 AM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>NPN</td>
-                                        <td>Naspers Limited</td>
-                                        <td>Technology</td>
-                                        <td>3,452.80</td>
-                                        <td>3,501.25</td>
-                                        <td class="text-success">+1.40%</td>
-                                        <td>985,432</td>
-                                        <td>Today, 11:45 AM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>FSR</td>
-                                        <td>FirstRand Limited</td>
-                                        <td>Financial</td>
-                                        <td>68.45</td>
-                                        <td>67.85</td>
-                                        <td class="text-danger">-0.88%</td>
-                                        <td>2,453,678</td>
-                                        <td>Today, 11:45 AM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SBK</td>
-                                        <td>Standard Bank Group</td>
-                                        <td>Financial</td>
-                                        <td>185.75</td>
-                                        <td>186.20</td>
-                                        <td class="text-success">+0.24%</td>
-                                        <td>1,543,210</td>
-                                        <td>Today, 11:45 AM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>AGL</td>
-                                        <td>Anglo American PLC</td>
-                                        <td>Mining</td>
-                                        <td>345.65</td>
-                                        <td>339.80</td>
-                                        <td class="text-danger">-1.69%</td>
-                                        <td>3,245,678</td>
-                                        <td>Today, 11:45 AM</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="space-y-4" id="aiInsightsList">
+                <!-- Dynamic AI insights will be loaded here -->
             </div>
         </div>
     </div>
 
-    <footer class="bg-dark text-white py-4 mt-auto">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>WizData</h5>
-                    <p class="text-muted">Financial data acquisition and API service for TradingWealthWiz.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="/api/docs" class="text-decoration-none text-muted">API Documentation</a></li>
-                        <li><a href="/products" class="text-decoration-none text-muted">Data Products</a></li>
-                        <li><a href="/api-services" class="text-decoration-none text-muted">API Services</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5>Resources</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-muted">Getting Started</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted">FAQ</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted">Support</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <div class="text-center">
-                <p class="text-muted">&copy; 2025 WizData. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Market Overview Chart
-        const marketCtx = document.getElementById('marketChart').getContext('2d');
-        const marketChart = new Chart(marketCtx, {
-            type: 'line',
-            data: {
-                labels: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
-                datasets: [
-                    {
-                        label: 'JSE Top 40',
-                        data: [74250, 74320, 74410, 74380, 74450, 74520, 74580, 74650],
-                        borderColor: '#0d6efd',
-                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    },
-                    {
-                        label: 'BTC/USD',
-                        data: [28100, 28250, 28420, 28380, 28510, 28450, 28530, 28650],
-                        borderColor: '#ffc107',
-                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    },
-                    {
-                        label: 'EUR/USD',
-                        data: [1.0815, 1.0825, 1.0832, 1.0829, 1.0845, 1.0840, 1.0852, 1.0860],
-                        borderColor: '#20c997',
-                        backgroundColor: 'rgba(32, 201, 151, 0.1)',
-                        tension: 0.4,
-                        fill: true
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Dashboard data management
+        class WizDataDashboard {
+            constructor() {
+                this.marketChart = null;
+                this.init();
+            }
+
+            async init() {
+                await this.loadDashboardData();
+                this.initChart();
+                this.setupEventListeners();
+                this.loadTopPerformers();
+                this.loadMarketInsights();
+                this.loadAIInsights();
+                
+                // Auto-refresh every 30 seconds
+                setInterval(() => this.refreshData(), 30000);
+            }
+
+            async loadDashboardData() {
+                try {
+                    // Load symbols count
+                    const symbolsResponse = await fetch('/api/v1/charting/symbols');
+                    if (symbolsResponse.ok) {
+                        const symbolsData = await symbolsResponse.json();
+                        document.getElementById('trackedSymbols').textContent = symbolsData.count || 0;
                     }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
+
+                    // Load scrapers data
+                    const scrapersResponse = await fetch('/api/scrapers/sources');
+                    if (scrapersResponse.ok) {
+                        const scrapersData = await scrapersResponse.json();
+                        document.getElementById('totalSources').textContent = scrapersData.sources ? scrapersData.sources.length : 0;
                     }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.05)'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.05)'
-                        }
-                    }
+
+                    // Simulate other metrics
+                    document.getElementById('dataPoints').textContent = '1.2M';
+                    document.getElementById('apiRequests').textContent = '45.2K';
+                    
+                    // Add random change percentages
+                    document.getElementById('sourcesChange').textContent = '+12%';
+                    document.getElementById('symbolsChange').textContent = '+8%';
+                    document.getElementById('dataPointsChange').textContent = '+24%';
+                    document.getElementById('requestsChange').textContent = '+156%';
+
+                } catch (error) {
+                    console.error('Error loading dashboard data:', error);
                 }
             }
-        });
 
-        // API Usage Chart
-        const apiUsageCtx = document.getElementById('apiUsageChart').getContext('2d');
-        const apiUsageChart = new Chart(apiUsageCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Symbols', 'Prices', 'OHLCV', 'Other'],
-                datasets: [
-                    {
-                        data: [35, 45, 15, 5],
-                        backgroundColor: [
-                            '#0d6efd',
-                            '#20c997',
-                            '#ffc107',
-                            '#6c757d'
-                        ],
-                        borderWidth: 0
+            initChart() {
+                const ctx = document.getElementById('marketChart');
+                if (!ctx) return;
+
+                // Generate sample data
+                const generateData = (days = 30) => {
+                    const data = [];
+                    const now = new Date();
+                    for (let i = days; i >= 0; i--) {
+                        const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
+                        data.push({
+                            x: date,
+                            jse: 65000 + Math.random() * 5000,
+                            btc: 45000 + Math.random() * 10000,
+                            eur: 1.08 + Math.random() * 0.1
+                        });
                     }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
+                    return data;
+                };
+
+                const data = generateData();
+
+                this.marketChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            label: 'JSE Top 40',
+                            data: data.map(d => ({ x: d.x, y: d.jse })),
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4,
+                            fill: false
+                        }, {
+                            label: 'BTC/USD',
+                            data: data.map(d => ({ x: d.x, y: d.btc })),
+                            borderColor: '#F59E0B',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            tension: 0.4,
+                            fill: false,
+                            yAxisID: 'y1'
+                        }, {
+                            label: 'EUR/USD',
+                            data: data.map(d => ({ x: d.x, y: d.eur })),
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            fill: false,
+                            yAxisID: 'y2'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#9CA3AF'
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                },
+                                grid: {
+                                    color: '#374151'
+                                },
+                                ticks: {
+                                    color: '#9CA3AF'
+                                }
+                            },
+                            y: {
+                                position: 'left',
+                                grid: {
+                                    color: '#374151'
+                                },
+                                ticks: {
+                                    color: '#9CA3AF'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: false,
+                                position: 'right'
+                            },
+                            y2: {
+                                type: 'linear',
+                                display: false,
+                                position: 'right'
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        }
                     }
-                },
-                cutout: '70%'
+                });
             }
+
+            async loadTopPerformers() {
+                try {
+                    const response = await fetch('/api/v1/charting/screener?sort_by=change_percent&order=desc&limit=5');
+                    if (!response.ok) throw new Error('Failed to load screener data');
+                    
+                    const data = await response.json();
+                    const container = document.getElementById('topPerformers');
+                    
+                    if (data.results && data.results.length > 0) {
+                        container.innerHTML = data.results.map(symbol => `
+                            <div class="flex items-center justify-between p-3 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
+                                <div>
+                                    <div class="font-medium text-white">${symbol.symbol}</div>
+                                    <div class="text-sm text-gray-400">$${symbol.price || 'N/A'}</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-medium ${(symbol.change_percent || 0) >= 0 ? 'text-green-400' : 'text-red-400'}">
+                                        ${(symbol.change_percent || 0) >= 0 ? '+' : ''}${(symbol.change_percent || 0).toFixed(2)}%
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                    } else {
+                        container.innerHTML = '<div class="text-center text-gray-400 py-8">No data available</div>';
+                    }
+                } catch (error) {
+                    console.error('Error loading top performers:', error);
+                    document.getElementById('topPerformers').innerHTML = '<div class="text-center text-red-400 py-8">Error loading data</div>';
+                }
+            }
+
+            async loadMarketInsights() {
+                try {
+                    const response = await fetch('/api/v1/charting/symbols');
+                    if (!response.ok) throw new Error('Failed to load symbols');
+                    
+                    const data = await response.json();
+                    const tbody = document.getElementById('marketInsightsTable');
+                    
+                    if (data.symbols) {
+                        const allSymbols = [
+                            ...(data.symbols.jse || []),
+                            ...(data.symbols.crypto || []),
+                            ...(data.symbols.forex || []),
+                            ...(data.symbols.stocks || [])
+                        ];
+
+                        tbody.innerHTML = allSymbols.slice(0, 10).map(symbol => {
+                            const change = (Math.random() - 0.5) * 10; // Random change for demo
+                            const price = Math.random() * 1000;
+                            const volume = Math.floor(Math.random() * 1000000);
+                            
+                            return `
+                                <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors">
+                                    <td class="p-4 font-medium text-white">${symbol.symbol}</td>
+                                    <td class="p-4 text-gray-300">${symbol.name}</td>
+                                    <td class="p-4 text-gray-400">${symbol.sector || 'N/A'}</td>
+                                    <td class="p-4 text-right text-white">$${price.toFixed(2)}</td>
+                                    <td class="p-4 text-right ${change >= 0 ? 'text-green-400' : 'text-red-400'}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</td>
+                                    <td class="p-4 text-right text-gray-300">${volume.toLocaleString()}</td>
+                                    <td class="p-4 text-right text-gray-400">Just now</td>
+                                </tr>
+                            `;
+                        }).join('');
+                    }
+                } catch (error) {
+                    console.error('Error loading market insights:', error);
+                }
+            }
+
+            loadAIInsights() {
+                const insights = [
+                    {
+                        symbol: 'SOL',
+                        message: '300% spike in volume detected',
+                        tags: ['#volume', '#alert'],
+                        severity: 'high',
+                        time: '2 mins ago'
+                    },
+                    {
+                        symbol: 'ETH',
+                        message: 'Sentiment shifted to neutral',
+                        tags: ['#sentiment'],
+                        severity: 'medium',
+                        time: '5 mins ago'
+                    },
+                    {
+                        symbol: 'JSE:NPN',
+                        message: 'Technical breakout pattern forming',
+                        tags: ['#technical', '#pattern'],
+                        severity: 'medium',
+                        time: '12 mins ago'
+                    },
+                    {
+                        symbol: 'BTC',
+                        message: 'Support level holding strong',
+                        tags: ['#support', '#technical'],
+                        severity: 'low',
+                        time: '18 mins ago'
+                    }
+                ];
+
+                const container = document.getElementById('aiInsightsList');
+                container.innerHTML = insights.map(insight => `
+                    <div class="p-4 bg-gray-700 rounded-lg border-l-4 ${
+                        insight.severity === 'high' ? 'border-red-500' : 
+                        insight.severity === 'medium' ? 'border-yellow-500' : 'border-blue-500'
+                    }">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-white">${insight.symbol}</span>
+                            <span class="text-xs text-gray-400">${insight.time}</span>
+                        </div>
+                        <p class="text-sm text-gray-300 mb-2">${insight.message}</p>
+                        <div class="flex flex-wrap gap-1">
+                            ${insight.tags.map(tag => `
+                                <span class="text-xs px-2 py-1 bg-blue-600 text-blue-100 rounded">${tag}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            setupEventListeners() {
+                // App switcher dropdown
+                document.getElementById('appSwitcher').addEventListener('click', () => {
+                    const dropdown = document.getElementById('appDropdown');
+                    dropdown.classList.toggle('hidden');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('#appSwitcher')) {
+                        document.getElementById('appDropdown').classList.add('hidden');
+                    }
+                });
+
+                // AI Insights panel
+                document.getElementById('aiInsightsBtn').addEventListener('click', () => {
+                    const panel = document.getElementById('aiInsightsPanel');
+                    panel.classList.toggle('translate-x-full');
+                });
+
+                document.getElementById('closeAiPanel').addEventListener('click', () => {
+                    document.getElementById('aiInsightsPanel').classList.add('translate-x-full');
+                });
+
+                // Time range buttons
+                document.querySelectorAll('.time-range-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.time-range-btn').forEach(b => {
+                            b.classList.remove('bg-blue-600', 'text-white');
+                            b.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
+                        });
+                        btn.classList.add('bg-blue-600', 'text-white');
+                        btn.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
+                    });
+                });
+
+                // Filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.filter-btn').forEach(b => {
+                            b.classList.remove('bg-blue-600', 'text-white');
+                            b.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
+                        });
+                        btn.classList.add('bg-blue-600', 'text-white');
+                        btn.classList.remove('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
+                    });
+                });
+
+                // Search functionality
+                document.addEventListener('keydown', (e) => {
+                    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                        e.preventDefault();
+                        document.querySelector('input[placeholder="Search..."]').focus();
+                    }
+                });
+            }
+
+            async refreshData() {
+                await this.loadDashboardData();
+                this.loadTopPerformers();
+                this.loadMarketInsights();
+            }
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new WizDataDashboard();
         });
     </script>
 </body>
