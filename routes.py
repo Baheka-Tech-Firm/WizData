@@ -69,16 +69,7 @@ def register_routes(app):
         """Render the integrated data dashboard page"""
         return render_template('integrated/dashboard.html', title="Integrated Financial & ESG Data")
 
-    @app.route('/api/health')
-    @rate_limit(requests_per_minute=120)  # Higher limit for health checks
-    @cached(ttl=30, data_type='api_responses')
-    def health():
-        """Health check endpoint"""
-        return jsonify({
-            "status": "healthy",
-            "version": "1.0.0",
-            "service": "WizData Web Dashboard"
-        })
+    # Health endpoints are provided by the monitoring middleware
 
     # API routes for direct usage
     @app.route('/api/symbols')
