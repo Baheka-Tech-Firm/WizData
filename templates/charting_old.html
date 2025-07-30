@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WizData - Professional Charting Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
+    <style>
+        body { 
+            background: #0d1117; 
+            color: #c9d1d9; 
+            font-family: 'Segoe UI', system-ui; 
+        }
+        .trading-header {
+            background: linear-gradient(135deg, #1e2124 0%, #2c2f36 100%);
+            border-bottom: 1px solid #30363d;
+            padding: 1rem 0;
+        }
+        .symbol-selector {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            color: #c9d1d9;
+        }
+        .symbol-selector:focus {
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 0.25rem rgba(88, 166, 255, 0.25);
+        }
+        .chart-container {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            height: 600px;
+            position: relative;
+        }
+        .market-data-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .market-data-card:hover {
+            transform: translateY(-2px);
+            border-color: #58a6ff;
+        }
+        .price-positive { color: #3fb950; }
+        .price-negative { color: #f85149; }
+        .indicator-panel {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .news-item {
+            background: #21262d;
+            border-left: 3px solid #58a6ff;
+            margin-bottom: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+        }
+        .live-indicator {
+            animation: pulse 2s infinite;
+            color: #3fb950;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .control-panel {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .btn-trading {
+            background: #238636;
+            border: none;
+            color: white;
+        }
+        .btn-trading:hover {
+            background: #2ea043;
+            color: white;
+        }
+        .interval-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            margin-right: 0.25rem;
+        }
+        .interval-btn.active {
+            background: #58a6ff;
+            border-color: #58a6ff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg trading-header">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/">
+                <i class="fas fa-chart-line me-2"></i>WizData Pro Charting
+            </a>
+            <div class="d-flex align-items-center">
+                <select id="symbolSelector" class="form-select symbol-selector me-3" style="width: 200px;">
+                    <option value="BTC/USDT">BTC/USDT</option>
+                    <option value="ETH/USDT">ETH/USDT</option>
+                    <option value="AAPL">AAPL</option>
+                    <option value="JSE:NPN">JSE:NPN</option>
+                    <option value="USD/ZAR">USD/ZAR</option>
+                </select>
+                <span class="live-indicator me-2">
+                    <i class="fas fa-circle"></i> LIVE
+                </span>
+                <span class="text-muted" id="lastUpdate">-</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <!-- Main Chart Area -->
+            <div class="col-md-8">
+                <!-- Market Data Header -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="market-data-card p-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <h4 class="mb-0" id="currentSymbol">BTC/USDT</h4>
+                                    <small class="text-muted">Binance</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <h3 class="mb-0" id="currentPrice">$67,500.00</h3>
+                                    <small class="text-muted">Price</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5 class="mb-0 price-positive" id="priceChange">+1,245.50</h5>
+                                    <small class="text-muted">24h Change</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5 class="mb-0 price-positive" id="priceChangePercent">+1.88%</h5>
+                                    <small class="text-muted">24h %</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="mb-0" id="volume24h">1,234,567</h5>
+                                    <small class="text-muted">24h Volume</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Controls -->
+                <div class="control-panel mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn interval-btn active" data-interval="1m">1m</button>
+                            <button type="button" class="btn interval-btn" data-interval="5m">5m</button>
+                            <button type="button" class="btn interval-btn" data-interval="15m">15m</button>
+                            <button type="button" class="btn interval-btn" data-interval="1h">1h</button>
+                            <button type="button" class="btn interval-btn" data-interval="4h">4h</button>
+                            <button type="button" class="btn interval-btn" data-interval="1d">1D</button>
+                            <button type="button" class="btn interval-btn" data-interval="1w">1W</button>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-trading btn-sm" onclick="addIndicator('RSI')">
+                                <i class="fas fa-chart-bar me-1"></i>RSI
+                            </button>
+                            <button class="btn btn-trading btn-sm" onclick="addIndicator('MACD')">
+                                <i class="fas fa-wave-square me-1"></i>MACD
+                            </button>
+                            <button class="btn btn-trading btn-sm" onclick="addIndicator('SMA')">
+                                <i class="fas fa-chart-line me-1"></i>SMA
+                            </button>
+                            <button class="btn btn-trading btn-sm" onclick="refreshChart()">
+                                <i class="fas fa-sync me-1"></i>Refresh
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Canvas -->
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-md-4">
+                <!-- Technical Indicators -->
+                <div class="indicator-panel mb-4">
+                    <div class="p-3 border-bottom">
+                        <h6 class="mb-0">
+                            <i class="fas fa-calculator me-2"></i>Technical Indicators
+                        </h6>
+                    </div>
+                    <div class="p-3" id="indicatorData">
+                        <div class="row mb-2">
+                            <div class="col-6">RSI(14):</div>
+                            <div class="col-6 text-end" id="rsiValue">65.4</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">MACD:</div>
+                            <div class="col-6 text-end" id="macdValue">0.025</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">SMA(20):</div>
+                            <div class="col-6 text-end" id="smaValue">67,250</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">Volume:</div>
+                            <div class="col-6 text-end" id="volumeIndicator">High</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market News -->
+                <div class="indicator-panel mb-4">
+                    <div class="p-3 border-bottom">
+                        <h6 class="mb-0">
+                            <i class="fas fa-newspaper me-2"></i>Market News
+                        </h6>
+                    </div>
+                    <div class="p-3" id="newsContainer">
+                        <div class="news-item">
+                            <h6 class="mb-1">Bitcoin ETF sees record inflows</h6>
+                            <small class="text-muted">CoinDesk • 2 hours ago</small>
+                        </div>
+                        <div class="news-item">
+                            <h6 class="mb-1">Fed signals dovish stance on rates</h6>
+                            <small class="text-muted">Reuters • 4 hours ago</small>
+                        </div>
+                        <div class="news-item">
+                            <h6 class="mb-1">Crypto market cap hits new high</h6>
+                            <small class="text-muted">CryptoNews • 6 hours ago</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Market Data -->
+                <div class="indicator-panel">
+                    <div class="p-3 border-bottom">
+                        <h6 class="mb-0">
+                            <i class="fas fa-tachometer-alt me-2"></i>Market Overview
+                        </h6>
+                    </div>
+                    <div class="p-3" id="marketOverview">
+                        <div class="row mb-2">
+                            <div class="col-8">BTC/USDT</div>
+                            <div class="col-4 text-end price-positive">+1.88%</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-8">ETH/USDT</div>
+                            <div class="col-4 text-end price-negative">-0.45%</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-8">AAPL</div>
+                            <div class="col-4 text-end price-positive">+0.32%</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">USD/ZAR</div>
+                            <div class="col-4 text-end price-negative">-0.12%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WebSocket Status -->
+    <div class="position-fixed bottom-0 end-0 m-3">
+        <div class="badge bg-success" id="wsStatus">
+            <i class="fas fa-wifi me-1"></i>Connected
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentSymbol = 'BTC/USDT';
+        let currentInterval = '1h';
+        let priceChart = null;
+        let socket = null;
+        let chartData = [];
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChart();
+            setupEventListeners();
+            initializeWebSocket();
+            loadInitialData();
+        });
+
+        // Initialize Chart.js
+        function initializeChart() {
+            const ctx = document.getElementById('priceChart').getContext('2d');
+            
+            priceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Price',
+                        data: [],
+                        borderColor: '#58a6ff',
+                        backgroundColor: 'rgba(88, 166, 255, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#c9d1d9'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#7d8590'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#7d8590'
+                            },
+                            grid: {
+                                color: '#30363d'
+                            }
+                        }
+                    },
+                    elements: {
+                        point: {
+                            radius: 0,
+                            hoverRadius: 4
+                        }
+                    }
+                }
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Symbol selector
+            document.getElementById('symbolSelector').addEventListener('change', function() {
+                currentSymbol = this.value;
+                loadChartData();
+                subscribeToSymbol(currentSymbol);
+                updateMarketData();
+            });
+
+            // Interval buttons
+            document.querySelectorAll('.interval-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.interval-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentInterval = this.dataset.interval;
+                    loadChartData();
+                });
+            });
+        }
+
+        // Initialize WebSocket connection
+        function initializeWebSocket() {
+            socket = io();
+            
+            socket.on('connect', function() {
+                console.log('Connected to WebSocket');
+                document.getElementById('wsStatus').innerHTML = '<i class="fas fa-wifi me-1"></i>Connected';
+                document.getElementById('wsStatus').className = 'badge bg-success';
+                
+                // Subscribe to initial symbol
+                subscribeToSymbol(currentSymbol);
+            });
+
+            socket.on('disconnect', function() {
+                console.log('Disconnected from WebSocket');
+                document.getElementById('wsStatus').innerHTML = '<i class="fas fa-wifi-slash me-1"></i>Disconnected';
+                document.getElementById('wsStatus').className = 'badge bg-danger';
+            });
+
+            socket.on('price_tick', function(data) {
+                if (data.symbol === currentSymbol) {
+                    updateRealTimePrice(data);
+                }
+            });
+
+            socket.on('market_snapshot', function(data) {
+                updateMarketData(data);
+            });
+
+            socket.on('news_update', function(data) {
+                if (data.symbol === currentSymbol || !data.symbol) {
+                    addNewsItem(data);
+                }
+            });
+        }
+
+        // Subscribe to symbol updates
+        function subscribeToSymbol(symbol) {
+            if (socket && socket.connected) {
+                socket.emit('subscribe', {
+                    symbols: [symbol],
+                    channel: 'price_updates'
+                });
+            }
+        }
+
+        // Load initial data
+        function loadInitialData() {
+            loadChartData();
+            updateMarketData();
+            loadNews();
+        }
+
+        // Load chart data from API
+        async function loadChartData() {
+            try {
+                const response = await fetch(`/api/v1/charting/ohlcv/${currentSymbol}?interval=${currentInterval}&limit=100`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateChart(data.data, data.indicators);
+                }
+            } catch (error) {
+                console.error('Error loading chart data:', error);
+            }
+        }
+
+        // Update chart with new data
+        function updateChart(ohlcvData, indicators) {
+            const labels = ohlcvData.map(item => {
+                const date = new Date(item.time * 1000);
+                return date.toLocaleTimeString();
+            });
+            
+            const prices = ohlcvData.map(item => item.close);
+            
+            priceChart.data.labels = labels;
+            priceChart.data.datasets[0].data = prices;
+            priceChart.update();
+            
+            // Update indicators
+            if (indicators) {
+                updateIndicators(indicators);
+            }
+            
+            chartData = ohlcvData;
+        }
+
+        // Update real-time price
+        function updateRealTimePrice(tickData) {
+            // Update current price display
+            document.getElementById('currentPrice').textContent = `$${tickData.price.toLocaleString()}`;
+            
+            // Update change display
+            const changeElement = document.getElementById('priceChange');
+            const changePercentElement = document.getElementById('priceChangePercent');
+            
+            if (tickData.change > 0) {
+                changeElement.className = 'mb-0 price-positive';
+                changePercentElement.className = 'mb-0 price-positive';
+                changeElement.textContent = `+${tickData.change}`;
+            } else {
+                changeElement.className = 'mb-0 price-negative';
+                changePercentElement.className = 'mb-0 price-negative';
+                changeElement.textContent = `${tickData.change}`;
+            }
+            
+            // Update chart with new price point
+            if (chartData.length > 0) {
+                const lastTime = chartData[chartData.length - 1].time;
+                const newTime = Math.floor(Date.now() / 1000);
+                
+                if (newTime - lastTime > 60) { // New candle
+                    priceChart.data.labels.push(new Date().toLocaleTimeString());
+                    priceChart.data.datasets[0].data.push(tickData.price);
+                    
+                    // Keep only last 100 points
+                    if (priceChart.data.labels.length > 100) {
+                        priceChart.data.labels.shift();
+                        priceChart.data.datasets[0].data.shift();
+                    }
+                } else { // Update current candle
+                    priceChart.data.datasets[0].data[priceChart.data.datasets[0].data.length - 1] = tickData.price;
+                }
+                
+                priceChart.update('none');
+            }
+            
+            // Update last update time
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+
+        // Update market data
+        async function updateMarketData(data = null) {
+            try {
+                if (!data) {
+                    const response = await fetch(`/api/v1/charting/market-data/${currentSymbol}`);
+                    const result = await response.json();
+                    data = result.success ? result.data : null;
+                }
+                
+                if (data) {
+                    document.getElementById('currentSymbol').textContent = data.symbol;
+                    document.getElementById('currentPrice').textContent = `$${data.price.toLocaleString()}`;
+                    document.getElementById('volume24h').textContent = data.volume.toLocaleString();
+                    
+                    const changeElement = document.getElementById('priceChange');
+                    const changePercentElement = document.getElementById('priceChangePercent');
+                    
+                    if (data.change >= 0) {
+                        changeElement.className = 'mb-0 price-positive';
+                        changePercentElement.className = 'mb-0 price-positive';
+                        changeElement.textContent = `+${data.change}`;
+                        changePercentElement.textContent = `+${data.change_percent}%`;
+                    } else {
+                        changeElement.className = 'mb-0 price-negative';
+                        changePercentElement.className = 'mb-0 price-negative';
+                        changeElement.textContent = `${data.change}`;
+                        changePercentElement.textContent = `${data.change_percent}%`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating market data:', error);
+            }
+        }
+
+        // Update technical indicators
+        function updateIndicators(indicators) {
+            if (indicators.rsi && indicators.rsi.length > 0) {
+                document.getElementById('rsiValue').textContent = indicators.rsi[indicators.rsi.length - 1];
+            }
+            
+            if (indicators.macd && indicators.macd.line.length > 0) {
+                document.getElementById('macdValue').textContent = indicators.macd.line[indicators.macd.line.length - 1];
+            }
+            
+            if (indicators.sma_20 && indicators.sma_20.length > 0) {
+                document.getElementById('smaValue').textContent = indicators.sma_20[indicators.sma_20.length - 1].toLocaleString();
+            }
+        }
+
+        // Load news data
+        async function loadNews() {
+            try {
+                const response = await fetch(`/api/v1/charting/news/${currentSymbol}`);
+                const data = await response.json();
+                
+                if (data.success && data.news.length > 0) {
+                    const container = document.getElementById('newsContainer');
+                    container.innerHTML = '';
+                    
+                    data.news.forEach(item => {
+                        addNewsItem(item);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading news:', error);
+            }
+        }
+
+        // Add news item to container
+        function addNewsItem(newsItem) {
+            const container = document.getElementById('newsContainer');
+            const newsElement = document.createElement('div');
+            newsElement.className = 'news-item';
+            
+            const timeAgo = new Date(newsItem.time || newsItem.timestamp).toLocaleTimeString();
+            
+            newsElement.innerHTML = `
+                <h6 class="mb-1">${newsItem.title}</h6>
+                <small class="text-muted">${newsItem.source} • ${timeAgo}</small>
+            `;
+            
+            container.insertBefore(newsElement, container.firstChild);
+            
+            // Keep only last 5 news items
+            while (container.children.length > 5) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        // Add technical indicator
+        function addIndicator(indicator) {
+            alert(`Adding ${indicator} indicator to chart`);
+            // Implementation would add the indicator to the chart
+        }
+
+        // Refresh chart
+        function refreshChart() {
+            loadChartData();
+            updateMarketData();
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            if (!socket || !socket.connected) {
+                updateMarketData();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>

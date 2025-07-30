@@ -1,67 +1,106 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container">
-    <!-- Hero Section -->
-    <div class="row mb-5">
-        <div class="col-lg-10 mx-auto text-center">
-            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeIn">
-                <i class="fas fa-database text-info me-3"></i>WizData B2B Platform
-            </h1>
-            <p class="lead text-muted animate__animated animate__fadeIn animate__delay-1s">
-                Enterprise-grade African Financial Data Intelligence Platform with Dataset Registry, Licensing, and Advanced Analytics
-            </p>
-            <div class="d-flex justify-content-center gap-3 mt-4 animate__animated animate__fadeIn animate__delay-2s flex-wrap">
-                <a href="/api/datasets" class="btn btn-primary rounded-pill">
-                    <i class="fas fa-database me-2"></i>Dataset Registry
+<!-- Hero Section with 3D Background -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Animated Grid Background -->
+    <div class="absolute inset-0 cyber-grid opacity-20"></div>
+    
+    <!-- Floating Elements -->
+    <div class="absolute inset-0">
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-3/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/4 left-1/2 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl animate-float" style="animation-delay: 4s;"></div>
+    </div>
+    
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="space-y-8">
+            <!-- Logo and Title -->
+            <div class="space-y-4" x-data="{ loaded: false }" x-init="setTimeout(() => loaded = true, 100)">
+                <div class="flex justify-center mb-8">
+                    <div class="w-32 h-32 bg-gradient-to-br from-blue-500 via-purple-600 to-cyan-500 rounded-3xl flex items-center justify-center transform hover:scale-110 transition-all duration-500 shadow-2xl"
+                         :class="loaded ? 'animate-slide-up' : 'opacity-0'">
+                        <i class="fas fa-database text-white text-5xl animate-glow"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-black gradient-text animate-glow"
+                    :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'">
+                    WizData
+                </h1>
+                
+                <h2 class="text-2xl md:text-4xl font-light text-gray-300"
+                    :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'"
+                    style="animation-delay: 0.2s;">
+                    African Financial Intelligence Platform
+                </h2>
+                
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
+                   :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'"
+                   style="animation-delay: 0.4s;">
+                    Enterprise-grade data intelligence with advanced licensing, real-time analytics, 
+                    and comprehensive African market coverage. Transform your business with our cutting-edge B2B platform.
+                </p>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-center gap-6 mt-12" x-data="{ loaded: false }" x-init="setTimeout(() => loaded = true, 600)">
+                <a href="#platform-overview" class="gradient-button transform hover:scale-110 shadow-2xl"
+                   :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'">
+                    <i class="fas fa-rocket mr-2"></i>
+                    Explore Platform
                 </a>
-                <a href="/api/licenses" class="btn btn-success rounded-pill">
-                    <i class="fas fa-key me-2"></i>License Management
+                <a href="/api/datasets" class="glass-button transform hover:scale-110"
+                   :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'"
+                   style="animation-delay: 0.1s;">
+                    <i class="fas fa-database mr-2"></i>
+                    Browse Datasets
                 </a>
-                <a href="/api/market-data" class="btn btn-info rounded-pill">
-                    <i class="fas fa-chart-line me-2"></i>Market Data API
-                </a>
-                <a href="/api/websocket" class="btn btn-warning rounded-pill">
-                    <i class="fas fa-broadcast-tower me-2"></i>Real-time Streaming
-                </a>
-                <a href="/api/docs" class="btn btn-secondary rounded-pill">
-                    <i class="fas fa-book me-2"></i>API Documentation
+                <a href="/api/docs" class="glass-button transform hover:scale-110"
+                   :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'"
+                   style="animation-delay: 0.2s;">
+                    <i class="fas fa-book mr-2"></i>
+                    API Documentation
                 </a>
             </div>
-        </div>
-    </div>
-
-    <!-- B2B Platform Status Overview -->
-    <div class="row mb-5">
-        <div class="col-12">
-            <div class="card bg-gradient-success text-white">
-                <div class="card-body text-center py-4">
-                    <h3 class="card-title fw-bold mb-3">
-                        <i class="fas fa-check-circle me-2"></i>B2B Platform Status
-                        <span class="pulse bg-success ms-2"></span>
-                    </h3>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h4 id="active-licenses" class="fw-bold">12</h4>
-                            <p class="mb-0">Active Licenses</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h4 id="total-datasets" class="fw-bold">8</h4>
-                            <p class="mb-0">Available Datasets</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h4 id="api-calls-today" class="fw-bold">2,847</h4>
-                            <p class="mb-0">API Calls Today</p>
-                        </div>
-                        <div class="col-md-3">
-                            <h4 id="platform-uptime" class="fw-bold">99.9%</h4>
-                            <p class="mb-0">Platform Uptime</p>
-                        </div>
-                    </div>
+            
+            <!-- Live Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16" x-data="{ loaded: false }" x-init="setTimeout(() => loaded = true, 800)">
+                <div class="stat-card text-center"
+                     :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'">
+                    <div class="text-3xl font-bold text-blue-400" id="active-licenses-hero">12</div>
+                    <div class="text-sm text-gray-400">Active Licenses</div>
+                </div>
+                <div class="stat-card text-center"
+                     :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'"
+                     style="animation-delay: 0.1s;">
+                    <div class="text-3xl font-bold text-purple-400" id="total-datasets-hero">8</div>
+                    <div class="text-sm text-gray-400">Datasets</div>
+                </div>
+                <div class="stat-card text-center"
+                     :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'"
+                     style="animation-delay: 0.2s;">
+                    <div class="text-3xl font-bold text-green-400" id="api-calls-hero">2,847</div>
+                    <div class="text-sm text-gray-400">API Calls Today</div>
+                </div>
+                <div class="stat-card text-center"
+                     :class="loaded ? 'animate-slide-up' : 'opacity-0 translate-y-10'"
+                     style="animation-delay: 0.3s;">
+                    <div class="text-3xl font-bold text-yellow-400" id="uptime-hero">99.9%</div>
+                    <div class="text-sm text-gray-400">Uptime</div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <a href="#platform-overview" class="block">
+            <i class="fas fa-chevron-down text-2xl text-gray-400 hover:text-white transition-colors"></i>
+        </a>
+    </div>
+</section>
 
     <!-- Dataset Registry Section -->
     <div class="row mb-5">
@@ -1117,12 +1156,7 @@ function createToastContainer() {
     return container;
 }
 
-// Initialize tooltips if Bootstrap is available
-if (typeof bootstrap !== 'undefined') {
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-}
+// Initialize modern tooltips (can be implemented with Alpine.js or other libraries)
+// Modern tooltip functionality would go here if needed
 </script>
 {% endblock %}

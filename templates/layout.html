@@ -1,103 +1,180 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WizData Dashboard</title>
+    <title>{% block title %}WizData - African Financial Intelligence Platform{% endblock %}</title>
     
-    <!-- Bootstrap CSS with dark theme -->
-    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        dark: {
+                            100: '#f3f4f6',
+                            200: '#e5e7eb',
+                            300: '#d1d5db',
+                            400: '#9ca3af',
+                            500: '#6b7280',
+                            600: '#4b5563',
+                            700: '#374151',
+                            800: '#1f2937',
+                            900: '#111827',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                        'mono': ['JetBrains Mono', 'ui-monospace', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'gradient': 'gradient 15s ease infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                        'pulse-slow': 'pulse 4s ease-in-out infinite',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'mesh-pattern': 'radial-gradient(circle at 25% 25%, #1e3a8a 0%, transparent 50%), radial-gradient(circle at 75% 75%, #7c3aed 0%, transparent 50%)',
+                    }
+                }
+            }
+        }
+    </script>
     
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Chart.js for data visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Animation libraries -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
-    <!-- Interactive data tables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" defer></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js" defer></script>
+    <!-- Chart.js with modern plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     
-    <!-- jQuery (needed for interactive components) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/static/css/custom.css">
+    <!-- Alpine.js for reactive components -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <style>
-        /* Modern styling updates */
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            padding: 0.8rem 1rem;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
         
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-            letter-spacing: 0.5px;
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #3b82f6; }
+            to { text-shadow: 0 0 30px #60a5fa, 0 0 40px #93c5fd; }
         }
         
-        .card {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-            margin-bottom: 20px;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
-        .card-header {
-            font-weight: 600;
-            padding: 1rem 1.5rem;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
         
-        .btn {
-            border-radius: 6px;
-            padding: 0.5rem 1.25rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .btn:hover {
-            transform: translateY(-2px);
+        .glass-card {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .table {
-            border-radius: 8px;
-            overflow: hidden;
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+            background-size: 300% 300%;
+            animation: gradient 15s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .stat-card {
-            padding: 1.5rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+        .mesh-bg {
+            background: linear-gradient(45deg, #0f172a, #1e293b);
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
         }
         
-        .stat-card:hover {
-            transform: translateY(-5px);
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
         
-        .progress {
-            height: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
+        .neon-border {
+            border: 1px solid;
+            border-image: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4) 1;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
         
-        /* Pulse animation for real-time indicators */
-        .pulse {
+        .scroll-smooth { scroll-behavior: smooth; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1f2937; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #60a5fa; }
+    </style>
+</head>
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -121,162 +198,355 @@
                 box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
             }
         }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand animate__animated animate__fadeIn" href="/">
-                <i class="fas fa-database me-2 text-info"></i>
-                <span class="fw-bold">Wiz</span><span class="text-info fw-bold">Data</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100">
-                        <a class="nav-link rounded-pill px-3 mx-1" href="/" data-bs-toggle="tooltip" title="Main Dashboard">
-                            <i class="fas fa-tachometer-alt me-1"></i> Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="150">
-                        <a class="nav-link rounded-pill px-3 mx-1" href="/jobs" data-bs-toggle="tooltip" title="Data Collection Jobs">
-                            <i class="fas fa-tasks me-1"></i> Jobs
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown" data-aos="fade-down" data-aos-delay="200">
-                        <a class="nav-link dropdown-toggle rounded-pill px-3 mx-1" href="#" id="dataDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-database me-1"></i> Data
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark animate__animated animate__fadeIn animate__faster" aria-labelledby="dataDropdown">
-                            <li><a class="dropdown-item" href="/sources"><i class="fas fa-cloud-download-alt me-1"></i> Data Sources</a></li>
-                            <li><a class="dropdown-item" href="/products"><i class="fas fa-tags me-1"></i> Data Products</a></li>
-                            <li><a class="dropdown-item" href="/quality"><i class="fas fa-check-circle me-1"></i> Data Quality</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/api/health" target="_blank"><i class="fas fa-file-alt me-1"></i> API Health</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="250">
-                        <a class="nav-link rounded-pill px-3 mx-1" href="/api-services" data-bs-toggle="tooltip" title="API Documentation">
-                            <i class="fas fa-plug me-1"></i> API Services
-                        </a>
-                    </li>
-                </ul>
-                
-                <div class="d-flex flex-wrap justify-content-center">
-                    <a class="btn btn-outline-primary rounded-pill me-2 mb-2 mb-md-0 animate__animated animate__fadeIn" href="/insights" data-bs-toggle="tooltip" title="AI-Powered Data Insights">
-                        <i class="fas fa-robot me-1"></i> AI Insights
-                    </a>
-                    <a class="btn btn-outline-success rounded-pill me-2 mb-2 mb-md-0 animate__animated animate__fadeIn" href="/websocket" data-bs-toggle="tooltip" title="Real-time Data Streaming">
-                        <i class="fas fa-broadcast-tower me-1 pulse"></i> Live Data
-                    </a>
-                    <div class="dropdown mb-2 mb-md-0 animate__animated animate__fadeIn">
-                        <button class="btn btn-outline-info rounded-pill dropdown-toggle" href="#" id="esgDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip" title="ESG Data Dashboards">
-                            <i class="fas fa-leaf me-1"></i> ESG Data
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end animate__animated animate__fadeIn animate__faster" aria-labelledby="esgDropdown">
-                            <li><a class="dropdown-item" href="/esg"><i class="fas fa-globe me-1"></i> Global ESG Dashboard</a></li>
-                            <li><a class="dropdown-item" href="/esg/africa"><i class="fas fa-map-marker-alt me-1"></i> Africa ESG Dashboard</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                        <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/integrated-data"><i class="fas fa-chart-line me-1"></i> Integrated Financial & ESG Data</a></li>
-                            <li><a class="dropdown-item" href="/integrated-data"><i class="fas fa-chart-line me-1"></i> Integrated Financial & ESG Data</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="ms-lg-3 d-none d-lg-flex">
-                    <div class="badge bg-dark-subtle text-light me-2 d-flex align-items-center py-2 px-3 border border-secondary rounded-pill">
-                        <i class="fas fa-circle text-success me-1 pulse"></i>
-                        <span>API</span>
-                    </div>
-                    <div class="badge bg-dark-subtle text-light d-flex align-items-center py-2 px-3 border border-secondary rounded-pill">
-                        <i class="fas fa-circle text-success me-1 pulse"></i>
-                        <span>DB</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main content -->
-    <main class="container-fluid py-4">
-        {% block content %}{% endblock %}
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer mt-auto py-4 bg-dark">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <h5 class="text-info mb-3"><i class="fas fa-database me-2"></i>WizData</h5>
-                    <p class="text-muted">Comprehensive financial data platform for TradingWealthWiz. Powered by real-time analytics and advanced ESG data integration.</p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <h5 class="text-info mb-3">Quick Links</h5>
-                    <div class="d-flex justify-content-center flex-wrap gap-3">
-                        <a href="/websocket" class="text-decoration-none text-white-50 hover-text-white">Real-time Data</a>
-                        <a href="/esg/africa" class="text-decoration-none text-white-50 hover-text-white">Africa ESG</a>
-                        <a href="/quality" class="text-decoration-none text-white-50 hover-text-white">Data Quality</a>
-                    </div>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <h5 class="text-info mb-3">API Status</h5>
-                    <p class="text-muted mb-2">
-                        <i class="fas fa-circle text-success me-1 pulse"></i> WizData API v1.0.0
-                    </p>
-                    <p class="text-light">
-                        <small>Last updated: Apr 04, 2025</small>
-                    </p>
-                </div>
-            </div>
-            <hr class="mt-4 mb-3 border-secondary">
-            <div class="text-center text-muted">
-                <small>WizData &copy; 2025 - Financial Data Engine for TradingWealthWiz</small>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<body class="bg-gray-900 text-white font-sans scroll-smooth">
+    <!-- Three.js Background Container -->
+    <div id="threejs-background" class="fixed inset-0 z-0"></div>
     
-    <!-- Initialize AOS animations -->
+    <!-- Main Content Wrapper -->
+    <div class="relative z-10">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 glass-morphism border-b border-gray-800/50" 
+             x-data="{ mobileMenuOpen: false, userMenuOpen: false }">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-4">
+                        <a href="/" class="flex items-center space-x-3 group">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-database text-white text-lg"></i>
+                            </div>
+                            <div class="hidden sm:block">
+                                <h1 class="text-xl font-bold gradient-text">WizData</h1>
+                                <p class="text-xs text-gray-400">African Financial Intelligence</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="/" class="nav-link group">
+                            <i class="fas fa-tachometer-alt text-blue-400 group-hover:text-blue-300"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="nav-link group">
+                                <i class="fas fa-database text-purple-400 group-hover:text-purple-300"></i>
+                                <span>Data Sources</span>
+                                <i class="fas fa-chevron-down ml-1 transform transition-transform" :class="open ? 'rotate-180' : ''"></i>
+                            </button>
+                            <div x-show="open" x-transition class="absolute top-full left-0 mt-2 w-64 glass-card rounded-xl shadow-xl overflow-hidden">
+                                <a href="/api/datasets" class="dropdown-item">
+                                    <i class="fas fa-table text-blue-400"></i>
+                                    <span>Dataset Registry</span>
+                                </a>
+                                <a href="/scrapers" class="dropdown-item">
+                                    <i class="fas fa-robot text-green-400"></i>
+                                    <span>Live Scrapers</span>
+                                </a>
+                                <a href="/sources" class="dropdown-item">
+                                    <i class="fas fa-globe text-cyan-400"></i>
+                                    <span>Global Markets</span>
+                                </a>
+                            </div>
+                        </div>
+                        <a href="/api/licenses" class="nav-link group">
+                            <i class="fas fa-key text-yellow-400 group-hover:text-yellow-300"></i>
+                            <span>Licensing</span>
+                        </a>
+                        <a href="/charting" class="nav-link group">
+                            <i class="fas fa-chart-line text-green-400 group-hover:text-green-300"></i>
+                            <span>Analytics</span>
+                        </a>
+                        <a href="/api/docs" class="nav-link group">
+                            <i class="fas fa-book text-indigo-400 group-hover:text-indigo-300"></i>
+                            <span>API Docs</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Status Indicators -->
+                    <div class="hidden lg:flex items-center space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-sm text-gray-300">Live</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                            <span class="text-sm text-gray-300" id="api-status">API Ready</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg glass-morphism">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div x-show="mobileMenuOpen" x-transition class="md:hidden glass-morphism border-t border-gray-800/50">
+                <div class="px-4 py-6 space-y-4">
+                    <a href="/" class="mobile-nav-item">
+                        <i class="fas fa-tachometer-alt text-blue-400"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="/api/datasets" class="mobile-nav-item">
+                        <i class="fas fa-table text-purple-400"></i>
+                        <span>Datasets</span>
+                    </a>
+                    <a href="/api/licenses" class="mobile-nav-item">
+                        <i class="fas fa-key text-yellow-400"></i>
+                        <span>Licensing</span>
+                    </a>
+                    <a href="/charting" class="mobile-nav-item">
+                        <i class="fas fa-chart-line text-green-400"></i>
+                        <span>Analytics</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Main Content -->
+        <main class="pt-16 min-h-screen">
+            {% block content %}{% endblock %}
+        </main>
+        
+        <!-- Footer -->
+        <footer class="glass-morphism border-t border-gray-800/50 mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-database text-white text-sm"></i>
+                            </div>
+                            <span class="text-lg font-bold gradient-text">WizData</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">
+                            African Financial Intelligence Platform providing enterprise-grade data solutions for modern businesses.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Products</h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="/api/datasets" class="hover:text-blue-400 transition-colors">Dataset Registry</a></li>
+                            <li><a href="/api/licenses" class="hover:text-blue-400 transition-colors">License Management</a></li>
+                            <li><a href="/charting" class="hover:text-blue-400 transition-colors">Analytics Platform</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Resources</h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li><a href="/api/docs" class="hover:text-blue-400 transition-colors">API Documentation</a></li>
+                            <li><a href="/health" class="hover:text-blue-400 transition-colors">System Status</a></li>
+                            <li><a href="#" class="hover:text-blue-400 transition-colors">Support</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Connect</h3>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                <i class="fab fa-twitter text-sm"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                <i class="fab fa-linkedin text-sm"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                <i class="fab fa-github text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                    <p>&copy; 2025 WizData. All rights reserved. Built for African Financial Markets.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Global Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize AOS animations
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true
+        // Custom CSS classes
+        const styles = document.createElement('style');
+        styles.textContent = `
+            .nav-link {
+                @apply flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300;
+            }
+            
+            .dropdown-item {
+                @apply flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300;
+            }
+            
+            .mobile-nav-item {
+                @apply flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300;
+            }
+            
+            .glass-button {
+                @apply px-6 py-3 glass-morphism rounded-lg text-white hover:bg-white/20 transition-all duration-300 border border-white/20;
+            }
+            
+            .gradient-button {
+                @apply px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-semibold hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300;
+            }
+            
+            .stat-card {
+                @apply glass-card rounded-xl p-6 transform hover:scale-105 transition-all duration-300 hover:shadow-2xl;
+            }
+            
+            .data-card {
+                @apply glass-card rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-white/10;
+            }
+        `;
+        document.head.appendChild(styles);
+        
+        // Three.js Background
+        function initThreeJSBackground() {
+            const container = document.getElementById('threejs-background');
+            if (!container) return;
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+            
+            // Create floating particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 100;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                color: 0x3b82f6,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
             });
             
-            // Tooltips initialization
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Add geometric shapes
+            const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0x8b5cf6, 
+                wireframe: true, 
+                transparent: true, 
+                opacity: 0.1 
+            });
+            const torusKnot = new THREE.Mesh(geometry, material);
+            scene.add(torusKnot);
+            
+            camera.position.z = 5;
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Rotate particles and shapes
+                particlesMesh.rotation.x += 0.001;
+                particlesMesh.rotation.y += 0.002;
+                torusKnot.rotation.x += 0.005;
+                torusKnot.rotation.y += 0.003;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // Initialize GSAP animations
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Fade in elements on scroll
+            gsap.utils.toArray('.data-card, .stat-card').forEach(card => {
+                gsap.fromTo(card, 
+                    { opacity: 0, y: 50 },
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8, 
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
             });
             
-            // Update status indicators with real-time animation
-            let statusIcons = document.querySelectorAll('.fa-circle.text-success');
-            statusIcons.forEach(icon => {
-                icon.classList.add('pulse');
+            // Stagger animations for lists
+            gsap.utils.toArray('.stagger-item').forEach((item, index) => {
+                gsap.fromTo(item,
+                    { opacity: 0, x: -30 },
+                    { 
+                        opacity: 1, 
+                        x: 0, 
+                        duration: 0.6, 
+                        delay: index * 0.1,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
             });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+        }
+        
+        // Real-time status updates
+        function updateStatus() {
+            fetch('/health')
+                .then(response => response.json())
+                .then(data => {
+                    const statusElement = document.getElementById('api-status');
+                    if (statusElement) {
+                        statusElement.textContent = data.status === 'healthy' ? 'API Ready' : 'API Issues';
+                    }
+                })
+                .catch(() => {
+                    const statusElement = document.getElementById('api-status');
+                    if (statusElement) {
+                        statusElement.textContent = 'API Offline';
+                    }
                 });
-            });
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initThreeJSBackground();
+            initAnimations();
+            updateStatus();
+            
+            // Update status every 30 seconds
+            setInterval(updateStatus, 30000);
+            
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         });
     </script>
     
-    <!-- Custom JS -->
     {% block scripts %}{% endblock %}
 </body>
 </html>

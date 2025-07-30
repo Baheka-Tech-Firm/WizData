@@ -1,1095 +1,893 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title | default('Data Sources - WizData') }}</title>
-    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <style>
-        /* Futuristic UI Styles */
-        :root {
-            --glow-primary: rgba(13, 110, 253, 0.5);
-            --glow-success: rgba(25, 135, 84, 0.5);
-            --glow-info: rgba(13, 202, 240, 0.5);
-            --glow-warning: rgba(255, 193, 7, 0.5);
-            --glow-danger: rgba(220, 53, 69, 0.5);
-            --neon-blue: #00f2ff;
-            --neon-purple: #b300ff;
-            --neon-green: #39ff14;
-            --grid-line: rgba(255, 255, 255, 0.03);
-        }
+{% extends "layout.html" %}
+
+{% block title %}Data Sources - WizData{% endblock %}
+
+{% block content %}
+<div class="min-h-screen pt-20 pb-12">
+    <!-- Hero Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-6" 
+                x-data x-init="gsap.fromTo($el, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 1})">
+                Global Data Sources
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8"
+               x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 1, delay: 0.2})">
+                Real-time access to African and global financial markets, ESG data, and economic indicators
+            </p>
+        </div>
+    </div>
+
+    <!-- Data Source Statistics -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.3})">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-globe text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">50+</h3>
+                <p class="text-gray-400">Data Sources</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.4})">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-chart-line text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">15</h3>
+                <p class="text-gray-400">African Markets</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.5})">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-leaf text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">100+</h3>
+                <p class="text-gray-400">ESG Metrics</p>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.6})">
+                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-clock text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">24/7</h3>
+                <p class="text-gray-400">Real-time Updates</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- African Markets Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-4">African Financial Markets</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Real-time access to African stock exchanges, bonds, and economic indicators
+            </p>
+        </div>
         
-        body {
-            background-color: #0f1118;
-            background-image: 
-                linear-gradient(0deg, transparent 24%, var(--grid-line) 25%, var(--grid-line) 26%, transparent 27%, transparent 74%, var(--grid-line) 75%, var(--grid-line) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, var(--grid-line) 25%, var(--grid-line) 26%, transparent 27%, transparent 74%, var(--grid-line) 75%, var(--grid-line) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
-        }
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- JSE - Johannesburg Stock Exchange -->
+            <div class="glass-card rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 group"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.7})">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-400 text-sm">Active</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Johannesburg Stock Exchange</h3>
+                <p class="text-gray-400 mb-4">South Africa's premier stock exchange</p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Listed Companies:</span>
+                        <span class="text-white">350+</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Market Cap:</span>
+                        <span class="text-white">$1.2T</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Uptime:</span>
+                        <span class="text-green-400">99.9%</span>
+                    </div>
+                </div>
+                <button class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-2 rounded-xl hover:shadow-lg transition-all duration-300">
+                    View Details
+                </button>
+            </div>
+
+            <!-- NGX - Nigerian Exchange -->
+            <div class="glass-card rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 group"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.8})">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-building text-white text-xl"></i>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-400 text-sm">Active</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Nigerian Exchange Group</h3>
+                <p class="text-gray-400 mb-4">Africa's largest stock exchange by market cap</p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Listed Companies:</span>
+                        <span class="text-white">150+</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Market Cap:</span>
+                        <span class="text-white">$45B</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Uptime:</span>
+                        <span class="text-green-400">98.5%</span>
+                    </div>
+                </div>
+                <button class="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-2 rounded-xl hover:shadow-lg transition-all duration-300">
+                    View Details
+                </button>
+            </div>
+
+            <!-- EGX - Egyptian Exchange -->
+            <div class="glass-card rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 group"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 0.9})">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-pyramid text-white text-xl"></i>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                        <span class="text-yellow-400 text-sm">Maintenance</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Egyptian Exchange</h3>
+                <p class="text-gray-400 mb-4">Leading exchange in North Africa</p>
+                <div class="space-y-2 mb-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Listed Companies:</span>
+                        <span class="text-white">220+</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Market Cap:</span>
+                        <span class="text-white">$25B</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Uptime:</span>
+                        <span class="text-yellow-400">95.2%</span>
+                    </div>
+                </div>
+                <button class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 rounded-xl hover:shadow-lg transition-all duration-300">
+                    View Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Markets Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-4">Global Markets Integration</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Connect to major international exchanges and financial data providers
+            </p>
+        </div>
         
-        .navbar {
-            backdrop-filter: blur(10px);
-            background-color: rgba(32, 35, 48, 0.8) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .card {
-            background-color: rgba(32, 35, 48, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card.market-card {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .card.market-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-green));
-            z-index: -1;
-            border-radius: inherit;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .card.market-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .card.market-card:hover::before {
-            opacity: 1;
-        }
-        
-        .card.market-card.active::before {
-            opacity: 1;
-        }
-        
-        .card.market-card .card-title {
-            font-weight: 600;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .market-icon {
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            border-radius: 15px;
-            background: rgba(var(--bs-primary-rgb), 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .card.market-card:hover .market-icon {
-            box-shadow: 0 0 15px var(--glow-primary);
-        }
-        
-        .status-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            box-shadow: 0 0 5px currentColor;
-        }
-        
-        .status-active {
-            background-color: var(--bs-success);
-            box-shadow: 0 0 10px var(--glow-success);
-        }
-        
-        .status-warning {
-            background-color: var(--bs-warning);
-            box-shadow: 0 0 10px var(--glow-warning);
-        }
-        
-        .status-inactive {
-            background-color: var(--bs-danger);
-            box-shadow: 0 0 10px var(--glow-danger);
-        }
-        
-        .btn-glow {
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .btn-glow::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, rgba(var(--bs-primary-rgb), 0), rgba(var(--bs-primary-rgb), 0.8), rgba(var(--bs-primary-rgb), 0));
-            transform: rotate(30deg);
-            animation: glowing 3s infinite;
-            z-index: -1;
-        }
-        
-        @keyframes glowing {
-            0% { transform: rotate(30deg) translateX(-100%); }
-            100% { transform: rotate(30deg) translateX(100%); }
-        }
-        
-        .symbol-card {
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-            cursor: pointer;
-        }
-        
-        .symbol-card:hover {
-            border-left-color: var(--bs-primary);
-            transform: translateX(5px);
-        }
-        
-        .symbol-badge {
-            font-family: monospace;
-            font-weight: bold;
-            padding: 0.35em 0.65em;
-            border-radius: 4px;
-            background: rgba(var(--bs-primary-rgb), 0.1);
-            color: var(--bs-primary);
-            letter-spacing: 0.5px;
-        }
-        
-        .chart-container {
-            height: 350px;
-            width: 100%;
-            position: relative;
-        }
-        
-        .export-btn {
-            transition: all 0.3s ease;
-        }
-        
-        .export-btn:hover {
-            box-shadow: 0 0 15px var(--glow-primary);
-        }
-        
-        .progress-glow .progress-bar {
-            box-shadow: 0 0 10px currentColor;
-        }
-        
-        .market-stats {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .pill-selector {
-            display: inline-flex;
-            padding: 3px;
-            background-color: rgba(32, 35, 48, 0.7);
-            border-radius: 50px;
-            margin-bottom: 20px;
-        }
-        
-        .pill-selector .btn {
-            border-radius: 50px;
-            font-size: 0.85rem;
-            padding: 5px 15px;
-            border: none;
-        }
-        
-        .pill-selector .btn.active {
-            background-color: var(--bs-primary);
-            color: white;
-            box-shadow: 0 0 10px var(--glow-primary);
-        }
-        
-        .continent-map {
-            position: relative;
-            height: 350px;
-            width: 100%;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .map-bg {
-            opacity: 0.15;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-            filter: grayscale(100%);
-        }
-        
-        .market-point {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background-color: var(--bs-primary);
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px var(--glow-primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .market-point:hover {
-            transform: translate(-50%, -50%) scale(1.5);
-        }
-        
-        .market-point.active {
-            background-color: var(--neon-green);
-            box-shadow: 0 0 15px var(--neon-green);
-        }
-        
-        .market-point.jse {
-            bottom: 20%;
-            right: 45%;
-        }
-        
-        .market-point.ngx {
-            top: 48%;
-            left: 45%;
-        }
-        
-        .market-point.egx {
-            top: 38%;
-            right: 38%;
-        }
-        
-        .market-point.nse {
-            top: 48%;
-            right: 42%;
-        }
-        
-        .market-point.cse {
-            top: 33%;
-            left: 42%;
-        }
-        
-        .market-tooltip {
-            position: absolute;
-            background-color: rgba(32, 35, 48, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            padding: 8px 12px;
-            font-size: 0.85rem;
-            transform: translateY(10px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
-            min-width: 150px;
-            z-index: 100;
-        }
-        
-        .market-point:hover + .market-tooltip {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        footer {
-            background-color: rgba(32, 35, 48, 0.8);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .table-responsive {
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        
-        .table {
-            margin-bottom: 0;
-        }
-        
-        .table thead th {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: rgba(32, 35, 48, 0.8);
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            padding-top: 15px;
-            padding-bottom: 15px;
-        }
-        
-        .table tbody tr {
-            transition: all 0.3s ease;
-        }
-        
-        .table tbody tr:hover {
-            background-color: rgba(var(--bs-primary-rgb), 0.1);
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(var(--bs-primary-rgb), 0.5);
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <span class="fs-4">WizData</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/sources">Data Sources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/jobs">Collection Jobs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/products">Data Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/api-services">API Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link bg-primary text-white rounded px-3" href="/insights"><i class="bi bi-robot"></i> AI Insights</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a href="/api/docs" class="btn btn-outline-light me-2">API Docs</a>
-                    <a href="#" class="btn btn-primary">Sign In</a>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 1.0})">
+                <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-chart-area text-white text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Alpha Vantage</h3>
+                <p class="text-gray-400 text-sm mb-3">Global market data API</p>
+                <div class="flex items-center justify-center space-x-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-green-400 text-sm">Connected</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 1.1})">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-globe text-white text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">GDELT</h3>
+                <p class="text-gray-400 text-sm mb-3">Global events database</p>
+                <div class="flex items-center justify-center space-x-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-green-400 text-sm">Connected</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 1.2})">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-newspaper text-white text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Reuters</h3>
+                <p class="text-gray-400 text-sm mb-3">Financial news feed</p>
+                <div class="flex items-center justify-center space-x-2">
+                    <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                    <span class="text-yellow-400 text-sm">Pending</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 1.3})">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-bitcoin text-white text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">CoinGecko</h3>
+                <p class="text-gray-400 text-sm mb-3">Cryptocurrency data</p>
+                <div class="flex items-center justify-center space-x-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-green-400 text-sm">Connected</span>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <div class="container-fluid py-4">
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h2 class="card-title">Data Sources</h2>
-                                <p class="card-text text-muted">
-                                    Manage and monitor your financial data sources
-                                </p>
-                            </div>
-                            <div>
-                                <button class="btn btn-outline-light me-2">
-                                    <i class="bi bi-sliders me-1"></i> Filter
-                                </button>
-                                <button class="btn btn-primary btn-glow">
-                                    <i class="bi bi-plus-lg me-1"></i> Add New Source
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- ESG Data Sources -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-white mb-4">ESG & Sustainability Data</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Environmental, Social, and Governance metrics for responsible investing
+            </p>
         </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card rounded-2xl p-8"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.8, delay: 1.4})">
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-leaf text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Environmental</h3>
+                    <p class="text-gray-400">Climate impact, carbon footprint, and environmental metrics</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span class="text-gray-300">Carbon emissions tracking</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span class="text-gray-300">Water usage metrics</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-green-400"></i>
+                        <span class="text-gray-300">Renewable energy usage</span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <div class="pill-selector mb-4">
-                    <button class="btn active">All Sources</button>
-                    <button class="btn">African Markets</button>
-                    <button class="btn">International Markets</button>
-                    <button class="btn">Cryptocurrency</button>
-                    <button class="btn">Forex</button>
-                    <button class="btn">Commodities</button>
+            <div class="glass-card rounded-2xl p-8"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.8, delay: 1.5})">
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Social</h3>
+                    <p class="text-gray-400">Employee welfare, community impact, and social responsibility</p>
                 </div>
-                
-                <div class="continent-map">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Africa_%28orthographic_projection%29.svg/1200px-Africa_%28orthographic_projection%29.svg.png" class="map-bg" alt="Africa Map">
-                    
-                    <div class="market-point jse active"></div>
-                    <div class="market-tooltip" style="bottom: 15%; right: 40%;">
-                        <strong>Johannesburg Stock Exchange</strong><br>
-                        South Africa - 100% Uptime
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-blue-400"></i>
+                        <span class="text-gray-300">Employee satisfaction</span>
                     </div>
-                    
-                    <div class="market-point ngx"></div>
-                    <div class="market-tooltip" style="top: 45%; left: 50%;">
-                        <strong>Nigerian Stock Exchange</strong><br>
-                        Nigeria - 98% Uptime
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-blue-400"></i>
+                        <span class="text-gray-300">Community investment</span>
                     </div>
-                    
-                    <div class="market-point egx"></div>
-                    <div class="market-tooltip" style="top: 35%; right: 33%;">
-                        <strong>Egyptian Exchange</strong><br>
-                        Egypt - 99% Uptime
-                    </div>
-                    
-                    <div class="market-point nse"></div>
-                    <div class="market-tooltip" style="top: 45%; right: 37%;">
-                        <strong>Nairobi Securities Exchange</strong><br>
-                        Kenya - 97% Uptime
-                    </div>
-                    
-                    <div class="market-point cse"></div>
-                    <div class="market-tooltip" style="top: 30%; left: 47%;">
-                        <strong>Casablanca Stock Exchange</strong><br>
-                        Morocco - 99.5% Uptime
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-blue-400"></i>
+                        <span class="text-gray-300">Diversity metrics</span>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <h3 class="mb-4">African Financial Markets</h3>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card market-card h-100 border-0 shadow-sm active">
-                    <span class="status-badge status-active" data-bs-toggle="tooltip" title="Active"></span>
-                    <div class="card-body d-flex flex-column">
-                        <div class="market-icon mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                        </div>
-                        <div class="text-center mb-3">
-                            <h4 class="card-title">Johannesburg Stock Exchange</h4>
-                            <p class="text-muted mb-0">South Africa (JSE)</p>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Data Frequency</span>
-                                <span>Real-time</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Available Symbols</span>
-                                <span>45</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Last Updated</span>
-                                <span>Today, 13:45</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Status</span>
-                                <span class="text-success">Online</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <div class="progress progress-glow mb-2" style="height: 6px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
-                            </div>
-                            <small class="text-muted d-flex justify-content-between">
-                                <span>Uptime</span>
-                                <span>100%</span>
-                            </small>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 d-flex">
-                            <a href="#" class="btn btn-primary flex-grow-1 me-2">View Data</a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="bi bi-gear"></i>
-                            </a>
-                        </div>
+            <div class="glass-card rounded-2xl p-8"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, x: 30}, {opacity: 1, x: 0, duration: 0.8, delay: 1.6})">
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gavel text-white text-3xl"></i>
                     </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Governance</h3>
+                    <p class="text-gray-400">Corporate governance, ethics, and compliance metrics</p>
                 </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card market-card h-100 border-0 shadow-sm">
-                    <span class="status-badge status-active" data-bs-toggle="tooltip" title="Active"></span>
-                    <div class="card-body d-flex flex-column">
-                        <div class="market-icon mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                        </div>
-                        <div class="text-center mb-3">
-                            <h4 class="card-title">Nigerian Stock Exchange</h4>
-                            <p class="text-muted mb-0">Nigeria (NGX)</p>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Data Frequency</span>
-                                <span>Daily</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Available Symbols</span>
-                                <span>32</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Last Updated</span>
-                                <span>Today, 12:30</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Status</span>
-                                <span class="text-success">Online</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <div class="progress progress-glow mb-2" style="height: 6px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 98%"></div>
-                            </div>
-                            <small class="text-muted d-flex justify-content-between">
-                                <span>Uptime</span>
-                                <span>98%</span>
-                            </small>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 d-flex">
-                            <a href="#" class="btn btn-primary flex-grow-1 me-2">View Data</a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="bi bi-gear"></i>
-                            </a>
-                        </div>
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-purple-400"></i>
+                        <span class="text-gray-300">Board composition</span>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card market-card h-100 border-0 shadow-sm">
-                    <span class="status-badge status-active" data-bs-toggle="tooltip" title="Active"></span>
-                    <div class="card-body d-flex flex-column">
-                        <div class="market-icon mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
-                        </div>
-                        <div class="text-center mb-3">
-                            <h4 class="card-title">Egyptian Exchange</h4>
-                            <p class="text-muted mb-0">Egypt (EGX)</p>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Data Frequency</span>
-                                <span>Daily</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Available Symbols</span>
-                                <span>28</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Last Updated</span>
-                                <span>Today, 11:15</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Status</span>
-                                <span class="text-success">Online</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <div class="progress progress-glow mb-2" style="height: 6px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 99%"></div>
-                            </div>
-                            <small class="text-muted d-flex justify-content-between">
-                                <span>Uptime</span>
-                                <span>99%</span>
-                            </small>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 d-flex">
-                            <a href="#" class="btn btn-primary flex-grow-1 me-2">View Data</a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="bi bi-gear"></i>
-                            </a>
-                        </div>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-purple-400"></i>
+                        <span class="text-gray-300">Executive compensation</span>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card market-card h-100 border-0 shadow-sm">
-                    <span class="status-badge status-active" data-bs-toggle="tooltip" title="Active"></span>
-                    <div class="card-body d-flex flex-column">
-                        <div class="market-icon mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        </div>
-                        <div class="text-center mb-3">
-                            <h4 class="card-title">Nairobi Securities Exchange</h4>
-                            <p class="text-muted mb-0">Kenya (NSE)</p>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Data Frequency</span>
-                                <span>Daily</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Available Symbols</span>
-                                <span>25</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Last Updated</span>
-                                <span>Today, 10:45</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Status</span>
-                                <span class="text-success">Online</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <div class="progress progress-glow mb-2" style="height: 6px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 97%"></div>
-                            </div>
-                            <small class="text-muted d-flex justify-content-between">
-                                <span>Uptime</span>
-                                <span>97%</span>
-                            </small>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 d-flex">
-                            <a href="#" class="btn btn-primary flex-grow-1 me-2">View Data</a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="bi bi-gear"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card market-card h-100 border-0 shadow-sm">
-                    <span class="status-badge status-active" data-bs-toggle="tooltip" title="Active"></span>
-                    <div class="card-body d-flex flex-column">
-                        <div class="market-icon mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                        </div>
-                        <div class="text-center mb-3">
-                            <h4 class="card-title">Casablanca Stock Exchange</h4>
-                            <p class="text-muted mb-0">Morocco (CSE)</p>
-                        </div>
-                        
-                        <div class="mt-3">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Data Frequency</span>
-                                <span>Daily</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Available Symbols</span>
-                                <span>20</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Last Updated</span>
-                                <span>Today, 09:30</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Status</span>
-                                <span class="text-success">Online</span>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-4">
-                            <div class="progress progress-glow mb-2" style="height: 6px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 99.5%"></div>
-                            </div>
-                            <small class="text-muted d-flex justify-content-between">
-                                <span>Uptime</span>
-                                <span>99.5%</span>
-                            </small>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 d-flex">
-                            <a href="#" class="btn btn-primary flex-grow-1 me-2">View Data</a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="bi bi-gear"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 border-0 shadow-sm d-flex justify-content-center align-items-center">
-                    <div class="text-center p-4">
-                        <div class="mb-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                        </div>
-                        <h5 class="mb-3">Add New Market</h5>
-                        <p class="text-muted mb-4">Connect to another African financial market source</p>
-                        <button class="btn btn-outline-primary px-4 py-2">
-                            <i class="bi bi-plus-lg me-2"></i> Add Market
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col-md-8">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-transparent">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Johannesburg Stock Exchange - Top Symbols</h5>
-                            <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-outline-light active">Day</button>
-                                <button type="button" class="btn btn-outline-light">Week</button>
-                                <button type="button" class="btn btn-outline-light">Month</button>
-                                <button type="button" class="btn btn-outline-light">Year</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-container">
-                            <canvas id="marketPerformanceChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
-                        <small class="text-muted">Last updated: Today, 13:45</small>
-                        <div>
-                            <button class="btn btn-sm btn-outline-light export-btn me-2">
-                                <i class="bi bi-file-earmark-arrow-down me-1"></i> Export CSV
-                            </button>
-                            <button class="btn btn-sm btn-outline-light export-btn">
-                                <i class="bi bi-filetype-json me-1"></i> Export JSON
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-header bg-transparent">
-                        <h5 class="mb-0">Available Symbols</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action symbol-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="symbol-badge">SOL</span>
-                                        <span class="ms-2">Sasol Limited</span>
-                                    </div>
-                                    <span class="text-success">+2.5%</span>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action symbol-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="symbol-badge">NPN</span>
-                                        <span class="ms-2">Naspers Limited</span>
-                                    </div>
-                                    <span class="text-success">+1.8%</span>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action symbol-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="symbol-badge">SLM</span>
-                                        <span class="ms-2">Sanlam Limited</span>
-                                    </div>
-                                    <span class="text-success">+0.9%</span>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action symbol-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="symbol-badge">FSR</span>
-                                        <span class="ms-2">FirstRand Limited</span>
-                                    </div>
-                                    <span class="text-danger">-0.4%</span>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action symbol-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="symbol-badge">SBK</span>
-                                        <span class="ms-2">Standard Bank Group</span>
-                                    </div>
-                                    <span class="text-success">+0.6%</span>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action symbol-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="symbol-badge">AGL</span>
-                                        <span class="ms-2">Anglo American PLC</span>
-                                    </div>
-                                    <span class="text-danger">-1.2%</span>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action symbol-card">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="symbol-badge">MTN</span>
-                                        <span class="ms-2">MTN Group Limited</span>
-                                    </div>
-                                    <span class="text-success">+3.1%</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <button class="btn btn-sm btn-outline-primary w-100">View All Symbols</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header bg-transparent">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Recent Data Acquisitions</h5>
-                            <button class="btn btn-sm btn-outline-light">
-                                <i class="bi bi-arrow-repeat me-1"></i> Refresh
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Market</th>
-                                        <th>Source</th>
-                                        <th>Timestamp</th>
-                                        <th>Symbols</th>
-                                        <th>Data Points</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>JSE</td>
-                                        <td>Johannesburg Stock Exchange</td>
-                                        <td>2025-04-03 13:45</td>
-                                        <td>45</td>
-                                        <td>1,245</td>
-                                        <td><span class="badge bg-success">Success</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-light me-1">View</button>
-                                            <button class="btn btn-sm btn-outline-primary">Export</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>NGX</td>
-                                        <td>Nigerian Stock Exchange</td>
-                                        <td>2025-04-03 12:30</td>
-                                        <td>32</td>
-                                        <td>896</td>
-                                        <td><span class="badge bg-success">Success</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-light me-1">View</button>
-                                            <button class="btn btn-sm btn-outline-primary">Export</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>EGX</td>
-                                        <td>Egyptian Exchange</td>
-                                        <td>2025-04-03 11:15</td>
-                                        <td>28</td>
-                                        <td>764</td>
-                                        <td><span class="badge bg-success">Success</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-light me-1">View</button>
-                                            <button class="btn btn-sm btn-outline-primary">Export</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>NSE</td>
-                                        <td>Nairobi Securities Exchange</td>
-                                        <td>2025-04-03 10:45</td>
-                                        <td>25</td>
-                                        <td>675</td>
-                                        <td><span class="badge bg-success">Success</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-light me-1">View</button>
-                                            <button class="btn btn-sm btn-outline-primary">Export</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>CSE</td>
-                                        <td>Casablanca Stock Exchange</td>
-                                        <td>2025-04-03 09:30</td>
-                                        <td>20</td>
-                                        <td>530</td>
-                                        <td><span class="badge bg-success">Success</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-light me-1">View</button>
-                                            <button class="btn btn-sm btn-outline-primary">Export</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <nav aria-label="Data acquisition history navigation">
-                            <ul class="pagination justify-content-center mb-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-check-circle text-purple-400"></i>
+                        <span class="text-gray-300">Risk management</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="py-4 mt-auto">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>WizData</h5>
-                    <p class="text-muted">Financial data acquisition and API service for TradingWealthWiz.</p>
+    <!-- Available Datasets Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold gradient-text mb-4">Available Datasets</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Comprehensive collection of premium financial, ESG, and economic datasets ready for integration
+            </p>
+        </div>
+
+        <!-- Dataset Categories Filter -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12" 
+             x-data="{ activeCategory: 'all' }">
+            <button @click="activeCategory = 'all'" 
+                    :class="activeCategory === 'all' ? 'bg-gradient-to-r from-blue-500 to-cyan-500' : 'bg-gray-800 hover:bg-gray-700'"
+                    class="px-6 py-3 rounded-full text-white font-medium transition-all duration-300 transform hover:scale-105">
+                All Datasets
+            </button>
+            <button @click="activeCategory = 'market'" 
+                    :class="activeCategory === 'market' ? 'bg-gradient-to-r from-green-500 to-emerald-500' : 'bg-gray-800 hover:bg-gray-700'"
+                    class="px-6 py-3 rounded-full text-white font-medium transition-all duration-300 transform hover:scale-105">
+                Market Data
+            </button>
+            <button @click="activeCategory = 'esg'" 
+                    :class="activeCategory === 'esg' ? 'bg-gradient-to-r from-purple-500 to-pink-500' : 'bg-gray-800 hover:bg-gray-700'"
+                    class="px-6 py-3 rounded-full text-white font-medium transition-all duration-300 transform hover:scale-105">
+                ESG Data
+            </button>
+            <button @click="activeCategory = 'economic'" 
+                    :class="activeCategory === 'economic' ? 'bg-gradient-to-r from-orange-500 to-red-500' : 'bg-gray-800 hover:bg-gray-700'"
+                    class="px-6 py-3 rounded-full text-white font-medium transition-all duration-300 transform hover:scale-105">
+                Economic Indicators
+            </button>
+            <button @click="activeCategory = 'alternative'" 
+                    :class="activeCategory === 'alternative' ? 'bg-gradient-to-r from-yellow-500 to-amber-500' : 'bg-gray-800 hover:bg-gray-700'"
+                    class="px-6 py-3 rounded-full text-white font-medium transition-all duration-300 transform hover:scale-105">
+                Alternative Data
+            </button>
+        </div>
+
+        <!-- Datasets Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+             x-data="datasetsController()">
+            
+            <!-- JSE Market Data Dataset -->
+            <div class="glass-card rounded-2xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group dataset-card" 
+                 data-category="market"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 0.8, delay: 0.1})">
+                <div class="relative">
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="bg-green-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">Market Data</span>
+                    </div>
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs font-medium">Live</span>
+                        </div>
+                    </div>
+                    <div class="h-32 bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-4xl text-green-400"></i>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <h5>Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="/api/docs" class="text-decoration-none text-muted">API Documentation</a></li>
-                        <li><a href="/products" class="text-decoration-none text-muted">Data Products</a></li>
-                        <li><a href="/api-services" class="text-decoration-none text-muted">API Services</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5>Resources</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-muted">Getting Started</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted">FAQ</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted">Support</a></li>
-                    </ul>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">JSE Real-time Data</h3>
+                    <p class="text-gray-400 text-sm mb-4">Live stock prices, volumes, and market indices from Johannesburg Stock Exchange</p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Source:</span>
+                            <span class="text-white font-medium">JSE Official</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Update Frequency:</span>
+                            <span class="text-green-400 font-medium">Real-time</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Data Points:</span>
+                            <span class="text-white font-medium">10M+ daily</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Quality Score:</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                </div>
+                                <span class="text-green-400 text-sm font-medium">99.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button class="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                            Subscribe
+                        </button>
+                        <button class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-green-400 hover:text-green-400 transition-all duration-300">
+                            Preview
+                        </button>
+                    </div>
                 </div>
             </div>
-            <hr>
-            <div class="text-center">
-                <p class="text-muted">&copy; 2025 WizData. All rights reserved.</p>
+
+            <!-- ESG Metrics Dataset -->
+            <div class="glass-card rounded-2xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group dataset-card" 
+                 data-category="esg"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 0.8, delay: 0.2})">
+                <div class="relative">
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="bg-purple-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">ESG Data</span>
+                    </div>
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                            <span class="text-blue-400 text-xs font-medium">Daily</span>
+                        </div>
+                    </div>
+                    <div class="h-32 bg-gradient-to-br from-purple-500/20 to-pink-600/20 flex items-center justify-center">
+                        <i class="fas fa-leaf text-4xl text-purple-400"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">ESG Comprehensive Metrics</h3>
+                    <p class="text-gray-400 text-sm mb-4">Environmental, Social & Governance data for African companies with global standards</p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Source:</span>
+                            <span class="text-white font-medium">Multiple Providers</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Update Frequency:</span>
+                            <span class="text-blue-400 font-medium">Daily</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Companies Covered:</span>
+                            <span class="text-white font-medium">500+</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Quality Score:</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                </div>
+                                <span class="text-purple-400 text-sm font-medium">95.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                            Subscribe
+                        </button>
+                        <button class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-purple-400 hover:text-purple-400 transition-all duration-300">
+                            Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Economic Indicators Dataset -->
+            <div class="glass-card rounded-2xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group dataset-card" 
+                 data-category="economic"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 0.8, delay: 0.3})">
+                <div class="relative">
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="bg-orange-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">Economic</span>
+                    </div>
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                            <span class="text-yellow-400 text-xs font-medium">Weekly</span>
+                        </div>
+                    </div>
+                    <div class="h-32 bg-gradient-to-br from-orange-500/20 to-red-600/20 flex items-center justify-center">
+                        <i class="fas fa-chart-bar text-4xl text-orange-400"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">African Economic Indicators</h3>
+                    <p class="text-gray-400 text-sm mb-4">GDP, inflation, interest rates, and macroeconomic data across African economies</p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Source:</span>
+                            <span class="text-white font-medium">Central Banks</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Update Frequency:</span>
+                            <span class="text-yellow-400 font-medium">Weekly</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Countries:</span>
+                            <span class="text-white font-medium">15 Markets</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Quality Score:</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                                </div>
+                                <span class="text-orange-400 text-sm font-medium">97.5%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                            Subscribe
+                        </button>
+                        <button class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-orange-400 hover:text-orange-400 transition-all duration-300">
+                            Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NSE Market Data Dataset -->
+            <div class="glass-card rounded-2xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group dataset-card" 
+                 data-category="market"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 0.8, delay: 0.4})">
+                <div class="relative">
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="bg-green-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">Market Data</span>
+                    </div>
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs font-medium">Live</span>
+                        </div>
+                    </div>
+                    <div class="h-32 bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center">
+                        <i class="fas fa-building text-4xl text-green-400"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">NSE Nigeria Data</h3>
+                    <p class="text-gray-400 text-sm mb-4">Nigerian Stock Exchange data including blue-chip stocks and market indices</p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Source:</span>
+                            <span class="text-white font-medium">NSE Official</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Update Frequency:</span>
+                            <span class="text-green-400 font-medium">Real-time</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Listed Companies:</span>
+                            <span class="text-white font-medium">220+</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Quality Score:</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                </div>
+                                <span class="text-green-400 text-sm font-medium">95.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button class="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                            Subscribe
+                        </button>
+                        <button class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-green-400 hover:text-green-400 transition-all duration-300">
+                            Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commodity Prices Dataset -->
+            <div class="glass-card rounded-2xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group dataset-card" 
+                 data-category="alternative"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 0.8, delay: 0.5})">
+                <div class="relative">
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="bg-yellow-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">Alternative</span>
+                    </div>
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                            <span class="text-yellow-400 text-xs font-medium">Hourly</span>
+                        </div>
+                    </div>
+                    <div class="h-32 bg-gradient-to-br from-yellow-500/20 to-amber-600/20 flex items-center justify-center">
+                        <i class="fas fa-coins text-4xl text-yellow-400"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">African Commodity Prices</h3>
+                    <p class="text-gray-400 text-sm mb-4">Gold, platinum, diamonds, and agricultural commodity prices from African markets</p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Source:</span>
+                            <span class="text-white font-medium">LME, Local Exchanges</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Update Frequency:</span>
+                            <span class="text-yellow-400 font-medium">Hourly</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Commodities:</span>
+                            <span class="text-white font-medium">50+ Products</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Quality Score:</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                </div>
+                                <span class="text-yellow-400 text-sm font-medium">94.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button class="flex-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                            Subscribe
+                        </button>
+                        <button class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-yellow-400 hover:text-yellow-400 transition-all duration-300">
+                            Preview
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Currency Exchange Dataset -->
+            <div class="glass-card rounded-2xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group dataset-card" 
+                 data-category="market"
+                 x-data x-init="gsap.fromTo($el, {opacity: 0, y: 50}, {opacity: 1, y: 0, duration: 0.8, delay: 0.6})">
+                <div class="relative">
+                    <div class="absolute top-4 left-4 z-10">
+                        <span class="bg-green-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium">Market Data</span>
+                    </div>
+                    <div class="absolute top-4 right-4 z-10">
+                        <div class="flex items-center space-x-1">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs font-medium">Live</span>
+                        </div>
+                    </div>
+                    <div class="h-32 bg-gradient-to-br from-green-500/20 to-emerald-600/20 flex items-center justify-center">
+                        <i class="fas fa-exchange-alt text-4xl text-green-400"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">African Currency Exchange</h3>
+                    <p class="text-gray-400 text-sm mb-4">Real-time exchange rates for African currencies against major global currencies</p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Source:</span>
+                            <span class="text-white font-medium">Central Banks</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Update Frequency:</span>
+                            <span class="text-green-400 font-medium">Live</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Currency Pairs:</span>
+                            <span class="text-white font-medium">45+ Pairs</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">Quality Score:</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                </div>
+                                <span class="text-green-400 text-sm font-medium">99.5%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button class="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white py-2 px-4 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
+                            Subscribe
+                        </button>
+                        <button class="px-4 py-2 border border-gray-600 text-gray-300 rounded-lg hover:border-green-400 hover:text-green-400 transition-all duration-300">
+                            Preview
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Initialize tooltips
-        document.addEventListener('DOMContentLoaded', function() {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
+        <!-- Dataset Summary Stats -->
+        <div class="mt-16 glass-card rounded-2xl p-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-white mb-4">Dataset Collection Overview</h3>
+                <p class="text-gray-400">Comprehensive data coverage across African and global markets</p>
+            </div>
             
-            // Market Performance Chart
-            const performanceCtx = document.getElementById('marketPerformanceChart').getContext('2d');
-            const performanceChart = new Chart(performanceCtx, {
-                type: 'line',
-                data: {
-                    labels: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
-                    datasets: [
-                        {
-                            label: 'SOL',
-                            data: [387.25, 389.50, 390.75, 391.20, 393.45, 396.50, 399.80, 405.35],
-                            borderColor: '#0d6efd',
-                            backgroundColor: 'rgba(13, 110, 253, 0.05)',
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 3,
-                            pointBackgroundColor: '#0d6efd'
-                        },
-                        {
-                            label: 'NPN',
-                            data: [3452.80, 3460.25, 3475.50, 3480.75, 3490.20, 3495.45, 3498.70, 3501.25],
-                            borderColor: '#20c997',
-                            backgroundColor: 'rgba(32, 201, 151, 0.05)',
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 3,
-                            pointBackgroundColor: '#20c997'
-                        },
-                        {
-                            label: 'SLM',
-                            data: [149.25, 149.75, 150.30, 150.85, 151.25, 151.90, 152.40, 152.75],
-                            borderColor: '#fd7e14',
-                            backgroundColor: 'rgba(253, 126, 20, 0.05)',
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 3,
-                            pointBackgroundColor: '#fd7e14'
-                        },
-                        {
-                            label: 'MTN',
-                            data: [125.50, 126.30, 126.75, 127.80, 129.25, 130.50, 131.75, 132.90],
-                            borderColor: '#dc3545',
-                            backgroundColor: 'rgba(220, 53, 69, 0.05)',
-                            tension: 0.4,
-                            borderWidth: 2,
-                            pointRadius: 3,
-                            pointBackgroundColor: '#dc3545'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        tooltip: {
-                            mode: 'index',
-                            intersect: false,
-                            backgroundColor: 'rgba(32, 35, 48, 0.8)',
-                            titleFont: {
-                                size: 14
-                            },
-                            bodyFont: {
-                                size: 13
-                            },
-                            padding: 10,
-                            borderWidth: 1,
-                            borderColor: 'rgba(255, 255, 255, 0.1)'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.05)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.05)'
-                            }
-                        }
-                    },
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    }
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold gradient-text mb-2">24+</div>
+                    <div class="text-gray-400">Premium Datasets</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold gradient-text mb-2">50M+</div>
+                    <div class="text-gray-400">Data Points Daily</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold gradient-text mb-2">99.2%</div>
+                    <div class="text-gray-400">Average Uptime</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold gradient-text mb-2">15ms</div>
+                    <div class="text-gray-400">Average Latency</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Endpoints & Integration -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div class="glass-card rounded-3xl p-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">API Integration & Access</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Programmatic access to all data sources through RESTful APIs and WebSocket streams
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-white mb-4">Available Endpoints</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-xl">
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <code class="text-green-400 font-mono">GET /api/markets/jse</code>
+                            <span class="text-gray-400">JSE market data</span>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-xl">
+                            <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                            <code class="text-blue-400 font-mono">GET /api/esg/companies</code>
+                            <span class="text-gray-400">ESG metrics</span>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 bg-gray-800/50 rounded-xl">
+                            <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
+                            <code class="text-purple-400 font-mono">WS /stream/realtime</code>
+                            <span class="text-gray-400">Real-time updates</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-white mb-4">Integration Examples</h3>
+                    <div class="bg-gray-900/50 rounded-xl p-6">
+                        <pre class="text-sm text-gray-300 overflow-x-auto">
+<span class="text-purple-400">import</span> requests
+
+<span class="text-green-400"># Get JSE market data</span>
+response = requests.<span class="text-blue-400">get</span>(
+    <span class="text-yellow-400">'https://api.wizdata.co/markets/jse'</span>,
+    headers={<span class="text-yellow-400">'Authorization'</span>: <span class="text-yellow-400">'Bearer YOUR_TOKEN'</span>}
+)
+
+data = response.<span class="text-blue-400">json</span>()
+<span class="text-purple-400">print</span>(data[<span class="text-yellow-400">'companies'</span>])
+                        </pre>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-xl hover:shadow-lg transition-all duration-300">
+                        <i class="fas fa-code mr-2"></i>
+                        View Full Documentation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+// Dataset filtering controller
+function datasetsController() {
+    return {
+        activeCategory: 'all',
+        
+        init() {
+            this.filterDatasets();
+        },
+        
+        filterDatasets() {
+            const cards = document.querySelectorAll('.dataset-card');
+            
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                
+                if (this.activeCategory === 'all' || category === this.activeCategory) {
+                    card.style.display = 'block';
+                    // Re-animate visible cards
+                    gsap.fromTo(card, 
+                        { opacity: 0, y: 30 }, 
+                        { opacity: 1, y: 0, duration: 0.6, delay: Math.random() * 0.3 }
+                    );
+                } else {
+                    card.style.display = 'none';
                 }
             });
+        },
+        
+        setCategory(category) {
+            this.activeCategory = category;
+            this.filterDatasets();
+        }
+    }
+}
+
+// Enhanced animations for dataset cards
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize card hover effects
+    const cards = document.querySelectorAll('.dataset-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            gsap.to(this, { scale: 1.05, duration: 0.3 });
+            gsap.to(this.querySelector('.glass-card'), { 
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', 
+                duration: 0.3 
+            });
         });
-    </script>
-</body>
-</html>
+        
+        card.addEventListener('mouseleave', function() {
+            gsap.to(this, { scale: 1, duration: 0.3 });
+            gsap.to(this.querySelector('.glass-card'), { 
+                boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.3)', 
+                duration: 0.3 
+            });
+        });
+    });
+    
+    // Stagger animation for initial load
+    gsap.fromTo('.dataset-card', 
+        { opacity: 0, y: 50 }, 
+        { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: '.dataset-card',
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            }
+        }
+    );
+});
+</script>
