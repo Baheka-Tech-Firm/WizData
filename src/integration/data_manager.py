@@ -37,12 +37,36 @@ class DataManager:
     
     def __init__(self):
         """Initialize the data manager with all required data sources"""
-        # Create data source clients
-        self.alpha_vantage = AlphaVantageClient()
-        self.sp_global = SPGlobalClient()
-        self.bloomberg = BloombergClient()
-        self.refinitiv = RefinitivClient()
-        self.world_bank = WorldBankClient()
+        # Create data source clients (with optional API keys)
+        try:
+            self.alpha_vantage = AlphaVantageClient()
+        except Exception as e:
+            logger.warning(f"Alpha Vantage client initialization failed: {e}")
+            self.alpha_vantage = None
+            
+        try:
+            self.sp_global = SPGlobalClient()
+        except Exception as e:
+            logger.warning(f"S&P Global client initialization failed: {e}")
+            self.sp_global = None
+            
+        try:
+            self.bloomberg = BloombergClient()
+        except Exception as e:
+            logger.warning(f"Bloomberg client initialization failed: {e}")
+            self.bloomberg = None
+            
+        try:
+            self.refinitiv = RefinitivClient()
+        except Exception as e:
+            logger.warning(f"Refinitiv client initialization failed: {e}")
+            self.refinitiv = None
+            
+        try:
+            self.world_bank = WorldBankClient()
+        except Exception as e:
+            logger.warning(f"World Bank client initialization failed: {e}")
+            self.world_bank = None
         
         # Ensure cache directory exists
         os.makedirs(self.CACHE_DIR, exist_ok=True)

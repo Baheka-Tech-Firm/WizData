@@ -31,8 +31,9 @@ class AlphaVantageClient:
             api_key: Alpha Vantage API key (defaults to environment variable if not provided)
         """
         self.api_key = api_key or os.environ.get("ALPHA_VANTAGE_API_KEY")
-        if not self.api_key:
-            raise ValueError("Alpha Vantage API key is required")
+        self.is_enabled = bool(self.api_key)
+        if not self.is_enabled:
+            logger.warning("Alpha Vantage API key not found. Alpha Vantage features will be disabled.")
         
         self.session = requests.Session()
         self.request_count = 0
@@ -48,6 +49,12 @@ class AlphaVantageClient:
         Returns:
             JSON response data
         """
+        if not self.is_enabled:
+            return {
+                "error": "Alpha Vantage API not configured",
+                "message": "ALPHA_VANTAGE_API_KEY environment variable is required"
+            }
+        
         # Add API key to parameters
         params["apikey"] = self.api_key
         

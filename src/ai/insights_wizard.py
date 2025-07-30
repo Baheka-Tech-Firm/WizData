@@ -13,11 +13,22 @@ from datetime import datetime
 
 from openai import OpenAI
 
-# Initialize OpenAI client
+# Initialize OpenAI client (optional)
 # the newest OpenAI model is "gpt-4o" which was released May 13, 2024.
 # do not change this unless explicitly requested by the user
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 MODEL = "gpt-4o"  # Using the latest model
+client = None
+
+# Try to initialize OpenAI client if API key is available
+try:
+    openai_api_key = os.environ.get("OPENAI_API_KEY")
+    if openai_api_key:
+        client = OpenAI(api_key=openai_api_key)
+    else:
+        print("Warning: OPENAI_API_KEY not found. AI insights features will be limited.")
+except Exception as e:
+    print(f"Warning: Could not initialize OpenAI client: {e}")
+    client = None
 
 class InsightsWizard:
     """
@@ -125,6 +136,19 @@ class InsightsWizard:
             dict: Analysis results with insights
         """
         try:
+            # Check if OpenAI client is available
+            if client is None:
+                return {
+                    "key_insights": [
+                        "AI analysis requires OpenAI API key configuration",
+                        "Data structure analysis would show basic patterns",
+                        "Manual analysis can be performed with provided data"
+                    ],
+                    "explanation": "OpenAI integration is not configured. To enable AI-powered insights, please set the OPENAI_API_KEY environment variable.",
+                    "suggested_visualizations": ["Charts based on data structure", "Time series if date fields present", "Comparison tables"],
+                    "next_analysis_steps": ["Configure OpenAI API key", "Retry analysis with AI capabilities", "Perform manual data exploration"]
+                }
+            
             # Convert data to JSON string for the prompt
             data_str = json.dumps(data, indent=2)
             
@@ -180,6 +204,26 @@ class InsightsWizard:
             dict: Step-by-step guide
         """
         try:
+            # Check if OpenAI client is available
+            if client is None:
+                return {
+                    "analysis_title": f"{analysis_type} Guide",
+                    "complexity": complexity,
+                    "overview": "AI-powered analysis guide unavailable - OpenAI API key not configured",
+                    "prerequisites": ["Configure OPENAI_API_KEY environment variable"],
+                    "steps": [
+                        {
+                            "step_number": 1,
+                            "title": "Set up OpenAI Integration",
+                            "description": "Configure the OPENAI_API_KEY environment variable to enable AI-powered analysis guides",
+                            "code_example": "export OPENAI_API_KEY=your_api_key_here",
+                            "tip": "Get your API key from the OpenAI platform"
+                        }
+                    ],
+                    "expected_outcome": "AI-powered analysis capabilities will be enabled",
+                    "next_level_analysis": "Retry this request after configuring the API key"
+                }
+            
             # Create prompt for OpenAI
             prompt = f"""
             You are a financial and ESG data analysis expert.
@@ -239,6 +283,15 @@ class InsightsWizard:
             dict: Answer with guidance
         """
         try:
+            # Check if OpenAI client is available
+            if client is None:
+                return {
+                    "answer": "AI question answering is unavailable - OpenAI API key not configured. Please configure the OPENAI_API_KEY environment variable to enable AI-powered insights.",
+                    "related_concepts": ["API configuration", "Environment variables", "AI integration"],
+                    "relevant_data_sources": ["Configuration documentation", "API setup guides"],
+                    "suggested_next_questions": ["How do I configure the OpenAI API key?", "What other features require API keys?"]
+                }
+            
             # Prepare context information if provided
             context_str = ""
             if context:
@@ -296,6 +349,16 @@ class InsightsWizard:
             dict: Narrative explanation
         """
         try:
+            # Check if OpenAI client is available
+            if client is None:
+                return {
+                    "title": "AI Narrative Generation Unavailable",
+                    "summary": "OpenAI API key not configured - narrative generation requires AI capabilities.",
+                    "detailed_narrative": "AI-powered narrative generation is currently unavailable because the OPENAI_API_KEY environment variable is not set. To enable this feature, please configure your OpenAI API key and restart the application. Manual data analysis and interpretation can still be performed using the raw data.",
+                    "key_data_points": ["OpenAI integration required", "API key configuration needed", "Manual analysis available"],
+                    "limitations": "All AI-powered features are disabled without proper API key configuration"
+                }
+            
             # Convert data to JSON string for the prompt
             data_str = json.dumps(data, indent=2)
             
@@ -363,6 +426,26 @@ class InsightsWizard:
             dict: Suggested comparative analysis
         """
         try:
+            # Check if OpenAI client is available
+            if client is None:
+                return {
+                    "analysis_title": f"Comparative Analysis for {data_type} Data",
+                    "objective": "AI-powered comparison suggestions unavailable - OpenAI API key not configured",
+                    "methodology": "Manual comparative analysis approach required",
+                    "data_requirements": ["Configure OPENAI_API_KEY environment variable"],
+                    "suggested_comparisons": [
+                        {
+                            "comparison_name": "Basic Data Structure Comparison",
+                            "elements_to_compare": ["Available data fields", "Data completeness"],
+                            "metrics": ["Record counts", "Field availability"],
+                            "visualization": "Table comparison",
+                            "expected_insights": "Understanding of data structure and availability"
+                        }
+                    ],
+                    "interpretation_guidance": "Configure OpenAI API key to enable AI-powered comparison suggestions",
+                    "potential_api_endpoints": ["All WizData API endpoints available for manual analysis"]
+                }
+            
             # Prepare regions and metrics information if provided
             regions_str = ""
             if regions:
