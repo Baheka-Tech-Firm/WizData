@@ -1,9 +1,12 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import JSON
 from enum import Enum
 from decimal import Decimal
 # from sqlalchemy.dialects.postgresql import ARRAY, JSON
+
+# Initialize db here to avoid circular imports
+db = SQLAlchemy()
 
 class APIKey(db.Model):
     """API Key model for authentication"""

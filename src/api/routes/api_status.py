@@ -110,7 +110,7 @@ def services_status():
     
     # Check database
     try:
-        from app import db
+        from models import db
         db.session.execute('SELECT 1')
         services['database'] = {
             'status': 'healthy',

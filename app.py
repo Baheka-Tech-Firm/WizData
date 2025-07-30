@@ -2,8 +2,6 @@ import os
 import logging
 from datetime import datetime
 from flask import Flask, g, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase
 from werkzeug.middleware.proxy_fix import ProxyFix
 from flask_socketio import SocketIO
 from redis import Redis
@@ -30,11 +28,6 @@ except ImportError as e:
 logging.basicConfig(level=getattr(logging, config.monitoring.log_level))
 logger = logging.getLogger(__name__)
 
-class Base(DeclarativeBase):
-    pass
-
-db = SQLAlchemy(model_class=Base)
-
 def create_app():
     """Create and configure the Flask application"""
     # Create the Flask application
@@ -57,6 +50,7 @@ def create_app():
     os.makedirs(app.config["DATA_EXPORT_DIR"], exist_ok=True)
 
     # Initialize database with app
+    from models import db
     db.init_app(app)
     
     # Initialize Redis for caching and rate limiting
@@ -95,7 +89,7 @@ def create_app():
         # init_auth_middleware(app, redis_client if 'redis_client' in locals() else None)
         logger.info("Authentication middleware skipped for now")
     except Exception as e:
-        logger.warning(f"Could not initialize auth middleware: {e}")
+        logger.warning("Could not initialize auth middleware: {}".format(e))
     
     # Add rate limiter to request context
     @app.before_request
@@ -107,13 +101,14 @@ def create_app():
 
     with app.app_context():
         # Make sure to import the models here or their tables won't be created
+        from models import db
         import models  # noqa: F401
         
         try:
             db.create_all()
             logger.info("Database setup complete")
         except Exception as e:
-            logger.error(f"Error setting up database: {str(e)}")
+            logger.error("Error setting up database: {}".format(str(e)))
 
     # Register blueprints
     try:
@@ -164,12 +159,12 @@ def create_app():
             app.register_blueprint(dataset_api)
             app.register_blueprint(data_access_api)
         except ImportError as e:
-            logger.warning(f"Could not register dataset registry APIs: {e}")
+            logger.warning("Could not register dataset registry APIs: {}".format(e))
         
         logger.info("All blueprints registered successfully")
         
     except ImportError as e:
-        logger.warning(f"Some blueprints could not be imported: {e}")
+        logger.warning("Some blueprints could not be imported: {}".format(e))
         # Register only the essential ones
         from src.api.routes.api_status import api_status_bp
         app.register_blueprint(api_status_bp)
@@ -179,7 +174,7 @@ def create_app():
         from src.api.routes.realtime.socket_routes import init_socket_handlers
         init_socket_handlers(socketio, db_url=app.config["SQLALCHEMY_DATABASE_URI"])
     except ImportError as e:
-        logger.warning(f"Could not initialize socket handlers: {e}")
+        logger.warning("Could not initialize socket handlers: {}".format(e))
 
     # Register main routes
     from routes import register_routes
@@ -272,10 +267,15 @@ def create_app():
             logger.info("Enhanced API endpoints registered")
             
         except Exception as e:
-            logger.error(f"Failed to initialize enhanced features: {e}")
+            logger.error("Failed to initialize enhanced features: {}".format(e))
             app.job_scheduler = None
 
     return app, socketio
 
 # Create the app and socketio instances
 app, socketio = create_app()
+
+if __name__ == '__main__':
+    # Run the application
+    print("Starting WizData B2B Platform on http://localhost:5001")
+    socketio.run(app, host='0.0.0.0', port=5001, debug=True)

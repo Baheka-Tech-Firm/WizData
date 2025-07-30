@@ -4,6 +4,7 @@ Simple monitoring middleware for WizData API
 
 import time
 import logging
+import functools
 from flask import request, g
 
 logger = logging.getLogger(__name__)
@@ -23,20 +24,21 @@ class MonitoringMiddleware:
         def after_request(response):
             if hasattr(g, 'start_time'):
                 duration = time.time() - g.start_time
-                logger.info(f"{request.method} {request.path} - {response.status_code} - {duration:.3f}s")
+                logger.info("{} {} - {} - {:.3f}s".format(request.method, request.path, response.status_code, duration))
             return response
 
 def monitor_function(func):
     """Decorator for monitoring function execution"""
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start_time = time.time()
         try:
             result = func(*args, **kwargs)
             duration = time.time() - start_time
-            logger.info(f"{func.__name__} completed in {duration:.3f}s")
+            logger.info("{} completed in {:.3f}s".format(func.__name__, duration))
             return result
         except Exception as e:
             duration = time.time() - start_time
-            logger.error(f"{func.__name__} failed after {duration:.3f}s: {str(e)}")
+            logger.error("{} failed after {:.3f}s: {}".format(func.__name__, duration, str(e)))
             raise
     return wrapper

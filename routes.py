@@ -172,7 +172,7 @@ def register_routes(app):
                     fetcher = JSEScraper()
                 else:
                     return jsonify({
-                        "error": f"Invalid asset_type: {asset_type}. Supported types: jse, crypto, forex, african, global, dividend, earnings"
+                        "error": "Invalid asset_type: {}. Supported types: jse, crypto, forex, african, global, dividend, earnings".format(asset_type)
                     }), 400
                 
                 # Fetch symbols asynchronously
@@ -186,7 +186,7 @@ def register_routes(app):
                 })
             
         except Exception as e:
-            logger.error(f"Error fetching symbols: {str(e)}")
+            logger.error("Error fetching symbols: {}".format(str(e)))
             return jsonify({
                 "error": "Internal server error",
                 "message": str(e)
@@ -206,7 +206,7 @@ def register_routes(app):
         """Health check endpoint for Docker and load balancers"""
         try:
             # Check database connection
-            from app import db
+            from models import db
             from sqlalchemy import text
             db.session.execute(text('SELECT 1'))
             
@@ -223,7 +223,7 @@ def register_routes(app):
                 }
             }), 200
         except Exception as e:
-            logger.error(f"Health check failed: {str(e)}")
+            logger.error("Health check failed: {}".format(str(e)))
             return jsonify({
                 "status": "unhealthy",
                 "timestamp": datetime.utcnow().isoformat(),
@@ -266,7 +266,7 @@ def register_routes(app):
                 "status": "healthy"
             })
         except Exception as e:
-            logger.error(f"Error getting jobs status: {e}")
+            logger.error("Error getting jobs status: {}".format(e))
             return jsonify({
                 "active_jobs": 3,
                 "completed_jobs": 15,
@@ -294,7 +294,7 @@ def register_routes(app):
                 "status": "operational"
             })
         except Exception as e:
-            logger.error(f"Error getting platform status: {e}")
+            logger.error("Error getting platform status: {}".format(e))
             return jsonify({
                 "active_licenses": 12,
                 "total_datasets": 8,
@@ -318,7 +318,7 @@ def register_routes(app):
             
             return jsonify(analytics)
         except Exception as e:
-            logger.error(f"Error getting usage analytics: {e}")
+            logger.error("Error getting usage analytics: {}".format(e))
             
             # Return sample data
             from datetime import datetime, timedelta
