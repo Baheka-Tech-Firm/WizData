@@ -169,7 +169,7 @@ def calculate_technical_indicators(ohlcv_data: List[Dict], symbol: str) -> Dict[
     
     return indicators
 
-@charting_api.route('/ohlcv/<symbol>')
+@charting_api.route('/ohlcv/<path:symbol>')
 def get_symbol_ohlcv(symbol):
     """
     Get OHLCV data for a symbol
@@ -360,7 +360,7 @@ def get_available_symbols():
         'timestamp': datetime.now().isoformat()
     })
 
-@charting_api.route('/market-data/<symbol>')
+@charting_api.route('/market-data/<path:symbol>')
 def get_market_data(symbol):
     """Get current market data for a symbol"""
     try:
@@ -406,7 +406,7 @@ def get_market_data(symbol):
             'timestamp': datetime.now().isoformat()
         }), 400
 
-@charting_api.route('/events/<symbol>')
+@charting_api.route('/events/<path:symbol>')
 def get_symbol_events(symbol):
     """Get corporate actions and events for a symbol"""
     # Sample events data
@@ -467,7 +467,7 @@ def get_symbol_events(symbol):
         'timestamp': datetime.now().isoformat()
     })
 
-@charting_api.route('/news/<symbol>')
+@charting_api.route('/news/<path:symbol>')
 def get_symbol_news(symbol):
     """Get financial news for a symbol"""
     # Sample news data

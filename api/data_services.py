@@ -486,7 +486,7 @@ def get_market_data():
     
     return jsonify(MarketDataService.get_market_data(symbols, data_type))
 
-@data_services_api.route('/indicators/<symbol>')
+@data_services_api.route('/indicators/<path:symbol>')
 def get_indicators(symbol):
     """Get technical indicators for a symbol"""
     indicators = request.args.getlist('indicators')
@@ -505,7 +505,7 @@ def get_events():
     
     return jsonify(EventEngine.get_events(symbol, event_type, days_ahead))
 
-@data_services_api.route('/profile/<symbol>')
+@data_services_api.route('/profile/<path:symbol>')
 def get_company_profile(symbol):
     """Get company profile"""
     return jsonify(MetadataService.get_company_profile(symbol))
