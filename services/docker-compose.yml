@@ -1,0 +1,127 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: wizdata_db
+      POSTGRES_USER: wizdata_user
+      POSTGRES_PASSWORD: wizdata_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wizdata_user -d wizdata_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Market Data Service
+  market-data-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.market-data
+    ports:
+      - "5001:5001"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Symbol Registry Service
+  symbol-registry-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.symbol-registry
+    ports:
+      - "5002:5002"
+    environment:
+      - DATABASE_URL=postgresql://wizdata_user:wizdata_pass@postgres:5432/wizdata_db
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Indicator Engine Service
+  indicator-engine-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.indicator-engine
+    ports:
+      - "5003:5003"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MARKET_DATA_SERVICE_URL=http://market-data-service:5001
+    depends_on:
+      - redis
+      - market-data-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Streaming Service
+  streaming-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.streaming
+    ports:
+      - "5004:5004"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MARKET_DATA_SERVICE_URL=http://market-data-service:5001
+      - SYMBOL_REGISTRY_SERVICE_URL=http://symbol-registry-service:5002
+    depends_on:
+      - redis
+      - market-data-service
+      - symbol-registry-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # API Gateway / Load Balancer
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - market-data-service
+      - symbol-registry-service
+      - indicator-engine-service
+      - streaming-service
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  default:
+    name: wizdata-network
