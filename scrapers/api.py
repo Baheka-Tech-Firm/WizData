@@ -115,7 +115,7 @@ def get_scrapers_status():
         })
         
     except Exception as e:
-        logger.error("Error getting scraper status", error=str(e))
+        logger.error(f"Error getting scraper status: {str(e)}")
         return jsonify({
             'status': 'error',
             'message': str(e),
@@ -151,7 +151,7 @@ def get_scraper_jobs():
         })
         
     except Exception as e:
-        logger.error("Error getting scraper jobs", error=str(e))
+        logger.error(f"Error getting scraper jobs: {str(e)}")
         return jsonify({
             'message': str(e),
             'jobs': []
@@ -188,7 +188,7 @@ def get_scraper_job(job_name):
         })
         
     except Exception as e:
-        logger.error("Error getting scraper job", job_name=job_name, error=str(e))
+        logger.error(f"Error getting scraper job {job_name}: {str(e)}")
         return jsonify({
             'message': str(e)
         }), 500
@@ -212,8 +212,12 @@ def run_scraper_job(job_name):
         }), 500
     
     try:
-        # Get any additional parameters from request
-        params = request.get_json() or {}
+        # Get any additional parameters from request (handle missing Content-Type)
+        params = {}
+        if request.is_json:
+            params = request.get_json() or {}
+        elif request.form:
+            params = request.form.to_dict()
         
         # Run the job asynchronously
         loop = asyncio.new_event_loop()
@@ -238,7 +242,7 @@ def run_scraper_job(job_name):
             loop.close()
         
     except Exception as e:
-        logger.error("Error running scraper job", job_name=job_name, error=str(e))
+        logger.error(f"Error running scraper job {job_name}: {str(e)}")
         return jsonify({
             'success': False,
             'message': str(e),
@@ -273,7 +277,7 @@ def enable_scraper_job(job_name):
         })
         
     except Exception as e:
-        logger.error("Error enabling scraper job", job_name=job_name, error=str(e))
+        logger.error(f"Error enabling scraper job {job_name}: {str(e)}")
         return jsonify({
             'success': False,
             'message': str(e),
@@ -308,7 +312,7 @@ def disable_scraper_job(job_name):
         })
         
     except Exception as e:
-        logger.error("Error disabling scraper job", job_name=job_name, error=str(e))
+        logger.error(f"Error disabling scraper job {job_name}: {str(e)}")
         return jsonify({
             'success': False,
             'message': str(e),
@@ -367,7 +371,7 @@ def scrapers_health_check():
             loop.close()
         
     except Exception as e:
-        logger.error("Error in scrapers health check", error=str(e))
+        logger.error(f"Error in scrapers health check: {str(e)}")
         return jsonify({
             'overall_status': 'error',
             'message': str(e),
