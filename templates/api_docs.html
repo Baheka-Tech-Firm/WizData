@@ -1,0 +1,800 @@
+{% extends "layout.html" %}
+
+{% block title %}WizData - API Documentation{% endblock %}
+
+{% block content %}
+<div x-data="apiDocsController()" class="min-h-screen bg-gray-900">
+    <!-- Header Section -->
+    <div class="relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 py-16">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    API Documentation
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Comprehensive documentation for the WizData B2B platform APIs
+                </p>
+                <div class="mt-8 flex justify-center space-x-4">
+                    <button @click="scrollToSection('quickstart')" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        Quick Start
+                    </button>
+                    <button @click="scrollToSection('endpoints')" 
+                            class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        Browse APIs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="lg:col-span-1">
+                <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 sticky top-8">
+                    <h3 class="text-lg font-semibold text-white mb-4">Navigation</h3>
+                    <nav class="space-y-2">
+                        <button @click="activeSection = 'overview'" 
+                                :class="activeSection === 'overview' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'"
+                                class="w-full text-left px-3 py-2 rounded-lg transition-colors">
+                            Overview
+                        </button>
+                        <button @click="activeSection = 'authentication'" 
+                                :class="activeSection === 'authentication' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'"
+                                class="w-full text-left px-3 py-2 rounded-lg transition-colors">
+                            Authentication
+                        </button>
+                        <button @click="activeSection = 'endpoints'" 
+                                :class="activeSection === 'endpoints' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'"
+                                class="w-full text-left px-3 py-2 rounded-lg transition-colors">
+                            API Endpoints
+                        </button>
+                        <button @click="activeSection = 'examples'" 
+                                :class="activeSection === 'examples' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'"
+                                class="w-full text-left px-3 py-2 rounded-lg transition-colors">
+                            Code Examples
+                        </button>
+                        <button @click="activeSection = 'sdks'" 
+                                :class="activeSection === 'sdks' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'"
+                                class="w-full text-left px-3 py-2 rounded-lg transition-colors">
+                            SDKs & Libraries
+                        </button>
+                        <button @click="activeSection = 'errors'" 
+                                :class="activeSection === 'errors' ? 'bg-blue-600 text-white' : 'text-gray-300 hover:text-white'"
+                                class="w-full text-left px-3 py-2 rounded-lg transition-colors">
+                            Error Codes
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Overview Section -->
+                <div x-show="activeSection === 'overview'" x-transition:enter="transition ease-out duration-300" 
+                     x-transition:enter-start="opacity-0 transform translate-y-4" 
+                     x-transition:enter-end="opacity-100 transform translate-y-0">
+                    
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-8 mb-8">
+                        <h2 class="text-3xl font-bold text-white mb-6">API Overview</h2>
+                        <p class="text-gray-300 mb-6">
+                            The WizData API provides programmatic access to our comprehensive financial, ESG, and market datasets. 
+                            Our RESTful API is designed for high-performance data retrieval with robust authentication and rate limiting.
+                        </p>
+
+                        <!-- Key Features -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-gray-700 rounded-lg p-6">
+                                <div class="flex items-center mb-4">
+                                    <i data-lucide="zap" class="w-6 h-6 text-yellow-400 mr-2"></i>
+                                    <h3 class="text-lg font-semibold text-white">High Performance</h3>
+                                </div>
+                                <p class="text-gray-300 text-sm">Sub-second response times with global CDN distribution</p>
+                            </div>
+                            <div class="bg-gray-700 rounded-lg p-6">
+                                <div class="flex items-center mb-4">
+                                    <i data-lucide="shield" class="w-6 h-6 text-green-400 mr-2"></i>
+                                    <h3 class="text-lg font-semibold text-white">Secure</h3>
+                                </div>
+                                <p class="text-gray-300 text-sm">Enterprise-grade security with API key authentication</p>
+                            </div>
+                            <div class="bg-gray-700 rounded-lg p-6">
+                                <div class="flex items-center mb-4">
+                                    <i data-lucide="activity" class="w-6 h-6 text-blue-400 mr-2"></i>
+                                    <h3 class="text-lg font-semibold text-white">Real-time</h3>
+                                </div>
+                                <p class="text-gray-300 text-sm">Live data streams and WebSocket connections</p>
+                            </div>
+                            <div class="bg-gray-700 rounded-lg p-6">
+                                <div class="flex items-center mb-4">
+                                    <i data-lucide="code" class="w-6 h-6 text-purple-400 mr-2"></i>
+                                    <h3 class="text-lg font-semibold text-white">Developer Friendly</h3>
+                                </div>
+                                <p class="text-gray-300 text-sm">RESTful design with comprehensive SDKs</p>
+                            </div>
+                        </div>
+
+                        <!-- Base URL -->
+                        <div class="bg-gray-900 rounded-lg p-4 mb-6">
+                            <h4 class="text-lg font-semibold text-white mb-2">Base URL</h4>
+                            <code class="text-green-400 font-mono">https://api.wizdata.io/v1</code>
+                        </div>
+
+                        <!-- Rate Limits -->
+                        <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-blue-400 mb-2">Rate Limits</h4>
+                            <ul class="text-gray-300 space-y-1">
+                                <li>• <strong>Free Tier:</strong> 1,000 requests/day</li>
+                                <li>• <strong>Premium:</strong> 100,000 requests/day</li>
+                                <li>• <strong>Enterprise:</strong> Unlimited with custom quotas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Authentication Section -->
+                <div x-show="activeSection === 'authentication'" x-transition:enter="transition ease-out duration-300" 
+                     x-transition:enter-start="opacity-0 transform translate-y-4" 
+                     x-transition:enter-end="opacity-100 transform translate-y-0">
+                    
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-8 mb-8">
+                        <h2 class="text-3xl font-bold text-white mb-6">Authentication</h2>
+                        
+                        <p class="text-gray-300 mb-6">
+                            WizData API uses API key authentication. Include your API key in the Authorization header of every request.
+                        </p>
+
+                        <!-- API Key Example -->
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-white mb-4">Using Your API Key</h3>
+                            <div class="bg-gray-900 rounded-lg p-4 mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-400">HTTP Header</span>
+                                    <button @click="copyToClipboard('auth-header')" class="text-blue-400 hover:text-blue-300">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                                <code id="auth-header" class="text-green-400 font-mono">Authorization: Bearer YOUR_API_KEY</code>
+                            </div>
+                        </div>
+
+                        <!-- Code Examples -->
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-3">cURL Example</h4>
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <button @click="copyToClipboard('curl-example')" class="absolute top-2 right-2 text-gray-400 hover:text-white">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
+                                    <pre id="curl-example" class="text-green-400 font-mono text-sm overflow-x-auto">curl -H "Authorization: Bearer YOUR_API_KEY" \
+     https://api.wizdata.io/v1/symbols?asset_type=jse</pre>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-3">Python Example</h4>
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <button @click="copyToClipboard('python-example')" class="absolute top-2 right-2 text-gray-400 hover:text-white">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
+                                    <pre id="python-example" class="text-green-400 font-mono text-sm overflow-x-auto">import requests
+
+headers = {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+}
+
+response = requests.get(
+    'https://api.wizdata.io/v1/symbols',
+    headers=headers,
+    params={'asset_type': 'jse'}
+)
+
+data = response.json()</pre>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-3">JavaScript Example</h4>
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <button @click="copyToClipboard('js-example')" class="absolute top-2 right-2 text-gray-400 hover:text-white">
+                                        <i data-lucide="copy" class="w-4 h-4"></i>
+                                    </button>
+                                    <pre id="js-example" class="text-green-400 font-mono text-sm overflow-x-auto">const response = await fetch('https://api.wizdata.io/v1/symbols?asset_type=jse', {
+    headers: {
+        'Authorization': 'Bearer YOUR_API_KEY',
+        'Content-Type': 'application/json'
+    }
+});
+
+const data = await response.json();</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Getting API Key -->
+                        <div class="mt-8 bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-green-400 mb-2">Getting Your API Key</h4>
+                            <p class="text-gray-300 mb-3">To get your API key:</p>
+                            <ol class="text-gray-300 space-y-1 list-decimal list-inside">
+                                <li>Sign up for a WizData account</li>
+                                <li>Navigate to the Licensing page</li>
+                                <li>Choose your subscription plan</li>
+                                <li>Your API key will be generated automatically</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Endpoints Section -->
+                <div x-show="activeSection === 'endpoints'" x-transition:enter="transition ease-out duration-300" 
+                     x-transition:enter-start="opacity-0 transform translate-y-4" 
+                     x-transition:enter-end="opacity-100 transform translate-y-0">
+                    
+                    <div class="space-y-6">
+                        <template x-for="category in apiCategories" :key="category.name">
+                            <div class="bg-gray-800 rounded-xl border border-gray-700 p-8">
+                                <h3 class="text-2xl font-bold text-white mb-4" x-text="category.name"></h3>
+                                <p class="text-gray-300 mb-6" x-text="category.description"></p>
+                                
+                                <div class="space-y-4">
+                                    <template x-for="endpoint in category.endpoints" :key="endpoint.path">
+                                        <div class="bg-gray-700 rounded-lg p-6">
+                                            <div class="flex items-center justify-between mb-4">
+                                                <div class="flex items-center space-x-3">
+                                                    <span class="px-2 py-1 text-xs font-semibold rounded"
+                                                          :class="endpoint.method === 'GET' ? 'bg-green-600 text-white' : 
+                                                                  endpoint.method === 'POST' ? 'bg-blue-600 text-white' : 
+                                                                  'bg-yellow-600 text-white'" 
+                                                          x-text="endpoint.method"></span>
+                                                    <code class="text-blue-400 font-mono" x-text="endpoint.path"></code>
+                                                </div>
+                                                <button @click="toggleEndpoint(endpoint)" class="text-gray-400 hover:text-white">
+                                                    <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                                                </button>
+                                            </div>
+                                            
+                                            <p class="text-gray-300 mb-4" x-text="endpoint.description"></p>
+                                            
+                                            <div x-show="endpoint.expanded" x-transition class="space-y-4">
+                                                <!-- Parameters -->
+                                                <div x-show="endpoint.parameters && endpoint.parameters.length > 0">
+                                                    <h5 class="text-lg font-semibold text-white mb-2">Parameters</h5>
+                                                    <div class="overflow-x-auto">
+                                                        <table class="w-full text-sm">
+                                                            <thead>
+                                                                <tr class="border-b border-gray-600">
+                                                                    <th class="text-left py-2 text-gray-300">Name</th>
+                                                                    <th class="text-left py-2 text-gray-300">Type</th>
+                                                                    <th class="text-left py-2 text-gray-300">Required</th>
+                                                                    <th class="text-left py-2 text-gray-300">Description</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <template x-for="param in endpoint.parameters" :key="param.name">
+                                                                    <tr class="border-b border-gray-600">
+                                                                        <td class="py-2 text-blue-400 font-mono" x-text="param.name"></td>
+                                                                        <td class="py-2 text-gray-300" x-text="param.type"></td>
+                                                                        <td class="py-2">
+                                                                            <span x-text="param.required ? 'Yes' : 'No'" 
+                                                                                  :class="param.required ? 'text-red-400' : 'text-gray-400'"></span>
+                                                                        </td>
+                                                                        <td class="py-2 text-gray-300" x-text="param.description"></td>
+                                                                    </tr>
+                                                                </template>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Example Response -->
+                                                <div>
+                                                    <h5 class="text-lg font-semibold text-white mb-2">Example Response</h5>
+                                                    <div class="bg-gray-900 rounded-lg p-4">
+                                                        <pre class="text-green-400 font-mono text-sm overflow-x-auto" x-text="JSON.stringify(endpoint.example_response, null, 2)"></pre>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Try It Out -->
+                                                <div>
+                                                    <button @click="tryEndpoint(endpoint)" 
+                                                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                                                        Try It Out
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Code Examples Section -->
+                <div x-show="activeSection === 'examples'" x-transition:enter="transition ease-out duration-300" 
+                     x-transition:enter-start="opacity-0 transform translate-y-4" 
+                     x-transition:enter-end="opacity-100 transform translate-y-0">
+                    
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-8">
+                        <h2 class="text-3xl font-bold text-white mb-6">Code Examples</h2>
+                        
+                        <!-- Language Selector -->
+                        <div class="flex space-x-2 mb-6">
+                            <template x-for="lang in codeLanguages" :key="lang">
+                                <button @click="selectedLanguage = lang" 
+                                        :class="selectedLanguage === lang ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:text-white'"
+                                        class="px-4 py-2 rounded-lg font-medium transition-colors" 
+                                        x-text="lang"></button>
+                            </template>
+                        </div>
+
+                        <!-- Code Examples -->
+                        <div class="space-y-6">
+                            <template x-for="example in codeExamples[selectedLanguage]" :key="example.title">
+                                <div class="bg-gray-700 rounded-lg p-6">
+                                    <h4 class="text-lg font-semibold text-white mb-3" x-text="example.title"></h4>
+                                    <p class="text-gray-300 mb-4" x-text="example.description"></p>
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <button @click="copyToClipboard('code-' + example.id)" class="absolute top-2 right-2 text-gray-400 hover:text-white">
+                                            <i data-lucide="copy" class="w-4 h-4"></i>
+                                        </button>
+                                        <pre :id="'code-' + example.id" class="text-green-400 font-mono text-sm overflow-x-auto" x-text="example.code"></pre>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SDKs Section -->
+                <div x-show="activeSection === 'sdks'" x-transition:enter="transition ease-out duration-300" 
+                     x-transition:enter-start="opacity-0 transform translate-y-4" 
+                     x-transition:enter-end="opacity-100 transform translate-y-0">
+                    
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-8">
+                        <h2 class="text-3xl font-bold text-white mb-6">SDKs & Libraries</h2>
+                        <p class="text-gray-300 mb-8">
+                            Official SDKs and libraries to help you integrate WizData APIs quickly and efficiently.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <template x-for="sdk in sdks" :key="sdk.name">
+                                <div class="bg-gray-700 rounded-lg p-6">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                                            <i :data-lucide="sdk.icon" class="w-6 h-6 text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-white" x-text="sdk.name"></h3>
+                                            <p class="text-sm text-gray-400" x-text="sdk.version"></p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 mb-4" x-text="sdk.description"></p>
+                                    <div class="flex space-x-3">
+                                        <a :href="sdk.github" class="bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                            GitHub
+                                        </a>
+                                        <a :href="sdk.docs" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                            Documentation
+                                        </a>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Codes Section -->
+                <div x-show="activeSection === 'errors'" x-transition:enter="transition ease-out duration-300" 
+                     x-transition:enter-start="opacity-0 transform translate-y-4" 
+                     x-transition:enter-end="opacity-100 transform translate-y-0">
+                    
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-8">
+                        <h2 class="text-3xl font-bold text-white mb-6">Error Codes</h2>
+                        <p class="text-gray-300 mb-6">
+                            WizData API uses conventional HTTP response codes to indicate the success or failure of requests.
+                        </p>
+
+                        <div class="space-y-4">
+                            <template x-for="error in errorCodes" :key="error.code">
+                                <div class="bg-gray-700 rounded-lg p-6">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="px-3 py-1 text-sm font-semibold rounded"
+                                                  :class="error.type === 'success' ? 'bg-green-600 text-white' : 
+                                                          error.type === 'client' ? 'bg-yellow-600 text-white' : 
+                                                          'bg-red-600 text-white'" 
+                                                  x-text="error.code"></span>
+                                            <h3 class="text-lg font-semibold text-white" x-text="error.title"></h3>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 mb-4" x-text="error.description"></p>
+                                    <div class="bg-gray-900 rounded-lg p-4">
+                                        <pre class="text-green-400 font-mono text-sm" x-text="JSON.stringify(error.example, null, 2)"></pre>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function apiDocsController() {
+    return {
+        activeSection: 'overview',
+        selectedLanguage: 'Python',
+        
+        codeLanguages: ['Python', 'JavaScript', 'cURL', 'PHP'],
+
+        apiCategories: [
+            {
+                name: 'Market Data',
+                description: 'Access real-time and historical market data for various asset classes',
+                endpoints: [
+                    {
+                        method: 'GET',
+                        path: '/v1/symbols',
+                        description: 'Get available symbols for trading instruments',
+                        expanded: false,
+                        parameters: [
+                            { name: 'asset_type', type: 'string', required: true, description: 'Type of asset (jse, crypto, forex, etc.)' },
+                            { name: 'market', type: 'string', required: false, description: 'Specific market filter' }
+                        ],
+                        example_response: {
+                            asset_type: 'jse',
+                            count: 3,
+                            symbols: ['AGL', 'ABG', 'ACL']
+                        }
+                    },
+                    {
+                        method: 'GET',
+                        path: '/v1/quotes/{symbol}',
+                        description: 'Get real-time or latest quote for a symbol',
+                        expanded: false,
+                        parameters: [
+                            { name: 'symbol', type: 'string', required: true, description: 'Trading symbol' },
+                            { name: 'market', type: 'string', required: false, description: 'Market identifier' }
+                        ],
+                        example_response: {
+                            symbol: 'AGL',
+                            price: 234.50,
+                            change: 2.1,
+                            change_percent: 0.9,
+                            volume: 45623,
+                            timestamp: '2024-01-30T09:15:00Z'
+                        }
+                    }
+                ]
+            },
+            {
+                name: 'ESG Data',
+                description: 'Access environmental, social, and governance data for companies',
+                endpoints: [
+                    {
+                        method: 'GET',
+                        path: '/v1/esg/scores/{company}',
+                        description: 'Get ESG scores for a specific company',
+                        expanded: false,
+                        parameters: [
+                            { name: 'company', type: 'string', required: true, description: 'Company identifier' },
+                            { name: 'date', type: 'string', required: false, description: 'Specific date (YYYY-MM-DD)' }
+                        ],
+                        example_response: {
+                            company: 'MTN Group',
+                            esg_score: 7.2,
+                            environmental: 6.8,
+                            social: 7.5,
+                            governance: 7.3,
+                            last_updated: '2024-01-28'
+                        }
+                    }
+                ]
+            }
+        ],
+
+        codeExamples: {
+            Python: [
+                {
+                    id: 'py1',
+                    title: 'Get JSE Symbols',
+                    description: 'Fetch all available JSE trading symbols',
+                    code: `import requests
+
+API_KEY = 'your_api_key_here'
+BASE_URL = 'https://api.wizdata.io/v1'
+
+headers = {
+    'Authorization': f'Bearer {API_KEY}',
+    'Content-Type': 'application/json'
+}
+
+# Get JSE symbols
+response = requests.get(
+    f'{BASE_URL}/symbols',
+    headers=headers,
+    params={'asset_type': 'jse'}
+)
+
+if response.status_code == 200:
+    data = response.json()
+    print(f"Found {data['count']} JSE symbols")
+    for symbol in data['symbols']:
+        print(f"- {symbol}")
+else:
+    print(f"Error: {response.status_code}")`
+                },
+                {
+                    id: 'py2',
+                    title: 'Real-time Price Updates',
+                    description: 'Get real-time price updates for multiple symbols',
+                    code: `import requests
+import time
+
+def get_quote(symbol, market='jse'):
+    response = requests.get(
+        f'{BASE_URL}/quotes/{symbol}',
+        headers=headers,
+        params={'market': market}
+    )
+    return response.json() if response.status_code == 200 else None
+
+# Monitor multiple symbols
+symbols = ['AGL', 'ABG', 'ACL']
+
+while True:
+    for symbol in symbols:
+        quote = get_quote(symbol)
+        if quote:
+            print(f"{symbol}: R{quote['price']} ({quote['change']:+.2f})")
+    
+    time.sleep(30)  # Update every 30 seconds`
+                }
+            ],
+            JavaScript: [
+                {
+                    id: 'js1',
+                    title: 'Fetch Market Data',
+                    description: 'Use async/await to fetch market data',
+                    code: `const API_KEY = 'your_api_key_here';
+const BASE_URL = 'https://api.wizdata.io/v1';
+
+const headers = {
+    'Authorization': \`Bearer \${API_KEY}\`,
+    'Content-Type': 'application/json'
+};
+
+async function getJSESymbols() {
+    try {
+        const response = await fetch(\`\${BASE_URL}/symbols?asset_type=jse\`, {
+            headers: headers
+        });
+        
+        const data = await response.json();
+        console.log(\`Found \${data.count} JSE symbols:\`, data.symbols);
+        return data.symbols;
+    } catch (error) {
+        console.error('Error fetching symbols:', error);
+    }
+}
+
+async function getQuote(symbol) {
+    try {
+        const response = await fetch(\`\${BASE_URL}/quotes/\${symbol}\`, {
+            headers: headers
+        });
+        
+        const quote = await response.json();
+        console.log(\`\${symbol}: R\${quote.price} (\${quote.change > 0 ? '+' : ''}\${quote.change})\`);
+        return quote;
+    } catch (error) {
+        console.error(\`Error fetching quote for \${symbol}:\`, error);
+    }
+}
+
+// Usage
+getJSESymbols().then(symbols => {
+    symbols.slice(0, 5).forEach(symbol => {
+        getQuote(symbol);
+    });
+});`
+                }
+            ],
+            cURL: [
+                {
+                    id: 'curl1',
+                    title: 'Basic API Calls',
+                    description: 'Simple cURL commands for API testing',
+                    code: `# Get JSE symbols
+curl -H "Authorization: Bearer YOUR_API_KEY" \\
+     https://api.wizdata.io/v1/symbols?asset_type=jse
+
+# Get quote for AGL
+curl -H "Authorization: Bearer YOUR_API_KEY" \\
+     https://api.wizdata.io/v1/quotes/AGL
+
+# Get ESG score for MTN
+curl -H "Authorization: Bearer YOUR_API_KEY" \\
+     https://api.wizdata.io/v1/esg/scores/MTN`
+                }
+            ],
+            PHP: [
+                {
+                    id: 'php1',
+                    title: 'PHP Integration',
+                    description: 'Integrate WizData API with PHP applications',
+                    code: `<?php
+
+class WizDataAPI {
+    private $apiKey;
+    private $baseUrl = 'https://api.wizdata.io/v1';
+    
+    public function __construct($apiKey) {
+        $this->apiKey = $apiKey;
+    }
+    
+    private function makeRequest($endpoint, $params = []) {
+        $url = $this->baseUrl . $endpoint;
+        if (!empty($params)) {
+            $url .= '?' . http_build_query($params);
+        }
+        
+        $context = stream_context_create([
+            'http' => [
+                'header' => "Authorization: Bearer " . $this->apiKey
+            ]
+        ]);
+        
+        $response = file_get_contents($url, false, $context);
+        return json_decode($response, true);
+    }
+    
+    public function getSymbols($assetType = 'jse') {
+        return $this->makeRequest('/symbols', ['asset_type' => $assetType]);
+    }
+    
+    public function getQuote($symbol) {
+        return $this->makeRequest("/quotes/$symbol");
+    }
+}
+
+// Usage
+$api = new WizDataAPI('your_api_key_here');
+
+$symbols = $api->getSymbols('jse');
+echo "Found " . $symbols['count'] . " JSE symbols\\n";
+
+foreach (array_slice($symbols['symbols'], 0, 5) as $symbol) {
+    $quote = $api->getQuote($symbol);
+    echo "$symbol: R" . $quote['price'] . "\\n";
+}
+
+?>`
+                }
+            ]
+        },
+
+        sdks: [
+            {
+                name: 'Python SDK',
+                version: 'v1.2.3',
+                icon: 'code',
+                description: 'Official Python library for WizData API integration',
+                github: '#',
+                docs: '#'
+            },
+            {
+                name: 'JavaScript/Node.js SDK',
+                version: 'v1.1.0',
+                icon: 'code-2',
+                description: 'Modern JavaScript SDK with TypeScript support',
+                github: '#',
+                docs: '#'
+            },
+            {
+                name: 'PHP SDK',
+                version: 'v1.0.5',
+                icon: 'code',
+                description: 'PHP library for server-side API integration',
+                github: '#',
+                docs: '#'
+            },
+            {
+                name: 'Go SDK',
+                version: 'v0.9.2',
+                icon: 'code-2',
+                description: 'High-performance Go library for enterprise applications',
+                github: '#',
+                docs: '#'
+            }
+        ],
+
+        errorCodes: [
+            {
+                code: '200',
+                title: 'Success',
+                type: 'success',
+                description: 'The request was successful',
+                example: {
+                    status: 'success',
+                    data: '...'
+                }
+            },
+            {
+                code: '400',
+                title: 'Bad Request',
+                type: 'client',
+                description: 'The request was invalid or missing required parameters',
+                example: {
+                    error: 'Bad Request',
+                    message: 'Missing required parameter: asset_type',
+                    code: 400
+                }
+            },
+            {
+                code: '401',
+                title: 'Unauthorized',
+                type: 'client',
+                description: 'Invalid or missing API key',
+                example: {
+                    error: 'Unauthorized',
+                    message: 'Invalid API key',
+                    code: 401
+                }
+            },
+            {
+                code: '429',
+                title: 'Rate Limit Exceeded',
+                type: 'client',
+                description: 'Too many requests. Check your rate limits.',
+                example: {
+                    error: 'Rate Limit Exceeded',
+                    message: 'Rate limit of 1000 requests per day exceeded',
+                    retry_after: 3600,
+                    code: 429
+                }
+            },
+            {
+                code: '500',
+                title: 'Internal Server Error',
+                type: 'server',
+                description: 'An error occurred on our servers',
+                example: {
+                    error: 'Internal Server Error',
+                    message: 'An unexpected error occurred',
+                    code: 500
+                }
+            }
+        ],
+
+        scrollToSection(sectionId) {
+            this.activeSection = sectionId;
+        },
+
+        toggleEndpoint(endpoint) {
+            endpoint.expanded = !endpoint.expanded;
+        },
+
+        copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent || element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                // Could show a toast notification here
+                console.log('Copied to clipboard');
+            });
+        },
+
+        tryEndpoint(endpoint) {
+            // In a real implementation, this would open an API testing interface
+            alert(`Testing ${endpoint.method} ${endpoint.path}`);
+        }
+    }
+}
+</script>
+{% endblock %}

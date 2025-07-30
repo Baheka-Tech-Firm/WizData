@@ -97,7 +97,11 @@ def create_app():
         g.rate_limiter = app.rate_limiter
 
     # Initialize Socket.IO
-    socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+    try:
+        socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
+    except Exception as e:
+        logger.warning(f"Failed to initialize SocketIO with threading: {e}")
+        socketio = SocketIO(app, cors_allowed_origins="*")
 
     with app.app_context():
         # Make sure to import the models here or their tables won't be created

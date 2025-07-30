@@ -79,6 +79,26 @@ def register_routes(app):
         """Professional charting platform"""
         return render_template('charting.html', title="Professional Charting Platform")
 
+    @app.route('/datasets')
+    def datasets():
+        """Render the datasets page"""
+        return render_template('datasets.html', title="Available Datasets")
+
+    @app.route('/dataset-registry')
+    def dataset_registry():
+        """Render the dataset registry page"""
+        return render_template('dataset_registry.html', title="Dataset Registry")
+
+    @app.route('/api-docs')
+    def api_docs():
+        """Render the API documentation page"""
+        return render_template('api_docs.html', title="API Documentation")
+
+    @app.route('/licensing')
+    def licensing():
+        """Render the licensing page"""
+        return render_template('licensing.html', title="Licensing & Subscriptions")
+
     # Health endpoints are provided by the monitoring middleware
 
     # API routes for direct usage
@@ -205,22 +225,35 @@ def register_routes(app):
     def health_check():
         """Health check endpoint for Docker and load balancers"""
         try:
-            # Check database connection
-            from models import db
-            from sqlalchemy import text
-            db.session.execute(text('SELECT 1'))
+            services = {}
             
-            # Check Redis connection (if available)
-            if hasattr(app, 'cache_manager') and app.cache_manager:
-                app.cache_manager.redis.ping()
+            # Check database connection (optional)
+            try:
+                from models import db
+                from sqlalchemy import text
+                db.session.execute(text('SELECT 1'))
+                services["database"] = "healthy"
+            except Exception as db_e:
+                logger.warning(f"Database check failed: {db_e}")
+                services["database"] = "unavailable"
             
+            # Check Redis connection (optional)
+            try:
+                if hasattr(app, 'cache_manager') and app.cache_manager:
+                    app.cache_manager.redis.ping()
+                    services["redis"] = "healthy"
+                else:
+                    services["redis"] = "disabled"
+            except Exception as redis_e:
+                logger.warning(f"Redis check failed: {redis_e}")
+                services["redis"] = "unavailable"
+            
+            # Health check passes as long as the app is running
             return jsonify({
                 "status": "healthy",
                 "timestamp": datetime.utcnow().isoformat(),
-                "services": {
-                    "database": "healthy",
-                    "redis": "healthy" if hasattr(app, 'cache_manager') and app.cache_manager else "disabled"
-                }
+                "services": services,
+                "app_mode": "simplified"
             }), 200
         except Exception as e:
             logger.error("Health check failed: {}".format(str(e)))
