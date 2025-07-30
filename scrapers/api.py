@@ -78,6 +78,51 @@ def _add_default_jobs():
         },
         'enabled': True
     })
+    
+    # Financial News scraper job
+    orchestrator.add_job('financial_news', {
+        'scraper_class': 'financial_news',
+        'config': {
+            'proxy_config': {},
+            'queue_config': {'enabled': True, 'queue_type': 'memory'},
+            'request_delay': 2.0
+        },
+        'schedule': {
+            'interval': 900,  # 15 minutes
+            'enabled': True
+        },
+        'enabled': True
+    })
+    
+    # Forex rates scraper job
+    orchestrator.add_job('forex_rates', {
+        'scraper_class': 'forex',
+        'config': {
+            'proxy_config': {},
+            'queue_config': {'enabled': True, 'queue_type': 'memory'},
+            'request_delay': 1.5
+        },
+        'schedule': {
+            'interval': 300,  # 5 minutes
+            'enabled': True
+        },
+        'enabled': True
+    })
+    
+    # Economic data scraper job
+    orchestrator.add_job('economic_data', {
+        'scraper_class': 'economic',
+        'config': {
+            'proxy_config': {},
+            'queue_config': {'enabled': True, 'queue_type': 'memory'},
+            'request_delay': 2.0
+        },
+        'schedule': {
+            'interval': 1800,  # 30 minutes
+            'enabled': True
+        },
+        'enabled': True
+    })
 
 @scrapers_bp.route('/status', methods=['GET'])
 @rate_limit(requests_per_minute=30)

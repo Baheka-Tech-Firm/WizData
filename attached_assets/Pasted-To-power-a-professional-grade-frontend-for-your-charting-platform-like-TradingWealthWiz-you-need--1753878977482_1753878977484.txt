@@ -1,0 +1,158 @@
+To power a professional-grade frontend for your charting platform (like TradingWealthWiz), you need to expose the following types of data from WizData’s backend via API or WebSocket.
+
+📊 1. Market Data (Time-Series)
+✅ Required for Charts:
+OHLCV: Open, High, Low, Close, Volume
+
+Interval options: 1m, 5m, 15m, 1h, 1D, 1W, 1M
+
+Historical and real-time data
+
+✅ Example:
+json
+Copy
+Edit
+{
+  "symbol": "AAPL",
+  "interval": "1d",
+  "data": [
+    { "time": "2025-07-30", "open": 185.3, "high": 186.1, "low": 183.9, "close": 184.7, "volume": 5523000 }
+  ]
+}
+💼 2. Company Metadata / Asset Info
+✅ Required for watchlists, headers, search
+Company name
+
+Exchange
+
+Ticker
+
+Currency
+
+Sector / Industry
+
+ISIN, CUSIP (optional)
+
+✅ Example:
+json
+Copy
+Edit
+{
+  "symbol": "JSE:BHP",
+  "name": "BHP Group Ltd",
+  "sector": "Mining",
+  "currency": "ZAR",
+  "exchange": "JSE"
+}
+📉 3. Technical Indicators
+✅ Required for overlays & analysis tools
+RSI, MACD, SMA/EMA, Bollinger Bands, etc.
+
+Can be precomputed or calculated on frontend
+
+Return indicators alongside price data or as separate API
+
+✅ Example:
+json
+Copy
+Edit
+{
+  "symbol": "BTC/USDT",
+  "interval": "1h",
+  "indicators": {
+    "rsi": [60, 62, 58],
+    "macd": [{ "line": 0.5, "signal": 0.4 }]
+  }
+}
+🔔 4. Corporate Actions / Events
+✅ For event markers on charts and tooltips
+Dividends
+
+Splits
+
+Earnings
+
+M&A, News headlines
+
+✅ Example:
+json
+Copy
+Edit
+{
+  "symbol": "AGL.JSE",
+  "events": [
+    { "type": "dividend", "date": "2025-06-30", "amount": 4.25, "currency": "ZAR" },
+    { "type": "earnings", "date": "2025-07-15", "eps": 1.13 }
+  ]
+}
+📰 5. Financial News / Sentiment
+✅ For real-time tickers or widgets
+Headlines
+
+Source
+
+Related symbols
+
+Sentiment score (optional, if NLP used)
+
+✅ Example:
+json
+Copy
+Edit
+{
+  "symbol": "JSE:NPN",
+  "news": [
+    { "title": "Naspers reports Q2 earnings beat", "source": "Reuters", "time": "2025-07-30T10:15Z" }
+  ]
+}
+📈 6. Aggregated Lists & Analytics
+✅ For dashboards, screeners, insights
+Top gainers/losers
+
+Most volatile
+
+Most active
+
+Sector summaries
+
+✅ Example:
+json
+Copy
+Edit
+{
+  "top_gainers": [
+    { "symbol": "SOL.JSE", "change": "+8.4%", "volume": 1200000 }
+  ]
+}
+👥 7. User-specific Data (if authenticated)
+✅ For personalized experience:
+Watchlist data
+
+Saved chart layouts
+
+Alert configurations
+
+Subscription access level
+
+💡 Bonus (Optional but Valuable)
+Screener Query Results
+
+Sentiment Index (AI generated)
+
+Backtest Results
+
+Heatmap Data
+
+Currency conversion table (ZAR ↔ USD)
+
+🧩 Integration Tip
+Expose data via:
+
+REST API (for paginated/fetched data)
+
+WebSocket (for real-time ticks/updates)
+
+GraphQL (optional for frontend flexibility)
+
+Redis Cache layer (for performance)
+

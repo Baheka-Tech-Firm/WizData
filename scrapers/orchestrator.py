@@ -80,6 +80,25 @@ class ScraperOrchestrator:
                 'coingecko': CoinGeckoScraper,
             })
         
+        # Import additional scrapers
+        try:
+            from scrapers.sources.simple_news_scraper import SimpleNewsScraper
+            scrapers['financial_news'] = SimpleNewsScraper
+        except ImportError:
+            pass
+        
+        try:
+            from scrapers.sources.simple_forex_scraper import SimpleForexScraper
+            scrapers['forex'] = SimpleForexScraper
+        except ImportError:
+            pass
+        
+        try:
+            from scrapers.sources.simple_economic_scraper import SimpleEconomicScraper
+            scrapers['economic'] = SimpleEconomicScraper
+        except ImportError:
+            pass
+        
         return scrapers
     
     def add_job(self, job_name: str, job_config: Dict[str, Any]):

@@ -69,6 +69,11 @@ def register_routes(app):
         """Render the integrated data dashboard page"""
         return render_template('integrated/dashboard.html', title="Integrated Financial & ESG Data")
 
+    @app.route('/scrapers')
+    def scrapers():
+        """Live data collection dashboard"""
+        return render_template('scrapers.html', title="Live Data Collection")
+
     # Health endpoints are provided by the monitoring middleware
 
     # API routes for direct usage
