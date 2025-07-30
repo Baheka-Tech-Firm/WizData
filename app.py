@@ -13,6 +13,7 @@ from config import config
 from middleware.monitoring import MonitoringMiddleware
 from middleware.cache_manager import CacheManager
 from middleware.rate_limiter import RateLimiter
+from middleware.auth_middleware import init_auth_middleware
 
 # Configure logging
 logging.basicConfig(level=getattr(logging, config.monitoring.log_level))
@@ -77,6 +78,13 @@ def create_app():
     # Initialize monitoring middleware
     monitoring = MonitoringMiddleware(app)
     
+    # Initialize authentication middleware
+    try:
+        init_auth_middleware(app, redis_client if 'redis_client' in locals() else None)
+        logger.info("Authentication middleware initialized")
+    except Exception as e:
+        logger.warning(f"Could not initialize auth middleware: {e}")
+    
     # Add rate limiter to request context
     @app.before_request
     def add_rate_limiter_to_context():
@@ -127,6 +135,13 @@ def create_app():
         try:
             from api.data_services import data_services_api
             app.register_blueprint(data_services_api)
+        except ImportError:
+            pass
+        
+        # Register authentication admin API
+        try:
+            from api.auth_admin import auth_admin_api
+            app.register_blueprint(auth_admin_api)
         except ImportError:
             pass
         

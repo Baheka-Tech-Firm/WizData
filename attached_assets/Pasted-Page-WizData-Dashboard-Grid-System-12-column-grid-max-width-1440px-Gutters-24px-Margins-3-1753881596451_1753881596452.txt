@@ -1,0 +1,142 @@
+Page: WizData Dashboard
+🧱 Grid System
+12-column grid (max width: 1440px)
+
+Gutters: 24px
+
+Margins: 32px padding on each side
+
+🧭 Left Sidebar
+Width: 220px
+
+Sticky positioning
+
+Background: #111827 (dark navy)
+
+Menu Items:
+
+Icon + Label (Shadcn-style)
+
+Dashboard (highlighted active)
+
+Sources
+
+Jobs
+
+Screener
+
+Charts
+
+Events
+
+Alerts
+
+Logs
+
+Hover: #1F2937 with rounded corners
+
+Icons: Lucide or Feather Icons
+
+🧭 Top Bar
+Height: 64px
+
+Background: #1E293B
+
+Elements:
+
+App name (WizData)
+
+App Switcher Dropdown (VueOn, Trader, Pulse, etc.)
+
+Search Input (Rounded with shortcut key icon ⌘+K)
+
+System Status Dot (🟢 OK)
+
+AI Insights Button (purple)
+
+User Avatar Dropdown (Name, Profile, Logout)
+
+📊 Dashboard Content
+🧾 Stat Cards (Top Row)
+Layout: 4 cards in 1 row
+
+Card Size: 250px width x 120px height
+
+Items:
+
+Total Sources
+
+Tracked Symbols
+
+Data Points
+
+API Requests
+
+Each has:
+
+Icon (left)
+
+Large number (center)
+
+% increase (bottom right, green or red)
+
+📈 Multi-Line Chart
+Title: Market Overview
+
+Chart Type: Line
+
+Tool: Use Chart.js or Recharts
+
+Series:
+
+JSE Top 40 (Blue)
+
+BTC/USD (Yellow)
+
+EUR/USD (Green)
+
+Interactivity:
+
+Hover tooltip
+
+Date range toggles (Day, Week, Month, Year)
+
+📈 Top Performing Symbols (Right Panel)
+Vertical Table
+
+Columns: Symbol, Price, Change (%)
+
+Change color:
+
+Green for positive
+
+Red for negative
+
+🧾 Market Insights (Bottom)
+Table with columns:
+
+Symbol | Name | Sector | Open | Close | Change | Volume | Last Updated
+
+Toggle filters above: All | JSE | Crypto | Forex
+
+Table rows: alternate background on hover
+
+🎛 AI Insights Panel
+Appears on hover or click of "AI Insights" button
+
+Shows latest alerts like:
+
+"SOL: 300% spike in volume"
+
+"ETH sentiment shifted to neutral"
+
+Includes tags: #sentiment, #volume, #alert
+
+📦 Component Specs
+Component	Tech / Spec
+StatCard	@/components/ui/card + icon + delta
+Sidebar NavItem	IconButton with tooltip
+Chart View	Recharts.LineChart or lightweight-charts
+Toggle Button	@/components/ui/toggle-group
+Table Rows	@/components/ui/table with hover
+Modal Panel	@/components/ui/sheet or dialog
