@@ -74,6 +74,11 @@ def register_routes(app):
         """Live data collection dashboard"""
         return render_template('scrapers.html', title="Live Data Collection")
 
+    @app.route('/charting')
+    def charting():
+        """Professional charting platform"""
+        return render_template('charting.html', title="Professional Charting Platform")
+
     # Health endpoints are provided by the monitoring middleware
 
     # API routes for direct usage

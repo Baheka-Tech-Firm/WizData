@@ -1,0 +1,118 @@
+DATA SOURCING STRATEGY
+🔹 1. JSE (Johannesburg Stock Exchange)
+Data Type	Source Options
+OHLCV, listings	⬩ JSE Direct API (licensed) ⬩ Yahoo Finance (free, limited) ⬩ Scrape https://www.jse.co.za
+Dividends, earnings, metadata	JSE SENS Announcements ⬩ ProfileData ⬩ Company websites
+Delayed Quotes	ICE Data Services (if licensed) or Alpha Vantage fallback
+
+✅ Recommended: Start with scraping + Alpha Vantage fallback → move to licensed JSE data once you gain traction.
+
+🔹 2. Cryptocurrency
+Data Type	Source
+OHLCV, tickers	CoinGecko (free), CoinMarketCap, Binance API
+Order book	Binance WebSocket, Kraken API
+On-chain data	Glassnode, Dune Analytics (for paid features)
+
+✅ CoinGecko is easy to integrate and supports thousands of coins for free.
+
+🔹 3. Forex
+Source	Features
+Alpha Vantage (free)	5-minute delay, basic indicators
+Open Exchange Rates	Real-time (paid)
+TrueFX / OANDA	Real-time quotes, order book
+
+✅ Use Alpha Vantage for MVP, upgrade to TrueFX or OANDA when monetizing.
+
+🔹 4. Financial News
+Source	Type
+NewsAPI.org (free/paid)	Headlines, global
+Google News RSS + scraping	Custom source tagging
+SENS Announcements (JSE news)	Corporate filings
+RSS for Business Day, Fin24	South Africa specific
+
+🔹 5. Fundamentals & Analytics
+Data Type	Source
+Ratios, EPS, debt	Yahoo Finance, Alpha Vantage, Finbox API
+Screener data	Finviz (US only), custom compute from your DB
+AI sentiment	Your own NLP model on top of news headlines
+
+🧱 SYSTEM STRUCTURE TO SUPPORT OTHER PRODUCTS
+🔁 1. Centralized Data Engine (WizData)
+Make WizData your core data warehouse + API hub. All other products (VueOn, Wealth, Pulse, Trader, etc.) will consume WizData via API.
+
+lua
+Copy
+Edit
+        +----------------------+
+        |     WizData API      |   <- REST / GraphQL / WebSocket
+        +----------------------+
+             ↑      ↑      ↑
+         Trader   Pulse   VueOn  (Frontend apps)
+📦 2. Modular Data Services in WizData
+Split into services:
+
+market-data-service
+
+indicator-engine
+
+event-engine (dividends, earnings, splits)
+
+metadata-service
+
+screener-engine
+
+news-service
+
+Each product only calls what it needs.
+
+🧠 3. Use a Message Queue (Kafka)
+To broadcast updates (price ticks, news) from WizData to all apps:
+
+VueOn receives real-time chart data
+
+Pulse gets a summary feed
+
+Connect (client portal) gets news alerts
+
+🛡️ 4. API Gateway & Auth Layer
+Use an API gateway to:
+
+Rate-limit per product
+
+Manage API keys & scopes (e.g., VueOn can’t access Pulse-specific endpoints)
+
+Centralize monitoring and usage metrics
+
+🔌 PLUGGABLE PRODUCT INTEGRATION
+Product	Consumes from WizData
+VueOn (Charts)	OHLCV + Indicators + Events
+Trader (Strada)	Quotes + Order Book + Screener + News
+Pulse (Market Overview)	Aggregated metrics + Sector performance
+Wealth (Novia)	Company profiles + fundamentals + earnings
+Connect	News feed + insights + alerts
+
+✅ TL;DR: ACTION PLAN
+🔨 Build WizData Core
+PostgreSQL (for metadata, fundamentals)
+
+TimescaleDB (for OHLCV + tick data)
+
+Redis (for real-time cache)
+
+S3/MinIO (for raw HTML/PDF/news archives)
+
+📡 Plug in Scrapers / APIs
+Build source-specific modules (JSE, Crypto, FX, News)
+
+Normalize & push into WizData
+
+🔐 Expose APIs
+REST + GraphQL + optional WebSocket
+
+Swagger / Postman for internal devs
+
+📎 Connect to All Products
+Document all endpoints
+
+Use feature flags/scopes for product-specific access
+

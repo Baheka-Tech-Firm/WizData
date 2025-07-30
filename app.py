@@ -116,6 +116,13 @@ def create_app():
         app.register_blueprint(api_status_bp)
         app.register_blueprint(scrapers_bp)
         
+        # Register charting API
+        try:
+            from api.charting import charting_api
+            app.register_blueprint(charting_api)
+        except ImportError:
+            pass
+        
         logger.info("All blueprints registered successfully")
         
     except ImportError as e:
