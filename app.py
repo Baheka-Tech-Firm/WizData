@@ -104,6 +104,7 @@ def create_app():
         from src.api.routes.realtime import realtime_bp
         from src.api.routes.integrated_data_routes import integrated_data_bp
         from src.api.routes.api_status import api_status_bp
+        from scrapers.api import scrapers_bp
         
         app.register_blueprint(prices_bp)
         app.register_blueprint(quality_bp)
@@ -113,6 +114,7 @@ def create_app():
         app.register_blueprint(realtime_bp)
         app.register_blueprint(integrated_data_bp)
         app.register_blueprint(api_status_bp)
+        app.register_blueprint(scrapers_bp)
         
         logger.info("All blueprints registered successfully")
         

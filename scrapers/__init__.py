@@ -1,0 +1,1 @@
+# Modular Scraper Architecture for WizData

@@ -2,7 +2,7 @@ modules = ["python-3.11", "web", "nodejs-20", "nix"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["geos", "glibcLocales", "openssl", "postgresql"]
+packages = ["geckodriver", "geos", "gitFull", "glibcLocales", "openssl", "playwright-driver", "postgresql"]
 
 [deployment]
 deploymentTarget = "autoscale"
