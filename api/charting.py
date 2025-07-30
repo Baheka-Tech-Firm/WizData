@@ -259,7 +259,18 @@ def get_available_symbols():
                 'currency': 'ZAR',
                 'sector': 'Technology',
                 'industry': 'Internet Services',
-                'type': 'stock'
+                'type': 'stock',
+                'market_cap': 1500000000000  # ZAR cents
+            },
+            {
+                'symbol': 'JSE:PRX',
+                'name': 'Prosus N.V.',
+                'exchange': 'JSE',
+                'currency': 'ZAR',
+                'sector': 'Technology',
+                'industry': 'Internet Services',
+                'type': 'stock',
+                'market_cap': 2000000000000
             },
             {
                 'symbol': 'JSE:BHP',
@@ -268,7 +279,18 @@ def get_available_symbols():
                 'currency': 'ZAR',
                 'sector': 'Mining',
                 'industry': 'Diversified Mining',
-                'type': 'stock'
+                'type': 'stock',
+                'market_cap': 850000000000
+            },
+            {
+                'symbol': 'JSE:AGL',
+                'name': 'Anglo American plc',
+                'exchange': 'JSE',
+                'currency': 'ZAR',
+                'sector': 'Mining',
+                'industry': 'Diversified Mining',
+                'type': 'stock',
+                'market_cap': 680000000000
             },
             {
                 'symbol': 'JSE:SOL',
@@ -277,7 +299,38 @@ def get_available_symbols():
                 'currency': 'ZAR',
                 'sector': 'Energy',
                 'industry': 'Chemicals',
-                'type': 'stock'
+                'type': 'stock',
+                'market_cap': 320000000000
+            },
+            {
+                'symbol': 'JSE:SBK',
+                'name': 'Standard Bank Group Limited',
+                'exchange': 'JSE',
+                'currency': 'ZAR',
+                'sector': 'Banking',
+                'industry': 'Commercial Banking',
+                'type': 'stock',
+                'market_cap': 450000000000
+            },
+            {
+                'symbol': 'JSE:MTN',
+                'name': 'MTN Group Limited',
+                'exchange': 'JSE',
+                'currency': 'ZAR',
+                'sector': 'Telecommunications',
+                'industry': 'Mobile Communications',
+                'type': 'stock',
+                'market_cap': 280000000000
+            },
+            {
+                'symbol': 'JSE:CFR',
+                'name': 'Capitec Bank Holdings Limited',
+                'exchange': 'JSE',
+                'currency': 'ZAR',
+                'sector': 'Banking',
+                'industry': 'Retail Banking',
+                'type': 'stock',
+                'market_cap': 380000000000
             }
         ],
         'forex': [

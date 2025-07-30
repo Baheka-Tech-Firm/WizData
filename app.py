@@ -123,6 +123,13 @@ def create_app():
         except ImportError:
             pass
         
+        # Register modular data services
+        try:
+            from api.data_services import data_services_api
+            app.register_blueprint(data_services_api)
+        except ImportError:
+            pass
+        
         logger.info("All blueprints registered successfully")
         
     except ImportError as e:

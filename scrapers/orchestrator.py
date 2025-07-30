@@ -99,6 +99,13 @@ class ScraperOrchestrator:
         except ImportError:
             pass
         
+        # Import enhanced JSE scraper
+        try:
+            from scrapers.sources.jse_enhanced_scraper import JSEEnhancedScraper
+            scrapers['jse_enhanced'] = JSEEnhancedScraper
+        except ImportError:
+            pass
+        
         return scrapers
     
     def add_job(self, job_name: str, job_config: Dict[str, Any]):
