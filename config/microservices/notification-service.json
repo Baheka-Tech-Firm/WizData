@@ -1,0 +1,44 @@
+{
+  "service": {
+    "name": "notification-service",
+    "description": "Manages alerts and notifications",
+    "version": "1.0.0",
+    "port": 5005
+  },
+  "dependencies": [
+    "kafka",
+    "redis"
+  ],
+  "responsibilities": [
+    "Price alerts",
+    "ESG threshold notifications",
+    "System health alerts",
+    "Email and SMS delivery",
+    "Webhook notifications"
+  ],
+  "environment": {
+    "development": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "DEBUG"
+    },
+    "production": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "INFO"
+    }
+  },
+  "health_check": {
+    "endpoint": "/health",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3
+  },
+  "monitoring": {
+    "metrics_enabled": true,
+    "tracing_enabled": true,
+    "logging_structured": true
+  }
+}

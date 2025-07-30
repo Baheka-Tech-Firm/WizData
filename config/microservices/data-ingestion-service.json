@@ -1,0 +1,45 @@
+{
+  "service": {
+    "name": "data-ingestion-service",
+    "description": "Handles real-time data ingestion from external sources",
+    "version": "1.0.0",
+    "port": 5001
+  },
+  "dependencies": [
+    "kafka",
+    "redis",
+    "postgresql"
+  ],
+  "responsibilities": [
+    "Real-time market data ingestion",
+    "ESG data collection",
+    "News and sentiment data gathering",
+    "Data validation and preprocessing",
+    "Message queue publishing"
+  ],
+  "environment": {
+    "development": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "DEBUG"
+    },
+    "production": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "INFO"
+    }
+  },
+  "health_check": {
+    "endpoint": "/health",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3
+  },
+  "monitoring": {
+    "metrics_enabled": true,
+    "tracing_enabled": true,
+    "logging_structured": true
+  }
+}

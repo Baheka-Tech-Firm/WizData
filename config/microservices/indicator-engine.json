@@ -1,0 +1,44 @@
+{
+  "service": {
+    "name": "indicator-engine",
+    "description": "Computes financial and ESG indicators",
+    "version": "1.0.0",
+    "port": 5003
+  },
+  "dependencies": [
+    "postgresql",
+    "redis"
+  ],
+  "responsibilities": [
+    "Technical indicator calculations",
+    "ESG score computations",
+    "Risk metrics calculation",
+    "Performance analytics",
+    "Continuous aggregates management"
+  ],
+  "environment": {
+    "development": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "DEBUG"
+    },
+    "production": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "INFO"
+    }
+  },
+  "health_check": {
+    "endpoint": "/health",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3
+  },
+  "monitoring": {
+    "metrics_enabled": true,
+    "tracing_enabled": true,
+    "logging_structured": true
+  }
+}

@@ -3,6 +3,9 @@ import asyncio
 import logging
 from datetime import datetime
 from flask import render_template, jsonify, request, send_file
+from middleware.rate_limiter import rate_limit
+from middleware.cache_manager import cached
+from middleware.monitoring import monitor_function
 
 logger = logging.getLogger(__name__)
 
@@ -67,6 +70,8 @@ def register_routes(app):
         return render_template('integrated/dashboard.html', title="Integrated Financial & ESG Data")
 
     @app.route('/api/health')
+    @rate_limit(requests_per_minute=120)  # Higher limit for health checks
+    @cached(ttl=30, data_type='api_responses')
     def health():
         """Health check endpoint"""
         return jsonify({
@@ -77,6 +82,9 @@ def register_routes(app):
 
     # API routes for direct usage
     @app.route('/api/symbols')
+    @rate_limit(requests_per_minute=30)
+    @cached(ttl=300, data_type='static_data')
+    @monitor_function("get_symbols")
     def get_symbols():
         """
         Get available symbols for different asset types

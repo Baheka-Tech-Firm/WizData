@@ -1,0 +1,44 @@
+{
+  "service": {
+    "name": "auth-service",
+    "description": "Handles authentication and user management",
+    "version": "1.0.0",
+    "port": 5004
+  },
+  "dependencies": [
+    "postgresql",
+    "redis"
+  ],
+  "responsibilities": [
+    "User authentication",
+    "JWT token management",
+    "Role-based access control",
+    "API key management",
+    "Session management"
+  ],
+  "environment": {
+    "development": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "DEBUG"
+    },
+    "production": {
+      "database_url": "${DATABASE_URL}",
+      "redis_url": "${REDIS_URL}",
+      "kafka_brokers": "${KAFKA_BROKERS}",
+      "log_level": "INFO"
+    }
+  },
+  "health_check": {
+    "endpoint": "/health",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3
+  },
+  "monitoring": {
+    "metrics_enabled": true,
+    "tracing_enabled": true,
+    "logging_structured": true
+  }
+}

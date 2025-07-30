@@ -1,0 +1,134 @@
+Modular Scraper Architecture (per-source microservices)
+Structure your scrapers as independent services:
+
+diff
+Copy
+Edit
+- scraper-jse
+- scraper-bloomberg
+- scraper-sars
+- scraper-coingecko
+- scraper-news
+Each service should:
+
+Fetch → Parse → Normalize → Push to message queue
+
+Be stateless, retryable, and containerized (Docker)
+
+Tech stack:
+
+Scraping: Playwright or Puppeteer (JS) or Scrapy (Python)
+
+Headless browsers (for dynamic sites)
+
+Rotate proxies, user-agents, and headers
+
+Log everything (errors, latency, changes)
+
+🧠 2. Intelligent Scheduling and Prioritization
+Use a job orchestrator like:
+
+Temporal, Apache Airflow, or BullMQ
+
+Why:
+
+Control frequency based on data type (e.g., JSE prices every 5s, company filings daily)
+
+Retry failed scrapes with backoff
+
+Log execution metrics for SLA monitoring
+
+🔁 3. Queue-Based Processing with Kafka or RabbitMQ
+Flow:
+
+Scraper pushes raw data to Kafka topic: raw.jse.quotes
+
+Normalizer consumes raw → outputs to clean.jse.quotes
+
+Indicator service consumes clean → enriches to enriched.jse.quotes
+
+Why:
+
+Scalable
+
+Supports parallel processing
+
+Enables multiple consumers (ML models, APIs, dashboards)
+
+🛡️ 4. Proxy & Anti-Ban Infrastructure
+✅ Rotate:
+Residential proxies (SmartProxy, BrightData, Oxylabs)
+
+User-Agents + Referrers
+
+IP pools via AWS, Azure regions
+
+✅ Other strategies:
+Headless stealth: puppeteer-extra-plugin-stealth
+
+Captcha solvers: 2Captcha, AntiCaptcha
+
+Rate-aware scraping: match site’s update schedule
+
+🔍 5. Quality Assurance Pipeline
+Build a QA layer after scraping:
+
+Schema validation (e.g., all prices must have ISO timestamp, currency)
+
+Outlier detection (e.g., price jumps >50% flagged)
+
+Cross-source verification (JSE vs Bloomberg for BHP.AX)
+
+Store logs in ELK stack (Elastic + Logstash + Kibana) for human QA.
+
+📦 6. Structured Storage & Indexing
+Use:
+
+TimescaleDB for time-series price data
+
+PostgreSQL/Clickhouse for structured meta (e.g., company profiles)
+
+MinIO/S3 for document/file dumps (PDFs, filings)
+
+Redis for short-term cache (for APIs)
+
+🧾 7. Compliance and Legality
+Scrape only public data or via open APIs
+
+Respect robots.txt (unless a client waives that through B2B)
+
+For sensitive/gray-area data, proxy scrapers through partner jurisdictions
+
+Keep terms-of-service logs per source for audit protection
+
+🧱 8. Deploy, Monitor, Scale
+Run scrapers on Kubernetes (autoscale based on job queue size)
+
+Use Prometheus + Grafana to monitor:
+
+Success rates
+
+Latency
+
+Proxy usage
+
+Store failed runs and requeue intelligently
+
+🧠 Bonus: Make It a Product
+UI for custom scrape configs
+
+Let users request “scrape this site daily” (like Diffbot, Import.io)
+
+Scheduled exports: JSON, CSV, Excel, or feed to their system via webhook
+
+⚡ Summary: Compete with Data Vendors By...
+Area	What You Need
+Scraper engine	Playwright/Puppeteer with proxy rotation & retries
+Scheduling	Temporal/Airflow with retries, alerts, frequency control
+Scale & Queueing	Kafka/RabbitMQ for decoupling & parallel pipelines
+Anti-bot	Residential proxies, Captcha solvers, stealth mode
+QA & validation	Schema checks, data diffing, alerts for missing/incomplete data
+Storage & indexing	TimescaleDB, S3, Redis, PostgreSQL
+Compliance	Robots.txt checker, ToS logging, B2B scrapes for sensitive data
+Monitoring	Prometheus, Grafana, Kibana
+
