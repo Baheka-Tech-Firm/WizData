@@ -7,6 +7,10 @@ import os
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 @dataclass
 class DatabaseConfig:

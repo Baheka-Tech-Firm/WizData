@@ -422,27 +422,44 @@
 
             setupEventListeners() {
                 // App switcher dropdown
-                document.getElementById('appSwitcher').addEventListener('click', () => {
-                    const dropdown = document.getElementById('appDropdown');
-                    dropdown.classList.toggle('hidden');
-                });
+                const appSwitcher = document.getElementById('appSwitcher');
+                if (appSwitcher) {
+                    appSwitcher.addEventListener('click', () => {
+                        const dropdown = document.getElementById('appDropdown');
+                        if (dropdown) {
+                            dropdown.classList.toggle('hidden');
+                        }
+                    });
+                }
 
                 // Close dropdown when clicking outside
                 document.addEventListener('click', (e) => {
-                    if (!e.target.closest('#appSwitcher')) {
-                        document.getElementById('appDropdown').classList.add('hidden');
+                    const appDropdown = document.getElementById('appDropdown');
+                    if (!e.target.closest('#appSwitcher') && appDropdown) {
+                        appDropdown.classList.add('hidden');
                     }
                 });
 
                 // AI Insights panel
-                document.getElementById('aiInsightsBtn').addEventListener('click', () => {
-                    const panel = document.getElementById('aiInsightsPanel');
-                    panel.classList.toggle('translate-x-full');
-                });
+                const aiInsightsBtn = document.getElementById('aiInsightsBtn');
+                if (aiInsightsBtn) {
+                    aiInsightsBtn.addEventListener('click', () => {
+                        const panel = document.getElementById('aiInsightsPanel');
+                        if (panel) {
+                            panel.classList.toggle('translate-x-full');
+                        }
+                    });
+                }
 
-                document.getElementById('closeAiPanel').addEventListener('click', () => {
-                    document.getElementById('aiInsightsPanel').classList.add('translate-x-full');
-                });
+                const closeAiPanel = document.getElementById('closeAiPanel');
+                if (closeAiPanel) {
+                    closeAiPanel.addEventListener('click', () => {
+                        const panel = document.getElementById('aiInsightsPanel');
+                        if (panel) {
+                            panel.classList.add('translate-x-full');
+                        }
+                    });
+                }
 
                 // Time range buttons
                 document.querySelectorAll('.time-range-btn').forEach(btn => {

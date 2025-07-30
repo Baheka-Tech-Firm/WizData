@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  # Redis service for caching and rate limiting
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # PostgreSQL database (optional - can use SQLite instead)
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wizdata
+      POSTGRES_USER: wizdata
+      POSTGRES_PASSWORD: wizdata_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wizdata -d wizdata"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Main WizData application
+  wizdata:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      # Database configuration
+      DATABASE_URL: "sqlite:///./wizdata.db"
+      # For PostgreSQL, uncomment below and comment SQLite above
+      # DATABASE_URL: "postgresql://wizdata:wizdata_password@postgres:5432/wizdata"
+      
+      # Redis configuration
+      REDIS_URL: "redis://redis:6379/0"
+      
+      # Application configuration
+      FLASK_ENV: "production"
+      SECRET_KEY: "your-secret-key-change-in-production"
+      DEBUG: "false"
+      
+      # Optional API keys (set these for full functionality)
+      # OPENAI_API_KEY: "your-openai-api-key"
+      # ALPHA_VANTAGE_API_KEY: "your-alpha-vantage-key"
+      # SP_GLOBAL_API_KEY: "your-sp-global-key"
+      # BLOOMBERG_API_KEY: "your-bloomberg-key"
+      # REFINITIV_API_KEY: "your-refinitiv-key"
+      # REFINITIV_API_SECRET: "your-refinitiv-secret"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./static:/app/static
+      - wizdata_db:/app/wizdata_db
+    depends_on:
+      redis:
+        condition: service_healthy
+      # postgres:
+      #   condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx reverse proxy (optional, for production)
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./static:/var/www/static:ro
+    depends_on:
+      - wizdata
+    profiles:
+      - production
+
+volumes:
+  redis_data:
+  postgres_data:
+  wizdata_db:

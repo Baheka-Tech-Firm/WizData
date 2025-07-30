@@ -1,0 +1,8 @@
+export OPENAI_API_KEY=your_openai_key
+export ALPHA_VANTAGE_API_KEY=your_alpha_key
+export SP_GLOBAL_API_KEY=your_sp_key
+export BLOOMBERG_API_KEY=your_bloomberg_key
+export REFINITIV_API_KEY=your_refinitiv_key
+export REFINITIV_API_SECRET=your_refinitiv_secret
+export SESSION_SECRET=your_secret
+ 

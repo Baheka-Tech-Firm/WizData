@@ -5,7 +5,7 @@ from datetime import datetime
 from flask import render_template, jsonify, request, send_file
 from middleware.rate_limiter import rate_limit
 from middleware.cache_manager import cached
-from middleware.monitoring import monitor_function
+from middleware.monitoring_simple import monitor_function
 
 logger = logging.getLogger(__name__)
 
@@ -85,7 +85,7 @@ def register_routes(app):
     @app.route('/api/symbols')
     @rate_limit(requests_per_minute=30)
     @cached(ttl=300, data_type='static_data')
-    @monitor_function("get_symbols")
+    @monitor_function
     def get_symbols():
         """
         Get available symbols for different asset types
@@ -191,3 +191,46 @@ def register_routes(app):
                 "error": "Internal server error",
                 "message": str(e)
             }), 500
+
+    @app.route('/favicon.ico')
+    def favicon():
+        """Serve favicon"""
+        try:
+            return send_file('static/favicon.ico', mimetype='image/vnd.microsoft.icon')
+        except:
+            # Return empty response if favicon not found
+            return '', 204
+
+    @app.route('/health')
+    def health_check():
+        """Health check endpoint for Docker and load balancers"""
+        try:
+            # Check database connection
+            from app import db
+            from sqlalchemy import text
+            db.session.execute(text('SELECT 1'))
+            
+            # Check Redis connection (if available)
+            if hasattr(app, 'cache_manager') and app.cache_manager:
+                app.cache_manager.redis.ping()
+            
+            return jsonify({
+                "status": "healthy",
+                "timestamp": datetime.utcnow().isoformat(),
+                "services": {
+                    "database": "healthy",
+                    "redis": "healthy" if hasattr(app, 'cache_manager') and app.cache_manager else "disabled"
+                }
+            }), 200
+        except Exception as e:
+            logger.error(f"Health check failed: {str(e)}")
+            return jsonify({
+                "status": "unhealthy",
+                "timestamp": datetime.utcnow().isoformat(),
+                "error": str(e)
+            }), 503
+
+    @app.route('/api/health')
+    def api_health_check():
+        """API health check endpoint"""
+        return health_check()

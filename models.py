@@ -1,6 +1,7 @@
 from app import db
 from datetime import datetime
-from sqlalchemy.dialects.postgresql import ARRAY, JSONB
+from sqlalchemy import JSON
+# from sqlalchemy.dialects.postgresql import ARRAY, JSON
 
 class APIKey(db.Model):
     """API Key model for authentication"""
@@ -101,7 +102,7 @@ class EnvironmentalMetric(db.Model):
     date = db.Column(db.Date, nullable=False)
     source_id = db.Column(db.Integer, db.ForeignKey('data_source.id'), nullable=True)
     confidence = db.Column(db.Float, nullable=True)  # Confidence score (0-1)
-    raw_data = db.Column(JSONB, nullable=True)  # Original data in JSON format
+    raw_data = db.Column(JSON, nullable=True)  # Original data in JSON format
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -118,7 +119,7 @@ class SocialMetric(db.Model):
     date = db.Column(db.Date, nullable=False)
     source_id = db.Column(db.Integer, db.ForeignKey('data_source.id'), nullable=True)
     confidence = db.Column(db.Float, nullable=True)  # Confidence score (0-1)
-    raw_data = db.Column(JSONB, nullable=True)  # Original data in JSON format
+    raw_data = db.Column(JSON, nullable=True)  # Original data in JSON format
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -136,7 +137,7 @@ class GovernanceMetric(db.Model):
     date = db.Column(db.Date, nullable=False)
     source_id = db.Column(db.Integer, db.ForeignKey('data_source.id'), nullable=True)
     confidence = db.Column(db.Float, nullable=True)  # Confidence score (0-1)
-    raw_data = db.Column(JSONB, nullable=True)  # Original data in JSON format
+    raw_data = db.Column(JSON, nullable=True)  # Original data in JSON format
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -153,7 +154,7 @@ class InfrastructureMetric(db.Model):
     date = db.Column(db.Date, nullable=False)
     source_id = db.Column(db.Integer, db.ForeignKey('data_source.id'), nullable=True)
     confidence = db.Column(db.Float, nullable=True)  # Confidence score (0-1)
-    raw_data = db.Column(JSONB, nullable=True)  # Original data in JSON format
+    raw_data = db.Column(JSON, nullable=True)  # Original data in JSON format
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -174,7 +175,7 @@ class InfrastructureFacility(db.Model):
     year_established = db.Column(db.Integer, nullable=True)
     last_renovated = db.Column(db.Integer, nullable=True)
     source_id = db.Column(db.Integer, db.ForeignKey('data_source.id'), nullable=True)
-    properties = db.Column(JSONB, nullable=True)  # Additional properties in JSON format
+    properties = db.Column(JSON, nullable=True)  # Additional properties in JSON format
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -194,7 +195,7 @@ class SDGMetric(db.Model):
     date = db.Column(db.Date, nullable=False)
     source_id = db.Column(db.Integer, db.ForeignKey('data_source.id'), nullable=True)
     confidence = db.Column(db.Float, nullable=True)  # Confidence score (0-1)
-    raw_data = db.Column(JSONB, nullable=True)  # Original data in JSON format
+    raw_data = db.Column(JSON, nullable=True)  # Original data in JSON format
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -213,7 +214,7 @@ class ESGCompositeScore(db.Model):
     overall_score = db.Column(db.Float, nullable=True)
     date = db.Column(db.Date, nullable=False)
     methodology = db.Column(db.String(100), nullable=True)  # Scoring methodology used
-    components = db.Column(JSONB, nullable=True)  # Detailed breakdown of score components
+    components = db.Column(JSON, nullable=True)  # Detailed breakdown of score components
     confidence = db.Column(db.Float, nullable=True)  # Overall confidence in the score (0-1)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

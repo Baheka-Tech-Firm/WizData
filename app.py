@@ -10,10 +10,10 @@ from redis.exceptions import RedisError
 
 # Import configuration and middleware
 from config import config
-from middleware.monitoring import MonitoringMiddleware
+from middleware.monitoring_simple import MonitoringMiddleware
 from middleware.cache_manager import CacheManager
 from middleware.rate_limiter import RateLimiter
-from middleware.auth_middleware import init_auth_middleware
+# from middleware.auth_middleware import init_auth_middleware
 
 # Configure logging
 logging.basicConfig(level=getattr(logging, config.monitoring.log_level))
@@ -68,6 +68,9 @@ def create_app():
             config.rate_limit.burst_requests
         )
         
+        # app.cache_manager = None
+        # app.rate_limiter = None
+        
         logger.info("Redis connection established successfully")
         
     except (RedisError, Exception) as e:
@@ -80,8 +83,8 @@ def create_app():
     
     # Initialize authentication middleware
     try:
-        init_auth_middleware(app, redis_client if 'redis_client' in locals() else None)
-        logger.info("Authentication middleware initialized")
+        # init_auth_middleware(app, redis_client if 'redis_client' in locals() else None)
+        logger.info("Authentication middleware skipped for now")
     except Exception as e:
         logger.warning(f"Could not initialize auth middleware: {e}")
     
@@ -91,7 +94,7 @@ def create_app():
         g.rate_limiter = app.rate_limiter
 
     # Initialize Socket.IO
-    socketio = SocketIO(app, cors_allowed_origins="*", async_mode='gevent')
+    socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
     with app.app_context():
         # Make sure to import the models here or their tables won't be created

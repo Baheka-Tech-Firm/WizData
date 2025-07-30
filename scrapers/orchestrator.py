@@ -6,6 +6,7 @@ Manages multiple scrapers, scheduling, monitoring, and quality assurance
 import asyncio
 import time
 import json
+from scrapers.base import BaseScraper  # Adjust path based on where BaseScraper is defined
 from typing import Dict, List, Any, Optional, Type
 from datetime import datetime, timezone, timedelta
 from dataclasses import dataclass, asdict
